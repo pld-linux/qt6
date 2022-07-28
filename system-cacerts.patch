@@ -1,0 +1,10 @@
+--- qt-everywhere-src-6.3.1/qtbase/src/plugins/tls/openssl/qtlsbackend_openssl.cpp~	2022-05-25 10:58:52.000000000 +0200
++++ qt-everywhere-src-6.3.1/qtbase/src/plugins/tls/openssl/qtlsbackend_openssl.cpp	2022-07-25 21:54:04.255199627 +0200
+@@ -405,6 +405,7 @@
+     {
+         const QList<QByteArray> directories = QSslSocketPrivate::unixRootCertDirectories();
+         QSet<QString> certFiles = {
++            QStringLiteral("/etc/certs/ca-certificates.crt"), // PLD
+             QStringLiteral("/etc/pki/tls/certs/ca-bundle.crt"), // Fedora, Mandriva
+             QStringLiteral("/usr/local/share/certs/ca-root-nss.crt") // FreeBSD's ca_root_nss
+         };

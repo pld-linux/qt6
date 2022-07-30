@@ -1138,7 +1138,7 @@ Generator plików makefile dla aplikacji Qt6.
 	' qtbase/mkspecs/common/linux.conf
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python3(\s|$),#!%{__python3}\1,' \
-	qtbase/mkspecs/features/uikit/devices.py
+	qtbase/mkspecs/features/uikit/devices.py \
 	qtbase/util/testrunner/qt-testrunner.py
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+perl(\s|$),#!%{__perl}\1,' \

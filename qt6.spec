@@ -153,35 +153,6 @@ Qt is a software toolkit for developing applications.
 %description -l pl.UTF-8
 Qt to programowy toolkit do tworzenia aplikacji.
 
-%package -n Qt6AccessibilitySupport-devel
-Summary:	Qt6 AccessibilitySupport library - development files
-Summary(pl.UTF-8):	Biblioteka Qt6 AccessibilitySupport - pliki programistyczne
-Group:		Development/Libraries
-# for (subset of) Qt6Core headers
-Requires:	Qt6Core-devel = %{version}
-Requires:	zlib-devel >= 1.0.8
-
-%description -n Qt6AccessibilitySupport-devel
-Qt6 AccessibilitySupport library - development files.
-
-%description -n Qt6AccessibilitySupport-devel -l pl.UTF-8
-Biblioteka Qt6 AccessibilitySupport - pliki programistyczne.
-
-%package -n Qt6Bootstrap-devel
-Summary:	Qt6 Bootstrap library - development files
-Summary(pl.UTF-8):	Biblioteka Qt6 Bootstrap - pliki programistyczne
-Group:		Development/Libraries
-# for (subset of) Qt6Core headers
-Requires:	Qt6Core-devel = %{version}
-Requires:	zlib-devel >= 1.0.8
-
-%description -n Qt6Bootstrap-devel
-Qt6 Bootstrap library (minimal part of Qt6 Core) - development files.
-
-%description -n Qt6Bootstrap-devel -l pl.UTF-8
-Biblioteka Qt6 Bootstrap (minimalna część Qt6 Core) - pliki
-programistyczne.
-
 %package -n Qt6Concurrent
 Summary:	Qt6 Concurrent library
 Summary(pl.UTF-8):	Biblioteka Qt6 Concurrent
@@ -1168,6 +1139,10 @@ Generator plików makefile dla aplikacji Qt6.
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python3(\s|$),#!%{__python3}\1,' \
 	qtbase/mkspecs/features/uikit/devices.py
+	qtbase/util/testrunner/qt-testrunner.py
+
+%{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+perl(\s|$),#!%{__perl}\1,' \
+	qtbase/libexec/syncqt.pl
 
 %if %(echo %{cxx_version} | cut -d. -f1) < 9
 # available since gcc 9
@@ -1186,7 +1161,6 @@ cd build
 	-GNinja \
 	-DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/samu \
 	-DNinja_EXECUTABLE:FILEPATH=/usr/bin/samu \
-	-DGn_EXECUTABLE:FILEPATH=/usr/bin/gn \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
 	-DINSTALL_ARCHDATADIR=%{qt6dir} \
 	-DINSTALL_BINDIR=%{qt6dir}/bin \
@@ -1202,10 +1176,7 @@ cd build
 	-DINSTALL_SYSCONFDIR=%{_sysconfdir}/qt6 \
 	-DINSTALL_TRANSLATIONSDIR=%{_datadir}/qt6/translations \
 	-DBUILD_SHARED_LIBS=ON \
-	-DFEATURE_webengine_jumbo_build=OFF \
 	%{?with_oci:-DOracle_INCLUDE_DIR=%{_includedir}/oracle/client} \
-	-DQT_FEATURE_webengine_jumbo_build=OFF \
-	-DINPUT_webengine_jumbo_file_merge_limit=1 \
 	-DQT_DISABLE_RPATH=TRUE \
 	-DQT_BUILD_EXAMPLES=ON \
 	-DQT_FEATURE_relocatable=OFF \
@@ -1213,7 +1184,7 @@ cd build
 	-DQT_FEATURE_separate_debug_info=OFF \
 	%{cmake_on_off red_reloc QT_FEATURE_reduce_relocations} \
 	%{cmake_on_off pch BUILD_WITH_PCH} \
-	-DQT_FEATURE_use_gold_linker=OFF \
+	-DQT_FEATURE_use_gold_linker=ON \
 	-DQT_FEATURE_enable_new_dtags=ON \
 	-DQT_FEATURE_dbus_linked=ON \
 	-DQT_FEATURE_openssl_linked=ON \
@@ -1277,6 +1248,7 @@ export SAMUFLAGS="%{_smp_mflags}"
 %{__cmake} --build . --verbose %{_smp_mflags}
 
 %if %{with doc}
+export QT_PLUGIN_PATH="$(pwd)/qtbase/lib64/qt6/plugins"
 %{__cmake} --build . --target docs --verbose %{_smp_mflags}
 %endif
 
@@ -1410,26 +1382,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	-n Qt6Xml -p /sbin/ldconfig
 %postun	-n Qt6Xml -p /sbin/ldconfig
-
-%files -n Qt6AccessibilitySupport-devel
-%defattr(644,root,root,755)
-%{_includedir}/qt6/QtAccessibilitySupport
-%{_includedir}/qt6/QtLinuxAccessibilitySupport
-%{_libdir}/libQt6AccessibilitySupport.a
-%{_libdir}/libQt6AccessibilitySupport.prl
-%{_libdir}/libQt6LinuxAccessibilitySupport.a
-%{_libdir}/libQt6LinuxAccessibilitySupport.prl
-%{_libdir}/cmake/Qt6AccessibilitySupport
-%{_libdir}/cmake/Qt6LinuxAccessibilitySupport
-%{qt6dir}/mkspecs/modules/qt_lib_accessibility_support_private.pri
-%{qt6dir}/mkspecs/modules/qt_lib_linuxaccessibility_support_private.pri
-
-%files -n Qt6Bootstrap-devel
-%defattr(644,root,root,755)
-# static-only
-%{_libdir}/libQt6Bootstrap.a
-%{_libdir}/libQt6Bootstrap.prl
-%{qt6dir}/mkspecs/modules/qt_lib_bootstrap_private.pri
 
 %files -n Qt6Concurrent
 %defattr(644,root,root,755)

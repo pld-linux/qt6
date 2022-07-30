@@ -68,6 +68,7 @@ Source0:	https://download.qt.io/official_releases/qt/6.3/%{version}/single/qt-ev
 # Source0-md5:	957a304773b281a4584f4c0254773456
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
+Patch2:		%{name}-gn.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -77,6 +78,8 @@ BuildRequires:	OpenGL-devel
 %{?with_kms:BuildRequires:	OpenGLESv2-devel}
 BuildRequires:	Vulkan-Loader-devel
 BuildRequires:	at-spi2-core-devel
+# base dir requires 3.16, gn 3.19
+BuildRequires:	cmake >= 3.19
 %{?with_cups:BuildRequires:	cups-devel >= 1.4}
 BuildRequires:	dbus-devel >= 1.2
 BuildRequires:	double-conversion-devel
@@ -1138,6 +1141,7 @@ Generator plików makefile dla aplikacji Qt6.
 %setup -q -n qt-everywhere-src-%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 
@@ -1164,6 +1168,13 @@ Generator plików makefile dla aplikacji Qt6.
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+python3(\s|$),#!%{__python3}\1,' \
 	qtbase/mkspecs/features/uikit/devices.py
+
+%if %(echo %{cxx_version} | cut -d. -f1) < 9
+# available since gcc 9
+%{__sed} -i -e '/-Wdeprecated-copy/d' \
+	qtwebengine/src/3rdparty/chromium/third_party/{angle,dawn/src/common,pdfium,skia/gn/skia}/BUILD.gn \
+	qtwebengine/src/3rdparty/chromium/third_party/swiftshader/CMakeLists.txt
+%endif
 
 %build
 #TODO optflags
@@ -1192,6 +1203,7 @@ cd build
 	-DINSTALL_TRANSLATIONSDIR=%{_datadir}/qt6/translations \
 	-DBUILD_SHARED_LIBS=ON \
 	-DFEATURE_webengine_jumbo_build=OFF \
+	%{?with_oci:-DOracle_INCLUDE_DIR=%{_includedir}/oracle/client} \
 	-DQT_FEATURE_webengine_jumbo_build=OFF \
 	-DINPUT_webengine_jumbo_file_merge_limit=1 \
 	-DQT_DISABLE_RPATH=TRUE \

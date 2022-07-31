@@ -77,12 +77,14 @@ BuildRequires:	EGL-devel
 BuildRequires:	OpenGL-devel
 %{?with_kms:BuildRequires:	OpenGLESv2-devel}
 BuildRequires:	Vulkan-Loader-devel
+BuildRequires:	alsa-lib-devel
 BuildRequires:	at-spi2-core-devel
 # base dir requires 3.16, gn 3.19
 BuildRequires:	cmake >= 3.19
 %{?with_cups:BuildRequires:	cups-devel >= 1.4}
 BuildRequires:	dbus-devel >= 1.2
 BuildRequires:	double-conversion-devel
+BuildRequires:	ffmpeg-devel
 BuildRequires:	fontconfig-devel
 %{?with_freetds:BuildRequires:	freetds-devel}
 BuildRequires:	freetype-devel >= 2.2.0
@@ -91,8 +93,11 @@ BuildRequires:	gdb
 BuildRequires:	glib2-devel >= 2.0.0
 %{?with_gtk:BuildRequires:	gtk+3-devel >= 3.6}
 BuildRequires:	harfbuzz-devel >= 1.6.0
+BuildRequires:	harfbuzz-subset-devel
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
+BuildRequires:	lcms2-devel
 %{?with_kms:BuildRequires:	libdrm-devel}
+BuildRequires:	libevent-devel
 # see dependency on libicu version below
 BuildRequires:	libicu-devel < %{next_icu_abi}
 BuildRequires:	libicu-devel >= %{icu_abi}
@@ -100,20 +105,30 @@ BuildRequires:	libicu-devel >= %{icu_abi}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel >= 2:1.0.8
 BuildRequires:	libstdc++-devel >= 6:4.7
+BuildRequires:	libvpx-devel
+BuildRequires:	libwebp-devel
 BuildRequires:	libxcb-devel >= 1.12
+BuildRequires:	libxml2-devel
+BuildRequires:	minizip-devel
 BuildRequires:	mtdev-devel
 %{?with_mysql:BuildRequires:	mysql-devel}
 BuildRequires:	nodejs
 BuildRequires:	openssl-devel >= 1.1.1
+BuildRequires:	opus-devel
 %{?with_oci:BuildRequires:	oracle-instantclient-devel}
+BuildRequires:	pciutils-devel
 BuildRequires:	pcre2-16-devel >= 10.20
 BuildRequires:	pkgconfig
+BuildRequires:	poppler-cpp-devel
 %{?with_pgsql:BuildRequires:	postgresql-devel}
+BuildRequires:	pulseaudio-devel
 BuildRequires:	python3-html5lib
+BuildRequires:	re2-devel
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	samurai
 BuildRequires:	sed >= 4.0
+BuildRequires:	snappy-devel
 %{?with_sqlite3:BuildRequires:	sqlite3-devel}
 %{?with_systemd:BuildRequires:	systemd-devel}
 BuildRequires:	tar >= 1:1.22
@@ -142,7 +157,6 @@ BuildRequires:	zlib-devel >= 1.0.8
 BuildRequires:	zstd-devel >= 1.3
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		specflags	-fno-strict-aliasing
 %define		filterout	-flto
 
 %define		qt6dir		%{_libdir}/qt6
@@ -257,19 +271,6 @@ Qt6 DeviceDiscoverySupport library - development files.
 %description -n Qt6DeviceDiscoverySupport-devel -l pl.UTF-8
 Biblioteka Qt6 DeviceDiscoverySupport - pliki programistyczne.
 
-%package -n Qt6EdidSupport-devel
-Summary:	Qt6 EdidSupport library - development files
-Summary(pl.UTF-8):	Biblioteka Qt6 EdidSupport - pliki programistyczne
-Group:		Development/Libraries
-# for (subset of) Qt6Core headers
-Requires:	Qt6Core-devel = %{version}
-
-%description -n Qt6EdidSupport-devel
-Qt6 EdidSupport library - development files.
-
-%description -n Qt6EdidSupport-devel -l pl.UTF-8
-Biblioteka Qt6 EdidSupport - pliki programistyczne.
-
 %package -n Qt6EglSupport-devel
 Summary:	Qt6 EglSupport library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 EglSupport - pliki programistyczne
@@ -283,20 +284,6 @@ Qt6 EglSupport library - development files.
 %description -n Qt6EglSupport-devel -l pl.UTF-8
 Biblioteka Qt6 EglSupport - pliki programistyczne.
 
-%package -n Qt6EventDispatcherSupport-devel
-Summary:	Qt6 EventDispatcherSupport library - development files
-Summary(pl.UTF-8):	Biblioteka Qt6 EventDispatcherSupport - pliki programistyczne
-Group:		Development/Libraries
-# for (subset of) Qt6Core headers
-Requires:	Qt6Core-devel = %{version}
-Requires:	glib2-devel >= 2.0
-
-%description -n Qt6EventDispatcherSupport-devel
-Qt6 EventDispatcherSupport library - development files.
-
-%description -n Qt6EventDispatcherSupport-devel -l pl.UTF-8
-Biblioteka Qt6 EventDispatcherSupport - pliki programistyczne.
-
 %package -n Qt6FbSupport-devel
 Summary:	Qt6 FbSupport library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 FbSupport - pliki programistyczne
@@ -309,32 +296,6 @@ Qt6 FbSupport library - development files.
 
 %description -n Qt6FbSupport-devel -l pl.UTF-8
 Biblioteka Qt6 FbSupport - pliki programistyczne.
-
-%package -n Qt6FontDatabaseSupport-devel
-Summary:	Qt6 FontDatabaseSupport library - development files
-Summary(pl.UTF-8):	Biblioteka Qt6 FontDatabaseSupport - pliki programistyczne
-Group:		Development/Libraries
-# for (subset of) Qt6Core headers
-Requires:	Qt6Core-devel = %{version}
-
-%description -n Qt6FontDatabaseSupport-devel
-Qt6 FontDatabaseSupport library - development files.
-
-%description -n Qt6FontDatabaseSupport-devel -l pl.UTF-8
-Biblioteka Qt6 FontDatabaseSupport - pliki programistyczne.
-
-%package -n Qt6GlxSupport-devel
-Summary:	Qt6 GlxSupport library - development files
-Summary(pl.UTF-8):	Biblioteka Qt6 GlxSupport - pliki programistyczne
-Group:		Development/Libraries
-# for (subset of) Qt6Core headers
-Requires:	Qt6Core-devel = %{version}
-
-%description -n Qt6GlxSupport-devel
-Qt6 GlxSupport library - development files.
-
-%description -n Qt6GlxSupport-devel -l pl.UTF-8
-Biblioteka Qt6 GlxSupport - pliki programistyczne.
 
 %package -n Qt6Gui
 Summary:	Qt6 Gui library
@@ -696,56 +657,6 @@ Header files for Qt6 OpenGL library.
 %description -n Qt6OpenGL-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 OpenGL.
 
-%package -n Qt6OpenGLExtensions-devel
-Summary:	Qt6 OpenGLExtensions library - development files
-Summary(pl.UTF-8):	Biblioteka Qt6 OpenGLExtensions - pliki programistyczne
-Group:		Development/Libraries
-Requires:	OpenGL-devel
-Requires:	Qt6Core-devel = %{version}
-Requires:	Qt6Gui-devel = %{version}
-
-%description -n Qt6OpenGLExtensions-devel
-Qt6 OpenGLExtensions library (development files).
-
-%description -n Qt6OpenGLExtensions-devel -l pl.UTF-8
-Biblioteka Qt6 OpenGL Extensions - obsługa rozszerzeń OpenGL (pliki
-programistyczne).
-
-%package -n Qt6ServiceSupport-devel
-Summary:	Qt6 ServiceSupport library - development files
-Summary(pl.UTF-8):	Biblioteka Qt6 ServiceSupport - pliki programistyczne
-Group:		Development/Libraries
-# for (subset of) Qt6Core headers
-Requires:	Qt6Core-devel = %{version}
-
-%description -n Qt6ServiceSupport-devel
-Qt6 ServiceSupport library - development files.
-
-%description -n Qt6ServiceSupport-devel -l pl.UTF-8
-Biblioteka Qt6 ServiceSupport - pliki programistyczne.
-
-%package -n Qt6PlatformCompositorSupport-devel
-Summary:	Qt6 PlatformCompositorSupport library - development files
-Summary(pl.UTF-8):	Biblioteka Qt6 PlatformCompositorSupport - pliki programistyczne
-Group:		X11/Development/Libraries
-Requires:	OpenGL-devel
-Requires:	Qt6Core-devel = %{version}
-Requires:	Qt6DBus-devel = %{version}
-Requires:	Qt6Gui-devel = %{version}
-Requires:	fontconfig-devel
-Requires:	freetype-devel >= 2.2.0
-Requires:	udev-devel
-Requires:	xorg-lib-libX11-devel
-Requires:	xorg-lib-libXext-devel
-Requires:	xorg-lib-libXrender-devel
-
-%description -n Qt6PlatformCompositorSupport-devel
-Qt6 PlatformCompositorSupport library (development files).
-
-%description -n Qt6PlatformCompositorSupport-devel -l pl.UTF-8
-Biblioteka Qt6 PlatformCompositorSupport - obsługa platformy (pliki
-programistyczne).
-
 %package -n Qt6PrintSupport
 Summary:	Qt6 PrintSupport library
 Summary(pl.UTF-8):	Biblioteka Qt6 PrintSupport
@@ -778,19 +689,6 @@ Header files for Qt6 PrintSupport library.
 
 %description -n Qt6PrintSupport-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 PrintSupport.
-
-%package -n Qt6ThemeSupport-devel
-Summary:	Qt6 ThemeSupport library - development files
-Summary(pl.UTF-8):	Biblioteka Qt6 ThemeSupport - pliki programistyczne
-Group:		Development/Libraries
-# for (subset of) Qt6Core headers
-Requires:	Qt6Core-devel = %{version}
-
-%description -n Qt6ThemeSupport-devel
-Qt6 ThemeSupport library - development files.
-
-%description -n Qt6ThemeSupport-devel -l pl.UTF-8
-Biblioteka Qt6 ThemeSupport - pliki programistyczne.
 
 %package -n Qt6Sql
 Summary:	Qt6 Sql library
@@ -944,19 +842,6 @@ Header files for Qt6 Test library.
 %description -n Qt6Test-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 Test.
 
-%package -n Qt6VulkanSupport-devel
-Summary:	Qt6 VulkanSupport library - development files
-Summary(pl.UTF-8):	Biblioteka Qt6 VulkanSupport - pliki programistyczne
-Group:		Development/Libraries
-# for (subset of) Qt6Core headers
-Requires:	Qt6Core-devel = %{version}
-
-%description -n Qt6VulkanSupport-devel
-Qt6 VulkanSupport library - development files.
-
-%description -n Qt6VulkanSupport-devel -l pl.UTF-8
-Biblioteka Qt6 VulkanSupport - pliki programistyczne.
-
 %package -n Qt6Widgets
 Summary:	Qt6 Widgets library
 Summary(pl.UTF-8):	Biblioteka Qt6 Widgets
@@ -988,19 +873,6 @@ Header files for Qt6 Widgets library.
 
 %description -n Qt6Widgets-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 Widgets.
-
-%package -n Qt6XkbCommonSupport-devel
-Summary:	Qt6 XkbCommonSupport library - development files
-Summary(pl.UTF-8):	Biblioteka Qt6 XkbCommonSupport - pliki programistyczne
-Group:		Development/Libraries
-# for (subset of) Qt6Core headers
-Requires:	Qt6Core-devel = %{version}
-
-%description -n Qt6XkbCommonSupport-devel
-Qt6 XkbCommonSupport library - development files.
-
-%description -n Qt6XkbCommonSupport-devel -l pl.UTF-8
-Biblioteka Qt6 XkbCommonSupport - pliki programistyczne.
 
 %package -n Qt6Xml
 Summary:	Qt6 Xml library
@@ -1144,6 +1016,9 @@ Generator plików makefile dla aplikacji Qt6.
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+perl(\s|$),#!%{__perl}\1,' \
 	qtbase/libexec/syncqt.pl
 
+%{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+node(\s|$),#!/usr/bin/node\1,' \
+	qtwebchannel/examples/webchannel/qwclient/qwclient.js
+
 %if %(echo %{cxx_version} | cut -d. -f1) < 9
 # available since gcc 9
 %{__sed} -i -e '/-Wdeprecated-copy/d' \
@@ -1152,7 +1027,6 @@ Generator plików makefile dla aplikacji Qt6.
 %endif
 
 %build
-#TODO optflags
 # We're using samurai instead of ninja because teh later
 # cannot be told what command line flags to use globally
 mkdir -p build
@@ -1178,7 +1052,7 @@ cd build
 	-DBUILD_SHARED_LIBS=ON \
 	%{?with_oci:-DOracle_INCLUDE_DIR=%{_includedir}/oracle/client} \
 	-DQT_DISABLE_RPATH=TRUE \
-	-DQT_BUILD_EXAMPLES=ON \
+	-DQT_BUILD_EXAMPLES=OFF \
 	-DQT_FEATURE_relocatable=OFF \
 	-DQT_FEATURE_rpath=OFF \
 	-DQT_FEATURE_separate_debug_info=OFF \
@@ -1205,6 +1079,28 @@ cd build
 	-DQT_FEATURE_system_pcre2=ON \
 	-DQT_FEATURE_system_sqlite=ON \
 	-DQT_FEATURE_system_zlib=ON \
+	-DQT_FEATURE_webengine_proprietary_codecs=ON \
+	-DQT_FEATURE_webengine_system_alsa=ON \
+	-DQT_FEATURE_webengine_system_ffmpeg=ON \
+	-DQT_FEATURE_webengine_system_freetype=ON \
+	-DQT_FEATURE_webengine_system_glib=ON \
+	-DQT_FEATURE_webengine_system_harfbuzz=ON \
+	-DQT_FEATURE_webengine_system_icu=ON \
+	-DQT_FEATURE_webengine_system_lcms2=ON \
+	-DQT_FEATURE_webengine_system_libevent=ON \
+	-DQT_FEATURE_webengine_system_libjpeg=ON \
+	-DQT_FEATURE_webengine_system_libpci=ON \
+	-DQT_FEATURE_webengine_system_libpng=ON \
+	-DQT_FEATURE_webengine_system_libvpx=ON \
+	-DQT_FEATURE_webengine_system_libwebp=ON \
+	-DQT_FEATURE_webengine_system_libxml=ON \
+	-DQT_FEATURE_webengine_system_minizip=ON \
+	-DQT_FEATURE_webengine_system_opus=ON \
+	-DQT_FEATURE_webengine_system_poppler=ON \
+	-DQT_FEATURE_webengine_system_pulseaudio=ON \
+	-DQT_FEATURE_webengine_system_re2=ON \
+	-DQT_FEATURE_webengine_system_snappy=ON \
+	-DQT_FEATURE_webengine_system_zlib=ON \
 	%{cmake_on_off sse2 QT_FEATURE_sse2} \
 	%{cmake_on_off sse3 QT_FEATURE_sse3} \
 	%{cmake_on_off ssse3 QT_FEATURE_ssse3} \
@@ -1221,7 +1117,7 @@ cd build
 	%{cmake_on_off odbc QT_FEATURE_sql_odbc} \
 	%{cmake_on_off pgsql QT_FEATURE_sql_psql} \
 	%{cmake_on_off sqlite3 QT_FEATURE_sql_sqlite} \
-	%{cmake_on_off tds QT_FEATURE_sql_tds} \
+	%{cmake_on_off freetds QT_FEATURE_sql_tds} \
 	%{cmake_on_off directfb QT_FEATURE_directfb} \
 	%{cmake_on_off gtk QT_FEATURE_gtk3} \
 	%{cmake_on_off egl QT_FEATURE_eglfs} \
@@ -1230,21 +1126,14 @@ cd build
 	%{cmake_on_off libinput QT_FEATURE_libinput} \
 	%{cmake_on_off tslib QT_FEATURE_tslib}
 
-## pass OPTFLAGS to build qmake itself with optimization
-#export OPTFLAGS="%{rpmcflags}"
-#export PATH=$PWD/bin:$PATH
-#
-#./configure \
-#%if %{with mysql}
-#	-I/usr/include/mysql \
-#%endif
-#%if %{with pgsql}
-#	-I/usr/include/postgresql/server \
-#%endif
-
 # Make sure arg-less sub-invocations will follow our parallel build setting
 export CMAKE_BUILD_PARALLEL_LEVEL="%__jobs"
 export SAMUFLAGS="%{_smp_mflags}"
+export VERBOSE=1
+export CFLAGS="%{rpmcflags}"
+export CXXFLAGS="%{rpmcxxflags}"
+export LDFLAGS="%{rpmldflags}"
+
 %{__cmake} --build . --verbose %{_smp_mflags}
 
 %if %{with doc}
@@ -1257,7 +1146,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/qt6,%{_bindir},%{_pkgconfigdir},%{qt6dir}/libexec}
 
 # for QtSolutions (qtlockedfile, qtsingleapplication, etc)
-#install -d $RPM_BUILD_ROOT%{_includedir}/qt6/QtSolutions
+install -d $RPM_BUILD_ROOT%{_includedir}/qt6/QtSolutions
 
 DESTDIR=$RPM_BUILD_ROOT %{__cmake} --install build/
 
@@ -1275,51 +1164,22 @@ install -d $RPM_BUILD_ROOT%{qt6dir}/plugins/iconengines
 
 # symlinks in system bin dir
 cd $RPM_BUILD_ROOT%{_bindir}
-ln -sf ../%{_lib}/qt6/bin/moc moc-qt6
 ln -sf ../%{_lib}/qt6/bin/qmake qmake-qt6
-ln -sf ../%{_lib}/qt6/bin/uic uic-qt6
-ln -sf ../%{_lib}/qt6/bin/rcc rcc-qt6
 ln -sf ../%{_lib}/qt6/bin/qdbuscpp2xml qdbuscpp2xml-qt6
 ln -sf ../%{_lib}/qt6/bin/qdbusxml2cpp qdbusxml2cpp-qt6
 ln -sf ../%{_lib}/qt6/bin/qdoc qdoc-qt6
-ln -sf ../%{_lib}/qt6/bin/qlalr qlalr-qt6
+ln -sf ../%{_lib}/qt6/libexec/moc moc-qt6
+ln -sf ../%{_lib}/qt6/libexec/uic uic-qt6
+ln -sf ../%{_lib}/qt6/libexec/rcc rcc-qt6
+ln -sf ../%{_lib}/qt6/libexec/qlalr qlalr-qt6
 cd -
 
-# Prepare some files list
-ifecho() {
-	r="$RPM_BUILD_ROOT$2"
-	if [ -d "$r" ]; then
-		echo "%%dir $2" >> $1.files
-	elif [ -x "$r" ] ; then
-		echo "%%attr(755,root,root) $2" >> $1.files
-	elif [ -f "$r" ]; then
-		echo "$2" >> $1.files
-	else
-		echo "Error generation $1 files list!"
-		echo "$r: no such file or directory!"
-		return 1
-	fi
-}
-ifecho_tree() {
-	ifecho $1 $2
-	for f in `find $RPM_BUILD_ROOT$2 -printf "%%P "`; do
-		ifecho $1 $2/$f
-	done
-}
-
-echo "%defattr(644,root,root,755)" > examples.files
-ifecho_tree examples %{_examplesdir}/qt6/corelib
-ifecho_tree examples %{_examplesdir}/qt6/dbus
-ifecho_tree examples %{_examplesdir}/qt6/gui
-ifecho_tree examples %{_examplesdir}/qt6/network
-ifecho_tree examples %{_examplesdir}/qt6/opengl
-ifecho_tree examples %{_examplesdir}/qt6/qpa
-ifecho_tree examples %{_examplesdir}/qt6/qtconcurrent
-ifecho_tree examples %{_examplesdir}/qt6/qtestlib
-ifecho_tree examples %{_examplesdir}/qt6/sql
-ifecho_tree examples %{_examplesdir}/qt6/vulkan
-ifecho_tree examples %{_examplesdir}/qt6/widgets
-ifecho_tree examples %{_examplesdir}/qt6/xml
+install -d $RPM_BUILD_ROOT%{_examplesdir}/qt6
+for dir in qt* ; do
+  [ -d $dir/examples ] || continue
+  mkdir -p $RPM_BUILD_ROOT%{_examplesdir}/qt6/$dir
+  cp -a $dir/examples/* $RPM_BUILD_ROOT%{_examplesdir}/qt6/$dir/
+done
 
 # find_lang --with-qm supports only PLD qt3/qt4 specific %{_localedir}/*/LC_MESSAGES layout
 find_qt6_qm()
@@ -1386,7 +1246,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6Concurrent
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Concurrent.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Concurrent.so.5
+%attr(755,root,root) %ghost %{_libdir}/libQt6Concurrent.so.6
 
 %files -n Qt6Concurrent-devel
 %defattr(644,root,root,755)
@@ -1400,9 +1260,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Core -f qtbase.lang
 %defattr(644,root,root,755)
-%doc dist/{README,changes-*}
+#%doc dist/{README,changes-*}
 %attr(755,root,root) %{_libdir}/libQt6Core.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Core.so.5
+%attr(755,root,root) %ghost %{_libdir}/libQt6Core.so.6
 %dir %{_sysconfdir}/qt6
 %dir %{qt6dir}
 %dir %{qt6dir}/bin
@@ -1418,7 +1278,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6Core.so
 %{_libdir}/libQt6Core.prl
 %dir %{_libdir}/metatypes
-%{_libdir}/metatypes/qt6core_metatypes.json
+%{_libdir}/metatypes/qt6core_pld_metatypes.json
 %dir %{_includedir}/qt6
 %dir %{_includedir}/qt6/QtSolutions
 %{_includedir}/qt6/QtCore
@@ -1427,12 +1287,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Core
 %{qt6dir}/mkspecs/modules/qt_lib_core.pri
 %{qt6dir}/mkspecs/modules/qt_lib_core_private.pri
-%attr(755,root,root) %{qt6dir}/bin/tracegen
+%attr(755,root,root) %{qt6dir}/libexec/tracegen
 
 %files -n Qt6DBus
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6DBus.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6DBus.so.5
+%attr(755,root,root) %ghost %{_libdir}/libQt6DBus.so.6
 
 %files -n Qt6DBus-devel
 %defattr(644,root,root,755)
@@ -1449,61 +1309,29 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtDeviceDiscoverySupport
 %{_libdir}/libQt6DeviceDiscoverySupport.a
 %{_libdir}/libQt6DeviceDiscoverySupport.prl
-%{_libdir}/cmake/Qt6DeviceDiscoverySupport
+#%{_libdir}/cmake/Qt6DeviceDiscoverySupport
 %{qt6dir}/mkspecs/modules/qt_lib_devicediscovery_support_private.pri
-
-%files -n Qt6EdidSupport-devel
-%defattr(644,root,root,755)
-%{_includedir}/qt6/QtEdidSupport
-%{_libdir}/libQt6EdidSupport.a
-%{_libdir}/libQt6EdidSupport.prl
-%{_libdir}/cmake/Qt6EdidSupport
-%{qt6dir}/mkspecs/modules/qt_lib_edid_support_private.pri
 
 %files -n Qt6EglSupport-devel
 %defattr(644,root,root,755)
-%{_includedir}/qt6/QtEglSupport
-%{_libdir}/libQt6EglSupport.a
-%{_libdir}/libQt6EglSupport.prl
-%{_libdir}/cmake/Qt6EglSupport
-%{qt6dir}/mkspecs/modules/qt_lib_egl_support_private.pri
-
-%files -n Qt6EventDispatcherSupport-devel
-%defattr(644,root,root,755)
-%{_includedir}/qt6/QtEventDispatcherSupport
-%{_libdir}/libQt6EventDispatcherSupport.a
-%{_libdir}/libQt6EventDispatcherSupport.prl
-%{_libdir}/cmake/Qt6EventDispatcherSupport
-%{qt6dir}/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri
+#%{_includedir}/qt6/QtEglSupport
+#%{_libdir}/libQt6EglSupport.a
+#%{_libdir}/libQt6EglSupport.prl
+#%{_libdir}/cmake/Qt6EglSupport
+#%{qt6dir}/mkspecs/modules/qt_lib_egl_support_private.pri
 
 %files -n Qt6FbSupport-devel
 %defattr(644,root,root,755)
-%{_includedir}/qt6/QtFbSupport
-%{_libdir}/libQt6FbSupport.a
-%{_libdir}/libQt6FbSupport.prl
-%{_libdir}/cmake/Qt6FbSupport
-%{qt6dir}/mkspecs/modules/qt_lib_fb_support_private.pri
-
-%files -n Qt6FontDatabaseSupport-devel
-%defattr(644,root,root,755)
-%{_includedir}/qt6/QtFontDatabaseSupport
-%{_libdir}/libQt6FontDatabaseSupport.a
-%{_libdir}/libQt6FontDatabaseSupport.prl
-%{_libdir}/cmake/Qt6FontDatabaseSupport
-%{qt6dir}/mkspecs/modules/qt_lib_fontdatabase_support_private.pri
-
-%files -n Qt6GlxSupport-devel
-%defattr(644,root,root,755)
-%{_includedir}/qt6/QtGlxSupport
-%{_libdir}/libQt6GlxSupport.a
-%{_libdir}/libQt6GlxSupport.prl
-%{_libdir}/cmake/Qt6GlxSupport
-%{qt6dir}/mkspecs/modules/qt_lib_glx_support_private.pri
+#%{_includedir}/qt6/QtFbSupport
+#%{_libdir}/libQt6FbSupport.a
+#%{_libdir}/libQt6FbSupport.prl
+#%{_libdir}/cmake/Qt6FbSupport
+#%{qt6dir}/mkspecs/modules/qt_lib_fb_support_private.pri
 
 %files -n Qt6Gui
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Gui.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Gui.so.5
+%attr(755,root,root) %ghost %{_libdir}/libQt6Gui.so.6
 # loaded from src/gui/kernel/qgenericpluginfactory.cpp
 %dir %{qt6dir}/plugins/generic
 # R: udev-libs (by all qevdev* plugins)
@@ -1541,7 +1369,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # R: libinput libxkbcommon udev
 %attr(755,root,root) %{qt6dir}/plugins/generic/libqlibinputplugin.so
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QLibInputPlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QLibInputPlugin*.cmake
 %endif
 
 %if %{with tslib}
@@ -1549,21 +1377,21 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # R: tslib
 %attr(755,root,root) %{qt6dir}/plugins/generic/libqtslibplugin.so
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QTsLibPlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QTsLibPlugin*.cmake
 %endif
 
 %files -n Qt6Gui-generic-tuiotouch
 %defattr(644,root,root,755)
 # R: Qt6Network
 %attr(755,root,root) %{qt6dir}/plugins/generic/libqtuiotouchplugin.so
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QTuioTouchPlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QTuioTouchPlugin*.cmake
 
 %if %{with directfb}
 %files -n Qt6Gui-platform-directfb
 %defattr(644,root,root,755)
 # R: DirectFB fontconfig freetype
 %attr(755,root,root) %{qt6dir}/plugins/platforms/libqdirectfb.so
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QDirectFbIntegrationPlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QDirectFbIntegrationPlugin*.cmake
 %endif
 
 %if %{with egl}
@@ -1571,18 +1399,18 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # R: egl fontconfig freetype
 %attr(755,root,root) %{qt6dir}/plugins/platforms/libqminimalegl.so
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QMinimalEglIntegrationPlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QMinimalEglIntegrationPlugin*.cmake
 %endif
 
 %files -n Qt6Gui-platform-eglfs
 %defattr(644,root,root,755)
 # R: Qt6Gui Qt6Core EGL GL ts fontconfig freetype glib2 udev mtdev
 %attr(755,root,root) %{_libdir}/libQt6EglFSDeviceIntegration.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6EglFSDeviceIntegration.so.5
+%attr(755,root,root) %ghost %{_libdir}/libQt6EglFSDeviceIntegration.so.6
 # R: egl fontconfig freetype (for two following)
 %attr(755,root,root) %{qt6dir}/plugins/platforms/libqeglfs.so
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QEglFSIntegrationPlugin.cmake
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QEglFSEmulatorIntegrationPlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QEglFSIntegrationPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QEglFSEmulatorIntegrationPlugin*.cmake
 # loaded from src/plugins/platforms/eglfs/qeglfsdeviceintegration.cpp
 %dir %{qt6dir}/plugins/egldeviceintegrations
 %attr(755,root,root) %{qt6dir}/plugins/egldeviceintegrations/libqeglfs-emu-integration.so
@@ -1591,7 +1419,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_includedir}/qt6/QtEglFSDeviceIntegration
 %attr(755,root,root) %{_libdir}/libQt6EglFSDeviceIntegration.so
-%{_libdir}/cmake/Qt6EglFSDeviceIntegration
+%{_libdir}/cmake/Qt6EglFSDeviceIntegrationPrivate
 %{_libdir}/libQt6EglFSDeviceIntegration.prl
 %{qt6dir}/mkspecs/modules/qt_lib_eglfsdeviceintegration_private.pri
 
@@ -1600,7 +1428,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # R: gl egl libdrm libgbm udev
 %attr(755,root,root) %{_libdir}/libQt6EglFsKmsSupport.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6EglFsKmsSupport.so.5
+%attr(755,root,root) %ghost %{_libdir}/libQt6EglFsKmsSupport.so.6
 %attr(755,root,root) %{qt6dir}/plugins/egldeviceintegrations/libqeglfs-kms-integration.so
 %attr(755,root,root) %{qt6dir}/plugins/egldeviceintegrations/libqeglfs-kms-egldevice-integration.so
 
@@ -1608,9 +1436,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6EglFsKmsSupport.so
 %{_libdir}/libQt6EglFsKmsSupport.prl
-%{_libdir}/cmake/Qt6EglFsKmsSupport
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QEglFSKmsEglDeviceIntegrationPlugin.cmake
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QEglFSKmsGbmIntegrationPlugin.cmake
+%{_libdir}/cmake/Qt6EglFsKmsSupportPrivate
+%{_libdir}/cmake/Qt6Gui/Qt6QEglFSKmsEglDeviceIntegrationPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QEglFSKmsGbmIntegrationPlugin*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_eglfs_kms_support_private.pri
 %endif
 
@@ -1618,13 +1446,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # R: libX11 libxcb
 %attr(755,root,root) %{qt6dir}/plugins/egldeviceintegrations/libqeglfs-x11-integration.so
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QEglFSX11IntegrationPlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QEglFSX11IntegrationPlugin*.cmake
 
 %files -n Qt6Gui-platform-linuxfb
 %defattr(644,root,root,755)
 # R: fontconfig freetype libinput tslib udev-libs
 %attr(755,root,root) %{qt6dir}/plugins/platforms/libqlinuxfb.so
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QLinuxFbIntegrationPlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QLinuxFbIntegrationPlugin*.cmake
 
 %files -n Qt6Gui-platform-vnc
 %defattr(644,root,root,755)
@@ -1632,70 +1460,69 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Gui-platform-vnc-devel
 %defattr(644,root,root,755)
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QVncIntegrationPlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QVncIntegrationPlugin*.cmake
 
 %files -n Qt6Gui-platform-xcb
 %defattr(644,root,root,755)
 # R: Qt6DBus xorg* xcb* libxkbcommon-x11 fontconfig freetype
 %attr(755,root,root) %{_libdir}/libQt6XcbQpa.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6XcbQpa.so.5
+%attr(755,root,root) %ghost %{_libdir}/libQt6XcbQpa.so.6
 # R: Qt6DBus xcb-* xorg*
 %attr(755,root,root) %{qt6dir}/plugins/platforms/libqxcb.so
 # loaded from src/plugins/platforms/xcb/gl_integrations/qxcbglintegrationfactory.cpp
 %dir %{qt6dir}/plugins/xcbglintegrations
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QXcbIntegrationPlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QXcbIntegrationPlugin*.cmake
 
 %files -n Qt6Gui-platform-xcb-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6XcbQpa.so
 %{_libdir}/libQt6XcbQpa.prl
-%{_libdir}/cmake/Qt6XcbQpa
+%{_libdir}/cmake/Qt6XcbQpaPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri
 
 %files -n Qt6Gui-platform-xcb-egl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{qt6dir}/plugins/xcbglintegrations/libqxcb-egl-integration.so
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QXcbEglIntegrationPlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QXcbEglIntegrationPlugin*.cmake
 
 %files -n Qt6Gui-platform-xcb-glx
 %defattr(644,root,root,755)
 %attr(755,root,root) %{qt6dir}/plugins/xcbglintegrations/libqxcb-glx-integration.so
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QXcbGlxIntegrationPlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QXcbGlxIntegrationPlugin*.cmake
 
 %if %{with gtk}
 %files -n Qt6Gui-platformtheme-gtk3
 %defattr(644,root,root,755)
 # R: gtk+3
 %attr(755,root,root) %{qt6dir}/plugins/platformthemes/libqgtk3.so
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QGtk3ThemePlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QGtk3ThemePlugin*.cmake
 %endif
 
 %files -n Qt6Gui-platformtheme-xdgdesktopportal
 %defattr(644,root,root,755)
 %attr(755,root,root) %{qt6dir}/plugins/platformthemes/libqxdgdesktopportal.so
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QXdgDesktopPortalThemePlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QXdgDesktopPortalThemePlugin*.cmake
 
 %files -n Qt6Gui-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/bin/qvkgen
+%attr(755,root,root) %{qt6dir}/libexec/qvkgen
 %attr(755,root,root) %{_libdir}/libQt6Gui.so
 %{_libdir}/libQt6Gui.prl
-%{_libdir}/metatypes/qt6gui_metatypes.json
+%{_libdir}/metatypes/qt6gui_pld_metatypes.json
 %{_includedir}/qt6/QtGui
-%{_includedir}/qt6/QtPlatformHeaders
 %{_pkgconfigdir}/Qt6Gui.pc
 %{_libdir}/cmake/Qt6Gui/Qt6GuiConfig*.cmake
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QEvdevKeyboardPlugin.cmake
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QEvdevMousePlugin.cmake
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QEvdevTabletPlugin.cmake
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QEvdevTouchScreenPlugin.cmake
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QGifPlugin.cmake
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QICOPlugin.cmake
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QJpegPlugin.cmake
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QComposePlatformInputContextPlugin.cmake
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QIbusPlatformInputContextPlugin.cmake
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QMinimalIntegrationPlugin.cmake
-%{_libdir}/cmake/Qt6Gui/Qt6Gui_QOffscreenIntegrationPlugin.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QEvdevKeyboardPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QEvdevMousePlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QEvdevTabletPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QEvdevTouchScreenPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QGifPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QICOPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QJpegPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QComposePlatformInputContextPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QIbusPlatformInputContextPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QMinimalIntegrationPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QOffscreenIntegrationPlugin*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_gui.pri
 %{qt6dir}/mkspecs/modules/qt_lib_gui_private.pri
 
@@ -1704,7 +1531,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtInputSupport
 %{_libdir}/libQt6InputSupport.a
 %{_libdir}/libQt6InputSupport.prl
-%{_libdir}/cmake/Qt6InputSupport
+%{_libdir}/cmake/Qt6InputSupportPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_input_support_private.pri
 
 %files -n Qt6KmsSupport-devel
@@ -1712,20 +1539,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtKmsSupport
 %{_libdir}/libQt6KmsSupport.a
 %{_libdir}/libQt6KmsSupport.prl
-%{_libdir}/cmake/Qt6KmsSupport
+%{_libdir}/cmake/Qt6KmsSupportPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_kms_support_private.pri
 
 %files -n Qt6Network
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Network.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Network.so.5
-# loaded from src/network/bearer/qnetworkconfigmanager_p.cpp
-%dir %{qt6dir}/plugins/bearer
-# R: Qt6DBus
-%attr(755,root,root) %{qt6dir}/plugins/bearer/libqconnmanbearer.so
-%attr(755,root,root) %{qt6dir}/plugins/bearer/libqgenericbearer.so
-# R: Qt6DBus
-%attr(755,root,root) %{qt6dir}/plugins/bearer/libqnmbearer.so
+%attr(755,root,root) %ghost %{_libdir}/libQt6Network.so.6
 
 %files -n Qt6Network-devel
 %defattr(644,root,root,755)
@@ -1735,16 +1555,16 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6Network.pc
 %dir %{_libdir}/cmake/Qt6Network
 %{_libdir}/cmake/Qt6Network/Qt6NetworkConfig*.cmake
-%{_libdir}/cmake/Qt6Network/Qt6Network_QConnmanEnginePlugin.cmake
-%{_libdir}/cmake/Qt6Network/Qt6Network_QGenericEnginePlugin.cmake
-%{_libdir}/cmake/Qt6Network/Qt6Network_QNetworkManagerEnginePlugin.cmake
+#%{_libdir}/cmake/Qt6Network/Qt6NetworkQConnmanEnginePlugin*.cmake
+#%{_libdir}/cmake/Qt6Network/Qt6NetworkQGenericEnginePlugin*.cmake
+#%{_libdir}/cmake/Qt6Network/Qt6NetworkQNetworkManagerEnginePlugin*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_network.pri
 %{qt6dir}/mkspecs/modules/qt_lib_network_private.pri
 
 %files -n Qt6OpenGL
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6OpenGL.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6OpenGL.so.5
+%attr(755,root,root) %ghost %{_libdir}/libQt6OpenGL.so.6
 
 %files -n Qt6OpenGL-devel
 %defattr(644,root,root,755)
@@ -1756,29 +1576,10 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_opengl.pri
 %{qt6dir}/mkspecs/modules/qt_lib_opengl_private.pri
 
-%files -n Qt6OpenGLExtensions-devel
-%defattr(644,root,root,755)
-# static-only
-%{_libdir}/libQt6OpenGLExtensions.a
-%{_libdir}/libQt6OpenGLExtensions.prl
-%{_includedir}/qt6/QtOpenGLExtensions
-%{_pkgconfigdir}/Qt6OpenGLExtensions.pc
-%{_libdir}/cmake/Qt6OpenGLExtensions
-%{qt6dir}/mkspecs/modules/qt_lib_openglextensions.pri
-%{qt6dir}/mkspecs/modules/qt_lib_openglextensions_private.pri
-
-%files -n Qt6PlatformCompositorSupport-devel
-%defattr(644,root,root,755)
-%{_includedir}/qt6/QtPlatformCompositorSupport
-%{_libdir}/libQt6PlatformCompositorSupport.a
-%{_libdir}/libQt6PlatformCompositorSupport.prl
-%{_libdir}/cmake/Qt6PlatformCompositorSupport
-%{qt6dir}/mkspecs/modules/qt_lib_platformcompositor_support_private.pri
-
 %files -n Qt6PrintSupport
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6PrintSupport.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6PrintSupport.so.5
+%attr(755,root,root) %ghost %{_libdir}/libQt6PrintSupport.so.6
 # loaded from src/printsupport/kernel/qplatformprintplugin.cpp
 %dir %{qt6dir}/plugins/printsupport
 %if %{with cups}
@@ -1794,23 +1595,15 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/cmake/Qt6PrintSupport
 %{_libdir}/cmake/Qt6PrintSupport/Qt6PrintSupportConfig*.cmake
 %if %{with cups}
-%{_libdir}/cmake/Qt6PrintSupport/Qt6PrintSupport_QCupsPrinterSupportPlugin.cmake
+%{_libdir}/cmake/Qt6PrintSupport/Qt6QCupsPrinterSupportPlugin*.cmake
 %endif
 %{qt6dir}/mkspecs/modules/qt_lib_printsupport.pri
 %{qt6dir}/mkspecs/modules/qt_lib_printsupport_private.pri
 
-%files -n Qt6ServiceSupport-devel
-%defattr(644,root,root,755)
-%{_includedir}/qt6/QtServiceSupport
-%{_libdir}/libQt6ServiceSupport.a
-%{_libdir}/libQt6ServiceSupport.prl
-%{_libdir}/cmake/Qt6ServiceSupport
-%{qt6dir}/mkspecs/modules/qt_lib_service_support_private.pri
-
 %files -n Qt6Sql
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Sql.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Sql.so.5
+%attr(755,root,root) %ghost %{_libdir}/libQt6Sql.so.6
 # loaded from src/sql/kernel/qsqldatabase.cpp
 %dir %{qt6dir}/plugins/sqldrivers
 # common for base -devel and plugin-specific files
@@ -1821,7 +1614,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # R: (proprietary) DB2 libs
 %attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqldb2.so
-%{_libdir}/cmake/Qt6Sql/Qt6Sql_QDB2DriverPlugin.cmake
+%{_libdir}/cmake/Qt6Sql/Qt6QDB2DriverPlugin*.cmake
 %endif
 
 %if %{with ibase}
@@ -1829,7 +1622,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # R: Firebird-lib
 %attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqlibase.so
-%{_libdir}/cmake/Qt6Sql/Qt6Sql_QIBaseDriverPlugin.cmake
+%{_libdir}/cmake/Qt6Sql/Qt6QIBaseDriverPlugin*.cmake
 %endif
 
 %if %{with sqlite3}
@@ -1837,7 +1630,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # R: sqlite3
 %attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqlite.so
-%{_libdir}/cmake/Qt6Sql/Qt6Sql_QSQLiteDriverPlugin.cmake
+%{_libdir}/cmake/Qt6Sql/Qt6QSQLiteDriverPlugin*.cmake
 %endif
 
 %if %{with mysql}
@@ -1845,7 +1638,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # R: mysql-libs
 %attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqlmysql.so
-%{_libdir}/cmake/Qt6Sql/Qt6Sql_QMYSQLDriverPlugin.cmake
+%{_libdir}/cmake/Qt6Sql/Qt6QMYSQLDriverPlugin*.cmake
 %endif
 
 %if %{with oci}
@@ -1853,7 +1646,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # R: (proprietary) Oracle libs
 %attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqloci.so
-%{_libdir}/cmake/Qt6Sql/Qt6Sql_QOCIDriverPlugin.cmake
+%{_libdir}/cmake/Qt6Sql/Qt6QOCIDriverPlugin*.cmake
 %endif
 
 %if %{with odbc}
@@ -1861,7 +1654,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # R: unixODBC
 %attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqlodbc.so
-%{_libdir}/cmake/Qt6Sql/Qt6Sql_QODBCDriverPlugin.cmake
+%{_libdir}/cmake/Qt6Sql/Qt6QODBCDriverPlugin*.cmake
 %endif
 
 %if %{with pgsql}
@@ -1869,15 +1662,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 # R: postgresql-libs
 %attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqlpsql.so
-%{_libdir}/cmake/Qt6Sql/Qt6Sql_QPSQLDriverPlugin.cmake
+%{_libdir}/cmake/Qt6Sql/Qt6QPSQLDriverPlugin*.cmake
 %endif
 
 %if %{with freetds}
 %files -n Qt6Sql-sqldriver-tds
 %defattr(644,root,root,755)
 # R: freetds
-%attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqltds.so
-%{_libdir}/cmake/Qt6Sql/Qt6Sql_QTDSDriverPlugin.cmake
+#%attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqltds.so
+#%{_libdir}/cmake/Qt6Sql/Qt6QTDSDriverPlugin*.cmake
 %endif
 
 %files -n Qt6Sql-devel
@@ -1893,7 +1686,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6Test
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Test.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Test.so.5
+%attr(755,root,root) %ghost %{_libdir}/libQt6Test.so.6
 
 %files -n Qt6Test-devel
 %defattr(644,root,root,755)
@@ -1905,33 +1698,17 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_testlib.pri
 %{qt6dir}/mkspecs/modules/qt_lib_testlib_private.pri
 
-%files -n Qt6ThemeSupport-devel
-%defattr(644,root,root,755)
-%{_includedir}/qt6/QtThemeSupport
-%{_libdir}/libQt6ThemeSupport.a
-%{_libdir}/libQt6ThemeSupport.prl
-%{_libdir}/cmake/Qt6ThemeSupport
-%{qt6dir}/mkspecs/modules/qt_lib_theme_support_private.pri
-
-%files -n Qt6VulkanSupport-devel
-%defattr(644,root,root,755)
-%{_includedir}/qt6/QtVulkanSupport
-%{_libdir}/libQt6VulkanSupport.a
-%{_libdir}/libQt6VulkanSupport.prl
-%{_libdir}/cmake/Qt6VulkanSupport
-%{qt6dir}/mkspecs/modules/qt_lib_vulkan_support_private.pri
-
 %files -n Qt6Widgets
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Widgets.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Widgets.so.5
+%attr(755,root,root) %ghost %{_libdir}/libQt6Widgets.so.6
 %dir %{qt6dir}/plugins/styles
 
 %files -n Qt6Widgets-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Widgets.so
 %{_libdir}/libQt6Widgets.prl
-%{_libdir}/metatypes/qt6widgets_metatypes.json
+%{_libdir}/metatypes/qt6widgets_pld_metatypes.json
 %{_includedir}/qt6/QtWidgets
 %{_pkgconfigdir}/Qt6Widgets.pc
 %dir %{_libdir}/cmake/Qt6Widgets
@@ -1940,18 +1717,10 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_widgets.pri
 %{qt6dir}/mkspecs/modules/qt_lib_widgets_private.pri
 
-%files -n Qt6XkbCommonSupport-devel
-%defattr(644,root,root,755)
-%{_includedir}/qt6/QtXkbCommonSupport
-%{_libdir}/libQt6XkbCommonSupport.a
-%{_libdir}/libQt6XkbCommonSupport.prl
-%{_libdir}/cmake/Qt6XkbCommonSupport
-%{qt6dir}/mkspecs/modules/qt_lib_xkbcommon_support_private.pri
-
 %files -n Qt6Xml
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Xml.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Xml.so.5
+%attr(755,root,root) %ghost %{_libdir}/libQt6Xml.so.6
 
 %files -n Qt6Xml-devel
 %defattr(644,root,root,755)
@@ -1979,7 +1748,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtgui
 %{_docdir}/qt6-doc/qtnetwork
 %{_docdir}/qt6-doc/qtopengl
-%{_docdir}/qt6-doc/qtplatformheaders
 %{_docdir}/qt6-doc/qtprintsupport
 %{_docdir}/qt6-doc/qtsql
 %{_docdir}/qt6-doc/qttestlib
@@ -1995,7 +1763,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtgui.qch
 %{_docdir}/qt6-doc/qtnetwork.qch
 %{_docdir}/qt6-doc/qtopengl.qch
-%{_docdir}/qt6-doc/qtplatformheaders.qch
 %{_docdir}/qt6-doc/qtprintsupport.qch
 %{_docdir}/qt6-doc/qtsql.qch
 %{_docdir}/qt6-doc/qttestlib.qch
@@ -2003,11 +1770,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtxml.qch
 %endif
 
-%files examples -f examples.files
+%files examples
 %defattr(644,root,root,755)
-%dir %{_examplesdir}/qt6
-%doc %{_examplesdir}/qt6/README
-%{_examplesdir}/qt6/examples.pro
+%{_examplesdir}/qt6
 
 %files -n qt6-build
 %defattr(644,root,root,755)
@@ -2018,14 +1783,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/qlalr-qt6
 %attr(755,root,root) %{_bindir}/rcc-qt6
 %attr(755,root,root) %{_bindir}/uic-qt6
-%attr(755,root,root) %{qt6dir}/bin/fixqt4headers.pl
-%attr(755,root,root) %{qt6dir}/bin/moc
 %attr(755,root,root) %{qt6dir}/bin/qdbuscpp2xml
 %attr(755,root,root) %{qt6dir}/bin/qdbusxml2cpp
-%attr(755,root,root) %{qt6dir}/bin/qlalr
-%attr(755,root,root) %{qt6dir}/bin/rcc
-%attr(755,root,root) %{qt6dir}/bin/syncqt.pl
-%attr(755,root,root) %{qt6dir}/bin/uic
+%attr(755,root,root) %{qt6dir}/libexec/moc
+%attr(755,root,root) %{qt6dir}/libexec/qlalr
+%attr(755,root,root) %{qt6dir}/libexec/rcc
+%attr(755,root,root) %{qt6dir}/libexec/syncqt.pl
+%attr(755,root,root) %{qt6dir}/libexec/uic
 
 %files -n qt6-qmake
 %defattr(644,root,root,755)
@@ -2056,5 +1820,4 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/unsupported
 %{qt6dir}/mkspecs/wasm-emscripten
 %{qt6dir}/mkspecs/win32-*
-%{qt6dir}/mkspecs/winrt-*
 %{qt6dir}/mkspecs/*.pri

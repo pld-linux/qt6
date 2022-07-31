@@ -466,6 +466,61 @@ Header files for Qt6 Core library.
 %description -n Qt6Core-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 Core.
 
+%package -n Qt6DataVisualization
+Summary:	The Qt6 DataVisualization library
+Summary(pl.UTF-8):	Biblioteka Qt6 DataVisualization
+Group:		X11/Libraries
+Requires:	Qt6Core >= %{version}
+Requires:	Qt6Gui >= %{version}
+Requires:	Qt6Qml >= %{qtdeclarative_ver}
+Requires:	Qt6Quick >= %{qtdeclarative_ver}
+
+%description -n Qt6DataVisualization
+Qt6 DataVisualization library.
+
+%description -n Qt6DataVisualization -l pl.UTF-8
+Biblioteka Qt6 DataVisualization.
+
+%package -n Qt6DataVisualization-devel
+Summary:	Qt6 DataVisualization - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 DataVisualization - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6DataVisualization = %{version}-%{release}
+Requires:	Qt6Core-devel >= %{version}
+Requires:	Qt6Gui-devel >= %{version}
+
+%description -n Qt6DataVisualization-devel
+Qt6 DataVisualization - development files.
+
+%description -n Qt6DataVisualization-devel -l pl.UTF-8
+Biblioteka Qt6 DataVisualization - pliki programistyczne.
+
+%package -n Qt6DataVisualization-doc
+Summary:	Qt6 DataVisualization documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 DataVisualization w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6DataVisualization-doc
+Qt6 DataVisualization documentation in HTML format.
+
+%description -n Qt6DataVisualization-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 DataVisualization w formacie HTML.
+
+%package -n Qt6DataVisualization-doc-qch
+Summary:	Qt6 DataVisualization documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 DataVisualization w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6DataVisualization-doc-qch
+Qt6 DataVisualization documentation in QCH format.
+
+%description -n Qt6DataVisualization-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 DataVisualization w formacie QCH.
+
 %package -n Qt6DBus
 Summary:	Qt6 DBus library
 Summary(pl.UTF-8):	Biblioteka Qt6 DBus
@@ -1510,6 +1565,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n Qt6Core -p /sbin/ldconfig
 %postun	-n Qt6Core -p /sbin/ldconfig
 
+%post	-n Qt6DataVisualization -p /sbin/ldconfig
+%postun	-n Qt6DataVisualization -p /sbin/ldconfig
+
 %post	-n Qt6DBus -p /sbin/ldconfig
 %postun	-n Qt6DBus -p /sbin/ldconfig
 
@@ -1881,6 +1939,38 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_core.pri
 %{qt6dir}/mkspecs/modules/qt_lib_core_private.pri
 %attr(755,root,root) %{qt6dir}/libexec/tracegen
+
+%files -n Qt6DataVisualization
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Gui
+%attr(755,root,root) %{_libdir}/libQt6DataVisualization.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6DataVisualization.so.6
+%dir %{qt6dir}/qml/QtDataVisualization
+# R: Qt6Core Qt6Gui Qt6Qml Qt6Quick
+%attr(755,root,root) %{qt6dir}/qml/QtDataVisualization/libdatavisualizationqmlplugin.so
+%{qt6dir}/qml/QtDataVisualization/plugins.qmltypes
+%{qt6dir}/qml/QtDataVisualization/qmldir
+%{qt6dir}/qml/QtDataVisualization/designer
+
+%files -n Qt6DataVisualization-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6DataVisualization.so
+%{_libdir}/libQt6DataVisualization.prl
+%{_includedir}/qt6/QtDataVisualization
+%{_pkgconfigdir}/Qt6DataVisualization.pc
+%{_libdir}/cmake/Qt6DataVisualization
+%{qt6dir}/mkspecs/modules/qt_lib_datavisualization.pri
+%{qt6dir}/mkspecs/modules/qt_lib_datavisualization_private.pri
+
+%if %{with doc}
+%files -n Qt6DataVisualization-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtdatavis3d
+
+%files -n Qt6DataVisualization-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtdatavis3d.qch
+%endif
 
 %files -n Qt6DBus
 %defattr(644,root,root,755)

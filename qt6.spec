@@ -11,6 +11,7 @@
 %bcond_without	cups		# CUPS printing support
 %bcond_with	directfb	# DirectFB platform support
 %bcond_without	egl		# EGL (EGLFS, minimal EGL) platform support
+%bcond_with	fbx		# Autodesk FBX SDK support (proprietary)
 %bcond_without	gtk		# GTK+ theme integration
 %bcond_without	kerberos5	# KRB5 GSSAPI Support
 %bcond_without	kms		# KMS platform support
@@ -78,12 +79,14 @@ BuildRequires:	OpenGL-devel
 %{?with_kms:BuildRequires:	OpenGLESv2-devel}
 BuildRequires:	Vulkan-Loader-devel
 BuildRequires:	alsa-lib-devel
+BuildRequires:	assimp-devel >= 5
 BuildRequires:	at-spi2-core-devel
 # base dir requires 3.16, gn 3.19
 BuildRequires:	cmake >= 3.19
 %{?with_cups:BuildRequires:	cups-devel >= 1.4}
 BuildRequires:	dbus-devel >= 1.2
 BuildRequires:	double-conversion-devel
+%{?with_fbx:BuildRequires:	fbxsdk-devel}
 BuildRequires:	ffmpeg-devel
 BuildRequires:	fontconfig-devel
 %{?with_freetds:BuildRequires:	freetds-devel}
@@ -166,6 +169,125 @@ Qt is a software toolkit for developing applications.
 
 %description -l pl.UTF-8
 Qt to programowy toolkit do tworzenia aplikacji.
+
+%package -n Qt63D
+Summary:	The Qt6 3D libraries
+Summary(pl.UTF-8):	Biblioteki Qt6 3D
+Group:		X11/Libraries
+Requires:	Qt6Core >= %{version}
+Requires:	Qt6Gui >= %{version}
+Requires:	assimp >= 5
+
+%description -n Qt63D
+Qt6 3D libraries.
+
+%description -n Qt63D -l pl.UTF-8
+Biblioteki Qt6 3D.
+
+%package -n Qt63D-devel
+Summary:	Qt6 3D - development files
+Summary(pl.UTF-8):	Biblioteki Qt6 3D - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt63D = %{version}-%{release}
+Requires:	Qt6Concurrent-devel >= %{version}
+Requires:	Qt6Core-devel >= %{version}
+Requires:	Qt6Gui-devel >= %{version}
+Requires:	Qt6Qml-devel >= %{version}
+
+%description -n Qt63D-devel
+Qt6 3D - development files.
+
+%description -n Qt63D-devel -l pl.UTF-8
+Biblioteki Qt6 3D - pliki programistyczne.
+
+%package -n Qt63D-doc
+Summary:	Qt6 3D documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 3D w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt63D-doc
+Qt6 3D documentation in HTML format.
+
+%description -n Qt63D-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 3D w formacie HTML.
+
+%package -n Qt63D-doc-qch
+Summary:	Qt6 3D documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 3D w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt63D-doc-qch
+Qt6 3D documentation in QCH format.
+
+%description -n Qt63D-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 3D w formacie QCH.
+
+%package -n Qt6Charts
+Summary:	The Qt6 Charts library
+Summary(pl.UTF-8):	Biblioteka Qt6 Charts
+Group:		Libraries
+Requires:	Qt6Core >= %{version}
+Requires:	Qt6Gui >= %{version}
+Requires:	Qt6Widgets >= %{version}
+# for qml module
+Requires:	Qt6Qml >= %{version}
+Requires:	Qt6Quick >= %{version}
+
+%description -n Qt6Charts
+Qt Charts module provides a set of easy to use chart components. It
+uses the Qt Graphics View Framework, therefore charts can be easily
+integrated to modern user interfaces.
+
+%description -n Qt6Charts -l pl.UTF-8
+Biblioteka Qt6 Charts udostępnia łatwe w użyciu komponenty do
+tworzenia wykresów. Wykorzystuje szkielet Qt Graphics View, dzięki
+czemu wykresy mogą być łatwo integrowane z nowoczesnymi interfejsami
+użytkownika.
+
+%package -n Qt6Charts-devel
+Summary:	Qt6 Charts library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Charts - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Charts = %{version}-%{release}
+Requires:	Qt6Core-devel >= %{version}
+Requires:	Qt6Gui-devel >= %{version}
+Requires:	Qt6Widgets-devel >= %{version}
+
+%description -n Qt6Charts-devel
+Qt6 Charts library - development files.
+
+%description -n Qt6Charts-devel -l pl.UTF-8
+Biblioteka Qt6 Charts - pliki programistyczne.
+
+%package -n Qt6Charts-doc
+Summary:	Qt6 Charts documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Charts w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6Charts-doc
+Qt6 Charts documentation in HTML format.
+
+%description -n Qt6Charts-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Charts w formacie HTML.
+
+%package -n Qt6Charts-doc-qch
+Summary:	Qt6 Charts documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Charts w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6Charts-doc-qch
+Qt6 Charts documentation in QCH format.
+
+%description -n Qt6Charts-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Charts w formacie QCH.
 
 %package -n Qt6Concurrent
 Summary:	Qt6 Concurrent library
@@ -1201,6 +1323,12 @@ install -d $RPM_BUILD_ROOT%{qt6dir}/plugins/styles
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	-n Qt63D -p /sbin/ldconfig
+%postun	-n Qt63D -p /sbin/ldconfig
+
+%post	-n Qt6Charts -p /sbin/ldconfig
+%postun	-n Qt6Charts -p /sbin/ldconfig
+
 %post	-n Qt6Concurrent -p /sbin/ldconfig
 %postun	-n Qt6Concurrent -p /sbin/ldconfig
 
@@ -1242,6 +1370,239 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	-n Qt6Xml -p /sbin/ldconfig
 %postun	-n Qt6Xml -p /sbin/ldconfig
+
+%files -n Qt63D
+%defattr(644,root,root,755)
+# R: Qt63DCore Qt63DRender Qt6Core Qt6Gui
+%attr(755,root,root) %{_libdir}/libQt63DAnimation.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt63DAnimation.so.6
+# R: Qt6Core Qt6Gui Qt6Network
+%attr(755,root,root) %{_libdir}/libQt63DCore.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt63DCore.so.6
+# R: Qt63DCore Qt63DInput Qt63DLogic Qt63DRender Qt6Core Qt6Gui
+%attr(755,root,root) %{_libdir}/libQt63DExtras.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt63DExtras.so.6
+# R: Qt63DCore Qt6Core Qt6Gui
+%attr(755,root,root) %{_libdir}/libQt63DInput.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt63DInput.so.6
+# R: Qt63DCore Qt6Core
+%attr(755,root,root) %{_libdir}/libQt63DLogic.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt63DLogic.so.6
+# R: Qt63DCore Qt6Core Qt6Gui Qt6Qml Qt6QmlModels Qt6Quick
+%attr(755,root,root) %{_libdir}/libQt63DQuick.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt63DQuick.so.6
+# R: Qt63DAnimation Qt63DCore Qt63DRender Qt6Core Qt6Qml
+%attr(755,root,root) %{_libdir}/libQt63DQuickAnimation.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt63DQuickAnimation.so.6
+# R: Qt63DCore Qt63DExtras Qt63DInput Qt63DLogic Qt63DQuick Qt63DRender Qt6Core Qt6Gui Qt6Qml
+%attr(755,root,root) %{_libdir}/libQt63DQuickExtras.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt63DQuickExtras.so.6
+# R: Qt63DCore Qt63DInput Qt6Core Qt6Qml
+%attr(755,root,root) %{_libdir}/libQt63DQuickInput.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt63DQuickInput.so.6
+# R: Qt63DCore Qt63DRender Qt6Core Qt6Qml
+%attr(755,root,root) %{_libdir}/libQt63DQuickRender.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt63DQuickRender.so.6
+# R: Qt63DCore Qt63DRender Qt6Core Qt6Gui Qt6Qml Qt6Quick
+%attr(755,root,root) %{_libdir}/libQt63DQuickScene2D.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt63DQuickScene2D.so.6
+# R: Qt63DCore Qt6Concurrent Qt6Core Qt6Gui
+%attr(755,root,root) %{_libdir}/libQt63DRender.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt63DRender.so.6
+# - loaded from src/render/geometry/qmesh.cpp
+%dir %{qt6dir}/plugins/geometryloaders
+# R: Qt63DRender Qt6Core Qt6Gui
+%attr(755,root,root) %{_libdir}/qt6/plugins/geometryloaders/libdefaultgeometryloader.so
+# R: Qt63DRender Qt6Core
+%attr(755,root,root) %{_libdir}/qt6/plugins/geometryloaders/libgltfgeometryloader.so
+# - loaded from src/render/qrendererpluginfactory.cpp
+%dir %{qt6dir}/plugins/renderers
+# R: Qt63DCore Qt63DRender Qt6Core Qt6Gui
+%{qt6dir}/plugins/renderers/libopenglrenderer.so
+# - loaded from src/render/frontend/qrenderpluginfactory.cpp
+%dir %{qt6dir}/plugins/renderplugins
+# R: Qt63DCore Qt63DQuickScene2D Qt63DRender Qt6Core
+%attr(755,root,root) %{_libdir}/qt6/plugins/renderplugins/libscene2d.so
+# - loaded from src/render/io/qsceneimportfactory.cpp
+%dir %{qt6dir}/plugins/sceneparsers
+# R: Qt63DAnimation Qt63DCore Qt63DExtras Qt63DRender Qt6Core Qt6Gui assimp
+%attr(755,root,root) %{_libdir}/qt6/plugins/sceneparsers/libassimpsceneimport.so
+# R: Qt63DCore Qt63DExtras Qt63DRender Qt6Core Qt6Gui
+%attr(755,root,root) %{_libdir}/qt6/plugins/sceneparsers/libgltfsceneexport.so
+# R: Qt63DCore Qt63DExtras Qt63DRender Qt6Core Qt6Gui
+%attr(755,root,root) %{_libdir}/qt6/plugins/sceneparsers/libgltfsceneimport.so
+%dir %{qt6dir}/qml/Qt3D
+%dir %{qt6dir}/qml/Qt3D/Animation
+# R: Qt63DAnimation Qt63DCore Qt63DQuick Qt63DQuickAnimation Qt6Core Qt6Qml
+%attr(755,root,root) %{qt6dir}/qml/Qt3D/Animation/libquick3danimationplugin.so
+%{qt6dir}/qml/Qt3D/Animation/plugins.qmltypes
+%{qt6dir}/qml/Qt3D/Animation/qmldir
+%dir %{qt6dir}/qml/Qt3D/Core
+# R: Qt63DCore Qt63DQuick Qt6Core Qt6Qml Qt6Quick
+%attr(755,root,root) %{qt6dir}/qml/Qt3D/Core/libquick3dcoreplugin.so
+%{qt6dir}/qml/Qt3D/Core/plugins.qmltypes
+%{qt6dir}/qml/Qt3D/Core/qmldir
+%dir %{qt6dir}/qml/Qt3D/Extras
+# R: Qt63DCore Qt63DExtras Qt63DQuickExtra Qt63DRender Qt6Core Qt6Qml
+%attr(755,root,root) %{qt6dir}/qml/Qt3D/Extras/libquick3dextrasplugin.so
+%{qt6dir}/qml/Qt3D/Extras/plugins.qmltypes
+%{qt6dir}/qml/Qt3D/Extras/qmldir
+%dir %{qt6dir}/qml/Qt3D/Input
+# R: Qt63DCore Qt63DInput Qt63DQuickInput Qt6Core Qt6Qml
+%attr(755,root,root) %{qt6dir}/qml/Qt3D/Input/libquick3dinputplugin.so
+%{qt6dir}/qml/Qt3D/Input/plugins.qmltypes
+%{qt6dir}/qml/Qt3D/Input/qmldir
+%dir %{qt6dir}/qml/Qt3D/Logic
+# R: Qt63DCore Qt63DLogic Qt6Core Qt6Qml
+%attr(755,root,root) %{qt6dir}/qml/Qt3D/Logic/libquick3dlogicplugin.so
+%{qt6dir}/qml/Qt3D/Logic/plugins.qmltypes
+%{qt6dir}/qml/Qt3D/Logic/qmldir
+%dir %{qt6dir}/qml/Qt3D/Render
+# R: Qt63DCore Qt63DQuick Qt63DQuickRender Qt63DRender Qt6Core Qt6Gui Qt6Qml
+%attr(755,root,root) %{qt6dir}/qml/Qt3D/Render/libquick3drenderplugin.so
+%{qt6dir}/qml/Qt3D/Render/plugins.qmltypes
+%{qt6dir}/qml/Qt3D/Render/qmldir
+%dir %{qt6dir}/qml/QtQuick/Scene2D
+# R: Qt63DCore Qt63DRender Qt63DQuickScene2D Qt6Core Qt6Qml
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Scene2D/libqtquickscene2dplugin.so
+%{qt6dir}/qml/QtQuick/Scene2D/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Scene2D/qmldir
+%dir %{qt6dir}/qml/QtQuick/Scene3D
+# R: Qt63DAnimation Qt63DCore Qt63DInput Qt63DLogic Qt63DRender Qt6Core Qt6Gui Qt6Qml Qt6Quick
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Scene3D/libqtquickscene3dplugin.so
+%{qt6dir}/qml/QtQuick/Scene3D/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Scene3D/qmldir
+
+%files -n Qt63D-devel
+%defattr(644,root,root,755)
+# R: Qt6Core assimp
+%attr(755,root,root) %{_libdir}/libQt63DAnimation.so
+%attr(755,root,root) %{_libdir}/libQt63DCore.so
+%attr(755,root,root) %{_libdir}/libQt63DExtras.so
+%attr(755,root,root) %{_libdir}/libQt63DInput.so
+%attr(755,root,root) %{_libdir}/libQt63DLogic.so
+%attr(755,root,root) %{_libdir}/libQt63DQuickAnimation.so
+%attr(755,root,root) %{_libdir}/libQt63DQuickExtras.so
+%attr(755,root,root) %{_libdir}/libQt63DQuickInput.so
+%attr(755,root,root) %{_libdir}/libQt63DQuickRender.so
+%attr(755,root,root) %{_libdir}/libQt63DQuickScene2D.so
+%attr(755,root,root) %{_libdir}/libQt63DQuick.so
+%attr(755,root,root) %{_libdir}/libQt63DRender.so
+%{_libdir}/libQt63DAnimation.prl
+%{_libdir}/libQt63DCore.prl
+%{_libdir}/libQt63DExtras.prl
+%{_libdir}/libQt63DInput.prl
+%{_libdir}/libQt63DLogic.prl
+%{_libdir}/libQt63DQuickAnimation.prl
+%{_libdir}/libQt63DQuickExtras.prl
+%{_libdir}/libQt63DQuickInput.prl
+%{_libdir}/libQt63DQuick.prl
+%{_libdir}/libQt63DQuickRender.prl
+%{_libdir}/libQt63DQuickScene2D.prl
+%{_libdir}/libQt63DRender.prl
+%{_includedir}/qt6/Qt3DAnimation
+%{_includedir}/qt6/Qt3DCore
+%{_includedir}/qt6/Qt3DExtras
+%{_includedir}/qt6/Qt3DInput
+%{_includedir}/qt6/Qt3DLogic
+%{_includedir}/qt6/Qt3DQuick
+%{_includedir}/qt6/Qt3DQuickAnimation
+%{_includedir}/qt6/Qt3DQuickExtras
+%{_includedir}/qt6/Qt3DQuickInput
+%{_includedir}/qt6/Qt3DQuickRender
+%{_includedir}/qt6/Qt3DQuickScene2D
+%{_includedir}/qt6/Qt3DRender
+%{_pkgconfigdir}/Qt63DAnimation.pc
+%{_pkgconfigdir}/Qt63DCore.pc
+%{_pkgconfigdir}/Qt63DExtras.pc
+%{_pkgconfigdir}/Qt63DInput.pc
+%{_pkgconfigdir}/Qt63DLogic.pc
+%{_pkgconfigdir}/Qt63DQuickAnimation.pc
+%{_pkgconfigdir}/Qt63DQuickExtras.pc
+%{_pkgconfigdir}/Qt63DQuickInput.pc
+%{_pkgconfigdir}/Qt63DQuick.pc
+%{_pkgconfigdir}/Qt63DQuickRender.pc
+%{_pkgconfigdir}/Qt63DQuickScene2D.pc
+%{_pkgconfigdir}/Qt63DRender.pc
+%{_libdir}/cmake/Qt63DAnimation
+%{_libdir}/cmake/Qt63DCore
+%{_libdir}/cmake/Qt63DExtras
+%{_libdir}/cmake/Qt63DInput
+%{_libdir}/cmake/Qt63DLogic
+%{_libdir}/cmake/Qt63DQuick
+%{_libdir}/cmake/Qt63DQuickAnimation
+%{_libdir}/cmake/Qt63DQuickExtras
+%{_libdir}/cmake/Qt63DQuickInput
+%{_libdir}/cmake/Qt63DQuickRender
+%{_libdir}/cmake/Qt63DQuickScene2D
+%{_libdir}/cmake/Qt63DRender
+
+%{qt6dir}/mkspecs/modules/qt_lib_3danimation.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3danimation_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dcore.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dcore_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dextras.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dextras_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dinput.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dinput_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dlogic.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dlogic_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dquickanimation.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dquickanimation_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dquickextras.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dquickextras_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dquickinput.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dquickinput_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dquick.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dquick_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dquickrender.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dquickrender_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dquickscene2d.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dquickscene2d_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3drender.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3drender_private.pri
+
+%if %{with doc}
+%files -n Qt63D-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qt3d
+
+%files -n Qt63D-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qt3d.qch
+%endif
+
+%files -n Qt6Charts
+%defattr(644,root,root,755)
+# R: Core Gui Widgets
+%attr(755,root,root) %{_libdir}/libQt6Charts.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Charts.so.6
+%dir %{qt6dir}/qml/QtCharts
+%{qt6dir}/qml/QtCharts/designer
+# R: Core Gui Qml Quick Widgets
+%attr(755,root,root) %{qt6dir}/qml/QtCharts/libqtchartsqml2plugin.so
+%{qt6dir}/qml/QtCharts/plugins.qmltypes
+%{qt6dir}/qml/QtCharts/qmldir
+
+%files -n Qt6Charts-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Charts.so
+%{_libdir}/libQt6Charts.prl
+%{_includedir}/qt6/QtCharts
+%{_pkgconfigdir}/Qt6Charts.pc
+%{_libdir}/cmake/Qt6Charts
+%{qt6dir}/mkspecs/modules/qt_lib_charts.pri
+%{qt6dir}/mkspecs/modules/qt_lib_charts_private.pri
+
+%if %{with doc}
+%files -n Qt6Charts-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtcharts
+
+%files -n Qt6Charts-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtcharts.qch
+%endif
 
 %files -n Qt6Concurrent
 %defattr(644,root,root,755)

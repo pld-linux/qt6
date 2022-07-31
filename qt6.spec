@@ -81,6 +81,7 @@ BuildRequires:	Vulkan-Loader-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	assimp-devel >= 5
 BuildRequires:	at-spi2-core-devel
+BuildRequires:	bluez-libs-devel
 # base dir requires 3.16, gn 3.19
 BuildRequires:	cmake >= 3.19
 %{?with_cups:BuildRequires:	cups-devel >= 1.4}
@@ -226,6 +227,64 @@ Qt6 3D documentation in QCH format.
 %description -n Qt63D-doc-qch -l pl.UTF-8
 Dokumentacja do biblioteki Qt6 3D w formacie QCH.
 
+%package -n Qt6Bluetooth
+Summary:	Qt6 Bluetooth library
+Summary(pl.UTF-8):	Biblioteka Qt6 Bluetooth
+Group:		Libraries
+Requires:	Qt6Core >= %{version}
+Requires:	Qt6DBus >= %{version}
+Requires:	Qt6Network >= %{version}
+Requires:	Qt6Qml >= %{qtdeclarative_ver}
+
+%description -n Qt6Bluetooth
+Qt6 Bluetooth library provides classes that enable basic Bluetooth
+operations like scanning for devices and connecting them.
+
+%description -n Qt6Bluetooth -l pl.UTF-8
+Biblioteka Qt6 Bluetooth dostarcza klasy umożliwiające podstawowe
+operacje Bluetooth, takie jak wyszukiwanie urządzeń i łączenie z nimi.
+
+%package -n Qt6Bluetooth-devel
+Summary:	The Qt6 Bluetooth - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Bluetooth - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Bluetooth = %{version}-%{release}
+Requires:	Qt6Core-devel >= %{version}
+Requires:	Qt6DBus-devel >= %{version}
+Requires:	Qt6Qml-devel >= %{qtdeclarative_ver}
+
+%description -n Qt6Bluetooth-devel
+The Qt6 Bluetooth - development files.
+
+%description -n Qt6Bluetooth-devel -l pl.UTF-8
+Biblioteka Qt6 Bluetooth - pliki programistyczne.
+
+%package -n Qt6Bluetooth-doc
+Summary:	Qt6 Bluetooth documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do bibliotek Qt6 Bluetooth w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6Bluetooth-doc
+Qt6 Bluetooth documentation in HTML format.
+
+%description -n Qt6Bluetooth-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Bluetooth w formacie HTML.
+
+%package -n Qt6Bluetooth-doc-qch
+Summary:	Qt6 Bluetooth documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Bluetooth w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6Bluetooth-doc-qch
+Qt6 Bluetooth documentation in QCH format.
+
+%description -n Qt6Bluetooth-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Bluetooth w formacie QCH.
+
 %package -n Qt6Charts
 Summary:	The Qt6 Charts library
 Summary(pl.UTF-8):	Biblioteka Qt6 Charts
@@ -288,6 +347,64 @@ Qt6 Charts documentation in QCH format.
 
 %description -n Qt6Charts-doc-qch -l pl.UTF-8
 Dokumentacja do biblioteki Qt6 Charts w formacie QCH.
+
+%package -n Qt6Coap
+Summary:	The Qt6 Coap library
+Summary(pl.UTF-8):	Biblioteka Qt6 Coap
+Group:		Libraries
+Requires:	Qt6Core >= %{version}
+Requires:	Qt6Network >= %{version}
+
+%description -n Qt6Coap
+Qt Coap module contains a library that supports the CoAP protocol.
+CoAP is a protocol for IoT devices and machine to machine
+communication.
+
+%description -n Qt6Coap -l pl.UTF-8
+Moduł Qt Coap zawiera bibliotekę obsługującą protokół CoAP. Jest to
+protokół dla urządzeń IoT oraz do komunikacji między maszynami.
+
+%package -n Qt6Coap-devel
+Summary:	Qt6 Coap library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Coap - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Coap = %{version}-%{release}
+Requires:	Qt6Core-devel >= %{version}
+Requires:	Qt6Network-devel >= %{version}
+
+%description -n Qt6Coap-devel
+Qt6 Coap library - development files.
+
+%description -n Qt6Coap-devel -l pl.UTF-8
+Biblioteka Qt6 Coap - pliki programistyczne.
+
+%package -n Qt6Coap-doc
+Summary:	Qt6 Coap documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Coap w formacie HTML
+License:	FDL v1.3
+Group:		Documentation
+Requires:	qt5-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6Coap-doc
+Qt6 Coap documentation in HTML format.
+
+%description -n Qt6Coap-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Coap w formacie HTML.
+
+%package -n Qt6Coap-doc-qch
+Summary:	Qt6 Coap documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Coap w formacie QCH
+License:	FDL v1.3
+Group:		Documentation
+Requires:	qt5-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6Coap-doc-qch
+Qt6 Coap documentation in QCH format.
+
+%description -n Qt6Coap-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Coap w formacie QCH.
 
 %package -n Qt6Concurrent
 Summary:	Qt6 Concurrent library
@@ -746,6 +863,62 @@ Header files for Qt6 Network library.
 
 %description -n Qt6Network-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 Network.
+
+%package -n Qt6Nfc
+Summary:	Qt6 Nfc library
+Summary(pl.UTF-8):	Biblioteka Qt6 Nfc
+Group:		Libraries
+Requires:	Qt6Core >= %{version}
+Requires:	Qt6DBus >= %{version}
+Requires:	Qt6Qml >= %{qtdeclarative_ver}
+
+%description -n Qt6Nfc
+Qt6 Nfc library provides classes to access NFC Forum Tags.
+
+%description -n Qt6Nfc -l pl.UTF-8
+Biblioteka Qt6 Nfc dostarcza klasy służace do dostępu do urządzeń NFC
+Forum.
+
+%package -n Qt6Nfc-devel
+Summary:	The Qt6 Nfc - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Nfc - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Nfc = %{version}-%{release}
+Requires:	Qt6Core-devel >= %{version}
+Requires:	Qt6DBus-devel >= %{version}
+Requires:	Qt6Qml-devel >= %{qtdeclarative_ver}
+
+%description -n Qt6Nfc-devel
+The Qt6 Nfc - development files.
+
+%description -n Qt6Nfc-devel -l pl.UTF-8
+Biblioteka Qt6 Nfc - pliki programistyczne.
+
+%package -n Qt6Nfc-doc
+Summary:	Qt6 Nfc documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Nfc w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6Nfc-doc
+Qt6 Nfc documentation in HTML format.
+
+%description -n Qt6Nfc-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Nfc w formacie HTML.
+
+%package -n Qt6Nfc-doc-qch
+Summary:	Qt6 Nfc documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Nfc w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6Nfc-doc-qch
+Qt6 Nfc documentation in QCH format.
+
+%description -n Qt6Nfc-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Nfc w formacie QCH.
 
 %package -n Qt6OpenGL
 Summary:	Qt6 OpenGL library
@@ -1326,8 +1499,14 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n Qt63D -p /sbin/ldconfig
 %postun	-n Qt63D -p /sbin/ldconfig
 
+%post	-n Qt6Bluetooth -p /sbin/ldconfig
+%postun	-n Qt6Bluetooth -p /sbin/ldconfig
+
 %post	-n Qt6Charts -p /sbin/ldconfig
 %postun	-n Qt6Charts -p /sbin/ldconfig
+
+%post	-n Qt6Coap -p /sbin/ldconfig
+%postun	-n Qt6Coap -p /sbin/ldconfig
 
 %post	-n Qt6Concurrent -p /sbin/ldconfig
 %postun	-n Qt6Concurrent -p /sbin/ldconfig
@@ -1352,6 +1531,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	-n Qt6Network -p /sbin/ldconfig
 %postun	-n Qt6Network -p /sbin/ldconfig
+
+%post	-n Qt6Nfc -p /sbin/ldconfig
+%postun	-n Qt6Nfc -p /sbin/ldconfig
 
 %post	-n Qt6OpenGL -p /sbin/ldconfig
 %postun	-n Qt6OpenGL -p /sbin/ldconfig
@@ -1572,6 +1754,34 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qt3d.qch
 %endif
 
+%files -n Qt6Bluetooth
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Bluetooth.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Bluetooth.so.6
+%attr(755,root,root) %{qt6dir}/libexec/sdpscanner
+
+%files -n Qt6Bluetooth-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Bluetooth.so
+%{_libdir}/libQt6Bluetooth.prl
+%{_includedir}/qt6/QtBluetooth
+%{_pkgconfigdir}/Qt6Bluetooth.pc
+%{_libdir}/cmake/Qt6Bluetooth
+%{qt6dir}/mkspecs/modules/qt_lib_bluetooth.pri
+%{qt6dir}/mkspecs/modules/qt_lib_bluetooth_private.pri
+
+%if %{with doc}
+%files -n Qt6Bluetooth-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtbluetooth
+%{_docdir}/qt6-doc/qtnfc
+
+%files -n Qt6Bluetooth-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtbluetooth.qch
+%{_docdir}/qt6-doc/qtnfc.qch
+%endif
+
 %files -n Qt6Charts
 %defattr(644,root,root,755)
 # R: Core Gui Widgets
@@ -1602,6 +1812,32 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6Charts-doc-qch
 %defattr(644,root,root,755)
 %{_docdir}/qt6-doc/qtcharts.qch
+%endif
+
+%files -n Qt6Coap
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Network
+%attr(755,root,root) %{_libdir}/libQt6Coap.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Coap.so.6
+
+%files -n Qt6Coap-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Coap.so
+%{_libdir}/libQt6Coap.prl
+%{_includedir}/qt6/QtCoap
+%{_pkgconfigdir}/Qt6Coap.pc
+%{_libdir}/cmake/Qt6Coap
+%{qt6dir}/mkspecs/modules/qt_lib_coap.pri
+%{qt6dir}/mkspecs/modules/qt_lib_coap_private.pri
+
+%if %{with doc}
+%files -n Qt6Coap-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtcoap
+
+%files -n Qt6Coap-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtcoap.qch
 %endif
 
 %files -n Qt6Concurrent
@@ -1921,6 +2157,33 @@ rm -rf $RPM_BUILD_ROOT
 #%{_libdir}/cmake/Qt6Network/Qt6NetworkQNetworkManagerEnginePlugin*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_network.pri
 %{qt6dir}/mkspecs/modules/qt_lib_network_private.pri
+
+%files -n Qt6Nfc
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Nfc.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Nfc.so.6
+
+%files -n Qt6Nfc-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Nfc.so
+%{_libdir}/libQt6Nfc.prl
+%{_includedir}/qt6/QtNfc
+%{_pkgconfigdir}/Qt6Nfc.pc
+%{_libdir}/cmake/Qt6Nfc
+%{qt6dir}/mkspecs/modules/qt_lib_nfc.pri
+%{qt6dir}/mkspecs/modules/qt_lib_nfc_private.pri
+
+%if %{with doc}
+%files -n Qt6Nfc-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtbluetooth
+%{_docdir}/qt6-doc/qtnfc
+
+%files -n Qt6Nfc-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtbluetooth.qch
+%{_docdir}/qt6-doc/qtnfc.qch
+%endif
 
 %files -n Qt6OpenGL
 %defattr(644,root,root,755)

@@ -234,7 +234,6 @@ Group:		Libraries
 Requires:	Qt6Core >= %{version}
 Requires:	Qt6DBus >= %{version}
 Requires:	Qt6Network >= %{version}
-Requires:	Qt6Qml >= %{qtdeclarative_ver}
 
 %description -n Qt6Bluetooth
 Qt6 Bluetooth library provides classes that enable basic Bluetooth
@@ -251,7 +250,6 @@ Group:		Development/Libraries
 Requires:	Qt6Bluetooth = %{version}-%{release}
 Requires:	Qt6Core-devel >= %{version}
 Requires:	Qt6DBus-devel >= %{version}
-Requires:	Qt6Qml-devel >= %{qtdeclarative_ver}
 
 %description -n Qt6Bluetooth-devel
 The Qt6 Bluetooth - development files.
@@ -870,7 +868,6 @@ Summary(pl.UTF-8):	Biblioteka Qt6 Nfc
 Group:		Libraries
 Requires:	Qt6Core >= %{version}
 Requires:	Qt6DBus >= %{version}
-Requires:	Qt6Qml >= %{qtdeclarative_ver}
 
 %description -n Qt6Nfc
 Qt6 Nfc library provides classes to access NFC Forum Tags.
@@ -886,7 +883,6 @@ Group:		Development/Libraries
 Requires:	Qt6Nfc = %{version}-%{release}
 Requires:	Qt6Core-devel >= %{version}
 Requires:	Qt6DBus-devel >= %{version}
-Requires:	Qt6Qml-devel >= %{qtdeclarative_ver}
 
 %description -n Qt6Nfc-devel
 The Qt6 Nfc - development files.

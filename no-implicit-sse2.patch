@@ -48,8 +48,8 @@
  function(qt_handle_apple_app_extension_api_only)
      if(APPLE)
          # Build Qt libraries with -fapplication-extension. Needed to avoid linker warnings
---- qtbase/src/gui/painting/qdrawhelper_p.h~	2022-05-25 10:58:52.000000000 +0200
-+++ qtbase/src/gui/painting/qdrawhelper_p.h	2022-08-01 10:05:33.794191916 +0200
+--- qt-everywhere-src-6.3.1/qtbase/src/gui/painting/qdrawhelper_p.h~	2022-05-25 10:58:52.000000000 +0200
++++ qt-everywhere-src-6.3.1/qtbase/src/gui/painting/qdrawhelper_p.h	2022-08-01 10:05:33.794191916 +0200
 @@ -71,7 +71,7 @@
  
  #if defined(Q_CC_GNU)

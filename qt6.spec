@@ -1490,7 +1490,7 @@ export LDFLAGS="%{rpmldflags}"
 %{__cmake} --build . --verbose %{_smp_mflags}
 
 %if %{with doc}
-export QT_PLUGIN_PATH="$(pwd)/qtbase/lib64/qt6/plugins"
+export QT_PLUGIN_PATH="$(pwd)/qtbase/%{_lib}/qt6/plugins"
 %{__cmake} --build . --target docs --verbose %{_smp_mflags}
 %endif
 

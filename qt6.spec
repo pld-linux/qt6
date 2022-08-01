@@ -7,6 +7,7 @@
 # Conditional build:
 # -- build targets
 %bcond_without	doc		# Documentation
+%bcond_without	webengine	# Qt WebEngine
 # -- features
 %bcond_without	cups		# CUPS printing support
 %bcond_with	directfb	# DirectFB platform support
@@ -54,6 +55,9 @@
 %ifnarch %{arm} aarch64
 %define		with_red_reloc	1
 %endif
+%ifarch %{ix86} x32
+%undefine	with_webengine
+%endif
 
 %define		icu_abi		71
 %define		next_icu_abi	%(echo $((%{icu_abi} + 1)))
@@ -70,6 +74,7 @@ Source0:	https://download.qt.io/official_releases/qt/6.3/%{version}/single/qt-ev
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		%{name}-gn.patch
+Patch3:		no-implicit-sse2.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -116,7 +121,7 @@ BuildRequires:	libxml2-devel
 BuildRequires:	minizip-devel
 BuildRequires:	mtdev-devel
 %{?with_mysql:BuildRequires:	mysql-devel}
-BuildRequires:	nodejs
+%{?with_webengine:BuildRequires:	nodejs}
 BuildRequires:	openssl-devel >= 1.1.1
 BuildRequires:	opus-devel
 %{?with_oci:BuildRequires:	oracle-instantclient-devel}
@@ -1331,6 +1336,7 @@ Generator plików makefile dla aplikacji Qt6.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 
@@ -1379,6 +1385,7 @@ mkdir -p build
 cd build
 %cmake ../ \
 	-GNinja \
+	%{cmake_on_off webengine BUILD_qtwebengine} \
 	-DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/samu \
 	-DNinja_EXECUTABLE:FILEPATH=/usr/bin/samu \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \

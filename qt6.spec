@@ -75,6 +75,7 @@ Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		%{name}-gn.patch
 Patch3:		no-implicit-sse2.patch
+Patch4:		x32.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -87,6 +88,8 @@ BuildRequires:	alsa-lib-devel
 BuildRequires:	assimp-devel >= 5
 BuildRequires:	at-spi2-core-devel
 BuildRequires:	bluez-libs-devel
+# qdoc
+BuildRequires:	clang-devel
 # base dir requires 3.16, gn 3.19
 BuildRequires:	cmake >= 3.19
 %{?with_cups:BuildRequires:	cups-devel >= 1.4}
@@ -477,8 +480,8 @@ Summary(pl.UTF-8):	Biblioteka Qt6 DataVisualization
 Group:		X11/Libraries
 Requires:	Qt6Core >= %{version}
 Requires:	Qt6Gui >= %{version}
-Requires:	Qt6Qml >= %{qtdeclarative_ver}
-Requires:	Qt6Quick >= %{qtdeclarative_ver}
+Requires:	Qt6Qml >= %{version}
+Requires:	Qt6Quick >= %{version}
 
 %description -n Qt6DataVisualization
 Qt6 DataVisualization library.
@@ -1337,6 +1340,7 @@ Generator plików makefile dla aplikacji Qt6.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 

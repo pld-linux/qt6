@@ -1011,6 +1011,83 @@ Header files for Qt6 OpenGL library.
 %description -n Qt6OpenGL-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 OpenGL.
 
+%package -n Qt6Pdf
+Summary:	The Qt6 Pdf library
+Summary(pl.UTF-8):	Biblioteka Qt6 Pdf
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Network = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Quick = %{version}
+Requires:	Qt6Widgets = %{version}
+
+%description -n Qt6Pdf
+Qt6 Pdf module contains classes and functions for rendering PDF
+documents.
+
+%description -n Qt6Pdf -l pl.UTF-8
+Moduł Qt6 Pdf zawiera klasy i funkcje do renderowania dokumentów PDF.
+
+%package -n Qt6Pdf-devel
+Summary:	Qt6 Pdf library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Pdf - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6Pdf = %{version}-%{release}
+Requires:	Qt6Widgets-devel = %{version}
+
+%description -n Qt6Pdf-devel
+Qt6 Pdf library - development files.
+
+%description -n Qt6Pdf-devel -l pl.UTF-8
+Biblioteka Qt6 Pdf - pliki programistyczne.
+
+%package -n Qt6Pdf-doc
+Summary:	Qt6 Pdf documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Pdf w formacie HTML
+License:	FDL v1.3
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Pdf-doc
+Qt6 Pdf documentation in HTML format.
+
+%description -n Qt6Pdf-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Pdf w formacie HTML.
+
+%package -n Qt6Pdf-doc-qch
+Summary:	Qt6 Pdf documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Pdf w formacie QCH
+License:	FDL v1.3
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Pdf-doc-qch
+Qt6 Pdf documentation in QCH format.
+
+%description -n Qt6Pdf-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Pdf w formacie QCH.
+
+%package -n Qt6Designer-plugin-qwebengineview
+Summary:	QWebEngineView plugin for Qt6 Designer
+Summary(pl.UTF-8):	Wtyczka QWebEngineView dla Qt6 Designera
+Group:		X11/Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Designer = %{version}
+Requires:	Qt6WebEngine = %{version}-%{release}
+Requires:	Qt6Widgets = %{version}
+
+%description -n Qt6Designer-plugin-qwebengineview
+QWebEngineView plugin for Qt6 Designer.
+
+%description -n Qt6Designer-plugin-qwebengineview -l pl.UTF-8
+Wtyczka QWebEngineView dla Qt6 Designera.
+
 %package -n Qt6PrintSupport
 Summary:	Qt6 PrintSupport library
 Summary(pl.UTF-8):	Biblioteka Qt6 PrintSupport
@@ -1195,6 +1272,426 @@ Header files for Qt6 Test library.
 
 %description -n Qt6Test-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 Test.
+
+%package -n Qt6VirtualKeyboard
+Summary:	The Qt6 VirtualKeyboard library
+Summary(pl.UTF-8):	Biblioteka Qt6 VirtualKeyboard
+Group:		X11/Libraries
+Requires:	Qt6Core >= %{version}
+Requires:	Qt6Gui >= %{version}
+Requires:	Qt6Qml >= %{version}
+Requires:	Qt6Quick >= %{version}
+
+%description -n Qt6VirtualKeyboard
+Qt6 VirtualKeyboard library.
+
+%description -n Qt6VirtualKeyboard -l pl.UTF-8
+Biblioteka Qt6 VirtualKeyboard.
+
+%package -n Qt6VirtualKeyboard-devel
+Summary:	Qt6 VirtualKeyboard - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 VirtualKeyboard - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6Core-devel >= %{version}
+Requires:	Qt6Gui-devel >= %{version}
+Requires:	Qt6Qml-devel >= %{version}
+Requires:	Qt6Quick-devel >= %{version}
+Requires:	Qt6VirtualKeyboard = %{version}-%{release}
+
+%description -n Qt6VirtualKeyboard-devel
+Qt6 VirtualKeyboard - development files.
+
+%description -n Qt6VirtualKeyboard-devel -l pl.UTF-8
+Biblioteka Qt6 VirtualKeyboard - pliki programistyczne.
+
+%package -n Qt6VirtualKeyboard-doc
+Summary:	Qt6 VirtualKeyboard documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 VirtualKeyboard w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6VirtualKeyboard-doc
+Qt6 VirtualKeyboard documentation in HTML format.
+
+%description -n Qt6VirtualKeyboard-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 VirtualKeyboard w formacie HTML.
+
+%package -n Qt6VirtualKeyboard-doc-qch
+Summary:	Qt6 VirtualKeyboard documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 VirtualKeyboard w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6VirtualKeyboard-doc-qch
+Qt6 VirtualKeyboard documentation in QCH format.
+
+%description -n Qt6VirtualKeyboard-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 VirtualKeyboard w formacie QCH.
+
+%package -n Qt6WaylandCompositor
+Summary:	The Qt6 WaylandCompositor library
+Summary(pl.UTF-8):	Biblioteka Qt6 WaylandCompositor
+Group:		Libraries
+Requires:	Qt6Core >= %{version}
+Requires:	Qt6Gui >= %{version}
+Requires:	Qt6Qml >= %{version}
+Requires:	Qt6Quick >= %{version}
+Requires:	wayland >= 1.4.0
+Requires:	xorg-lib-libxkbcommon >= 0.2.0
+Obsoletes:	Qt6Compositor < 5.8.0
+
+%description -n Qt6WaylandCompositor
+Qt6 WaylandCompositor library enables the creation of Wayland
+compositors using Qt and QtQuick.
+
+%description -n Qt6WaylandCompositor -l pl.UTF-8
+Biblioteka Qt6 WaylandCompositor pozwala na tworzenie kompozytorów
+Wayland przy użyciu bibliotek Qt i QtQuick.
+
+%package -n Qt6WaylandCompositor-devel
+Summary:	Qt6 WaylandCompositor library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 WaylandCompositor - pliki programistyczne
+Group:		Development/Libraries
+Requires:	OpenGL-devel
+Requires:	Qt6WaylandCompositor = %{version}-%{release}
+Requires:	Qt6Core-devel >= %{version}
+Requires:	Qt6Gui-devel >= %{version}
+Requires:	Qt6Network-devel >= %{version}
+Requires:	Qt6Qml-devel >= %{version}
+Requires:	Qt6Quick-devel >= %{version}
+Requires:	wayland-devel >= 1.4.0
+Requires:	xorg-lib-libxkbcommon-devel >= 0.2.0
+Obsoletes:	Qt6Compositor-devel < 5.8.0
+
+%description -n Qt6WaylandCompositor-devel
+Qt6 WaylandCompositor library - development files.
+
+%description -n Qt6WaylandCompositor-devel -l pl.UTF-8
+Biblioteka Qt6 WaylandCompositor - pliki programistyczne.
+
+%package -n Qt6WaylandCompositor-doc
+Summary:	Qt6 Wayland documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do bibliotek Qt6 Wayland w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6WaylandCompositor-doc
+Qt6 Wayland documentation in HTML format.
+
+%description -n Qt6WaylandCompositor-doc -l pl.UTF-8
+Dokumentacja do bibliotek Qt6 Wayland w formacie HTML.
+
+%package -n Qt6WaylandCompositor-doc-qch
+Summary:	Qt6 Wayland documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do bibliotek Qt6 Wayland w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6WaylandCompositor-doc-qch
+Qt6 Wayland documentation in QCH format.
+
+%description -n Qt6WaylandCompositor-doc-qch -l pl.UTF-8
+Dokumentacja do bibliotek Qt6 Wayland w formacie QCH.
+
+%package -n Qt6WaylandClient
+Summary:	The Qt6 WaylandClient library
+Summary(pl.UTF-8):	Biblioteka Qt6 WaylandClient
+Group:		Libraries
+Requires:	Qt6Core >= %{version}
+Requires:	Qt6DBus >= %{version}
+Requires:	Qt6Gui >= %{version}
+Requires:	wayland >= 1.4.0
+Requires:	xorg-lib-libxkbcommon >= 0.2.0
+
+%description -n Qt6WaylandClient
+Qt6 WaylandClient library enables Qt applications to be run as Wayland
+clients.
+
+%description -n Qt6WaylandClient -l pl.UTF-8
+Biblioteka Qt6 WaylandClient pozwala na uruchamianie aplikacji Qt jako
+klientów Wayland.
+
+%package -n Qt6WaylandClient-devel
+Summary:	Qt6 WaylandClient library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 WaylandClient - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel >= %{version}
+Requires:	Qt6DBus-devel >= %{version}
+Requires:	Qt6Gui-devel >= %{version}
+Requires:	Qt6PlatformCompositorSupport-devel >= %{version}
+Requires:	Qt6WaylandClient = %{version}-%{release}
+Requires:	wayland-devel >= 1.4.0
+Requires:	xorg-lib-libxkbcommon-devel >= 0.2.0
+
+%description -n Qt6WaylandClient-devel
+Qt6 WaylandClient library - development files.
+
+%description -n Qt6WaylandClient-devel -l pl.UTF-8
+Biblioteka Qt6 WaylandClient - pliki programistyczne.
+
+%package -n Qt6WebChannel
+Summary:	The Qt6 WebChannel library
+Summary(pl.UTF-8):	Biblioteka Qt6 WebChannel
+Group:		Libraries
+Requires:	Qt6Core >= %{version}
+Requires:	Qt6Network >= %{version}
+Requires:	Qt6Qml >= %{version}
+
+%description -n Qt6WebChannel
+Qt6 WebChannel library provides seamless integration of C++ and QML
+applications with HTML/JavaScript clients.
+
+%description -n Qt6WebChannel -l pl.UTF-8
+Biblioteka Qt6 WebChannel udostępnia integrację aplikacji C++ i QML z
+klientami w HTML-u/JavaScripcie.
+
+%package -n Qt6WebChannel-devel
+Summary:	Qt6 WebChannel library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 WebChannel - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel >= %{version}
+Requires:	Qt6Network-devel >= %{version}
+Requires:	Qt6Qml-devel >= %{version}
+Requires:	Qt6WebChannel = %{version}-%{release}
+
+%description -n Qt6WebChannel-devel
+Qt6 WebChannel library - development files.
+
+%description -n Qt6WebChannel-devel -l pl.UTF-8
+Biblioteka Qt6 WebChannel - pliki programistyczne.
+
+%package -n Qt6WebChannel-doc
+Summary:	Qt6 WebChannel documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 WebChannel w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6WebChannel-doc
+Qt6 WebChannel documentation in HTML format.
+
+%description -n Qt6WebChannel-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 WebChannel w formacie HTML.
+
+%package -n Qt6WebChannel-doc-qch
+Summary:	Qt6 WebChannel documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 WebChannel w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6WebChannel-doc-qch
+Qt6 WebChannel documentation in QCH format.
+
+%description -n Qt6WebChannel-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 WebChannel w formacie QCH.
+
+%package -n Qt6WebEngine
+Summary:	The Qt6 WebEngine library
+Summary(pl.UTF-8):	Biblioteka Qt6 WebEngine
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Network = %{version}
+Requires:	Qt6Positioning = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Quick = %{version}
+Requires:	Qt6WebChannel = %{version}
+Requires:	alsa-lib >= 1.0.10
+Requires:	freetype >= 1:2.4.2
+Requires:	harfbuzz >= 3.0.0
+Requires:	harfbuzz-subset >= 3.0.0
+Requires:	libicu >= 65
+Requires:	libpng >= 2:1.6.0
+Requires:	libvpx >= 1.8.0
+Requires:	nss >= 3.26
+Requires:	opus >= 1.3.1
+Requires:	pulseaudio-libs >= 0.9.10
+
+%description -n Qt6WebEngine
+Qt6 WebEngine library provides seamless integration of C++ and QML
+applications with HTML/JavaScript clients.
+
+%description -n Qt6WebEngine -l pl.UTF-8
+Biblioteka Qt6 WebEngine udostępnia integrację aplikacji C++ i QML z
+klientami w HTML-u/JavaScripcie.
+
+%package -n Qt6WebEngine-devel
+Summary:	Qt6 WebEngine library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 WebEngine - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6Network-devel = %{version}
+Requires:	Qt6Positioning-devel = %{version}
+Requires:	Qt6PrintSupport-devel = %{version}
+Requires:	Qt6Qml-devel = %{version}
+Requires:	Qt6Quick-devel = %{version}
+Requires:	Qt6WebChannel-devel = %{version}
+Requires:	Qt6WebEngine = %{version}-%{release}
+Requires:	Qt6Widgets-devel = %{version}
+
+%description -n Qt6WebEngine-devel
+Qt6 WebEngine library - development files.
+
+%description -n Qt6WebEngine-devel -l pl.UTF-8
+Biblioteka Qt6 WebEngine - pliki programistyczne.
+
+%package -n Qt6WebEngine-doc
+Summary:	Qt6 WebEngine documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 WebEngine w formacie HTML
+License:	FDL v1.3
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6WebEngine-doc
+Qt6 WebEngine documentation in HTML format.
+
+%description -n Qt6WebEngine-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 WebEngine w formacie HTML.
+
+%package -n Qt6WebEngine-doc-qch
+Summary:	Qt6 WebEngine documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 WebEngine w formacie QCH
+License:	FDL v1.3
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6WebEngine-doc-qch
+Qt6 WebEngine documentation in QCH format.
+
+%description -n Qt6WebEngine-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 WebEngine w formacie QCH.
+
+%package -n Qt6WebSockets
+Summary:	The Qt6 WebSockets library
+Summary(pl.UTF-8):	Biblioteka Qt6 WebSockets
+Group:		Libraries
+Requires:	Qt6Core >= %{version}
+Requires:	Qt6Network >= %{version}
+# for qml module
+Requires:	Qt6Qml >= %{version}
+
+%description -n Qt6WebSockets
+Qt6 WebSockets library provides WebSockets communication classes.
+
+%description -n Qt6WebSockets -l pl.UTF-8
+Biblioteka Qt6 WebSockets dostarcza klasy do komunikacji przez
+WebSockets.
+
+%package -n Qt6WebSockets-devel
+Summary:	Qt6 WebSockets library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 WebSockets - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel >= %{version}
+Requires:	Qt6Network-devel >= %{version}
+Requires:	Qt6WebSockets = %{version}-%{release}
+
+%description -n Qt6WebSockets-devel
+Qt6 WebSockets library - development files.
+
+%description -n Qt6WebSockets-devel -l pl.UTF-8
+Biblioteka Qt6 WebSockets - pliki programistyczne.
+
+%package -n Qt6WebSockets-doc
+Summary:	Qt6 WebSockets documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 WebSockets w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6WebSockets-doc
+Qt6 WebSockets documentation in HTML format.
+
+%description -n Qt6WebSockets-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 WebSockets w formacie HTML.
+
+%package -n Qt6WebSockets-doc-qch
+Summary:	Qt6 WebSockets documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 WebSockets w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6WebSockets-doc-qch
+Qt6 WebSockets documentation in QCH format.
+
+%description -n Qt6WebSockets-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 WebSockets w formacie QCH.
+
+%package -n Qt6WebView
+Summary:	The Qt6 WebView library
+Summary(pl.UTF-8):	Biblioteka Qt6 WebView
+Group:		X11/Libraries
+Requires:	Qt6Core >= %{version}
+Requires:	Qt6Gui >= %{version}
+Requires:	Qt6Qml >= %{version}
+Requires:	Qt6Quick >= %{version}
+
+%description -n Qt6WebView
+Qt6 WebView library.
+
+%description -n Qt6WebView -l pl.UTF-8
+Biblioteka Qt6 WebView.
+
+%package -n Qt6WebView-devel
+Summary:	Qt6 WebView - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 WebView - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6Core-devel >= %{version}
+Requires:	Qt6Gui-devel >= %{version}
+Requires:	Qt6WebView = %{version}-%{release}
+
+%description -n Qt6WebView-devel
+Qt6 WebView - development files.
+
+%description -n Qt6WebView-devel -l pl.UTF-8
+Biblioteka Qt6 WebView - pliki programistyczne.
+
+%package -n Qt6WebView-plugin-webengine
+Summary:	Qt6 WebView library WebEngine plugin
+Summary(pl.UTF-8):	Wtyczka WebEngine do biblioteki Qt6 WebView
+Group:		X11/Libraries
+Requires:	Qt6WebEngine >= %{version}
+Requires:	Qt6WebView = %{version}-%{release}
+
+%description -n Qt6WebView-plugin-webengine
+Qt6 WebView library WebEngine plugin.
+
+%description -n Qt6WebView-plugin-webengine -l pl.UTF-8
+Wtyczka WebEngine do biblioteki Qt6 WebView.
+
+%package -n Qt6WebView-doc
+Summary:	Qt6 WebView documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 WebView w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6WebView-doc
+Qt6 WebView documentation in HTML format.
+
+%description -n Qt6WebView-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 WebView w formacie HTML.
+
+%package -n Qt6WebView-doc-qch
+Summary:	Qt6 WebView documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 WebView w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common >= %{version}
+BuildArch:	noarch
+
+%description -n Qt6WebView-doc-qch
+Qt6 WebView documentation in QCH format.
+
+%description -n Qt6WebView-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 WebView w formacie QCH.
 
 %package -n Qt6Widgets
 Summary:	Qt6 Widgets library
@@ -1548,9 +2045,29 @@ find_qt6_qm()
 }
 
 echo '%defattr(644,root,root,755)' > qtbase.lang
+echo '%defattr(644,root,root,755)' > qtassistant.lang
+echo '%defattr(644,root,root,755)' > qtdesigner.lang
+echo '%defattr(644,root,root,755)' > qtlinguist.lang
+echo '%defattr(644,root,root,755)' > qtconnectivity.lang
+echo '%defattr(644,root,root,755)' > qtdeclarative.lang
+echo '%defattr(644,root,root,755)' > qtlocation.lang
+echo '%defattr(644,root,root,755)' > qtmultimedia.lang
+echo '%defattr(644,root,root,755)' > qtserialport.lang
+echo '%defattr(644,root,root,755)' > qtwebengine.lang
+echo '%defattr(644,root,root,755)' > qtwebsockets.lang
 %if %{with doc}
 find_qt6_qm qt >> qtbase.lang
 find_qt6_qm qtbase >> qtbase.lang
+find_qt6_qm assistant >> qtassistant.lang
+find_qt6_qm designer >> qtdesigner.lang
+find_qt6_qm linguist >> qtlinguist.lang
+find_qt6_qm qtconnectivity >> qtconnectivity.lang
+find_qt6_qm qtdeclarative >> qtdeclarative.lang
+find_qt6_qm qtlocation >> qtlocation.lang
+find_qt6_qm qtmultimedia >> qtmultimedia.lang
+find_qt6_qm qtserialport >> qtserialport.lang
+find_qt6_qm qtwebengine >> qtwebengine.lang
+find_qt6_qm qtwebsockets >> qtwebsockets.lang
 %endif
 
 install -d $RPM_BUILD_ROOT%{qt6dir}/plugins/styles
@@ -1603,6 +2120,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n Qt6OpenGL -p /sbin/ldconfig
 %postun	-n Qt6OpenGL -p /sbin/ldconfig
 
+%post	-n Qt6Pdf -p /sbin/ldconfig
+%postun	-n Qt6Pdf -p /sbin/ldconfig
+
 %post	-n Qt6PrintSupport -p /sbin/ldconfig
 %postun	-n Qt6PrintSupport -p /sbin/ldconfig
 
@@ -1611,6 +2131,27 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	-n Qt6Test -p /sbin/ldconfig
 %postun	-n Qt6Test -p /sbin/ldconfig
+
+%post	-n Qt6VirtualKeyboard -p /sbin/ldconfig
+%postun	-n Qt6VirtualKeyboard -p /sbin/ldconfig
+
+%post	-n Qt6WaylandCompositor -p /sbin/ldconfig
+%postun	-n Qt6WaylandCompositor -p /sbin/ldconfig
+
+%post	-n Qt6WaylandClient -p /sbin/ldconfig
+%postun	-n Qt6WaylandClient -p /sbin/ldconfig
+
+%post	-n Qt6WebChannel -p /sbin/ldconfig
+%postun	-n Qt6WebChannel -p /sbin/ldconfig
+
+%post	-n Qt6WebEngine -p /sbin/ldconfig
+%postun	-n Qt6WebEngine -p /sbin/ldconfig
+
+%post	-n Qt6WebSockets -p /sbin/ldconfig
+%postun	-n Qt6WebSockets -p /sbin/ldconfig
+
+%post	-n Qt6WebView -p /sbin/ldconfig
+%postun	-n Qt6WebView -p /sbin/ldconfig
 
 %post	-n Qt6Widgets -p /sbin/ldconfig
 %postun	-n Qt6Widgets -p /sbin/ldconfig
@@ -1922,7 +2463,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Core -f qtbase.lang
 %defattr(644,root,root,755)
-#%doc dist/{README,changes-*}
 %attr(755,root,root) %{_libdir}/libQt6Core.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Core.so.6
 %dir %{_sysconfdir}/qt6
@@ -2297,6 +2837,53 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_opengl.pri
 %{qt6dir}/mkspecs/modules/qt_lib_opengl_private.pri
 
+%if %{with webengine}
+%files -n Qt6Pdf
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Gui Qt6Network freetype libjpeg zlib
+%attr(755,root,root) %{_libdir}/libQt6Pdf.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Pdf.so.6
+# R: Qt6Core Qt6Gui Qt6Pdf Qt6Widgets
+%attr(755,root,root) %{_libdir}/libQt6PdfWidgets.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6PdfWidgets.so.6
+%dir %{qt6dir}/qml/QtQuick/Pdf
+%{qt6dir}/qml/QtQuick/Pdf/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Pdf/qmldir
+%{qt6dir}/qml/QtQuick/Pdf/qml
+# R: Qt6Core Qt6Gui Qt6Pdf Qt6Qml Qt6Quick
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Pdf/libqtpdfquickplugin.so
+# R: Qt6Core Qt6Gui Qt6Pdf
+%attr(755,root,root) %{_libdir}/qt6/plugins/imageformats/libqpdf.so
+
+%files -n Qt6Pdf-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Pdf.so
+%attr(755,root,root) %{_libdir}/libQt6PdfWidgets.so
+%{_libdir}/libQt6Pdf.prl
+%{_libdir}/libQt6PdfWidgets.prl
+%{_includedir}/qt6/QtPdf
+%{_includedir}/qt6/QtPdfWidgets
+%{_pkgconfigdir}/Qt6Pdf.pc
+%{_pkgconfigdir}/Qt6PdfWidgets.pc
+%{_libdir}/cmake/Qt6Gui/Qt6QPdfPlugin*.cmake
+%{_libdir}/cmake/Qt6Pdf
+%{_libdir}/cmake/Qt6PdfWidgets
+%{qt6dir}/mkspecs/modules/qt_lib_pdf.pri
+%{qt6dir}/mkspecs/modules/qt_lib_pdf_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_pdfwidgets.pri
+%{qt6dir}/mkspecs/modules/qt_lib_pdfwidgets_private.pri
+
+%if %{with doc}
+%files -n Qt6Pdf-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtpdf
+
+%files -n Qt6Pdf-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtpdf.qch
+%endif
+%endif
+
 %files -n Qt6PrintSupport
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6PrintSupport.so.*.*.*
@@ -2419,6 +3006,169 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_testlib.pri
 %{qt6dir}/mkspecs/modules/qt_lib_testlib_private.pri
 
+%files -n Qt6VirtualKeyboard
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6VirtualKeyboard hunspell
+%attr(755,root,root) %{_libdir}/libQt6HunspellInputMethod.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6HunspellInputMethod.so.6
+# R: Qt6Core Qt6Gui Qt6Qml Qt6Quick libxcb libxcb-fixes
+%attr(755,root,root) %{_libdir}/libQt6VirtualKeyboard.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6VirtualKeyboard.so.6
+# R: Qt6Core Qt6Gui Qt6Qml Qt6VirtualKeyboard
+%attr(755,root,root) %{qt6dir}/plugins/platforminputcontexts/libqtvirtualkeyboardplugin.so
+%dir %{qt6dir}/plugins/virtualkeyboard
+# R: Qt6Core Qt6Qml Qt6VirtualKeyboard
+%attr(755,root,root) %{qt6dir}/plugins/virtualkeyboard/libqtvirtualkeyboard_hangul.so
+# R: Qt6Core Qt6HunspellInputMethod Qt6Qml Qt6VirtualKeyboard
+%attr(755,root,root) %{qt6dir}/plugins/virtualkeyboard/libqtvirtualkeyboard_hunspell.so
+%if %{with lipi}
+# R: Qt6Core Qt6HunspellInputMethod Qt6Qml Qt6VirtualKeyboard
+%attr(755,root,root) %{qt6dir}/plugins/virtualkeyboard/libqtvirtualkeyboard_lipi.so
+%endif
+# R: Qt6Core Qt6Gui Qt6Qml Qt6VirtualKeyboard
+%attr(755,root,root) %{qt6dir}/plugins/virtualkeyboard/libqtvirtualkeyboard_openwnn.so
+# R: Qt6Core Qt6Qml Qt6VirtualKeyboard
+%attr(755,root,root) %{qt6dir}/plugins/virtualkeyboard/libqtvirtualkeyboard_pinyin.so
+# R: Qt6Core Qt6Qml Qt6VirtualKeyboard
+%attr(755,root,root) %{qt6dir}/plugins/virtualkeyboard/libqtvirtualkeyboard_tcime.so
+# R: Qt6Core Qt6HunspellInputMethod Qt6Qml Qt6VirtualKeyboard
+%attr(755,root,root) %{qt6dir}/plugins/virtualkeyboard/libqtvirtualkeyboard_thai.so
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard
+# R: Qt6Core Qt6Qml Qt6VirtualKeyboard
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/libqtquickvirtualkeyboardplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/qmldir
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Settings
+# R: Qt6Core Qt6Qml Qt6VirtualKeyboard
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Settings/libqtquickvirtualkeyboardsettingsplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Settings/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Settings/qmldir
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles
+# R: Qt6Core Qt6Gui Qt6Qml Qt6Quick Qt6Svg
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/libqtquickvirtualkeyboardstylesplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/qmldir
+%if %{with lipi}
+%dir %{qt6dir}/plugins/lipi_toolkit
+%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libactivedtw.so
+%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libboxfld.so
+%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libl7.so
+%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/liblipiengine.so
+%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/liblogger.so
+%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libneuralnet.so
+%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libnn.so
+%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libnpen.so
+%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libpointfloat.so
+%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libpreproc.so
+%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libsubstroke.so
+%dir %{_datadir}/qt6/qtvirtualkeyboard
+%{_datadir}/qt6/qtvirtualkeyboard/lipi_toolkit
+%endif
+
+%files -n Qt6VirtualKeyboard-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6HunspellInputMethod.so
+%attr(755,root,root) %{_libdir}/libQt6VirtualKeyboard.so
+%{_libdir}/libQt6HunspellInputMethod.prl
+%{_libdir}/libQt6VirtualKeyboard.prl
+%{_includedir}/qt6/QtHunspellInputMethod
+%{_includedir}/qt6/QtVirtualKeyboard
+%{_pkgconfigdir}/Qt6VirtualKeyboard.pc
+%{_libdir}/cmake/Qt6Gui/Qt6QVirtualKeyboardPlugin*.cmake
+%{_libdir}/cmake/Qt6VirtualKeyboard
+%{qt6dir}/mkspecs/modules/qt_lib_hunspellinputmethod_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_virtualkeyboard.pri
+%{qt6dir}/mkspecs/modules/qt_lib_virtualkeyboard_private.pri
+
+%if %{with doc}
+%files -n Qt6VirtualKeyboard-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtvirtualkeyboard
+
+%files -n Qt6VirtualKeyboard-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtvirtualkeyboard.qch
+%endif
+
+%files -n Qt6WaylandCompositor
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6WaylandCompositor.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6WaylandCompositor.so.6
+%dir %{qt6dir}/plugins/wayland-graphics-integration-server
+%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-dmabuf-server-buffer.so
+%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-drm-egl-server-buffer.so
+%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-linux-dmabuf-unstable-v1.so
+%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-shm-emulation-server.so
+%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-vulkan-server.so
+%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-wayland-egl.so
+%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-wayland-eglstream-controller.so
+# dir shared Qt6WaylandClient
+%dir %{qt6dir}/qml/QtWayland
+%dir %{qt6dir}/qml/QtWayland/Compositor
+%attr(755,root,root) %{qt6dir}/qml/QtWayland/Compositor/libqwaylandcompositorplugin.so
+%{qt6dir}/qml/QtWayland/Compositor/qmldir
+%dir %{qt6dir}/qml/QtWayland/Compositor/TextureSharingExtension
+%attr(755,root,root) %{qt6dir}/qml/QtWayland/Compositor/TextureSharingExtension/libwaylandtexturesharingextensionplugin.so
+%{qt6dir}/qml/QtWayland/Compositor/TextureSharingExtension/qmldir
+
+%files -n Qt6WaylandCompositor-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6WaylandCompositor.so
+%{_libdir}/libQt6WaylandCompositor.prl
+%{_includedir}/qt6/QtWaylandCompositor
+%{_pkgconfigdir}/Qt6WaylandCompositor.pc
+%{_libdir}/cmake/Qt6WaylandCompositor
+%{qt6dir}/mkspecs/modules/qt_lib_waylandcompositor.pri
+%{qt6dir}/mkspecs/modules/qt_lib_waylandcompositor_private.pri
+
+%if %{with doc}
+%files -n Qt6WaylandCompositor-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtwaylandcompositor
+
+%files -n Qt6WaylandCompositor-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtwaylandcompositor.qch
+%endif
+
+%files -n Qt6WaylandClient
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6WaylandClient.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6WaylandClient.so.6
+%attr(755,root,root) %{qt6dir}/libexec/qtwaylandscanner
+%attr(755,root,root) %{qt6dir}/plugins/platforms/libqwayland-egl.so
+%attr(755,root,root) %{qt6dir}/plugins/platforms/libqwayland-generic.so
+%dir %{qt6dir}/plugins/wayland-decoration-client
+%attr(755,root,root) %{qt6dir}/plugins/wayland-decoration-client/libbradient.so
+%dir %{qt6dir}/plugins/wayland-graphics-integration-client
+%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-client/libdmabuf-server.so
+%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-client/libdrm-egl-server.so
+%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-client/libqt-plugin-wayland-egl.so
+%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-client/libshm-emulation-server.so
+%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-client/libvulkan-server.so
+%dir %{qt6dir}/plugins/wayland-shell-integration
+%attr(755,root,root) %{qt6dir}/plugins/wayland-shell-integration/libfullscreen-shell-v1.so
+%attr(755,root,root) %{qt6dir}/plugins/wayland-shell-integration/libivi-shell.so
+%attr(755,root,root) %{qt6dir}/plugins/wayland-shell-integration/libxdg-shell.so
+# dir shared Qt6WaylandCompositor
+%dir %{qt6dir}/qml/QtWayland
+%dir %{qt6dir}/qml/QtWayland/Client
+%dir %{qt6dir}/qml/QtWayland/Client/TextureSharing
+%attr(755,root,root) %{qt6dir}/qml/QtWayland/Client/TextureSharing/libwaylandtexturesharingplugin.so
+%{qt6dir}/qml/QtWayland/Client/TextureSharing/qmldir
+
+%files -n Qt6WaylandClient-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6WaylandClient.so
+%{_libdir}/libQt6WaylandClient.prl
+%{_includedir}/qt6/QtWaylandClient
+%{_pkgconfigdir}/Qt6WaylandClient.pc
+%{_libdir}/cmake/Qt6Gui/Qt6QWaylandEglPlatformIntegrationPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QWaylandIntegrationPlugin*.cmake
+%{_libdir}/cmake/Qt6WaylandClient
+%{qt6dir}/mkspecs/modules/qt_lib_waylandclient.pri
+%{qt6dir}/mkspecs/modules/qt_lib_waylandclient_private.pri
+
 %files -n Qt6Widgets
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Widgets.so.*.*.*
@@ -2437,6 +3187,234 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Widgets/Qt6WidgetsMacros.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_widgets.pri
 %{qt6dir}/mkspecs/modules/qt_lib_widgets_private.pri
+
+%files -n Qt6WebChannel
+%defattr(644,root,root,755)
+# R: Core Qml
+%attr(755,root,root) %{_libdir}/libQt6WebChannel.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6WebChannel.so.6
+%dir %{qt6dir}/qml/QtWebChannel
+# R: Core Qml
+%attr(755,root,root) %{qt6dir}/qml/QtWebChannel/libwebchannelplugin.so
+%{qt6dir}/qml/QtWebChannel/plugins.qmltypes
+%{qt6dir}/qml/QtWebChannel/qmldir
+
+%files -n Qt6WebChannel-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6WebChannel.so
+%{_libdir}/libQt6WebChannel.prl
+%{_includedir}/qt6/QtWebChannel
+%{_pkgconfigdir}/Qt6WebChannel.pc
+%{_libdir}/cmake/Qt6WebChannel
+%{qt6dir}/mkspecs/modules/qt_lib_webchannel.pri
+%{qt6dir}/mkspecs/modules/qt_lib_webchannel_private.pri
+
+%if %{with doc}
+%files -n Qt6WebChannel-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtwebchannel
+
+%files -n Qt6WebChannel-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtwebchannel.qch
+%endif
+
+%if %{with webengine}
+%files -n Qt6WebEngine -f qtwebengine.lang
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Gui Qt6Network Qt6Positioning Qt6Qml Qt6Quick Qt6WebChannel alsa-lib dbus-libs expat fontconfig freetype harfbuzz lcms2 libX11 libXcomposite libXcursor libXdamage libXext libXfixes libXi libXrender libXrandr libXss libavcodec libavformat libavutil libevent libjpeg libicu libpng libvpx libwebp libxcb minizip nspr nss opus re2 snappy zlib
+%attr(755,root,root) %{_libdir}/libQt6WebEngineCore.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6WebEngineCore.so.6
+%attr(755,root,root) %{_libdir}/libQt6WebEngineQuick.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6WebEngineQuick.so.6
+%attr(755,root,root) %{_libdir}/libQt6WebEngineQuickDelegatesQml.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6WebEngineQuickDelegatesQml.so.6
+# R: Qt6Core Qt6Gui Qt6Network Qt6PrintSupport Qt6Quick Qt6QuickWidgets Qt6WebEngineCore Qt6Widgets
+%attr(755,root,root) %{_libdir}/libQt6WebEngineWidgets.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6WebEngineWidgets.so.6
+%dir %{qt6dir}/qml/QtWebEngine
+%{qt6dir}/qml/QtWebEngine/plugins.qmltypes
+%{qt6dir}/qml/QtWebEngine/qmldir
+%{qt6dir}/qml/QtWebEngine/ControlsDelegates
+# R: Qt6Core Qt6Qml Qt6Quick Qt6WebEngine Qt6WebEngineCore
+%attr(755,root,root) %{qt6dir}/qml/QtWebEngine/libqtwebenginequickplugin.so
+%dir %{_datadir}/qt6/resources
+%{_datadir}/qt6/resources/qtwebengine*.pak
+%dir %{_datadir}/qt6/translations/qtwebengine_locales
+%lang(am) %{_datadir}/qt6/translations/qtwebengine_locales/am.pak
+%lang(ar) %{_datadir}/qt6/translations/qtwebengine_locales/ar.pak
+%lang(bg) %{_datadir}/qt6/translations/qtwebengine_locales/bg.pak
+%lang(bn) %{_datadir}/qt6/translations/qtwebengine_locales/bn.pak
+%lang(ca) %{_datadir}/qt6/translations/qtwebengine_locales/ca.pak
+%lang(cs) %{_datadir}/qt6/translations/qtwebengine_locales/cs.pak
+%lang(da) %{_datadir}/qt6/translations/qtwebengine_locales/da.pak
+%lang(de) %{_datadir}/qt6/translations/qtwebengine_locales/de.pak
+%lang(el) %{_datadir}/qt6/translations/qtwebengine_locales/el.pak
+%lang(en) %{_datadir}/qt6/translations/qtwebengine_locales/en-GB.pak
+%lang(en) %{_datadir}/qt6/translations/qtwebengine_locales/en-US.pak
+%lang(es) %{_datadir}/qt6/translations/qtwebengine_locales/es.pak
+%lang(es_AR,es_BO,es_CL,es_CO,es_CR,es_CU,es_DO,es_EC,es_GT,es_HN,es_MX,es_NI,es_PA,es_PE,es_PR,es_PY,es_SV,es_UY,es_VE) %{_datadir}/qt6/translations/qtwebengine_locales/es-419.pak
+%lang(et) %{_datadir}/qt6/translations/qtwebengine_locales/et.pak
+%lang(fa) %{_datadir}/qt6/translations/qtwebengine_locales/fa.pak
+%lang(fi) %{_datadir}/qt6/translations/qtwebengine_locales/fi.pak
+%lang(fil) %{_datadir}/qt6/translations/qtwebengine_locales/fil.pak
+%lang(fr) %{_datadir}/qt6/translations/qtwebengine_locales/fr.pak
+%lang(gu) %{_datadir}/qt6/translations/qtwebengine_locales/gu.pak
+%lang(he) %{_datadir}/qt6/translations/qtwebengine_locales/he.pak
+%lang(hi) %{_datadir}/qt6/translations/qtwebengine_locales/hi.pak
+%lang(hr) %{_datadir}/qt6/translations/qtwebengine_locales/hr.pak
+%lang(hu) %{_datadir}/qt6/translations/qtwebengine_locales/hu.pak
+%lang(id) %{_datadir}/qt6/translations/qtwebengine_locales/id.pak
+%lang(it) %{_datadir}/qt6/translations/qtwebengine_locales/it.pak
+%lang(ja) %{_datadir}/qt6/translations/qtwebengine_locales/ja.pak
+%lang(kn) %{_datadir}/qt6/translations/qtwebengine_locales/kn.pak
+%lang(ko) %{_datadir}/qt6/translations/qtwebengine_locales/ko.pak
+%lang(lt) %{_datadir}/qt6/translations/qtwebengine_locales/lt.pak
+%lang(lv) %{_datadir}/qt6/translations/qtwebengine_locales/lv.pak
+%lang(ml) %{_datadir}/qt6/translations/qtwebengine_locales/ml.pak
+%lang(mr) %{_datadir}/qt6/translations/qtwebengine_locales/mr.pak
+%lang(ms) %{_datadir}/qt6/translations/qtwebengine_locales/ms.pak
+%lang(nb) %{_datadir}/qt6/translations/qtwebengine_locales/nb.pak
+%lang(nl) %{_datadir}/qt6/translations/qtwebengine_locales/nl.pak
+%lang(pl) %{_datadir}/qt6/translations/qtwebengine_locales/pl.pak
+%lang(pt_BR) %{_datadir}/qt6/translations/qtwebengine_locales/pt-BR.pak
+%lang(pt) %{_datadir}/qt6/translations/qtwebengine_locales/pt-PT.pak
+%lang(ro) %{_datadir}/qt6/translations/qtwebengine_locales/ro.pak
+%lang(ru) %{_datadir}/qt6/translations/qtwebengine_locales/ru.pak
+%lang(sk) %{_datadir}/qt6/translations/qtwebengine_locales/sk.pak
+%lang(sl) %{_datadir}/qt6/translations/qtwebengine_locales/sl.pak
+%lang(sr) %{_datadir}/qt6/translations/qtwebengine_locales/sr.pak
+%lang(sv) %{_datadir}/qt6/translations/qtwebengine_locales/sv.pak
+%lang(sw) %{_datadir}/qt6/translations/qtwebengine_locales/sw.pak
+%lang(ta) %{_datadir}/qt6/translations/qtwebengine_locales/ta.pak
+%lang(te) %{_datadir}/qt6/translations/qtwebengine_locales/te.pak
+%lang(th) %{_datadir}/qt6/translations/qtwebengine_locales/th.pak
+%lang(tr) %{_datadir}/qt6/translations/qtwebengine_locales/tr.pak
+%lang(uk) %{_datadir}/qt6/translations/qtwebengine_locales/uk.pak
+%lang(vi) %{_datadir}/qt6/translations/qtwebengine_locales/vi.pak
+%lang(zh_CN) %{_datadir}/qt6/translations/qtwebengine_locales/zh-CN.pak
+%lang(zh_TW) %{_datadir}/qt6/translations/qtwebengine_locales/zh-TW.pak
+# R: Qt6Core libevent libicu
+%attr(755,root,root)  %{_libdir}/qt6/libexec/qwebengine_convert_dict
+# R: Qt6Core Qt6WebEngineCore
+%attr(755,root,root) %{_libdir}/qt6/libexec/QtWebEngineProcess
+
+%files -n Qt6WebEngine-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6WebEngineCore.so
+%attr(755,root,root) %{_libdir}/libQt6WebEngineQuick.so
+%attr(755,root,root) %{_libdir}/libQt6WebEngineQuickDelegatesQml.so
+%attr(755,root,root) %{_libdir}/libQt6WebEngineWidgets.so
+%{_libdir}/libQt6WebEngineCore.prl
+%{_libdir}/libQt6WebEngineQuick.prl
+%{_libdir}/libQt6WebEngineQuickDelegatesQml.prl
+%{_libdir}/libQt6WebEngineWidgets.prl
+%{_includedir}/qt6/QtWebEngineCore
+%{_includedir}/qt6/QtWebEngineQuick
+%{_includedir}/qt6/QtWebEngineWidgets
+%{_pkgconfigdir}/Qt6WebEngineCore.pc
+%{_pkgconfigdir}/Qt6WebEngineQuick.pc
+%{_pkgconfigdir}/Qt6WebEngineQuickDelegatesQml.pc
+%{_pkgconfigdir}/Qt6WebEngineWidgets.pc
+%{_libdir}/cmake/Qt6WebEngineCore
+%{_libdir}/cmake/Qt6WebEngineQuick
+%{_libdir}/cmake/Qt6WebEngineQuickDelegatesQml
+%{_libdir}/cmake/Qt6WebEngineWidgets
+#%{qt6dir}/mkspecs/modules/qt_lib_webengine.pri
+#%{qt6dir}/mkspecs/modules/qt_lib_webengine_private.pri
+%{_libdir}/qt6/mkspecs/modules/qt_lib_webenginecore.pri
+%{_libdir}/qt6/mkspecs/modules/qt_lib_webenginecore_private.pri
+#%{_libdir}/qt6/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri
+%{_libdir}/qt6/mkspecs/modules/qt_lib_webenginewidgets.pri
+%{_libdir}/qt6/mkspecs/modules/qt_lib_webenginewidgets_private.pri
+
+%files -n Qt6Designer-plugin-qwebengineview
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Gui Qt6WebEngineWidgets Qt6Widgets [+Qt6Designer by dir]
+%attr(755,root,root) %{_libdir}/qt6/plugins/designer/libqwebengineview.so
+%{_libdir}/cmake/Qt6Designer/Qt6QWebEngineViewPlugin*.cmake
+
+%if %{with doc}
+%files -n Qt6WebEngine-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtwebengine
+
+%files -n Qt6WebEngine-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtwebengine.qch
+%endif
+%endif
+
+%files -n Qt6WebSockets -f qtwebsockets.lang
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6WebSockets.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6WebSockets.so.6
+%dir %{qt6dir}/qml/QtWebSockets
+# R: Core Network Qml WebSockets
+%attr(755,root,root) %{qt6dir}/qml/QtWebSockets/libqmlwebsocketsplugin.so
+%{qt6dir}/qml/QtWebSockets/plugins.qmltypes
+%{qt6dir}/qml/QtWebSockets/qmldir
+
+%files -n Qt6WebSockets-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6WebSockets.so
+%{_libdir}/libQt6WebSockets.prl
+%{_includedir}/qt6/QtWebSockets
+%{_pkgconfigdir}/Qt6WebSockets.pc
+%{_libdir}/cmake/Qt6WebSockets
+%{qt6dir}/mkspecs/modules/qt_lib_websockets.pri
+%{qt6dir}/mkspecs/modules/qt_lib_websockets_private.pri
+
+%if %{with doc}
+%files -n Qt6WebSockets-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtwebsockets
+
+%files -n Qt6WebSockets-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtwebsockets.qch
+%endif
+
+%files -n Qt6WebView
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Qml
+%attr(755,root,root) %{_libdir}/libQt6WebView.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6WebView.so.6
+%dir %{qt6dir}/plugins/webview
+%dir %{qt6dir}/qml/QtWebView
+# R: Qt6Core Qt6Qml Qt6Quick Qt6WebView
+%attr(755,root,root) %{qt6dir}/qml/QtWebView/libqtwebviewquickplugin.so
+%{qt6dir}/qml/QtWebView/plugins.qmltypes
+%{qt6dir}/qml/QtWebView/qmldir
+
+%files -n Qt6WebView-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6WebView.so
+%{_libdir}/libQt6WebView.prl
+%{_includedir}/qt6/QtWebView
+%{_pkgconfigdir}/Qt6WebView.pc
+%dir %{_libdir}/cmake/Qt6WebView
+%{_libdir}/cmake/Qt6WebView/Qt6WebViewConfig*.cmake
+%{qt6dir}/mkspecs/modules/qt_lib_webview.pri
+%{qt6dir}/mkspecs/modules/qt_lib_webview_private.pri
+
+%if %{with webengine}
+%files -n Qt6WebView-plugin-webengine
+%defattr(644,root,root,755)
+%attr(755,root,root) %{qt6dir}/plugins/webview/libqtwebview_webengine.so
+%{_libdir}/cmake/Qt6WebView/Qt6WebView_QWebEngineWebViewPlugin.cmake
+%endif
+
+%if %{with doc}
+%files -n Qt6WebView-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtwebview
+
+%files -n Qt6WebView-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtwebview.qch
+%endif
+
 
 %files -n Qt6Xml
 %defattr(644,root,root,755)

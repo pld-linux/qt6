@@ -179,13 +179,147 @@ Qt is a software toolkit for developing applications.
 %description -l pl.UTF-8
 Qt to programowy toolkit do tworzenia aplikacji.
 
+%package -n qt6-qttools
+Summary:	Development tools for Qt 6
+Summary(pl.UTF-8):	Narzędzia programistyczne dla Qt 6
+Group:		X11/Libraries
+# pixeltool: Core, Gui, Widgets
+# qtdiag: Core Gui Network Widgets
+# qtpaths: Core
+# qtplugininfo: Core
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Widgets = %{version}
+
+%description -n qt6-qttools
+Qt is a cross-platform application and UI framework. Using Qt, you can
+write web-enabled applications once and deploy them across desktop,
+mobile and embedded systems without rewriting the source code.
+
+This package contains additional tools for building Qt applications.
+
+%description -n qt6-qttools -l pl.UTF-8
+Qt to wieloplatformowy szkielet aplikacji i interfejsów użytkownika.
+Przy użyciu Qt można pisać aplikacje powiązane z WWW i wdrażać je w
+systemach biurkowych, przenośnych i wbudowanych bez przepisywania kodu
+źródłowego.
+
+Ten pakiet zawiera dodatkowe narzędzia do budowania aplikacji Qt.
+
+%package -n qt6-assistant
+Summary:	Qt documentation browser
+Summary(pl.UTF-8):	Przeglądarka dokumentacji Qt
+Group:		X11/Development/Tools
+# assistant: Core, Gui, Help, Network, PrintSupport, Sql, Widgets
+# qdistancefieldgenerator: Core Gui Quick Widgets
+# qdoc: Core, clang-libs
+# qhelpgenerator: Core, Gui, Help Sql; sqldriver-sqlite3 to work
+# qtattributionsscanner: Core
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Help = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Network = %{version}
+Requires:	Qt6PrintSupport = %{version}
+Requires:	Qt6Sql = %{version}
+Requires:	Qt6Sql-sqldriver-sqlite3 = %{version}
+Requires:	Qt6Widgets = %{version}
+
+%description -n qt6-assistant
+Qt Assistant is a tool for browsing on-line documentation with
+indexing, bookmarks and full-text search.
+
+%description -n qt6-assistant -l pl.UTF-8
+Qt Assistant to narzędzie do przeglądania dokumentacji z możliwością
+indeksowania, dodawania zakładek i pełnotekstowego wyszukiwania.
+
+%package -n qt6-designer
+Summary:	IDE used for GUI designing with Qt 6 library
+Summary(pl.UTF-8):	IDE służące do projektowania GUI przy użyciu biblioteki Qt 6
+Group:		X11/Applications
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Designer = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Network = %{version}
+Requires:	Qt6PrintSupport = %{version}
+Requires:	Qt6Widgets = %{version}
+Requires:	Qt6Xml = %{version}
+
+%description -n qt6-designer
+An advanced tool used for GUI designing with Qt 6 library.
+
+%description -n qt6-designer -l pl.UTF-8
+Zaawansowane narzędzie służące do projektowania interfejsu graficznego
+przy użyciu biblioteki Qt 6.
+
+%package -n qt6-linguist
+Summary:	Translation helper for Qt 6
+Summary(pl.UTF-8):	Aplikacja ułatwiająca tłumaczenie aplikacji opartych na Qt 6
+Group:		X11/Development/Tools
+# lconvert,lprodump,lrelease*,lupdate*: Core
+# linguist: Core, Gui, PrintSupport, Widgets
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6PrintSupport = %{version}
+Requires:	Qt6Widgets = %{version}
+Requires:	Qt6Xml = %{version}
+
+%description -n qt6-linguist
+Translation helper for Qt 6.
+
+%description -n qt6-linguist -l pl.UTF-8
+Aplikacja ułatwiająca tłumaczenie aplikacji opartych na Qt 6.
+
+%package -n qt6-qdbus
+Summary:	Qt6 DBus tools
+Summary(pl.UTF-8):	Narzędzia Qt6 do magistrali DBus
+Group:		X11/Applications
+# qdbus: Core, DBus, Xml
+# qdbusviewer: Core, DBus, Gui, Widgets, Xml
+Requires:	Qt6Core = %{version}
+Requires:	Qt6DBus = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Widgets = %{version}
+Requires:	Qt6Xml = %{version}
+
+%description -n qt6-qdbus
+This package contains the qdbus and qdbusviewer tools.
+
+%description -n qt6-qdbus -l pl.UTF-8
+Ten pakiet zawiera narzędzia qdbus i qdbusviewer.
+
 %package -n Qt63D
 Summary:	The Qt6 3D libraries
 Summary(pl.UTF-8):	Biblioteki Qt6 3D
 Group:		X11/Libraries
-Requires:	Qt6Core >= %{version}
-Requires:	Qt6Gui >= %{version}
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
 Requires:	assimp >= 5
+
+%package -n qt6-qttools-doc
+Summary:	Qt6 Tools documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do narzędzi Qt6 w formacie HTML
+Group:		X11/Development/Libraries
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n qt6-qttools-doc
+Qt6 Tools documentation in HTML format.
+
+%description -n qt6-qttools-doc -l pl.UTF-8
+Dokumentacja do narzędzi Qt6 w formacie HTML.
+
+%package -n qt6-qttools-doc-qch
+Summary:	Qt6 Tools documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do narzędzi Qt6 w formacie QCH
+Group:		X11/Development/Libraries
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n qt6-qttools-doc-qch
+Qt6 Tools documentation in QCH format.
+
+%description -n qt6-qttools-doc-qch -l pl.UTF-8
+Dokumentacja do narzędzi Qt6 w formacie QCH.
 
 %description -n Qt63D
 Qt6 3D libraries.
@@ -197,11 +331,11 @@ Biblioteki Qt6 3D.
 Summary:	Qt6 3D - development files
 Summary(pl.UTF-8):	Biblioteki Qt6 3D - pliki programistyczne
 Group:		X11/Development/Libraries
-Requires:	Qt63D = %{version}-%{release}
-Requires:	Qt6Concurrent-devel >= %{version}
-Requires:	Qt6Core-devel >= %{version}
-Requires:	Qt6Gui-devel >= %{version}
-Requires:	Qt6Qml-devel >= %{version}
+Requires:	Qt63D = %{version}
+Requires:	Qt6Concurrent-devel = %{version}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6Qml-devel = %{version}
 
 %description -n Qt63D-devel
 Qt6 3D - development files.
@@ -213,7 +347,7 @@ Biblioteki Qt6 3D - pliki programistyczne.
 Summary:	Qt6 3D documentation in HTML format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 3D w formacie HTML
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt63D-doc
@@ -226,7 +360,7 @@ Dokumentacja do biblioteki Qt6 3D w formacie HTML.
 Summary:	Qt6 3D documentation in QCH format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 3D w formacie QCH
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt63D-doc-qch
@@ -239,9 +373,9 @@ Dokumentacja do biblioteki Qt6 3D w formacie QCH.
 Summary:	Qt6 Bluetooth library
 Summary(pl.UTF-8):	Biblioteka Qt6 Bluetooth
 Group:		Libraries
-Requires:	Qt6Core >= %{version}
-Requires:	Qt6DBus >= %{version}
-Requires:	Qt6Network >= %{version}
+Requires:	Qt6Core = %{version}
+Requires:	Qt6DBus = %{version}
+Requires:	Qt6Network = %{version}
 
 %description -n Qt6Bluetooth
 Qt6 Bluetooth library provides classes that enable basic Bluetooth
@@ -255,9 +389,9 @@ operacje Bluetooth, takie jak wyszukiwanie urządzeń i łączenie z nimi.
 Summary:	The Qt6 Bluetooth - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 Bluetooth - pliki programistyczne
 Group:		Development/Libraries
-Requires:	Qt6Bluetooth = %{version}-%{release}
-Requires:	Qt6Core-devel >= %{version}
-Requires:	Qt6DBus-devel >= %{version}
+Requires:	Qt6Bluetooth = %{version}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6DBus-devel = %{version}
 
 %description -n Qt6Bluetooth-devel
 The Qt6 Bluetooth - development files.
@@ -269,7 +403,7 @@ Biblioteka Qt6 Bluetooth - pliki programistyczne.
 Summary:	Qt6 Bluetooth documentation in HTML format
 Summary(pl.UTF-8):	Dokumentacja do bibliotek Qt6 Bluetooth w formacie HTML
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6Bluetooth-doc
@@ -282,7 +416,7 @@ Dokumentacja do biblioteki Qt6 Bluetooth w formacie HTML.
 Summary:	Qt6 Bluetooth documentation in QCH format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Bluetooth w formacie QCH
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6Bluetooth-doc-qch
@@ -295,12 +429,12 @@ Dokumentacja do biblioteki Qt6 Bluetooth w formacie QCH.
 Summary:	The Qt6 Charts library
 Summary(pl.UTF-8):	Biblioteka Qt6 Charts
 Group:		Libraries
-Requires:	Qt6Core >= %{version}
-Requires:	Qt6Gui >= %{version}
-Requires:	Qt6Widgets >= %{version}
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Widgets = %{version}
 # for qml module
-Requires:	Qt6Qml >= %{version}
-Requires:	Qt6Quick >= %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Quick = %{version}
 
 %description -n Qt6Charts
 Qt Charts module provides a set of easy to use chart components. It
@@ -317,10 +451,10 @@ użytkownika.
 Summary:	Qt6 Charts library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 Charts - pliki programistyczne
 Group:		Development/Libraries
-Requires:	Qt6Charts = %{version}-%{release}
-Requires:	Qt6Core-devel >= %{version}
-Requires:	Qt6Gui-devel >= %{version}
-Requires:	Qt6Widgets-devel >= %{version}
+Requires:	Qt6Charts = %{version}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6Widgets-devel = %{version}
 
 %description -n Qt6Charts-devel
 Qt6 Charts library - development files.
@@ -332,7 +466,7 @@ Biblioteka Qt6 Charts - pliki programistyczne.
 Summary:	Qt6 Charts documentation in HTML format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Charts w formacie HTML
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6Charts-doc
@@ -345,7 +479,7 @@ Dokumentacja do biblioteki Qt6 Charts w formacie HTML.
 Summary:	Qt6 Charts documentation in QCH format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Charts w formacie QCH
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6Charts-doc-qch
@@ -358,8 +492,8 @@ Dokumentacja do biblioteki Qt6 Charts w formacie QCH.
 Summary:	The Qt6 Coap library
 Summary(pl.UTF-8):	Biblioteka Qt6 Coap
 Group:		Libraries
-Requires:	Qt6Core >= %{version}
-Requires:	Qt6Network >= %{version}
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Network = %{version}
 
 %description -n Qt6Coap
 Qt Coap module contains a library that supports the CoAP protocol.
@@ -374,9 +508,9 @@ protokół dla urządzeń IoT oraz do komunikacji między maszynami.
 Summary:	Qt6 Coap library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 Coap - pliki programistyczne
 Group:		Development/Libraries
-Requires:	Qt6Coap = %{version}-%{release}
-Requires:	Qt6Core-devel >= %{version}
-Requires:	Qt6Network-devel >= %{version}
+Requires:	Qt6Coap = %{version}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Network-devel = %{version}
 
 %description -n Qt6Coap-devel
 Qt6 Coap library - development files.
@@ -389,7 +523,7 @@ Summary:	Qt6 Coap documentation in HTML format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Coap w formacie HTML
 License:	FDL v1.3
 Group:		Documentation
-Requires:	qt5-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6Coap-doc
@@ -403,7 +537,7 @@ Summary:	Qt6 Coap documentation in QCH format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Coap w formacie QCH
 License:	FDL v1.3
 Group:		Documentation
-Requires:	qt5-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6Coap-doc-qch
@@ -478,10 +612,10 @@ Pliki nagłówkowe biblioteki Qt6 Core.
 Summary:	The Qt6 DataVisualization library
 Summary(pl.UTF-8):	Biblioteka Qt6 DataVisualization
 Group:		X11/Libraries
-Requires:	Qt6Core >= %{version}
-Requires:	Qt6Gui >= %{version}
-Requires:	Qt6Qml >= %{version}
-Requires:	Qt6Quick >= %{version}
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Quick = %{version}
 
 %description -n Qt6DataVisualization
 Qt6 DataVisualization library.
@@ -493,9 +627,9 @@ Biblioteka Qt6 DataVisualization.
 Summary:	Qt6 DataVisualization - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 DataVisualization - pliki programistyczne
 Group:		X11/Development/Libraries
-Requires:	Qt6DataVisualization = %{version}-%{release}
-Requires:	Qt6Core-devel >= %{version}
-Requires:	Qt6Gui-devel >= %{version}
+Requires:	Qt6DataVisualization = %{version}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
 
 %description -n Qt6DataVisualization-devel
 Qt6 DataVisualization - development files.
@@ -507,7 +641,7 @@ Biblioteka Qt6 DataVisualization - pliki programistyczne.
 Summary:	Qt6 DataVisualization documentation in HTML format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 DataVisualization w formacie HTML
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6DataVisualization-doc
@@ -520,7 +654,7 @@ Dokumentacja do biblioteki Qt6 DataVisualization w formacie HTML.
 Summary:	Qt6 DataVisualization documentation in QCH format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 DataVisualization w formacie QCH
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6DataVisualization-doc-qch
@@ -571,6 +705,56 @@ Qt6 DeviceDiscoverySupport library - development files.
 %description -n Qt6DeviceDiscoverySupport-devel -l pl.UTF-8
 Biblioteka Qt6 DeviceDiscoverySupport - pliki programistyczne.
 
+%package -n Qt6Designer
+Summary:	Qt6 Designer libraries
+Summary(pl.UTF-8):	Biblioteki Qt6 Designer
+Group:		X11/Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Widgets = %{version}
+Requires:	Qt6Xml = %{version}
+
+%description -n Qt6Designer
+The Qt6 Designer libraries provide classes to create your own custom
+widget plugins for Qt Designer and classes to access Qt Designer
+components.
+
+%description -n Qt6Designer -l pl.UTF-8
+Biblioteki Qt6 Designer dostarczają klasy do tworzenia wtyczek Qt
+Designera do obsługi własnych widgetów oraz klasy pozwalające na
+dostęp do komponentów Qt Designera.
+
+%package -n Qt6Designer-devel
+Summary:	Qt6 Designer libraries - development files
+Summary(pl.UTF-8):	Biblioteki Qt6 Designer - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	OpenGL-devel
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Designer = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Widgets = %{version}
+Requires:	Qt6Xml = %{version}
+Obsoletes:	qt6-qttools-devel < 5.2.0-1
+
+%description -n Qt6Designer-devel
+Header files for Qt6 Designer libraries.
+
+%description -n Qt6Designer-devel -l pl.UTF-8
+Pliki nagłówkowe bibliotek Qt6 Designer.
+
+%package -n Qt6Designer-plugin-qquickwidget
+Summary:	QQuickWidget (Quick2) plugin for Qt6 Designer
+Summary(pl.UTF-8):	Wtyczka QQuickWidget (Quick2) dla Qt6 Designera
+Group:		X11/Libraries
+Requires:	Qt6Designer = %{version}
+Requires:	Qt6Quick = %{version}
+
+%description -n Qt6Designer-plugin-qquickwidget
+QQuickWidget (Quick2) plugin for Qt6 Designer.
+
+%description -n Qt6Designer-plugin-qquickwidget -l pl.UTF-8
+Wtyczka QQuickWidget (Quick2) dla Qt6 Designera.
+
 %package -n Qt6EglSupport-devel
 Summary:	Qt6 EglSupport library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 EglSupport - pliki programistyczne
@@ -610,11 +794,11 @@ Suggests:	Qt6Gui-platform-xcb
 
 %description -n Qt6Gui
 The Qt6 GUI library provides the basic enablers for graphical
-applications written with Qt 5.
+applications written with Qt 6.
 
 %description -n Qt6Gui -l pl
 Biblioteka Qt6 Gui udostępnia podstawową funkcjonalność dla
-graficznych aplikacji napisanych z użyciem Qt 5.
+graficznych aplikacji napisanych z użyciem Qt 6.
 
 %package -n Qt6Gui-generic-libinput
 Summary:	Qt6 Gui generic input plugin for libinput
@@ -868,6 +1052,40 @@ Header files for Qt6 Gui library.
 %description -n Qt6Gui-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 Gui.
 
+%package -n Qt6Help
+Summary:	Qt6 Help library
+Summary(pl.UTF-8):	Biblioteka Qt6 Help
+Group:		X11/Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Sql = %{version}
+Requires:	Qt6Widgets = %{version}
+
+%description -n Qt6Help
+Qt6 Help library provides classes for integrating online documentation
+in applications.
+
+%description -n Qt6Help -l pl.UTF-8
+Biblioteka Qt6 Help dostarcza klasy służące do integracji dokumentacji
+online w aplikacjach.
+
+%package -n Qt6Help-devel
+Summary:	Qt6 Help library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Help - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6Help = %{version}
+Requires:	Qt6Sql-devel = %{version}
+Requires:	Qt6Widgets-devel = %{version}
+Obsoletes:	qt6-qttools-devel < 5.2.0-1
+
+%description -n Qt6Help-devel
+Header files for Qt6 Help library.
+
+%description -n Qt6Help-devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki Qt6 Help.
+
 %package -n Qt6InputSupport-devel
 Summary:	Qt6 InputSupport library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 InputSupport - pliki programistyczne
@@ -929,8 +1147,8 @@ Pliki nagłówkowe biblioteki Qt6 Network.
 Summary:	Qt6 Nfc library
 Summary(pl.UTF-8):	Biblioteka Qt6 Nfc
 Group:		Libraries
-Requires:	Qt6Core >= %{version}
-Requires:	Qt6DBus >= %{version}
+Requires:	Qt6Core = %{version}
+Requires:	Qt6DBus = %{version}
 
 %description -n Qt6Nfc
 Qt6 Nfc library provides classes to access NFC Forum Tags.
@@ -943,9 +1161,9 @@ Forum.
 Summary:	The Qt6 Nfc - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 Nfc - pliki programistyczne
 Group:		Development/Libraries
-Requires:	Qt6Nfc = %{version}-%{release}
-Requires:	Qt6Core-devel >= %{version}
-Requires:	Qt6DBus-devel >= %{version}
+Requires:	Qt6Nfc = %{version}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6DBus-devel = %{version}
 
 %description -n Qt6Nfc-devel
 The Qt6 Nfc - development files.
@@ -957,7 +1175,7 @@ Biblioteka Qt6 Nfc - pliki programistyczne.
 Summary:	Qt6 Nfc documentation in HTML format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Nfc w formacie HTML
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6Nfc-doc
@@ -970,7 +1188,7 @@ Dokumentacja do biblioteki Qt6 Nfc w formacie HTML.
 Summary:	Qt6 Nfc documentation in QCH format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Nfc w formacie QCH
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6Nfc-doc-qch
@@ -989,11 +1207,11 @@ Requires:	Qt6Widgets = %{version}
 
 %description -n Qt6OpenGL
 The Qt6 OpenGL library offers classes that make it easy to use OpenGL
-in Qt 5 applications.
+in Qt 6 applications.
 
 %description -n Qt6OpenGL -l pl.UTF-8
 Biblioteka Qt6 OpenGL oferuje klasy ułatwiające wykorzystywanie
-OpenGL-a w aplikacjach Qt 5.
+OpenGL-a w aplikacjach Qt 6.
 
 %package -n Qt6OpenGL-devel
 Summary:	Qt6 OpenGL library - development files
@@ -1035,7 +1253,7 @@ Summary(pl.UTF-8):	Biblioteka Qt6 Pdf - pliki programistyczne
 Group:		Development/Libraries
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}
-Requires:	Qt6Pdf = %{version}-%{release}
+Requires:	Qt6Pdf = %{version}
 Requires:	Qt6Widgets-devel = %{version}
 
 %description -n Qt6Pdf-devel
@@ -1079,7 +1297,7 @@ Group:		X11/Libraries
 Requires:	Qt6Core = %{version}
 Requires:	Qt6Gui = %{version}
 Requires:	Qt6Designer = %{version}
-Requires:	Qt6WebEngine = %{version}-%{release}
+Requires:	Qt6WebEngine = %{version}
 Requires:	Qt6Widgets = %{version}
 
 %description -n Qt6Designer-plugin-qwebengineview
@@ -1253,12 +1471,12 @@ Group:		Libraries
 Requires:	Qt6Core = %{version}
 
 %description -n Qt6Test
-The Qt6 Test library provides classes for unit testing Qt 5
+The Qt6 Test library provides classes for unit testing Qt 6
 applications and libraries.
 
 %description -n Qt6Test -l pl.UTF-8
 Biblioteka Qt6 Test udostępnia klasy do testów jednostkowych aplikacji
-oraz bibliotek Qt 5.
+oraz bibliotek Qt 6.
 
 %package -n Qt6Test-devel
 Summary:	Qt6 Test library - development files
@@ -1273,14 +1491,53 @@ Header files for Qt6 Test library.
 %description -n Qt6Test-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 Test.
 
+%package -n Qt6UiTools
+Summary:	Qt6 Ui Tools library
+Summary(pl.UTF-8):	Biblioteka Qt6 Ui Tools
+Group:		X11/Development/Libraries
+Requires:	OpenGL
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Widgets = %{version}
+
+%description -n Qt6UiTools
+Qt6 Ui Tools library provides classes to handle forms created with Qt
+Designer.
+
+%description -n Qt6UiTools -l pl.UTF-8
+Biblioteka Qt6 Ui Tools dostarcza klasy do obsługi formularzy
+utworzonych przy użyciu Qt Designera.
+
+%package -n Qt6UiTools-devel
+Summary:	Qt6 Ui Tools library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Ui Tools - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	OpenGL-devel
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6Widgets-devel = %{version}
+Requires:	Qt6UiTools = %{version}
+
+%description -n Qt6UiTools-devel
+Header files and static Qt6 Ui Tools library.
+
+Qt6 Ui Tools library provides classes to handle forms created with Qt
+Designer.
+
+%description -n Qt6UiTools-devel -l pl.UTF-8
+Pliki nagłówkowe i statyczna biblioteka Qt6 Ui Tools.
+
+Biblioteka Qt6 Ui Tools dostarcza klasy do obsługi formularzy
+utworzonych przy użyciu Qt Designera.
+
 %package -n Qt6VirtualKeyboard
 Summary:	The Qt6 VirtualKeyboard library
 Summary(pl.UTF-8):	Biblioteka Qt6 VirtualKeyboard
 Group:		X11/Libraries
-Requires:	Qt6Core >= %{version}
-Requires:	Qt6Gui >= %{version}
-Requires:	Qt6Qml >= %{version}
-Requires:	Qt6Quick >= %{version}
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Quick = %{version}
 
 %description -n Qt6VirtualKeyboard
 Qt6 VirtualKeyboard library.
@@ -1292,11 +1549,11 @@ Biblioteka Qt6 VirtualKeyboard.
 Summary:	Qt6 VirtualKeyboard - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 VirtualKeyboard - pliki programistyczne
 Group:		X11/Development/Libraries
-Requires:	Qt6Core-devel >= %{version}
-Requires:	Qt6Gui-devel >= %{version}
-Requires:	Qt6Qml-devel >= %{version}
-Requires:	Qt6Quick-devel >= %{version}
-Requires:	Qt6VirtualKeyboard = %{version}-%{release}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6Qml-devel = %{version}
+Requires:	Qt6Quick-devel = %{version}
+Requires:	Qt6VirtualKeyboard = %{version}
 
 %description -n Qt6VirtualKeyboard-devel
 Qt6 VirtualKeyboard - development files.
@@ -1308,7 +1565,7 @@ Biblioteka Qt6 VirtualKeyboard - pliki programistyczne.
 Summary:	Qt6 VirtualKeyboard documentation in HTML format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 VirtualKeyboard w formacie HTML
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6VirtualKeyboard-doc
@@ -1321,7 +1578,7 @@ Dokumentacja do biblioteki Qt6 VirtualKeyboard w formacie HTML.
 Summary:	Qt6 VirtualKeyboard documentation in QCH format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 VirtualKeyboard w formacie QCH
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6VirtualKeyboard-doc-qch
@@ -1334,10 +1591,10 @@ Dokumentacja do biblioteki Qt6 VirtualKeyboard w formacie QCH.
 Summary:	The Qt6 WaylandCompositor library
 Summary(pl.UTF-8):	Biblioteka Qt6 WaylandCompositor
 Group:		Libraries
-Requires:	Qt6Core >= %{version}
-Requires:	Qt6Gui >= %{version}
-Requires:	Qt6Qml >= %{version}
-Requires:	Qt6Quick >= %{version}
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Quick = %{version}
 Requires:	wayland >= 1.4.0
 Requires:	xorg-lib-libxkbcommon >= 0.2.0
 Obsoletes:	Qt6Compositor < 5.8.0
@@ -1355,12 +1612,12 @@ Summary:	Qt6 WaylandCompositor library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 WaylandCompositor - pliki programistyczne
 Group:		Development/Libraries
 Requires:	OpenGL-devel
-Requires:	Qt6WaylandCompositor = %{version}-%{release}
-Requires:	Qt6Core-devel >= %{version}
-Requires:	Qt6Gui-devel >= %{version}
-Requires:	Qt6Network-devel >= %{version}
-Requires:	Qt6Qml-devel >= %{version}
-Requires:	Qt6Quick-devel >= %{version}
+Requires:	Qt6WaylandCompositor = %{version}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6Network-devel = %{version}
+Requires:	Qt6Qml-devel = %{version}
+Requires:	Qt6Quick-devel = %{version}
 Requires:	wayland-devel >= 1.4.0
 Requires:	xorg-lib-libxkbcommon-devel >= 0.2.0
 Obsoletes:	Qt6Compositor-devel < 5.8.0
@@ -1375,7 +1632,7 @@ Biblioteka Qt6 WaylandCompositor - pliki programistyczne.
 Summary:	Qt6 Wayland documentation in HTML format
 Summary(pl.UTF-8):	Dokumentacja do bibliotek Qt6 Wayland w formacie HTML
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6WaylandCompositor-doc
@@ -1388,7 +1645,7 @@ Dokumentacja do bibliotek Qt6 Wayland w formacie HTML.
 Summary:	Qt6 Wayland documentation in QCH format
 Summary(pl.UTF-8):	Dokumentacja do bibliotek Qt6 Wayland w formacie QCH
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6WaylandCompositor-doc-qch
@@ -1401,9 +1658,9 @@ Dokumentacja do bibliotek Qt6 Wayland w formacie QCH.
 Summary:	The Qt6 WaylandClient library
 Summary(pl.UTF-8):	Biblioteka Qt6 WaylandClient
 Group:		Libraries
-Requires:	Qt6Core >= %{version}
-Requires:	Qt6DBus >= %{version}
-Requires:	Qt6Gui >= %{version}
+Requires:	Qt6Core = %{version}
+Requires:	Qt6DBus = %{version}
+Requires:	Qt6Gui = %{version}
 Requires:	wayland >= 1.4.0
 Requires:	xorg-lib-libxkbcommon >= 0.2.0
 
@@ -1419,11 +1676,11 @@ klientów Wayland.
 Summary:	Qt6 WaylandClient library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 WaylandClient - pliki programistyczne
 Group:		Development/Libraries
-Requires:	Qt6Core-devel >= %{version}
-Requires:	Qt6DBus-devel >= %{version}
-Requires:	Qt6Gui-devel >= %{version}
-Requires:	Qt6PlatformCompositorSupport-devel >= %{version}
-Requires:	Qt6WaylandClient = %{version}-%{release}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6DBus-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6PlatformCompositorSupport-devel = %{version}
+Requires:	Qt6WaylandClient = %{version}
 Requires:	wayland-devel >= 1.4.0
 Requires:	xorg-lib-libxkbcommon-devel >= 0.2.0
 
@@ -1437,9 +1694,9 @@ Biblioteka Qt6 WaylandClient - pliki programistyczne.
 Summary:	The Qt6 WebChannel library
 Summary(pl.UTF-8):	Biblioteka Qt6 WebChannel
 Group:		Libraries
-Requires:	Qt6Core >= %{version}
-Requires:	Qt6Network >= %{version}
-Requires:	Qt6Qml >= %{version}
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Network = %{version}
+Requires:	Qt6Qml = %{version}
 
 %description -n Qt6WebChannel
 Qt6 WebChannel library provides seamless integration of C++ and QML
@@ -1453,10 +1710,10 @@ klientami w HTML-u/JavaScripcie.
 Summary:	Qt6 WebChannel library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 WebChannel - pliki programistyczne
 Group:		Development/Libraries
-Requires:	Qt6Core-devel >= %{version}
-Requires:	Qt6Network-devel >= %{version}
-Requires:	Qt6Qml-devel >= %{version}
-Requires:	Qt6WebChannel = %{version}-%{release}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Network-devel = %{version}
+Requires:	Qt6Qml-devel = %{version}
+Requires:	Qt6WebChannel = %{version}
 
 %description -n Qt6WebChannel-devel
 Qt6 WebChannel library - development files.
@@ -1468,7 +1725,7 @@ Biblioteka Qt6 WebChannel - pliki programistyczne.
 Summary:	Qt6 WebChannel documentation in HTML format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 WebChannel w formacie HTML
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6WebChannel-doc
@@ -1481,7 +1738,7 @@ Dokumentacja do biblioteki Qt6 WebChannel w formacie HTML.
 Summary:	Qt6 WebChannel documentation in QCH format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 WebChannel w formacie QCH
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6WebChannel-doc-qch
@@ -1532,7 +1789,7 @@ Requires:	Qt6PrintSupport-devel = %{version}
 Requires:	Qt6Qml-devel = %{version}
 Requires:	Qt6Quick-devel = %{version}
 Requires:	Qt6WebChannel-devel = %{version}
-Requires:	Qt6WebEngine = %{version}-%{release}
+Requires:	Qt6WebEngine = %{version}
 Requires:	Qt6Widgets-devel = %{version}
 
 %description -n Qt6WebEngine-devel
@@ -1573,10 +1830,10 @@ Dokumentacja do biblioteki Qt6 WebEngine w formacie QCH.
 Summary:	The Qt6 WebSockets library
 Summary(pl.UTF-8):	Biblioteka Qt6 WebSockets
 Group:		Libraries
-Requires:	Qt6Core >= %{version}
-Requires:	Qt6Network >= %{version}
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Network = %{version}
 # for qml module
-Requires:	Qt6Qml >= %{version}
+Requires:	Qt6Qml = %{version}
 
 %description -n Qt6WebSockets
 Qt6 WebSockets library provides WebSockets communication classes.
@@ -1589,9 +1846,9 @@ WebSockets.
 Summary:	Qt6 WebSockets library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 WebSockets - pliki programistyczne
 Group:		Development/Libraries
-Requires:	Qt6Core-devel >= %{version}
-Requires:	Qt6Network-devel >= %{version}
-Requires:	Qt6WebSockets = %{version}-%{release}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Network-devel = %{version}
+Requires:	Qt6WebSockets = %{version}
 
 %description -n Qt6WebSockets-devel
 Qt6 WebSockets library - development files.
@@ -1603,7 +1860,7 @@ Biblioteka Qt6 WebSockets - pliki programistyczne.
 Summary:	Qt6 WebSockets documentation in HTML format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 WebSockets w formacie HTML
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6WebSockets-doc
@@ -1616,7 +1873,7 @@ Dokumentacja do biblioteki Qt6 WebSockets w formacie HTML.
 Summary:	Qt6 WebSockets documentation in QCH format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 WebSockets w formacie QCH
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6WebSockets-doc-qch
@@ -1629,10 +1886,10 @@ Dokumentacja do biblioteki Qt6 WebSockets w formacie QCH.
 Summary:	The Qt6 WebView library
 Summary(pl.UTF-8):	Biblioteka Qt6 WebView
 Group:		X11/Libraries
-Requires:	Qt6Core >= %{version}
-Requires:	Qt6Gui >= %{version}
-Requires:	Qt6Qml >= %{version}
-Requires:	Qt6Quick >= %{version}
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Quick = %{version}
 
 %description -n Qt6WebView
 Qt6 WebView library.
@@ -1644,9 +1901,9 @@ Biblioteka Qt6 WebView.
 Summary:	Qt6 WebView - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 WebView - pliki programistyczne
 Group:		X11/Development/Libraries
-Requires:	Qt6Core-devel >= %{version}
-Requires:	Qt6Gui-devel >= %{version}
-Requires:	Qt6WebView = %{version}-%{release}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6WebView = %{version}
 
 %description -n Qt6WebView-devel
 Qt6 WebView - development files.
@@ -1658,8 +1915,8 @@ Biblioteka Qt6 WebView - pliki programistyczne.
 Summary:	Qt6 WebView library WebEngine plugin
 Summary(pl.UTF-8):	Wtyczka WebEngine do biblioteki Qt6 WebView
 Group:		X11/Libraries
-Requires:	Qt6WebEngine >= %{version}
-Requires:	Qt6WebView = %{version}-%{release}
+Requires:	Qt6WebEngine = %{version}
+Requires:	Qt6WebView = %{version}
 
 %description -n Qt6WebView-plugin-webengine
 Qt6 WebView library WebEngine plugin.
@@ -1671,7 +1928,7 @@ Wtyczka WebEngine do biblioteki Qt6 WebView.
 Summary:	Qt6 WebView documentation in HTML format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 WebView w formacie HTML
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6WebView-doc
@@ -1684,7 +1941,7 @@ Dokumentacja do biblioteki Qt6 WebView w formacie HTML.
 Summary:	Qt6 WebView documentation in QCH format
 Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 WebView w formacie QCH
 Group:		Documentation
-Requires:	qt6-doc-common >= %{version}
+Requires:	qt6-doc-common = %{version}
 BuildArch:	noarch
 
 %description -n Qt6WebView-doc-qch
@@ -1701,11 +1958,11 @@ Requires:	Qt6Core = %{version}
 Requires:	Qt6Gui = %{version}
 
 %description -n Qt6Widgets
-The Qt6 Widgets library extends Qt 5 GUI with C++ widget
+The Qt6 Widgets library extends Qt 6 GUI with C++ widget
 functionality.
 
 %description -n Qt6Widgets -l pl.UTF-8
-Biblioteka Qt6 Widgets rozszerza graficzny interfejs Qt 5 o
+Biblioteka Qt6 Widgets rozszerza graficzny interfejs Qt 6 o
 funkcjonalność widgetów C++.
 
 %package -n Qt6Widgets-devel
@@ -2018,14 +2275,31 @@ install -d $RPM_BUILD_ROOT%{qt6dir}/plugins/iconengines
 
 # symlinks in system bin dir
 cd $RPM_BUILD_ROOT%{_bindir}
-ln -sf ../%{_lib}/qt6/bin/qmake qmake-qt6
+ln -sf ../%{_lib}/qt6/bin/assistant assistant-qt6
+ln -sf ../%{_lib}/qt6/bin/designer designer-qt6
+ln -sf ../%{_lib}/qt6/bin/lconvert lconvert-qt6
+ln -sf ../%{_lib}/qt6/bin/linguist linguist-qt6
+ln -sf ../%{_lib}/qt6/bin/lrelease lrelease-qt6
+ln -sf ../%{_lib}/qt6/bin/lupdate lupdate-qt6
+ln -sf ../%{_lib}/qt6/bin/pixeltool pixeltool-qt6
+ln -sf ../%{_lib}/qt6/bin/qdbus qdbus-qt6
 ln -sf ../%{_lib}/qt6/bin/qdbuscpp2xml qdbuscpp2xml-qt6
 ln -sf ../%{_lib}/qt6/bin/qdbusxml2cpp qdbusxml2cpp-qt6
+ln -sf ../%{_lib}/qt6/bin/qdbusviewer qdbusviewer-qt6
+ln -sf ../%{_lib}/qt6/bin/qdistancefieldgenerator qdistancefieldgenerator-qt6
 ln -sf ../%{_lib}/qt6/bin/qdoc qdoc-qt6
+ln -sf ../%{_lib}/qt6/bin/qmake qmake-qt6
+ln -sf ../%{_lib}/qt6/bin/qtdiag qtdiag-qt6
+ln -sf ../%{_lib}/qt6/bin/qtpaths qtpaths-qt6
+ln -sf ../%{_lib}/qt6/bin/qtplugininfo qtplugininfo-qt6
+ln -sf ../%{_lib}/qt6/libexec/lprodump lprodump-qt6
+ln -sf ../%{_lib}/qt6/libexec/lrelease-pro lrelease-pro-qt6
+ln -sf ../%{_lib}/qt6/libexec/lupdate-pro lupdate-pro-qt6
 ln -sf ../%{_lib}/qt6/libexec/moc moc-qt6
-ln -sf ../%{_lib}/qt6/libexec/uic uic-qt6
-ln -sf ../%{_lib}/qt6/libexec/rcc rcc-qt6
+ln -sf ../%{_lib}/qt6/libexec/qhelpgenerator qhelpgenerator-qt6
 ln -sf ../%{_lib}/qt6/libexec/qlalr qlalr-qt6
+ln -sf ../%{_lib}/qt6/libexec/rcc rcc-qt6
+ln -sf ../%{_lib}/qt6/libexec/uic uic-qt6
 cd -
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/qt6
@@ -2045,9 +2319,10 @@ find_qt6_qm()
 }
 
 echo '%defattr(644,root,root,755)' > qtbase.lang
-echo '%defattr(644,root,root,755)' > qtassistant.lang
-echo '%defattr(644,root,root,755)' > qtdesigner.lang
-echo '%defattr(644,root,root,755)' > qtlinguist.lang
+echo '%defattr(644,root,root,755)' > assistant.lang
+echo '%defattr(644,root,root,755)' > designer.lang
+echo '%defattr(644,root,root,755)' > linguist.lang
+echo '%defattr(644,root,root,755)' > qt_help.lang
 echo '%defattr(644,root,root,755)' > qtconnectivity.lang
 echo '%defattr(644,root,root,755)' > qtdeclarative.lang
 echo '%defattr(644,root,root,755)' > qtlocation.lang
@@ -2058,9 +2333,10 @@ echo '%defattr(644,root,root,755)' > qtwebsockets.lang
 %if %{with doc}
 find_qt6_qm qt >> qtbase.lang
 find_qt6_qm qtbase >> qtbase.lang
-find_qt6_qm assistant >> qtassistant.lang
-find_qt6_qm designer >> qtdesigner.lang
-find_qt6_qm linguist >> qtlinguist.lang
+find_qt6_qm assistant >> assistant.lang
+find_qt6_qm designer >> designer.lang
+find_qt6_qm linguist >> linguist.lang
+find_qt6_qm qt_help >> qt_help.lang
 find_qt6_qm qtconnectivity >> qtconnectivity.lang
 find_qt6_qm qtdeclarative >> qtdeclarative.lang
 find_qt6_qm qtlocation >> qtlocation.lang
@@ -2099,6 +2375,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n Qt6DBus -p /sbin/ldconfig
 %postun	-n Qt6DBus -p /sbin/ldconfig
 
+%post	-n Qt6Designer -p /sbin/ldconfig
+%postun	-n Qt6Designer -p /sbin/ldconfig
+
 %post	-n Qt6Gui -p /sbin/ldconfig
 %postun	-n Qt6Gui -p /sbin/ldconfig
 
@@ -2110,6 +2389,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	-n Qt6Gui-platform-xcb -p /sbin/ldconfig
 %postun	-n Qt6Gui-platform-xcb -p /sbin/ldconfig
+
+%post	-n Qt6Help -p /sbin/ldconfig
+%postun	-n Qt6Help -p /sbin/ldconfig
 
 %post	-n Qt6Network -p /sbin/ldconfig
 %postun	-n Qt6Network -p /sbin/ldconfig
@@ -2158,6 +2440,81 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	-n Qt6Xml -p /sbin/ldconfig
 %postun	-n Qt6Xml -p /sbin/ldconfig
+
+%files -n qt6-qttools
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pixeltool-qt6
+%attr(755,root,root) %{_bindir}/qtdiag-qt6
+%attr(755,root,root) %{_bindir}/qtpaths-qt6
+%attr(755,root,root) %{_bindir}/qtplugininfo-qt6
+%attr(755,root,root) %{qt6dir}/bin/pixeltool
+%attr(755,root,root) %{qt6dir}/bin/qtdiag
+%attr(755,root,root) %{qt6dir}/bin/qtpaths
+%attr(755,root,root) %{qt6dir}/bin/qtplugininfo
+
+%files -n qt6-assistant -f assistant.lang
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/assistant-qt6
+%attr(755,root,root) %{_bindir}/qdistancefieldgenerator-qt6
+%attr(755,root,root) %{_bindir}/qhelpgenerator-qt6
+%attr(755,root,root) %{qt6dir}/bin/assistant
+%attr(755,root,root) %{qt6dir}/bin/qdistancefieldgenerator
+%attr(755,root,root) %{qt6dir}/bin/qdoc
+%attr(755,root,root) %{qt6dir}/libexec/qhelpgenerator
+%attr(755,root,root) %{qt6dir}/libexec/qtattributionsscanner
+
+%files -n qt6-designer -f designer.lang
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/designer-qt6
+%attr(755,root,root) %{qt6dir}/bin/designer
+
+%files -n qt6-linguist -f linguist.lang
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/lconvert-qt6
+%attr(755,root,root) %{_bindir}/linguist-qt6
+%attr(755,root,root) %{_bindir}/lprodump-qt6
+%attr(755,root,root) %{_bindir}/lrelease-pro-qt6
+%attr(755,root,root) %{_bindir}/lrelease-qt6
+%attr(755,root,root) %{_bindir}/lupdate-pro-qt6
+%attr(755,root,root) %{_bindir}/lupdate-qt6
+%attr(755,root,root) %{qt6dir}/bin/lconvert
+%attr(755,root,root) %{qt6dir}/bin/linguist
+%attr(755,root,root) %{qt6dir}/bin/lrelease
+%attr(755,root,root) %{qt6dir}/bin/lupdate
+%attr(755,root,root) %{qt6dir}/libexec/lprodump
+%attr(755,root,root) %{qt6dir}/libexec/lrelease-pro
+%attr(755,root,root) %{qt6dir}/libexec/lupdate-pro
+%{_datadir}/qt6/phrasebooks
+%{_libdir}/cmake/Qt6LinguistTools
+
+%files -n qt6-qdbus
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/qdbus-qt6
+%attr(755,root,root) %{_bindir}/qdbusviewer-qt6
+%attr(755,root,root) %{qt6dir}/bin/qdbus
+%attr(755,root,root) %{qt6dir}/bin/qdbusviewer
+
+%if %{with doc}
+%files -n qt6-qttools-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qdoc
+%{_docdir}/qt6-doc/qtassistant
+%{_docdir}/qt6-doc/qtdesigner
+%{_docdir}/qt6-doc/qtdistancefieldgenerator
+%{_docdir}/qt6-doc/qthelp
+%{_docdir}/qt6-doc/qtlinguist
+%{_docdir}/qt6-doc/qtuitools
+
+%files -n qt6-qttools-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qdoc.qch
+%{_docdir}/qt6-doc/qtassistant.qch
+%{_docdir}/qt6-doc/qtdesigner.qch
+%{_docdir}/qt6-doc/qtdistancefieldgenerator.qch
+%{_docdir}/qt6-doc/qthelp.qch
+%{_docdir}/qt6-doc/qtlinguist.qch
+%{_docdir}/qt6-doc/qtuitools.qch
+%endif
 
 %files -n Qt63D
 %defattr(644,root,root,755)
@@ -2538,6 +2895,26 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_dbus.pri
 %{qt6dir}/mkspecs/modules/qt_lib_dbus_private.pri
 
+%files -n Qt6Designer-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Designer.so
+%attr(755,root,root) %{_libdir}/libQt6DesignerComponents.so
+%{_libdir}/libQt6Designer.prl
+%{_libdir}/libQt6DesignerComponents.prl
+%{_includedir}/qt6/QtDesigner
+%{_includedir}/qt6/QtDesignerComponents
+%{_pkgconfigdir}/Qt6Designer.pc
+%{_libdir}/cmake/Qt6Designer/Qt6DesignerConfig*.cmake
+%{_libdir}/cmake/Qt6DesignerComponentsPrivate
+%{qt6dir}/mkspecs/modules/qt_lib_designer.pri
+%{qt6dir}/mkspecs/modules/qt_lib_designer_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_designercomponents_private.pri
+
+%files -n Qt6Designer-plugin-qquickwidget
+%defattr(644,root,root,755)
+%attr(755,root,root) %{qt6dir}/plugins/designer/libqquickwidget.so
+%{_libdir}/cmake/Qt6Designer/Qt6QQuickWidgetPlugin*.cmake
+
 %files -n Qt6DeviceDiscoverySupport-devel
 %defattr(644,root,root,755)
 %{_includedir}/qt6/QtDeviceDiscoverySupport
@@ -2759,6 +3136,21 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Gui/Qt6QOffscreenIntegrationPlugin*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_gui.pri
 %{qt6dir}/mkspecs/modules/qt_lib_gui_private.pri
+
+%files -n Qt6Help -f qt_help.lang
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Help.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Help.so.6
+
+%files -n Qt6Help-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Help.so
+%{_libdir}/libQt6Help.prl
+%{_includedir}/qt6/QtHelp
+%{_pkgconfigdir}/Qt6Help.pc
+%{_libdir}/cmake/Qt6Help
+%{qt6dir}/mkspecs/modules/qt_lib_help.pri
+%{qt6dir}/mkspecs/modules/qt_lib_help_private.pri
 
 %files -n Qt6InputSupport-devel
 %defattr(644,root,root,755)
@@ -3005,6 +3397,25 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Test
 %{qt6dir}/mkspecs/modules/qt_lib_testlib.pri
 %{qt6dir}/mkspecs/modules/qt_lib_testlib_private.pri
+
+%files -n Qt6UiTools
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6UiTools.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6UiTools.so.6
+
+%files -n Qt6UiTools-devel
+%defattr(644,root,root,755)
+%{_libdir}/libQt6UiTools.so
+%{_libdir}/libQt6UiTools.prl
+%{_includedir}/qt6/QtUiPlugin
+%{_includedir}/qt6/QtUiTools
+%{_pkgconfigdir}/Qt6UiPlugin.pc
+%{_pkgconfigdir}/Qt6UiTools.pc
+%{_libdir}/cmake/Qt6UiPlugin
+%{_libdir}/cmake/Qt6UiTools
+%{qt6dir}/mkspecs/modules/qt_lib_uiplugin.pri
+%{qt6dir}/mkspecs/modules/qt_lib_uitools.pri
+%{qt6dir}/mkspecs/modules/qt_lib_uitools_private.pri
 
 %files -n Qt6VirtualKeyboard
 %defattr(644,root,root,755)
@@ -3402,7 +3813,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6WebView-plugin-webengine
 %defattr(644,root,root,755)
 %attr(755,root,root) %{qt6dir}/plugins/webview/libqtwebview_webengine.so
-%{_libdir}/cmake/Qt6WebView/Qt6WebView_QWebEngineWebViewPlugin.cmake
+%{_libdir}/cmake/Qt6WebView/Qt6QWebEngineWebViewPlugin*.cmake
 %endif
 
 %if %{with doc}

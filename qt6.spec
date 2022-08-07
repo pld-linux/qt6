@@ -2266,7 +2266,7 @@ DESTDIR=$RPM_BUILD_ROOT %{__cmake} --build build/ --target install_docs
 %endif
 
 # external plugins loaded from qtbase libs
-install -d $RPM_BUILD_ROOT%{qt6dir}/plugins/iconengines
+install -d $RPM_BUILD_ROOT%{qt6dir}/plugins/{iconengines,webview}
 
 # kill unnecessary -L%{_libdir} from *.prl, *.pc
 %{__sed} -i -e "s,-L%{_libdir} \?,,g" \

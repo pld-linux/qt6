@@ -287,13 +287,35 @@ This package contains the qdbus and qdbusviewer tools.
 %description -n qt6-qdbus -l pl.UTF-8
 Ten pakiet zawiera narzędzia qdbus i qdbusviewer.
 
-%package -n Qt63D
-Summary:	The Qt6 3D libraries
-Summary(pl.UTF-8):	Biblioteki Qt6 3D
+%package -n qt6-qtdeclarative
+Summary:	The Qt6 Declarative libraries
+Summary(pl.UTF-8):	Biblioteki Qt6 Declarative
 Group:		X11/Libraries
+# qml: Core Gui Qml Widgets
+# qmlcachegen: Core
+# qmleasing: Core Gui Qml Quick Widgets
+# qmlformat: Core
+# qmlimportscanner: Core
+# qmllint: Core
+# qmlmin: Core
+# qmlplugindump: Core Gui Qml Widgets
+# qmlpreview: Core Network
+# qmlprofiler: Core Network
+# qmlscene: Core Gui Qml Quick Widgets
+# qmltestrunner: Core QuickTest
+# qmltyperegistrar: Core
 Requires:	Qt6Core = %{version}
 Requires:	Qt6Gui = %{version}
-Requires:	assimp >= 5
+Requires:	Qt6Network = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Quick = %{version}
+Requires:	Qt6Widgets = %{version}
+
+%description -n qt6-qtdeclarative
+This package contains Qt6 Declarative tools.
+
+%description -n qt6-qtdeclarative -l pl.UTF-8
+Ten pakiet zawiera narzeędzia Qt6 Declarative.
 
 %package -n qt6-qttools-doc
 Summary:	Qt6 Tools documentation in HTML format
@@ -321,12 +343,19 @@ Qt6 Tools documentation in QCH format.
 %description -n qt6-qttools-doc-qch -l pl.UTF-8
 Dokumentacja do narzędzi Qt6 w formacie QCH.
 
+%package -n Qt63D
+Summary:	The Qt6 3D libraries
+Summary(pl.UTF-8):	Biblioteki Qt6 3D
+Group:		X11/Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	assimp >= 5
+
 %description -n Qt63D
 Qt6 3D libraries.
 
 %description -n Qt63D -l pl.UTF-8
 Biblioteki Qt6 3D.
-
 %package -n Qt63D-devel
 Summary:	Qt6 3D - development files
 Summary(pl.UTF-8):	Biblioteki Qt6 3D - pliki programistyczne
@@ -424,6 +453,61 @@ Qt6 Bluetooth documentation in QCH format.
 
 %description -n Qt6Bluetooth-doc-qch -l pl.UTF-8
 Dokumentacja do biblioteki Qt6 Bluetooth w formacie QCH.
+
+%package -n Qt6Bodymovin
+Summary:	The Qt6 Bodymovin library
+Summary(pl.UTF-8):	Biblioteka Qt6 Bodymovin
+Group:		X11/Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Quick = %{version}
+
+%description -n Qt6Bodymovin
+Qt6 Bodymovin library.
+
+%description -n Qt6Bodymovin -l pl.UTF-8
+Biblioteka Qt6 Bodymovin.
+
+%package -n Qt6Bodymovin-devel
+Summary:	Qt6 Bodymovin - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Bodymovin - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6Bodymovin = %{version}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+
+%description -n Qt6Bodymovin-devel
+Qt6 Bodymovin - development files.
+
+%description -n Qt6Bodymovin-devel -l pl.UTF-8
+Biblioteka Qt6 Bodymovin - pliki programistyczne.
+
+%package -n Qt6Bodymovin-doc
+Summary:	Qt6 Lottie (Bodymovin) documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Lottie (Bodymovin) w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Bodymovin-doc
+Qt6 Lottie (Bodymovin) documentation in HTML format.
+
+%description -n Qt6Bodymovin-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Lottie (Bodymovin) w formacie HTML.
+
+%package -n Qt6Bodymovin-doc-qch
+Summary:	Qt6 Lottie (Bodymovin) documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Lottie (Bodymovin) w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Bodymovin-doc-qch
+Qt6 Lottie (Bodymovin) documentation in QCH format.
+
+%description -n Qt6Bodymovin-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Lottie (Bodymovin) w formacie QCH.
 
 %package -n Qt6Charts
 Summary:	The Qt6 Charts library
@@ -1112,6 +1196,185 @@ Qt6 KmsSupport library - development files.
 %description -n Qt6KmsSupport-devel -l pl.UTF-8
 Biblioteka Qt6 KmsSupport - pliki programistyczne.
 
+%package -n Qt6Mqtt
+Summary:	The Qt6 Mqtt library
+Summary(pl.UTF-8):	Biblioteka Qt6 Mqtt
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Network = %{version}
+
+%description -n Qt6Mqtt
+Qt Mqtt module contains a library that supports the MQTT protocol.
+MQTT is a machine-to-machine (M2M) protocol utilizing the
+publish-and-subscribe paradigm. Its purpose is to provide a channel
+with minimal communication overhead.
+
+%description -n Qt6Mqtt -l pl.UTF-8
+Moduł Qt Mqtt zawiera bibliotekę obsługującą protokół MQTT. Jest to
+protokół międzymaszynowy (M2M), korzystający z paradygmatu publikacji
+i subskrypcji. Celem jest zapewnienie kanału z minimalnym narzutem na
+komunikację.
+
+%package -n Qt6Mqtt-devel
+Summary:	Qt6 Mqtt library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Mqtt - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Mqtt = %{version}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Network-devel = %{version}
+
+%description -n Qt6Mqtt-devel
+Qt6 Mqtt library - development files.
+
+%description -n Qt6Mqtt-devel -l pl.UTF-8
+Biblioteka Qt6 Mqtt - pliki programistyczne.
+
+%package -n Qt6Mqtt-doc
+Summary:	Qt6 Mqtt documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Mqtt w formacie HTML
+License:	FDL v1.3
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Mqtt-doc
+Qt6 Mqtt documentation in HTML format.
+
+%description -n Qt6Mqtt-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Mqtt w formacie HTML.
+
+%package -n Qt6Mqtt-doc-qch
+Summary:	Qt6 Mqtt documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Mqtt w formacie QCH
+License:	FDL v1.3
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Mqtt-doc-qch
+Qt6 Mqtt documentation in QCH format.
+
+%description -n Qt6Mqtt-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Mqtt w formacie QCH.
+
+%package -n Qt6Multimedia
+Summary:	The Qt6 Multimedia libraries
+Summary(pl.UTF-8):	Biblioteki Qt6 Multimedia
+Group:		X11/Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Network = %{version}
+Requires:	alsa-lib >= 1.0.10
+Requires:	pulseaudio-libs >= 0.9.11
+
+%description -n Qt6Multimedia
+Qt6 Multimedia libraries provide audio, video, radio and camera
+functionality.
+
+%description -n Qt6Multimedia -l pl.UTF-8
+Biblioteki Qt6 Multimedia dostarczają funkcjonalność związaną z
+dźwiękiem, obrazem, radiem i kamerą.
+
+%package -n Qt6Multimedia-devel
+Summary:	Qt6 Multimedia libraries - development files
+Summary(pl.UTF-8):	Biblioteki Qt6 Multimedia - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6Network-devel = %{version}
+Requires:	Qt6Multimedia = %{version}
+
+%description -n Qt6Multimedia-devel
+Qt6 Multimedia libraries - development files.
+
+%description -n Qt6Multimedia-devel -l pl.UTF-8
+Biblioteki Qt6 Multimedia - pliki programistyczne.
+
+%package -n Qt6Multimedia-doc
+Summary:	Qt6 Multimedia documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do bibliotek Qt6 Multimedia w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Multimedia-doc
+Qt6 Multimedia documentation in HTML format.
+
+%description -n Qt6Multimedia-doc -l pl.UTF-8
+Dokumentacja do bibliotek Qt6 Multimedia w formacie HTML.
+
+%package -n Qt6Multimedia-doc-qch
+Summary:	Qt6 Multimedia documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do bibliotek Qt6 Multimedia w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Multimedia-doc-qch
+Qt6 Multimedia documentation in QCH format.
+
+%description -n Qt6Multimedia-doc-qch -l pl.UTF-8
+Dokumentacja do bibliotek Qt6 Multimedia w formacie QCH.
+
+%package -n Qt6MultimediaQuick
+Summary:	Qt6 Multimedia Quick library and modules
+Summary(pl.UTF-8):	Biblioteka i moduły Qt6 Multimedia Quick
+Group:		X11/Libraries
+Requires:	Qt6Multimedia = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Quick = %{version}
+Requires:	pulseaudio-devel >= 0.9.11
+
+%description -n Qt6MultimediaQuick
+Qt6 Multimedia Quick library and modules.
+
+%description -n Qt6MultimediaQuick -l pl.UTF-8
+Biblioteka i moduły Qt6 Multimedia Quick.
+
+%package -n Qt6MultimediaQuick-devel
+Summary:	Qt6 Multimedia Quick library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Multimedia Quick - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6MultimediaQuick = %{version}
+Requires:	Qt6Multimedia-devel = %{version}
+Requires:	Qt6Qml-devel = %{version}
+Requires:	Qt6Quick-devel = %{version}
+
+%description -n Qt6MultimediaQuick-devel
+Qt6 Multimedia Quick library - development files.
+
+%description -n Qt6MultimediaQuick-devel -l pl.UTF-8
+Biblioteka Qt6 Multimedia Quick - pliki programistyczne.
+
+%package -n Qt6MultimediaWidgets
+Summary:	Qt6 Multimedia Widgets library
+Summary(pl.UTF-8):	Biblioteka Qt6 Multimedia Widgets
+Group:		X11/Libraries
+Requires:	Qt6Multimedia = %{version}
+Requires:	Qt6Widgets = %{version}
+
+%description -n Qt6MultimediaWidgets
+Qt6 Multimedia Widgets library provides widgets classes for Qt6
+Multimedia.
+
+%description -n Qt6MultimediaWidgets -l pl.UTF-8
+Biblioteka Qt6 Multimedia Widgets dostarcza klasy widgetów dla
+biblioteki Qt6 Multimedia.
+
+%package -n Qt6MultimediaWidgets-devel
+Summary:	Qt6 Multimedia Widgets library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Multimedia Widgets - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6MultimediaWidgets = %{version}
+Requires:	Qt6Multimedia-devel = %{version}
+Requires:	Qt6Widgets-devel = %{version}
+
+%description -n Qt6MultimediaWidgets-devel
+Qt6 Multimedia Widgets library - development files.
+
+%description -n Qt6MultimediaWidgets-devel -l pl.UTF-8
+Biblioteka Qt6 Multimedia Widgets - pliki programistyczne.
+
 %package -n Qt6Network
 Summary:	Qt6 Network library
 Summary(pl.UTF-8):	Biblioteka Qt6 Network
@@ -1142,6 +1405,62 @@ Header files for Qt6 Network library.
 
 %description -n Qt6Network-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 Network.
+
+%package -n Qt6NetworkAuth
+Summary:	The Qt6 Network Auth library
+Summary(pl.UTF-8):	Biblioteka Qt6 Network Auth
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Network = %{version}
+
+%description -n Qt6NetworkAuth
+Qt6 Network Auth library provides classes for network authentication.
+
+%description -n Qt6NetworkAuth -l pl.UTF-8
+Biblioteka Qt6 Network Auth dostarcza klasy do uwierzytelniania w
+sieci.
+
+%package -n Qt6NetworkAuth-devel
+Summary:	Qt6 Network Auth library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Network Auth - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Network-devel = %{version}
+Requires:	Qt6NetworkAuth = %{version}
+
+%description -n Qt6NetworkAuth-devel
+Qt6 Network Auth library - development files.
+
+%description -n Qt6NetworkAuth-devel -l pl.UTF-8
+Biblioteka Qt6 NetworkAuth - pliki programistyczne.
+
+%package -n Qt6NetworkAuth-doc
+Summary:	Qt6 Network Auth documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Network Auth w formacie HTML
+License:	FDL v1.3
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6NetworkAuth-doc
+Qt6 Network Auth documentation in HTML format.
+
+%description -n Qt6NetworkAuth-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Netwok Auth w formacie HTML.
+
+%package -n Qt6NetworkAuth-doc-qch
+Summary:	Qt6 Network Auth documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Network Auth w formacie QCH
+License:	FDL v1.3
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6NetworkAuth-doc-qch
+Qt6 Network Auth documentation in QCH format.
+
+%description -n Qt6NetworkAuth-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Network Auth w formacie QCH.
 
 %package -n Qt6Nfc
 Summary:	Qt6 Nfc library
@@ -1196,6 +1515,61 @@ Qt6 Nfc documentation in QCH format.
 
 %description -n Qt6Nfc-doc-qch -l pl.UTF-8
 Dokumentacja do biblioteki Qt6 Nfc w formacie QCH.
+
+%package -n Qt6OpcUa
+Summary:	The Qt6 OpcUa library
+Summary(pl.UTF-8):	Biblioteka Qt6 OpcUa
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Network = %{version}
+
+%description -n Qt6OpcUa
+Qt OpcUa module implements OPC UA connectivity through a Qt API.
+
+%description -n Qt6OpcUa -l pl.UTF-8
+Moduł Qt OpcUa implementuje łączność OPC UA poprzez API Qt.
+
+%package -n Qt6OpcUa-devel
+Summary:	Qt6 OpcUa library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 OpcUa - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6OpcUa = %{version}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Network-devel = %{version}
+
+%description -n Qt6OpcUa-devel
+Qt6 OpcUa library - development files.
+
+%description -n Qt6OpcUa-devel -l pl.UTF-8
+Biblioteka Qt6 OpcUa - pliki programistyczne.
+
+%package -n Qt6OpcUa-doc
+Summary:	Qt6 OpcUa documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 OpcUa w formacie HTML
+License:	FDL v1.3
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6OpcUa-doc
+Qt6 OpcUa documentation in HTML format.
+
+%description -n Qt6OpcUa-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 OpcUa w formacie HTML.
+
+%package -n Qt6OpcUa-doc-qch
+Summary:	Qt6 OpcUa documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 OpcUa w formacie QCH
+License:	FDL v1.3
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6OpcUa-doc-qch
+Qt6 OpcUa documentation in QCH format.
+
+%description -n Qt6OpcUa-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 OpcUa w formacie QCH.
 
 %package -n Qt6OpenGL
 Summary:	Qt6 OpenGL library
@@ -1339,6 +1713,532 @@ Header files for Qt6 PrintSupport library.
 %description -n Qt6PrintSupport-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 PrintSupport.
 
+%package -n Qt6Qml
+Summary:	Qt6 Qml libraries
+Summary(pl.UTF-8):	Biblioteki Qt6 Qml
+Group:		Libraries
+# Qt6Qml: Core Network
+# Qt6QmlModels: Core Qml
+# Qt6QmlWorkerScript: Core Network Qml
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Network = %{version}
+
+%description -n Qt6Qml
+The Qt6 QML module provides a framework for developing applications
+and libraries with the QML language. It defines and implements the
+language and engine infrastructure, and provides an API to enable
+application developers to extend the QML language with custom types
+and integrate QML code with JavaScript and C++. The Qt6 QML module
+provides both a QML API and a C++ API.
+
+%description -n Qt6Qml -l pl.UTF-8
+Moduł Qt6 Qml dostarcza szkielet do tworzenia aplikacji i bibliotek
+przy użyciu języka QML. Moduł definiuje i implementuje język oraz
+silnik, a także udostąpnia API pozwalające programistom rozszerzać
+język QML o własne typy oraz integrować kod w języku QML z
+JavaScriptem i C++. Moduł Qt6 QML udostępnia API zarówno dla języka
+QML, jak i C++.
+
+%package -n Qt6Qml-devel
+Summary:	Qt6 Qml libraries - development files
+Summary(pl.UTF-8):	Biblioteki Qt6 Qml - pliki programistyczne
+Group:		Development/Libraries
+# Qt6Qml: Core Network
+# Qt6QmlModels: Core Network Qml
+# Qt6QmlWorkerScript: Core Network Qml
+# Qt6PacketProtocol.a: Core
+# Qt6QmlDebug.a: Core Network PacketProtocol Qml
+# Qt6QmlDevTools.a: Core
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Network-devel = %{version}
+Requires:	Qt6Qml = %{version}
+
+%description -n Qt6Qml-devel
+Qt6 Qml libraries - development files.
+
+%description -n Qt6Qml-devel -l pl.UTF-8
+Biblioteki Qt6 Qml - pliki programistyczne.
+
+%package -n Qt6Qml-doc
+Summary:	Qt6 Declarative documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do bibliotek Qt6 Declarative w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Qml-doc
+Qt6 Declarative documentation in HTML format.
+
+%description -n Qt6Qml-doc -l pl.UTF-8
+Dokumentacja do bibliotek Qt6 Declarative w formacie HTML.
+
+%package -n Qt6Qml-doc-qch
+Summary:	Qt6 Declarative documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do bibliotek Qt6 Declarative w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Qml-doc-qch
+Qt6 Declarative documentation in QCH format.
+
+%description -n Qt6Qml-doc-qch -l pl.UTF-8
+Dokumentacja do bibliotek Qt6 Declarative w formacie QCH.
+
+%package -n Qt6Quick
+Summary:	Qt6 Quick libraries
+Summary(pl.UTF-8):	Biblioteki Qt6 Quick
+Group:		X11/Libraries
+# Qt6Quick: Core Gui Network Qml QmlModels
+# Qt6QuickParticles: Core Gui Qml Quick GL
+# Qt6QuickShapes: Core Gui Qml Quick
+# Qt6QuickTest: Core Gui Qml Quick Test Widgets
+# Qt6QuickWidgets: Core Gui Qml Quick Widgets
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Network = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Test = %{version}
+Requires:	Qt6Widgets = %{version}
+
+%description -n Qt6Quick
+The Qt6 Quick module is the standard library for writing QML
+applications. While the Qt6 QML module provides the QML engine and
+language infrastructure, the Qt6 Quick module provides all the basic
+types necessary for creating user interfaces with QML. It provides a
+visual canvas and includes types for creating and animating visual
+components, receiving user input, creating data models and views and
+delayed object instantiation.
+
+The Qt6 Quick module provides both a QML API which supplies QML types
+for creating user interfaces with the QML language, and a C++ API for
+extending QML applications with C++ code.
+
+%description -n Qt6Quick -l pl.UTF-8
+Moduł Qt6 Quick to biblioteka standardowa do pisania aplikacji QML.
+Sam moduł Qt6 QML dostarcza silnik i infrastrukturę języka, natomiast
+moduł Qt6 Quick udostępnia wszystkie podstawowe typy niezbędne do
+tworzenia interfejsu użytkownika przy użyciu języka QML. Udostępnia
+graficzne "płótno", zawiera typy do tworzenia i animowania komponentów
+graficznych, odczytu wejścia od użytkownika, tworzenia modeli i
+widoków danych oraz opóźnionych instancji obiektów.
+
+Moduł Qt6 Quick dostarcza API zarówno dla języka QML, zapewniające
+typy QML do tworzenia interfejsów użytkownika w języku QML, jak i dla
+języka C++ do rozszerzania aplikacji QML przy użyciu kodu w C++.
+
+%package -n Qt6Quick-devel
+Summary:	Qt6 Qml libraries - development files
+Summary(pl.UTF-8):	Biblioteki Qt6 Qml - pliki programistyczne
+Group:		X11/Development/Libraries
+# Qt6Quick: Core Gui Network Qml QmlModels
+# Qt6QuickParticles: Core Gui Network Qml QmlModels Quick
+# Qt6QuickShapes: Core Gui Network Qml QmlModels Quick
+# Qt6QuickTest: Core Gui Test Widgets
+# Qt6QuickWidgets: Core Gui Network Qml QmlModels Quick Test Widgets
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6Network-devel = %{version}
+Requires:	Qt6Qml-devel = %{version}
+Requires:	Qt6Quick = %{version}
+Requires:	Qt6Widgets-devel = %{version}
+Requires:	qt6-qtdeclarative = %{version}
+
+%description -n Qt6Quick-devel
+Qt6 Qml libraries - development files.
+
+%description -n Qt6Quick-devel -l pl.UTF-8
+Biblioteki Qt6 Qml - pliki programistyczne.
+
+%package -n Qt6Quick-doc
+Summary:	Qt6 Declarative documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do bibliotek Qt6 Declarative w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Quick-doc
+Qt6 Declarative documentation in HTML format.
+
+%description -n Qt6Quick-doc -l pl.UTF-8
+Dokumentacja do bibliotek Qt6 Declarative w formacie HTML.
+
+%package -n Qt6Quick-doc-qch
+Summary:	Qt6 Declarative documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do bibliotek Qt6 Declarative w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Quick-doc-qch
+Qt6 Declarative documentation in QCH format.
+
+%description -n Qt6Quick-doc-qch -l pl.UTF-8
+Dokumentacja do bibliotek Qt6 Declarative w formacie QCH.
+
+%package -n Qt6Quick3D
+Summary:	The Qt6 Quick3D library
+Summary(pl.UTF-8):	Biblioteka Qt6 Quick3D
+Group:		X11/Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Quick = %{version}
+Requires:	assimp >= 5.0.0
+
+%description -n Qt6Quick3D
+Qt6 Quick3D libraries.
+
+%description -n Qt6Quick3D -l pl.UTF-8
+Biblioteki Qt6 Quick3D.
+
+%package -n Qt6Quick3D-devel
+Summary:	Qt6 Quick3D - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Quick3D - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6Quick3D = %{version}
+
+%description -n Qt6Quick3D-devel
+Qt6 Quick3D - development files.
+
+%description -n Qt6Quick3D-devel -l pl.UTF-8
+Biblioteka Qt6 Quick3D - pliki programistyczne.
+
+%package -n Qt6Quick3D-doc
+Summary:	Qt6 Quick3D documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Quick3D w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Quick3D-doc
+Qt6 Quick3D documentation in HTML format.
+
+%description -n Qt6Quick3D-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Quick3D w formacie HTML.
+
+%package -n Qt6Quick3D-doc-qch
+Summary:	Qt6 Quick3D documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Quick3D w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Quick3D-doc-qch
+Qt6 Quick3D documentation in QCH format.
+
+%description -n Qt6Quick3D-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Quick3D w formacie QCH.
+
+%package -n Qt6Quick-Timeline
+Summary:	The Qt6 Quick Timeline module
+Summary(pl.UTF-8):	Moduł Qt6 Quick Timeline
+Group:		X11/Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Quick = %{version}
+
+%description -n Qt6Quick-Timeline
+Qt6 Quick Timeline module.
+
+%description -n Qt6Quick-Timeline -l pl.UTF-8
+Moduł Qt6 Quick Timeline.
+
+%package -n Qt6Quick-Timeline-doc
+Summary:	Qt6 Quick Timeline module documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do modułu Qt6 Quick Timeline w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Quick-Timeline-doc
+Qt6 Quick Timeline module documentation in HTML format.
+
+%description -n Qt6Quick-Timeline-doc -l pl.UTF-8
+Dokumentacja do modułu Qt6 Quick Timeline w formacie HTML.
+
+%package -n Qt6Quick-Timeline-doc-qch
+Summary:	Qt6 Quick Timeline module documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do modułu Qt6 Quick Timeline w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Quick-Timeline-doc-qch
+Qt6 Quick Timeline module documentation in QCH format.
+
+%description -n Qt6Quick-Timeline-doc-qch -l pl.UTF-8
+Dokumentacja do modułu Qt6 Quick Timeline w formacie QCH.
+
+%package -n Qt6RemoteObjects
+Summary:	The Qt6 RemoteObjects library
+Summary(pl.UTF-8):	Biblioteka Qt6 RemoteObjects
+Group:		X11/Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Network = %{version}
+Requires:	Qt6Qml = %{version}
+
+%description -n Qt6RemoteObjects
+Qt6 RemoteObjects library.
+
+%description -n Qt6RemoteObjects -l pl.UTF-8
+Biblioteka Qt6 RemoteObjects.
+
+%package -n Qt6RemoteObjects-devel
+Summary:	Qt6 RemoteObjects - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 RemoteObjects - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Network-devel = %{version}
+Requires:	Qt6RemoteObjects = %{version}
+
+%description -n Qt6RemoteObjects-devel
+Qt6 RemoteObjects - development files.
+
+%description -n Qt6RemoteObjects-devel -l pl.UTF-8
+Biblioteka Qt6 RemoteObjects - pliki programistyczne.
+
+%package -n Qt6RemoteObjects-doc
+Summary:	Qt6 RemoteObjects documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 RemoteObjects w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6RemoteObjects-doc
+Qt6 RemoteObjects documentation in HTML format.
+
+%description -n Qt6RemoteObjects-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 RemoteObjects w formacie HTML.
+
+%package -n Qt6RemoteObjects-doc-qch
+Summary:	Qt6 RemoteObjects documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 RemoteObjects w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6RemoteObjects-doc-qch
+Qt6 RemoteObjects documentation in QCH format.
+
+%description -n Qt6RemoteObjects-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 RemoteObjects w formacie QCH.
+
+%package -n Qt6Scxml
+Summary:	The Qt6 Scxml library
+Summary(pl.UTF-8):	Biblioteka Qt6 Scxml
+Group:		X11/Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Qml = %{version}
+
+%description -n Qt6Scxml
+Qt6 Scxml library.
+
+%description -n Qt6Scxml -l pl.UTF-8
+Biblioteka Qt6 Scxml.
+
+%package -n Qt6Scxml-devel
+Summary:	Qt6 Scxml - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Scxml - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Qml-devel = %{version}
+Requires:	Qt6Scxml = %{version}
+
+%description -n Qt6Scxml-devel
+Qt6 Scxml - development files.
+
+%description -n Qt6Scxml-devel -l pl.UTF-8
+Biblioteka Qt6 Scxml - pliki programistyczne.
+
+%package -n Qt6Scxml-doc
+Summary:	Qt6 Scxml documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Scxml w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Scxml-doc
+Qt6 Scxml documentation in HTML format.
+
+%description -n Qt6Scxml-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Scxml w formacie HTML.
+
+%package -n Qt6Scxml-doc-qch
+Summary:	Qt6 Scxml documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Scxml w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Scxml-doc-qch
+Qt6 Scxml documentation in QCH format.
+
+%description -n Qt6Scxml-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Scxml w formacie QCH.
+
+%package -n Qt6Sensors
+Summary:	The Qt6 Sensors library
+Summary(pl.UTF-8):	Biblioteka Qt6 Sensors
+Group:		Libraries
+Requires:	Qt6Bluetooth = %{version}
+Requires:	Qt6Core = %{version}
+Requires:	Qt6DBus = %{version}
+Requires:	Qt6Qml = %{version}
+
+%description -n Qt6Sensors
+Qt6 Sensors library provides classes for reading sensor data.
+
+%description -n Qt6Sensors -l pl.UTF-8
+Biblioteka Qt6 Sensors dostarcza klasy do odczytu danych z czujników.
+
+%package -n Qt6Sensors-devel
+Summary:	Qt6 Sensors library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Sensors - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Sensors = %{version}
+
+%description -n Qt6Sensors-devel
+Qt6 Sensors library - development files.
+
+%description -n Qt6Sensors-devel -l pl.UTF-8
+Biblioteka Qt6 Sensors - pliki programistyczne.
+
+%package -n Qt6Sensors-doc
+Summary:	Qt6 Sensors documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Sensors w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Sensors-doc
+Qt6 Sensors documentation in HTML format.
+
+%description -n Qt6Sensors-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Sensors w formacie HTML.
+
+%package -n Qt6Sensors-doc-qch
+Summary:	Qt6 Sensors documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Sensors w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Sensors-doc-qch
+Qt6 Sensors documentation in QCH format.
+
+%description -n Qt6Sensors-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Sensors w formacie QCH.
+
+%package -n Qt6SerialBus
+Summary:	The Qt6 SerialBus library
+Summary(pl.UTF-8):	Biblioteka Qt6 SerialBus
+Group:		X11/Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Network = %{version}
+
+%description -n Qt6SerialBus
+Qt6 SerialBus library.
+
+%description -n Qt6SerialBus -l pl.UTF-8
+Biblioteka Qt6 SerialBus.
+
+%package -n Qt6SerialBus-devel
+Summary:	Qt6 SerialBus - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 SerialBus - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6SerialBus = %{version}
+
+%description -n Qt6SerialBus-devel
+Qt6 SerialBus - development files.
+
+%description -n Qt6SerialBus-devel -l pl.UTF-8
+Biblioteka Qt6 SerialBus - pliki programistyczne.
+
+%package -n Qt6SerialBus-doc
+Summary:	Qt6 SerialBus documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 SerialBus w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6SerialBus-doc
+Qt6 SerialBus documentation in HTML format.
+
+%description -n Qt6SerialBus-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 SerialBus w formacie HTML.
+
+%package -n Qt6SerialBus-doc-qch
+Summary:	Qt6 SerialBus documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 SerialBus w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6SerialBus-doc-qch
+Qt6 SerialBus documentation in QCH format.
+
+%description -n Qt6SerialBus-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 SerialBus w formacie QCH.
+
+%package -n Qt6SerialPort
+Summary:	The Qt6 SerialPort library
+Summary(pl.UTF-8):	Biblioteka Qt6 SerialPort
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+
+%description -n Qt6SerialPort
+Qt6 SerialPort library provides classes that enable access to a serial
+port.
+
+%description -n Qt6SerialPort -l pl.UTF-8
+Biblioteka Qt6 SerialPort udostępnia klasy pozwalające na dostęp do
+portu szeregowego.
+
+%package -n Qt6SerialPort-devel
+Summary:	Qt6 SerialPort library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 SerialPort - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6SerialPort = %{version}
+Requires:	udev-devel
+
+%description -n Qt6SerialPort-devel
+Qt6 SerialPort library - development files.
+
+%description -n Qt6SerialPort-devel -l pl.UTF-8
+Biblioteka Qt6 SerialPort - pliki programistyczne.
+
+%package -n Qt6SerialPort-doc
+Summary:	Qt6 SerialPort documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 SerialPort w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6SerialPort-doc
+Qt6 SerialPort documentation in HTML format.
+
+%description -n Qt6SerialPort-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 SerialPort w formacie HTML.
+
+%package -n Qt6SerialPort-doc-qch
+Summary:	Qt6 SerialPort documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 SerialPort w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6SerialPort-doc-qch
+Qt6 SerialPort documentation in QCH format.
+
+%description -n Qt6SerialPort-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 SerialPort w formacie QCH.
+
 %package -n Qt6Sql
 Summary:	Qt6 Sql library
 Summary(pl.UTF-8):	Biblioteka Qt6 Sql
@@ -1463,6 +2363,62 @@ Qt6 Sql driver for Sybase/MS SQL database (using TDS interface).
 %description -n Qt6Sql-sqldriver-tds -l pl.UTF-8
 Sterownik Qt6 Sql dla bazy danych Sybase/MS SQL (wykorzystujący
 interfejs TDS).
+
+%package -n Qt6Svg
+Summary:	The Qt6 Svg library
+Summary(pl.UTF-8):	Biblioteka Qt6 Svg
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Widgets = %{version}
+
+%description -n Qt6Svg
+Qt6 Svg library provides functionality for handling SVG images.
+
+%description -n Qt6Svg -l pl.UTF-8
+Biblioteka Qt6 Svg udostępnia obsługę obrazów SVG.
+
+%package -n Qt6Svg-devel
+Summary:	Qt6 Svg library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Svg - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6Svg = %{version}
+Requires:	Qt6Widgets-devel = %{version}
+Requires:	zlib-devel
+
+%description -n Qt6Svg-devel
+Qt6 Svg library - development files.
+
+%description -n Qt6Svg-devel -l pl.UTF-8
+Biblioteka Qt6 Svg - pliki programistyczne.
+
+%package -n Qt6Svg-doc
+Summary:	Qt6 Svg documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Svg w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Svg-doc
+Qt6 Svg documentation in HTML format.
+
+%description -n Qt6Svg-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Svg w formacie HTML.
+
+%package -n Qt6Svg-doc-qch
+Summary:	Qt6 Svg documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Svg w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Svg-doc-qch
+Qt6 Svg documentation in QCH format.
+
+%description -n Qt6Svg-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Svg w formacie QCH.
 
 %package -n Qt6Test
 Summary:	Qt6 Test library
@@ -2275,31 +3231,51 @@ install -d $RPM_BUILD_ROOT%{qt6dir}/plugins/{iconengines,webview}
 
 # symlinks in system bin dir
 cd $RPM_BUILD_ROOT%{_bindir}
-ln -sf ../%{_lib}/qt6/bin/assistant assistant-qt6
-ln -sf ../%{_lib}/qt6/bin/designer designer-qt6
-ln -sf ../%{_lib}/qt6/bin/lconvert lconvert-qt6
-ln -sf ../%{_lib}/qt6/bin/linguist linguist-qt6
-ln -sf ../%{_lib}/qt6/bin/lrelease lrelease-qt6
-ln -sf ../%{_lib}/qt6/bin/lupdate lupdate-qt6
-ln -sf ../%{_lib}/qt6/bin/pixeltool pixeltool-qt6
-ln -sf ../%{_lib}/qt6/bin/qdbus qdbus-qt6
-ln -sf ../%{_lib}/qt6/bin/qdbuscpp2xml qdbuscpp2xml-qt6
-ln -sf ../%{_lib}/qt6/bin/qdbusxml2cpp qdbusxml2cpp-qt6
-ln -sf ../%{_lib}/qt6/bin/qdbusviewer qdbusviewer-qt6
-ln -sf ../%{_lib}/qt6/bin/qdistancefieldgenerator qdistancefieldgenerator-qt6
-ln -sf ../%{_lib}/qt6/bin/qdoc qdoc-qt6
-ln -sf ../%{_lib}/qt6/bin/qmake qmake-qt6
-ln -sf ../%{_lib}/qt6/bin/qtdiag qtdiag-qt6
-ln -sf ../%{_lib}/qt6/bin/qtpaths qtpaths-qt6
-ln -sf ../%{_lib}/qt6/bin/qtplugininfo qtplugininfo-qt6
-ln -sf ../%{_lib}/qt6/libexec/lprodump lprodump-qt6
-ln -sf ../%{_lib}/qt6/libexec/lrelease-pro lrelease-pro-qt6
-ln -sf ../%{_lib}/qt6/libexec/lupdate-pro lupdate-pro-qt6
-ln -sf ../%{_lib}/qt6/libexec/moc moc-qt6
-ln -sf ../%{_lib}/qt6/libexec/qhelpgenerator qhelpgenerator-qt6
-ln -sf ../%{_lib}/qt6/libexec/qlalr qlalr-qt6
-ln -sf ../%{_lib}/qt6/libexec/rcc rcc-qt6
-ln -sf ../%{_lib}/qt6/libexec/uic uic-qt6
+for prog in \
+assistant \
+designer \
+lconvert \
+linguist \
+lrelease \
+lupdate \
+pixeltool \
+qdbus \
+qdbuscpp2xml \
+qdbusviewer \
+qdbusxml2cpp \
+qdistancefieldgenerator \
+qdoc \
+qmake \
+qml \
+qmleasing \
+qmlformat \
+qmllint \
+qmlplugindump \
+qmlpreview \
+qmlprofiler \
+qmlscene \
+qmltestrunner \
+qmltime \
+qtdiag \
+qtpaths \
+qtplugininfo ; do
+	ln -sf ../%{_lib}/qt6/bin/${prog} ${prog}-qt6
+done
+for prog in \
+lprodump \
+lrelease-pro \
+lupdate-pro \
+moc \
+qhelpgenerator \
+qlalr \
+qmlcachegen \
+qmlimportscanner \
+qmltyperegistrar \
+rcc \
+uic \
+; do
+	ln -sf ../%{_lib}/qt6/libexec/${prog} ${prog}-qt6
+done
 cd -
 
 install -d $RPM_BUILD_ROOT%{_examplesdir}/qt6
@@ -2357,6 +3333,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n Qt6Bluetooth -p /sbin/ldconfig
 %postun	-n Qt6Bluetooth -p /sbin/ldconfig
 
+%post	-n Qt6Bodymovin -p /sbin/ldconfig
+%postun	-n Qt6Bodymovin -p /sbin/ldconfig
+
 %post	-n Qt6Charts -p /sbin/ldconfig
 %postun	-n Qt6Charts -p /sbin/ldconfig
 
@@ -2393,11 +3372,29 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n Qt6Help -p /sbin/ldconfig
 %postun	-n Qt6Help -p /sbin/ldconfig
 
+%post	-n Qt6Mqtt -p /sbin/ldconfig
+%postun	-n Qt6Mqtt -p /sbin/ldconfig
+
+%post	-n Qt6Multimedia -p /sbin/ldconfig
+%postun	-n Qt6Multimedia -p /sbin/ldconfig
+
+%post	-n Qt6MultimediaQuick -p /sbin/ldconfig
+%postun	-n Qt6MultimediaQuick -p /sbin/ldconfig
+
+%post	-n Qt6MultimediaWidgets -p /sbin/ldconfig
+%postun	-n Qt6MultimediaWidgets -p /sbin/ldconfig
+
 %post	-n Qt6Network -p /sbin/ldconfig
 %postun	-n Qt6Network -p /sbin/ldconfig
 
+%post	-n Qt6NetworkAuth -p /sbin/ldconfig
+%postun	-n Qt6NetworkAuth -p /sbin/ldconfig
+
 %post	-n Qt6Nfc -p /sbin/ldconfig
 %postun	-n Qt6Nfc -p /sbin/ldconfig
+
+%post	-n Qt6OpcUa -p /sbin/ldconfig
+%postun	-n Qt6OpcUa -p /sbin/ldconfig
 
 %post	-n Qt6OpenGL -p /sbin/ldconfig
 %postun	-n Qt6OpenGL -p /sbin/ldconfig
@@ -2408,8 +3405,35 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n Qt6PrintSupport -p /sbin/ldconfig
 %postun	-n Qt6PrintSupport -p /sbin/ldconfig
 
+%post	-n Qt6Qml -p /sbin/ldconfig
+%postun	-n Qt6Qml -p /sbin/ldconfig
+
+%post	-n Qt6Quick -p /sbin/ldconfig
+%postun	-n Qt6Quick -p /sbin/ldconfig
+
+%post	-n Qt6Quick3D -p /sbin/ldconfig
+%postun	-n Qt6Quick3D -p /sbin/ldconfig
+
+%post	-n Qt6RemoteObjects -p /sbin/ldconfig
+%postun	-n Qt6RemoteObjects -p /sbin/ldconfig
+
+%post	-n Qt6Scxml -p /sbin/ldconfig
+%postun	-n Qt6Scxml -p /sbin/ldconfig
+
+%post	-n Qt6Sensors -p /sbin/ldconfig
+%postun	-n Qt6Sensors -p /sbin/ldconfig
+
+%post	-n Qt6SerialBus -p /sbin/ldconfig
+%postun	-n Qt6SerialBus -p /sbin/ldconfig
+
+%post	-n Qt6SerialPort -p /sbin/ldconfig
+%postun	-n Qt6SerialPort -p /sbin/ldconfig
+
 %post	-n Qt6Sql -p /sbin/ldconfig
 %postun	-n Qt6Sql -p /sbin/ldconfig
+
+%post	-n Qt6Svg -p /sbin/ldconfig
+%postun	-n Qt6Svg -p /sbin/ldconfig
 
 %post	-n Qt6Test -p /sbin/ldconfig
 %postun	-n Qt6Test -p /sbin/ldconfig
@@ -2515,6 +3539,35 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtlinguist.qch
 %{_docdir}/qt6-doc/qtuitools.qch
 %endif
+
+%files -n qt6-qtdeclarative
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/qmlcachegen-qt6
+%attr(755,root,root) %{_bindir}/qmleasing-qt6
+%attr(755,root,root) %{_bindir}/qmlformat-qt6
+%attr(755,root,root) %{_bindir}/qmlimportscanner-qt6
+%attr(755,root,root) %{_bindir}/qmllint-qt6
+%attr(755,root,root) %{_bindir}/qmlplugindump-qt6
+%attr(755,root,root) %{_bindir}/qmlpreview-qt6
+%attr(755,root,root) %{_bindir}/qmlprofiler-qt6
+%attr(755,root,root) %{_bindir}/qml-qt6
+%attr(755,root,root) %{_bindir}/qmlscene-qt6
+%attr(755,root,root) %{_bindir}/qmltestrunner-qt6
+%attr(755,root,root) %{_bindir}/qmltime-qt6
+%attr(755,root,root) %{_bindir}/qmltyperegistrar-qt6
+%attr(755,root,root) %{qt6dir}/bin/qml
+%attr(755,root,root) %{qt6dir}/bin/qmleasing
+%attr(755,root,root) %{qt6dir}/bin/qmlformat
+%attr(755,root,root) %{qt6dir}/bin/qmllint
+%attr(755,root,root) %{qt6dir}/bin/qmlplugindump
+%attr(755,root,root) %{qt6dir}/bin/qmlpreview
+%attr(755,root,root) %{qt6dir}/bin/qmlprofiler
+%attr(755,root,root) %{qt6dir}/bin/qmlscene
+%attr(755,root,root) %{qt6dir}/bin/qmltestrunner
+%attr(755,root,root) %{qt6dir}/bin/qmltime
+%attr(755,root,root) %{qt6dir}/libexec/qmlcachegen
+%attr(755,root,root) %{qt6dir}/libexec/qmlimportscanner
+%attr(755,root,root) %{qt6dir}/libexec/qmltyperegistrar
 
 %files -n Qt63D
 %defattr(644,root,root,755)
@@ -2743,6 +3796,35 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_docdir}/qt6-doc/qtbluetooth.qch
 %{_docdir}/qt6-doc/qtnfc.qch
+%endif
+
+%files -n Qt6Bodymovin
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Gui
+%attr(755,root,root) %{_libdir}/libQt6Bodymovin.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Bodymovin.so.6
+%dir %{qt6dir}/qml/Qt/labs/lottieqt
+# R: Qt6Bodymovin Qt6Core Qt6Gui Qt6Qml Qt6Quick
+%attr(755,root,root) %{qt6dir}/qml/Qt/labs/lottieqt/liblottieqtplugin.so
+%{qt6dir}/qml/Qt/labs/lottieqt/plugins.qmltypes
+%{qt6dir}/qml/Qt/labs/lottieqt/qmldir
+
+%files -n Qt6Bodymovin-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Bodymovin.so
+%{_libdir}/libQt6Bodymovin.prl
+%{_includedir}/qt6/QtBodymovin
+%{_libdir}/cmake/Qt6BodymovinPrivate
+%{qt6dir}/mkspecs/modules/qt_lib_bodymovin_private.pri
+
+%if %{with doc}
+%files -n Qt6Bodymovin-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtlottieanimation
+
+%files -n Qt6Bodymovin-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtlottieanimation.qch
 %endif
 
 %files -n Qt6Charts
@@ -3168,6 +4250,96 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6KmsSupportPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_kms_support_private.pri
 
+%files -n Qt6Mqtt
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Network
+%attr(755,root,root) %{_libdir}/libQt6Mqtt.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Mqtt.so.6
+
+%files -n Qt6Mqtt-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Mqtt.so
+%{_libdir}/libQt6Mqtt.prl
+%{_includedir}/qt6/QtMqtt
+%{_pkgconfigdir}/Qt6Mqtt.pc
+%{_libdir}/cmake/Qt6Mqtt
+%{qt6dir}/mkspecs/modules/qt_lib_mqtt.pri
+%{qt6dir}/mkspecs/modules/qt_lib_mqtt_private.pri
+
+%if %{with doc}
+%files -n Qt6Mqtt-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtmqtt
+
+%files -n Qt6Mqtt-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtmqtt.qch
+%endif
+
+%files -n Qt6Multimedia -f qtmultimedia.lang
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Gui Qt6Network pulseaudio-libs
+%attr(755,root,root) %{_libdir}/libQt6Multimedia.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Multimedia.so.6
+# common for base -devel and plugin-specific files
+%dir %{_libdir}/cmake/Qt6Multimedia
+
+%files -n Qt6Multimedia-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Multimedia.so
+%{_libdir}/libQt6Multimedia.prl
+%{_includedir}/qt6/QtMultimedia
+%{_pkgconfigdir}/Qt6Multimedia.pc
+%{_libdir}/cmake/Qt6Multimedia
+%{qt6dir}/mkspecs/modules/qt_lib_multimedia.pri
+%{qt6dir}/mkspecs/modules/qt_lib_multimedia_private.pri
+
+%if %{with doc}
+%files -n Qt6Multimedia-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtmultimedia
+
+%files -n Qt6Multimedia-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtmultimedia.qch
+%endif
+
+%files -n Qt6MultimediaQuick
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Gui Qt6Multimedia Qt6Quick
+%attr(755,root,root) %{_libdir}/libQt6MultimediaQuick.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6MultimediaQuick.so.6
+%dir %{qt6dir}/qml/QtMultimedia
+# R: Qt6Core Qt6Gui Qt6Multimedia Qt6MultimediaQuick Qt6Network Qt6Qml Qt6Quick
+%attr(755,root,root) %{qt6dir}/qml/QtMultimedia/libquickmultimediaplugin.so
+%{qt6dir}/qml/QtMultimedia/Video.qml
+%{qt6dir}/qml/QtMultimedia/plugins.qmltypes
+%{qt6dir}/qml/QtMultimedia/qmldir
+
+%files -n Qt6MultimediaQuick-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6MultimediaQuick.so
+%{_libdir}/libQt6MultimediaQuick.prl
+%{_libdir}/cmake/Qt6MultimediaQuickPrivate
+%{_includedir}/qt6/QtMultimediaQuick
+%{qt6dir}/mkspecs/modules/qt_lib_multimediaquick_private.pri
+
+%files -n Qt6MultimediaWidgets
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Gui Qt6Multimedia Qt6Widgets OpenGL
+%attr(755,root,root) %{_libdir}/libQt6MultimediaWidgets.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6MultimediaWidgets.so.6
+
+%files -n Qt6MultimediaWidgets-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6MultimediaWidgets.so
+%{_libdir}/libQt6MultimediaWidgets.prl
+%{_includedir}/qt6/QtMultimediaWidgets
+%{_pkgconfigdir}/Qt6MultimediaWidgets.pc
+%{_libdir}/cmake/Qt6MultimediaWidgets
+%{qt6dir}/mkspecs/modules/qt_lib_multimediawidgets.pri
+%{qt6dir}/mkspecs/modules/qt_lib_multimediawidgets_private.pri
+
 %files -n Qt6Network
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Network.so.*.*.*
@@ -3186,6 +4358,31 @@ rm -rf $RPM_BUILD_ROOT
 #%{_libdir}/cmake/Qt6Network/Qt6NetworkQNetworkManagerEnginePlugin*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_network.pri
 %{qt6dir}/mkspecs/modules/qt_lib_network_private.pri
+
+%files -n Qt6NetworkAuth
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6NetworkAuth.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6NetworkAuth.so.6
+
+%files -n Qt6NetworkAuth-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6NetworkAuth.so
+%{_libdir}/libQt6NetworkAuth.prl
+%{_includedir}/qt6/QtNetworkAuth
+%{_libdir}/cmake/Qt6NetworkAuth
+%{_pkgconfigdir}/Qt6NetworkAuth.pc
+%{_libdir}/qt6/mkspecs/modules/qt_lib_networkauth.pri
+%{_libdir}/qt6/mkspecs/modules/qt_lib_networkauth_private.pri
+
+%if %{with doc}
+%files -n Qt6NetworkAuth-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtnetworkauth
+
+%files -n Qt6NetworkAuth-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtnetworkauth.qch
+%endif
 
 %files -n Qt6Nfc
 %defattr(644,root,root,755)
@@ -3212,6 +4409,40 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_docdir}/qt6-doc/qtbluetooth.qch
 %{_docdir}/qt6-doc/qtnfc.qch
+%endif
+
+%files -n Qt6OpcUa
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Network openssl
+%attr(755,root,root) %{_libdir}/libQt6OpcUa.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6OpcUa.so.6
+%dir %{qt6dir}/plugins/opcua
+# R: Qt6Core Qt6OpcUa open62541
+%attr(755,root,root) %{qt6dir}/plugins/opcua/libopen62541_backend.so
+# R: Qt6Core Qt6Gui Qt6OpcUa Qt6Qml
+%dir %{qt6dir}/qml/QtOpcUa
+%attr(755,root,root) %{qt6dir}/qml/QtOpcUa/libdeclarativeopcuaplugin.so
+%{qt6dir}/qml/QtOpcUa/plugins.qmltypes
+%{qt6dir}/qml/QtOpcUa/qmldir
+
+%files -n Qt6OpcUa-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6OpcUa.so
+%{_libdir}/libQt6OpcUa.prl
+%{_includedir}/qt6/QtOpcUa
+%{_pkgconfigdir}/Qt6OpcUa.pc
+%{_libdir}/cmake/Qt6OpcUa
+%{qt6dir}/mkspecs/modules/qt_lib_opcua.pri
+%{qt6dir}/mkspecs/modules/qt_lib_opcua_private.pri
+
+%if %{with doc}
+%files -n Qt6OpcUa-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtopcua
+
+%files -n Qt6OpcUa-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtopcua.qch
 %endif
 
 %files -n Qt6OpenGL
@@ -3300,6 +4531,542 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_printsupport.pri
 %{qt6dir}/mkspecs/modules/qt_lib_printsupport_private.pri
 
+%files -n Qt6Qml -f qtdeclarative.lang
+%defattr(644,root,root,755)
+%doc LICENSE.GPL3-EXCEPT
+%attr(755,root,root) %{_libdir}/libQt6Qml.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Qml.so.6
+%attr(755,root,root) %{_libdir}/libQt6QmlModels.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QmlModels.so.6
+%attr(755,root,root) %{_libdir}/libQt6QmlWorkerScript.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QmlWorkerScript.so.6
+
+# loaded from src/qml/debugger/{qqmldebugserver,qqmlinspectorservice}.cpp
+%dir %{qt6dir}/plugins/qmltooling
+# R: Core Network Qml
+%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_debugger.so
+# R: Core Network Qml
+%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_local.so
+# R: Core Qml
+%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_messages.so
+# R: Core Qml
+%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_native.so
+# R: Core Qml
+%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_nativedebugger.so
+# R: Core Qml
+%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_profiler.so
+# R: Core Qml
+%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_server.so
+# R: Core Network Qml
+%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_tcp.so
+
+%dir %{qt6dir}/qml
+%dir %{qt6dir}/qml/Qt
+%dir %{qt6dir}/qml/Qt/labs
+%dir %{qt6dir}/qml/Qt/labs/animation
+# R: Core Qml
+%attr(755,root,root) %{qt6dir}/qml/Qt/labs/animation/liblabsanimationplugin.so
+%{qt6dir}/qml/Qt/labs/animation/plugins.qmltypes
+%{qt6dir}/qml/Qt/labs/animation/qmldir
+
+%dir %{qt6dir}/qml/Qt/labs/folderlistmodel
+# R: Core Qml
+%attr(755,root,root) %{qt6dir}/qml/Qt/labs/folderlistmodel/libqmlfolderlistmodelplugin.so
+%{qt6dir}/qml/Qt/labs/folderlistmodel/plugins.qmltypes
+%{qt6dir}/qml/Qt/labs/folderlistmodel/qmldir
+
+%dir %{qt6dir}/qml/Qt/labs/qmlmodels
+%{qt6dir}/qml/Qt/labs/qmlmodels/plugins.qmltypes
+%{qt6dir}/qml/Qt/labs/qmlmodels/qmldir
+# R: Core Qml QmlModels
+%attr(755,root,root) %{qt6dir}/qml/Qt/labs/qmlmodels/liblabsmodelsplugin.so
+
+%dir %{qt6dir}/qml/Qt/labs/settings
+# R: Core Qml
+%attr(755,root,root) %{qt6dir}/qml/Qt/labs/settings/libqmlsettingsplugin.so
+%{qt6dir}/qml/Qt/labs/settings/plugins.qmltypes
+%{qt6dir}/qml/Qt/labs/settings/qmldir
+
+%dir %{qt6dir}/qml/QtQml
+# R: Core Qml QmlModels
+%attr(755,root,root) %{qt6dir}/qml/QtQml/libqmlplugin.so
+%dir %{qt6dir}/qml/QtQml/Models
+# R: Core Qml QmlModels
+%attr(755,root,root) %{qt6dir}/qml/QtQml/Models/libmodelsplugin.so
+%{qt6dir}/qml/QtQml/Models/plugins.qmltypes
+%{qt6dir}/qml/QtQml/Models/qmldir
+
+%dir %{qt6dir}/qml/QtQml/StateMachine
+# R: Core Qml
+%attr(755,root,root) %{qt6dir}/qml/QtQml/StateMachine/libqtqmlstatemachineplugin.so
+%{qt6dir}/qml/QtQml/StateMachine/plugins.qmltypes
+%{qt6dir}/qml/QtQml/StateMachine/qmldir
+
+%dir %{qt6dir}/qml/QtQml/WorkerScript
+# R: Core Qml QmlWorkerScript
+%attr(755,root,root) %{qt6dir}/qml/QtQml/WorkerScript/libworkerscriptplugin.so
+%{qt6dir}/qml/QtQml/WorkerScript/plugins.qmltypes
+%{qt6dir}/qml/QtQml/WorkerScript/qmldir
+
+%{qt6dir}/qml/QtQml/plugins.qmltypes
+%{qt6dir}/qml/QtQml/qmldir
+%{qt6dir}/qml/builtins.qmltypes
+
+%files -n Qt6Qml-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Qml.so
+%attr(755,root,root) %{_libdir}/libQt6QmlModels.so
+%attr(755,root,root) %{_libdir}/libQt6QmlWorkerScript.so
+# static-only
+%{_libdir}/libQt6PacketProtocol.a
+%{_libdir}/libQt6QmlDebug.a
+%{_libdir}/libQt6PacketProtocol.prl
+%{_libdir}/libQt6Qml.prl
+%{_libdir}/libQt6QmlDebug.prl
+%{_libdir}/libQt6QmlModels.prl
+%{_libdir}/libQt6QmlWorkerScript.prl
+%{_libdir}/metatypes/qt6qml_pld_metatypes.json
+%{_libdir}/metatypes/qt6qmlmodels_pld_metatypes.json
+%{_libdir}/metatypes/qt6qmlworkerscript_pld_metatypes.json
+%{_includedir}/qt6/QtQml
+%{_includedir}/qt6/QtQmlDebug
+%{_includedir}/qt6/QtQmlModels
+%{_includedir}/qt6/QtQmlWorkerScript
+%{_includedir}/qt6/QtPacketProtocol
+%{_pkgconfigdir}/Qt6Qml.pc
+%{_pkgconfigdir}/Qt6QmlModels.pc
+%{_pkgconfigdir}/Qt6QmlWorkerScript.pc
+%{_libdir}/cmake/Qt6Qml
+%{_libdir}/cmake/Qt6QmlImportScanner
+%{_libdir}/cmake/Qt6QmlModels
+%{_libdir}/cmake/Qt6QmlWorkerScript
+%{qt6dir}/mkspecs/features/qmlcache.prf
+%{qt6dir}/mkspecs/features/qmltypes.prf
+%{qt6dir}/mkspecs/modules/qt_lib_packetprotocol_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qml.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qml_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmldebug_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmlmodels.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmlmodels_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmltest.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmltest_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmlworkerscript.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmlworkerscript_private.pri
+
+%if %{with doc}
+%files -n Qt6Qml-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtqml
+%{_docdir}/qt6-doc/qtqmlmodels
+%{_docdir}/qt6-doc/qtqmltest
+%{_docdir}/qt6-doc/qtqmlworkerscript
+
+%files -n Qt6Qml-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtqml.qch
+%{_docdir}/qt6-doc/qtqmlmodels.qch
+%{_docdir}/qt6-doc/qtqmltest.qch
+%{_docdir}/qt6-doc/qtqmlworkerscript.qch
+%endif
+
+%files -n Qt6Quick
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Quick.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickParticles.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickParticles.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickShapes.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickShapes.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickTest.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickTest.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickWidgets.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickWidgets.so.6
+
+# R: Core Gui Qml Quick
+%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_inspector.so
+# R: Core Gui Qml Quick
+%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_preview.so
+# R: Core Qml Quick
+%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_quickprofiler.so
+
+%if %{with openvg}
+%dir %{qt6dir}/plugins/scenegraph
+# R: Core Gui Quick EGL OpenVG
+%attr(755,root,root) %{qt6dir}/plugins/scenegraph/libqsgopenvgbackend.so
+%endif
+
+%dir %{qt6dir}/qml/Qt/labs/sharedimage
+# R: Core Gui Qml Quick
+%attr(755,root,root) %{qt6dir}/qml/Qt/labs/sharedimage/libsharedimageplugin.so
+%{qt6dir}/qml/Qt/labs/sharedimage/plugins.qmltypes
+%{qt6dir}/qml/Qt/labs/sharedimage/qmldir
+
+%dir %{qt6dir}/qml/Qt/labs/wavefrontmesh
+# R: Core Gui Qml Quick
+%attr(755,root,root) %{qt6dir}/qml/Qt/labs/wavefrontmesh/libqmlwavefrontmeshplugin.so
+%{qt6dir}/qml/Qt/labs/wavefrontmesh/plugins.qmltypes
+%{qt6dir}/qml/Qt/labs/wavefrontmesh/qmldir
+
+%dir %{qt6dir}/qml/QtQuick
+
+%dir %{qt6dir}/qml/QtQuick/Layouts
+# R: Core Gui Qml Quick
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Layouts/libqquicklayoutsplugin.so
+%{qt6dir}/qml/QtQuick/Layouts/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Layouts/qmldir
+
+%dir %{qt6dir}/qml/QtQuick/LocalStorage
+# R: Core Qml Sql
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/LocalStorage/libqmllocalstorageplugin.so
+%{qt6dir}/qml/QtQuick/LocalStorage/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/LocalStorage/qmldir
+
+%dir %{qt6dir}/qml/QtQuick/Particles
+# R: Core Qml QuickParticles
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Particles/libparticlesplugin.so
+%{qt6dir}/qml/QtQuick/Particles/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Particles/qmldir
+
+%dir %{qt6dir}/qml/QtQuick/Shapes
+# R: Core Qml QuickShapes
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Shapes/libqmlshapesplugin.so
+%{qt6dir}/qml/QtQuick/Shapes/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Shapes/qmldir
+
+%dir %{qt6dir}/qml/QtQuick/Window
+# R: Core Gui Qml Quick
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Window/libquickwindowplugin.so
+%{qt6dir}/qml/QtQuick/Window/quickwindow.qmltypes
+%{qt6dir}/qml/QtQuick/Window/qmldir
+
+# R: Core Qml QmlModels QmlWorkerScript Quick
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/libqtquick2plugin.so
+%{qt6dir}/qml/QtQuick/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/qmldir
+
+%dir %{qt6dir}/qml/QtTest
+# R: Core Gui Qml Quick QuickTest Widgets Test
+%attr(755,root,root) %{qt6dir}/qml/QtTest/libquicktestplugin.so
+%{qt6dir}/qml/QtTest/plugins.qmltypes
+%{qt6dir}/qml/QtTest/qmldir
+%{qt6dir}/qml/QtTest/testlogger.js
+%{qt6dir}/qml/QtTest/*.qml
+
+%files -n Qt6Quick-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Quick.so
+%attr(755,root,root) %{_libdir}/libQt6QuickParticles.so
+%attr(755,root,root) %{_libdir}/libQt6QuickShapes.so
+%attr(755,root,root) %{_libdir}/libQt6QuickTest.so
+%attr(755,root,root) %{_libdir}/libQt6QuickWidgets.so
+%{_libdir}/libQt6Quick.prl
+%{_libdir}/libQt6QuickParticles.prl
+%{_libdir}/libQt6QuickShapes.prl
+%{_libdir}/libQt6QuickTest.prl
+%{_libdir}/libQt6QuickWidgets.prl
+%{_libdir}/metatypes/qt6quick_pld_metatypes.json
+%{_libdir}/metatypes/qt6quicktest_pld_metatypes.json
+%{_includedir}/qt6/QtQuick
+%{_includedir}/qt6/QtQuickParticles
+%{_includedir}/qt6/QtQuickShapes
+%{_includedir}/qt6/QtQuickTest
+%{_includedir}/qt6/QtQuickWidgets
+%{_pkgconfigdir}/Qt6Quick.pc
+%{_pkgconfigdir}/Qt6QuickTest.pc
+%{_pkgconfigdir}/Qt6QuickWidgets.pc
+%{_libdir}/cmake/Qt6Quick
+%{_libdir}/cmake/Qt6QuickTest
+%{_libdir}/cmake/Qt6QuickWidgets
+%{qt6dir}/mkspecs/features/qtquickcompiler.prf
+%{qt6dir}/mkspecs/modules/qt_lib_quick.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickparticles_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickshapes_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickwidgets.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickwidgets_private.pri
+
+%if %{with doc}
+%files -n Qt6Quick-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtquick
+
+%files -n Qt6Quick-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtquick.qch
+%endif
+
+%files -n Qt6Quick-Timeline
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Qml Qt6Quick
+%dir %{qt6dir}/qml/QtQuick/Timeline
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Timeline/libqtquicktimelineplugin.so
+%{qt6dir}/qml/QtQuick/Timeline/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Timeline/qmldir
+
+%if %{with doc}
+%files -n Qt6Quick-Timeline-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtquicktimeline
+
+%files -n Qt6Quick-Timeline-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtquicktimeline.qch
+%endif
+
+%files -n Qt6Quick3D
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Gui Qt6Qml Qt6QmlModels Qt6Quick Qt6Quick3DRuntimeRender Qt6Quick3DUtils
+%attr(755,root,root) %{_libdir}/libQt6Quick3D.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3D.so.6
+# R: Qt6Core Qt6Gui Qt6Quick3DUtils
+%attr(755,root,root) %{_libdir}/libQt6Quick3DAssetImport.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DAssetImport.so.6
+# R: Qt6Core Qt6Gui Qt6Quick3DUtils Qt6Quick3DAssetImport
+%attr(755,root,root) %{_libdir}/libQt6Quick3DRuntimeRender.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DRuntimeRender.so.6
+# R: Qt6Core Qt6Gui
+%attr(755,root,root) %{_libdir}/libQt6Quick3DUtils.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DUtils.so.6
+# R: Qt6Core Qt6Quick3DAssetImport
+%attr(755,root,root) %{qt6dir}/bin/balsam
+# R: Qt6Core Qt6Gui Qt6Quick3DAssetImport
+%attr(755,root,root) %{qt6dir}/bin/meshdebug
+%dir %{qt6dir}/plugins/assetimporters
+# Qt6Core Qt6Gui Qt6Quick3DAssetImport assimp
+%attr(755,root,root) %{qt6dir}/plugins/assetimporters/libassimp.so
+# Qt6Core Qt6Gui Qt6Quick3DAssetImport
+%attr(755,root,root) %{qt6dir}/plugins/assetimporters/libuip.so
+%dir %{qt6dir}/qml/QtQuick3D
+# R: Qt6Core Qt6Qml Qt6Quick Qt6Quick3D
+%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/libqquick3dplugin.so
+%{qt6dir}/qml/QtQuick3D/plugins.qmltypes
+%{qt6dir}/qml/QtQuick3D/qmldir
+%{qt6dir}/qml/QtQuick3D/designer
+%dir %{qt6dir}/qml/QtQuick3D/Effects
+# R: Qt6Core Qt6Qml Qt6Quick3D
+%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/Effects/libqtquick3deffectplugin.so
+%{qt6dir}/qml/QtQuick3D/Effects/qmldir
+%{qt6dir}/qml/QtQuick3D/Effects/*.qml
+%{qt6dir}/qml/QtQuick3D/Effects/designer
+%dir %{qt6dir}/qml/QtQuick3D/Helpers
+# R: Qt6Core Qt6Gui Qt6Qml Qt6Quick3D
+%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/Helpers/libqtquick3dhelpersplugin.so
+%{qt6dir}/qml/QtQuick3D/Helpers/plugins.qmltypes
+%{qt6dir}/qml/QtQuick3D/Helpers/qmldir
+%{qt6dir}/qml/QtQuick3D/Helpers/*.qml
+%{qt6dir}/qml/QtQuick3D/Helpers/meshes
+
+%files -n Qt6Quick3D-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Quick3D.so
+%attr(755,root,root) %{_libdir}/libQt6Quick3DAssetImport.so
+%attr(755,root,root) %{_libdir}/libQt6Quick3DRuntimeRender.so
+%attr(755,root,root) %{_libdir}/libQt6Quick3DUtils.so
+%{_libdir}/libQt6Quick3D.prl
+%{_libdir}/libQt6Quick3DAssetImport.prl
+%{_libdir}/libQt6Quick3DRuntimeRender.prl
+%{_libdir}/libQt6Quick3DUtils.prl
+%{_includedir}/qt6/QtQuick3D
+%{_includedir}/qt6/QtQuick3DAssetImport
+%{_includedir}/qt6/QtQuick3DRuntimeRender
+%{_includedir}/qt6/QtQuick3DUtils
+%{_pkgconfigdir}/Qt6Quick3D.pc
+%{_pkgconfigdir}/Qt6Quick3DAssetImport.pc
+%{_pkgconfigdir}/Qt6Quick3DRuntimeRender.pc
+%{_pkgconfigdir}/Qt6Quick3DUtils.pc
+%{_libdir}/cmake/Qt6Quick3D
+%{_libdir}/cmake/Qt6Quick3DAssetImport
+%{_libdir}/cmake/Qt6Quick3DRuntimeRender
+%{_libdir}/cmake/Qt6Quick3DUtils
+%{qt6dir}/mkspecs/modules/qt_lib_quick3d.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3d_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dassetimport.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dassetimport_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3druntimerender.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3druntimerender_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dutils.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dutils_private.pri
+
+%if %{with doc}
+%files -n Qt6Quick3D-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtquick3d
+
+%files -n Qt6Quick3D-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtquick3d.qch
+%endif
+
+%files -n Qt6RemoteObjects
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Network
+%attr(755,root,root) %{_libdir}/libQt6RemoteObjects.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6RemoteObjects.so.6
+# R: Qt6Core
+%attr(755,root,root) %{qt6dir}/libexec/repc
+%dir %{qt6dir}/qml/QtRemoteObjects
+# R: Qt6Core Qt6Qml Qt6RemoteObjects
+%attr(755,root,root) %{qt6dir}/qml/QtRemoteObjects/libdeclarative_remoteobjectsplugin.so
+%{qt6dir}/qml/QtRemoteObjects/plugins.qmltypes
+%{qt6dir}/qml/QtRemoteObjects/qmldir
+
+%files -n Qt6RemoteObjects-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6RemoteObjects.so
+%{_libdir}/libQt6RemoteObjects.prl
+%{_includedir}/qt6/QtRemoteObjects
+%{_includedir}/qt6/QtRepParser
+%{_pkgconfigdir}/Qt6RemoteObjects.pc
+%{_pkgconfigdir}/Qt6RepParser.pc
+%{_libdir}/cmake/Qt6RemoteObjects
+%{_libdir}/cmake/Qt6RepParser
+%{qt6dir}/mkspecs/features/remoteobjects_repc.prf
+%{qt6dir}/mkspecs/features/repc*.pri
+%{qt6dir}/mkspecs/features/repparser.prf
+%{qt6dir}/mkspecs/modules/qt_lib_remoteobjects.pri
+%{qt6dir}/mkspecs/modules/qt_lib_remoteobjects_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_repparser.pri
+%{qt6dir}/mkspecs/modules/qt_lib_repparser_private.pri
+
+%if %{with doc}
+%files -n Qt6RemoteObjects-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtremoteobjects
+
+%files -n Qt6RemoteObjects-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtremoteobjects.qch
+%endif
+
+%files -n Qt6Scxml
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Qml
+%attr(755,root,root) %{_libdir}/libQt6Scxml.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Scxml.so.6
+# R: Qt6Core
+%attr(755,root,root) %{qt6dir}/libexec/qscxmlc
+%dir %{qt6dir}/qml/QtScxml
+# R: Qt6Core Qt6Qml Qt6Scxml
+%attr(755,root,root) %{qt6dir}/qml/QtScxml/libdeclarative_scxmlplugin.so
+%{qt6dir}/qml/QtScxml/plugins.qmltypes
+%{qt6dir}/qml/QtScxml/qmldir
+
+%files -n Qt6Scxml-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Scxml.so
+%{_libdir}/libQt6Scxml.prl
+%{_includedir}/qt6/QtScxml
+%{_pkgconfigdir}/Qt6Scxml.pc
+%{_libdir}/cmake/Qt6Scxml
+%{qt6dir}/mkspecs/features/qscxmlc.prf
+%{qt6dir}/mkspecs/modules/qt_lib_scxml.pri
+%{qt6dir}/mkspecs/modules/qt_lib_scxml_private.pri
+
+%if %{with doc}
+%files -n Qt6Scxml-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtscxml
+
+%files -n Qt6Scxml-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtscxml.qch
+%endif
+
+%files -n Qt6Sensors
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Sensors.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Sensors.so.6
+%dir %{qt6dir}/plugins/sensors
+%attr(755,root,root) %{qt6dir}/plugins/sensors/libqtsensors_dummy.so
+# R: Core Sensors
+%attr(755,root,root) %{qt6dir}/plugins/sensors/libqtsensors_generic.so
+# R: Core DBus Sensors
+%attr(755,root,root) %{qt6dir}/plugins/sensors/libqtsensors_iio-sensor-proxy.so
+%dir %{qt6dir}/qml/QtSensors
+# R: Core Qml Sensors [Quick for scriping]
+%attr(755,root,root) %{qt6dir}/qml/QtSensors/libsensorsquickplugin.so
+%{qt6dir}/qml/QtSensors/plugins.qmltypes
+%{qt6dir}/qml/QtSensors/qmldir
+
+%files -n Qt6Sensors-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Sensors.so
+%{_libdir}/libQt6Sensors.prl
+%{_includedir}/qt6/QtSensors
+%{_pkgconfigdir}/Qt6Sensors.pc
+%{_libdir}/cmake/Qt6Sensors
+%{qt6dir}/mkspecs/modules/qt_lib_sensors.pri
+%{qt6dir}/mkspecs/modules/qt_lib_sensors_private.pri
+
+%if %{with doc}
+%files -n Qt6Sensors-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtsensors
+
+%files -n Qt6Sensors-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtsensors.qch
+%endif
+
+%files -n Qt6SerialBus
+%defattr(644,root,root,755)
+# R: Qt6Core Qt6Network Qt6SerialPort
+%attr(755,root,root) %{_libdir}/libQt6SerialBus.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6SerialBus.so.6
+# R: Qt6Core Qt6SerialBus
+%attr(755,root,root) %{qt6dir}/bin/canbusutil
+%dir %{qt6dir}/plugins/canbus
+%attr(755,root,root) %{qt6dir}/plugins/canbus/libqtpassthrucanbus.so
+%attr(755,root,root) %{qt6dir}/plugins/canbus/libqtpeakcanbus.so
+%attr(755,root,root) %{qt6dir}/plugins/canbus/libqtsocketcanbus.so
+%attr(755,root,root) %{qt6dir}/plugins/canbus/libqttinycanbus.so
+%attr(755,root,root) %{qt6dir}/plugins/canbus/libqtvirtualcanbus.so
+
+%files -n Qt6SerialBus-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6SerialBus.so
+%{_libdir}/libQt6SerialBus.prl
+%{_includedir}/qt6/QtSerialBus
+%{_pkgconfigdir}/Qt6SerialBus.pc
+%{_libdir}/cmake/Qt6SerialBus
+%{qt6dir}/mkspecs/modules/qt_lib_serialbus.pri
+%{qt6dir}/mkspecs/modules/qt_lib_serialbus_private.pri
+
+%if %{with doc}
+%files -n Qt6SerialBus-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtserialbus
+
+%files -n Qt6SerialBus-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtserialbus.qch
+%endif
+
+%files -n Qt6SerialPort
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6SerialPort.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6SerialPort.so.6
+
+%files -n Qt6SerialPort-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6SerialPort.so
+%{_libdir}/libQt6SerialPort.prl
+%{_includedir}/qt6/QtSerialPort
+%{_pkgconfigdir}/Qt6SerialPort.pc
+%{_libdir}/cmake/Qt6SerialPort
+%{qt6dir}/mkspecs/modules/qt_lib_serialport.pri
+%{qt6dir}/mkspecs/modules/qt_lib_serialport_private.pri
+
+%if %{with doc}
+%files -n Qt6SerialPort-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtserialport
+
+%files -n Qt6SerialPort-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtserialport.qch
+%endif
+
 %files -n Qt6Sql
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Sql.so.*.*.*
@@ -3382,6 +5149,36 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Sql/Qt6SqlConfig*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_sql.pri
 %{qt6dir}/mkspecs/modules/qt_lib_sql_private.pri
+
+%files -n Qt6Svg
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Svg.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Svg.so.6
+# R: Core Gui Svg
+%attr(755,root,root) %{qt6dir}/plugins/iconengines/libqsvgicon.so
+# R: Core Gui Svg
+%attr(755,root,root) %{qt6dir}/plugins/imageformats/libqsvg.so
+
+%files -n Qt6Svg-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Svg.so
+%{_libdir}/libQt6Svg.prl
+%{_includedir}/qt6/QtSvg
+%{_pkgconfigdir}/Qt6Svg.pc
+%dir %{_libdir}/cmake/Qt6Svg
+%{_libdir}/cmake/Qt6Svg/Qt6Svg*.cmake
+%{qt6dir}/mkspecs/modules/qt_lib_svg.pri
+%{qt6dir}/mkspecs/modules/qt_lib_svg_private.pri
+
+%if %{with doc}
+%files -n Qt6Svg-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtsvg
+
+%files -n Qt6Svg-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtsvg.qch
+%endif
 
 %files -n Qt6Test
 %defattr(644,root,root,755)

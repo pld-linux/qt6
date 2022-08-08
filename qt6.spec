@@ -3301,7 +3301,6 @@ echo '%defattr(644,root,root,755)' > linguist.lang
 echo '%defattr(644,root,root,755)' > qt_help.lang
 echo '%defattr(644,root,root,755)' > qtconnectivity.lang
 echo '%defattr(644,root,root,755)' > qtdeclarative.lang
-echo '%defattr(644,root,root,755)' > qtlocation.lang
 echo '%defattr(644,root,root,755)' > qtmultimedia.lang
 echo '%defattr(644,root,root,755)' > qtserialport.lang
 echo '%defattr(644,root,root,755)' > qtwebengine.lang
@@ -3309,13 +3308,13 @@ echo '%defattr(644,root,root,755)' > qtwebsockets.lang
 %if %{with doc}
 find_qt6_qm qt >> qtbase.lang
 find_qt6_qm qtbase >> qtbase.lang
+find_qt6_qm qtlocation >> qtbase.lang
 find_qt6_qm assistant >> assistant.lang
 find_qt6_qm designer >> designer.lang
 find_qt6_qm linguist >> linguist.lang
 find_qt6_qm qt_help >> qt_help.lang
 find_qt6_qm qtconnectivity >> qtconnectivity.lang
 find_qt6_qm qtdeclarative >> qtdeclarative.lang
-find_qt6_qm qtlocation >> qtlocation.lang
 find_qt6_qm qtmultimedia >> qtmultimedia.lang
 find_qt6_qm qtserialport >> qtserialport.lang
 find_qt6_qm qtwebengine >> qtwebengine.lang
@@ -3776,7 +3775,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libQt6Bluetooth.so.6
 %attr(755,root,root) %{qt6dir}/libexec/sdpscanner
 
-%files -n Qt6Bluetooth-devel
+%files -n Qt6Bluetooth-devel -f qtconnectivity.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Bluetooth.so
 %{_libdir}/libQt6Bluetooth.prl
@@ -4656,17 +4655,25 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with doc}
 %files -n Qt6Qml-doc
 %defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtplatformintegration
+%{_docdir}/qt6-doc/qtpositioning
 %{_docdir}/qt6-doc/qtqml
+%{_docdir}/qt6-doc/qtqmlcore
 %{_docdir}/qt6-doc/qtqmlmodels
 %{_docdir}/qt6-doc/qtqmltest
 %{_docdir}/qt6-doc/qtqmlworkerscript
+%{_docdir}/qt6-doc/qtqmlxmllistmodel
 
 %files -n Qt6Qml-doc-qch
 %defattr(644,root,root,755)
-%{_docdir}/qt6-doc/qtqml.qch
+%{_docdir}/qt6-doc/qtplatformintegration.qch
+%{_docdir}/qt6-doc/qtpositioning.qch
+%{_docdir}/qt6-doc/qtqmlcore.qch
 %{_docdir}/qt6-doc/qtqmlmodels.qch
+%{_docdir}/qt6-doc/qtqml.qch
 %{_docdir}/qt6-doc/qtqmltest.qch
 %{_docdir}/qt6-doc/qtqmlworkerscript.qch
+%{_docdir}/qt6-doc/qtqmlxmllistmodel.qch
 %endif
 
 %files -n Qt6Quick
@@ -4789,10 +4796,14 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6Quick-doc
 %defattr(644,root,root,755)
 %{_docdir}/qt6-doc/qtquick
+%{_docdir}/qt6-doc/qtquickcontrols
+%{_docdir}/qt6-doc/qtquickdialogs
 
 %files -n Qt6Quick-doc-qch
 %defattr(644,root,root,755)
 %{_docdir}/qt6-doc/qtquick.qch
+%{_docdir}/qt6-doc/qtquickcontrols.qch
+%{_docdir}/qt6-doc/qtquickdialogs.qch
 %endif
 
 %files -n Qt6Quick-Timeline
@@ -5042,7 +5053,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtserialbus.qch
 %endif
 
-%files -n Qt6SerialPort
+%files -n Qt6SerialPort -f qtserialport.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6SerialPort.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6SerialPort.so.6
@@ -5653,6 +5664,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtcore
 %{_docdir}/qt6-doc/qtdbus
 %{_docdir}/qt6-doc/qtgui
+%{_docdir}/qt6-doc/qtimageformats
 %{_docdir}/qt6-doc/qtnetwork
 %{_docdir}/qt6-doc/qtopengl
 %{_docdir}/qt6-doc/qtprintsupport
@@ -5668,6 +5680,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtcore.qch
 %{_docdir}/qt6-doc/qtdbus.qch
 %{_docdir}/qt6-doc/qtgui.qch
+%{_docdir}/qt6-doc/qtimageformats.qch
 %{_docdir}/qt6-doc/qtnetwork.qch
 %{_docdir}/qt6-doc/qtopengl.qch
 %{_docdir}/qt6-doc/qtprintsupport.qch

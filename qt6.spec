@@ -4810,6 +4810,71 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{qt6dir}/qml/QtQuick
 
+%dir %{qt6dir}/qml/QtQuick/Controls
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/libqtquickcontrols2plugin.so
+%{qt6dir}/qml/QtQuick/Controls/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Controls/qmldir
+
+%dir %{qt6dir}/qml/QtQuick/Controls/Basic
+%{qt6dir}/qml/QtQuick/Controls/Basic/*.qml
+%{qt6dir}/qml/QtQuick/Controls/Basic/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Controls/Basic/qmldir
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Basic/libqtquickcontrols2basicstyleplugin.so
+%dir %{qt6dir}/qml/QtQuick/Controls/Basic/impl
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Basic/impl/libqtquickcontrols2basicstyleimplplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Basic/impl/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Controls/Basic/impl/qmldir
+
+%dir %{qt6dir}/qml/QtQuick/Controls/Fusion
+%{qt6dir}/qml/QtQuick/Controls/Fusion/*.qml
+%{qt6dir}/qml/QtQuick/Controls/Fusion/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Controls/Fusion/qmldir
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Fusion/libqtquickcontrols2fusionstyleplugin.so
+%dir %{qt6dir}/qml/QtQuick/Controls/Fusion/impl
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Fusion/impl/libqtquickcontrols2fusionstyleimplplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Fusion/impl/*.qml
+%{qt6dir}/qml/QtQuick/Controls/Fusion/impl/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Controls/Fusion/impl/qmldir
+%dir %{qt6dir}/qml/QtQuick/Controls/Imagine
+%{qt6dir}/qml/QtQuick/Controls/Imagine/*.qml
+%{qt6dir}/qml/QtQuick/Controls/Imagine/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Controls/Imagine/qmldir
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Imagine/libqtquickcontrols2imaginestyleplugin.so
+%dir %{qt6dir}/qml/QtQuick/Controls/Imagine/impl
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Imagine/impl/libqtquickcontrols2imaginestyleimplplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Imagine/impl/*.qml
+%{qt6dir}/qml/QtQuick/Controls/Imagine/impl/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Controls/Imagine/impl/qmldir
+%dir %{qt6dir}/qml/QtQuick/Controls/Material
+%{qt6dir}/qml/QtQuick/Controls/Material/*.qml
+%{qt6dir}/qml/QtQuick/Controls/Material/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Controls/Material/qmldir
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Material/libqtquickcontrols2materialstyleplugin.so
+%dir %{qt6dir}/qml/QtQuick/Controls/Material/impl
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Material/impl/libqtquickcontrols2materialstyleimplplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Material/impl/*.qml
+%{qt6dir}/qml/QtQuick/Controls/Material/impl/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Controls/Material/impl/qmldir
+%dir %{qt6dir}/qml/QtQuick/Controls/Universal
+%{qt6dir}/qml/QtQuick/Controls/Universal/*.qml
+%{qt6dir}/qml/QtQuick/Controls/Universal/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Controls/Universal/qmldir
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Universal/libqtquickcontrols2universalstyleplugin.so
+%dir %{qt6dir}/qml/QtQuick/Controls/Universal/impl
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Universal/impl/libqtquickcontrols2universalstyleimplplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Universal/impl/*.qml
+%{qt6dir}/qml/QtQuick/Controls/Universal/impl/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Controls/Universal/impl/qmldir
+%dir %{qt6dir}/qml/QtQuick/Controls/designer
+%{qt6dir}/qml/QtQuick/Controls/designer/images
+%{qt6dir}/qml/QtQuick/Controls/designer/*.qml
+%{qt6dir}/qml/QtQuick/Controls/designer/qtquickcontrols2.metainfo
+
+%dir %{qt6dir}/qml/QtQuick/Controls/impl
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/impl/libqtquickcontrols2implplugin.so
+%{qt6dir}/qml/QtQuick/Controls/impl/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Controls/impl/qmldir
+
 %dir %{qt6dir}/qml/QtQuick/Layouts
 # R: Core Gui Qml Quick
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Layouts/libqquicklayoutsplugin.so

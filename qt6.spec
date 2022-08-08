@@ -216,8 +216,8 @@ Group:		X11/Development/Tools
 # qhelpgenerator: Core, Gui, Help Sql; sqldriver-sqlite3 to work
 # qtattributionsscanner: Core
 Requires:	Qt6Core = %{version}
-Requires:	Qt6Help = %{version}
 Requires:	Qt6Gui = %{version}
+Requires:	Qt6Help = %{version}
 Requires:	Qt6Network = %{version}
 Requires:	Qt6PrintSupport = %{version}
 Requires:	Qt6Sql = %{version}
@@ -711,8 +711,8 @@ Biblioteka Qt6 DataVisualization.
 Summary:	Qt6 DataVisualization - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 DataVisualization - pliki programistyczne
 Group:		X11/Development/Libraries
-Requires:	Qt6DataVisualization = %{version}
 Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6DataVisualization = %{version}
 Requires:	Qt6Gui-devel = %{version}
 
 %description -n Qt6DataVisualization-devel
@@ -1127,8 +1127,8 @@ Group:		Development/Libraries
 Requires:	OpenGL-devel
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Gui = %{version}
-Requires:	libpng-devel
 Requires:	Vulkan-Loader-devel
+Requires:	libpng-devel
 
 %description -n Qt6Gui-devel
 Header files for Qt6 Gui library.
@@ -1219,8 +1219,8 @@ komunikację.
 Summary:	Qt6 Mqtt library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 Mqtt - pliki programistyczne
 Group:		Development/Libraries
-Requires:	Qt6Mqtt = %{version}
 Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Mqtt = %{version}
 Requires:	Qt6Network-devel = %{version}
 
 %description -n Qt6Mqtt-devel
@@ -1281,8 +1281,8 @@ Summary(pl.UTF-8):	Biblioteki Qt6 Multimedia - pliki programistyczne
 Group:		X11/Development/Libraries
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}
-Requires:	Qt6Network-devel = %{version}
 Requires:	Qt6Multimedia = %{version}
+Requires:	Qt6Network-devel = %{version}
 
 %description -n Qt6Multimedia-devel
 Qt6 Multimedia libraries - development files.
@@ -1335,8 +1335,8 @@ Biblioteka i moduły Qt6 Multimedia Quick.
 Summary:	Qt6 Multimedia Quick library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 Multimedia Quick - pliki programistyczne
 Group:		X11/Development/Libraries
-Requires:	Qt6MultimediaQuick = %{version}
 Requires:	Qt6Multimedia-devel = %{version}
+Requires:	Qt6MultimediaQuick = %{version}
 Requires:	Qt6Qml-devel = %{version}
 Requires:	Qt6Quick-devel = %{version}
 
@@ -1365,8 +1365,8 @@ biblioteki Qt6 Multimedia.
 Summary:	Qt6 Multimedia Widgets library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 Multimedia Widgets - pliki programistyczne
 Group:		X11/Development/Libraries
-Requires:	Qt6MultimediaWidgets = %{version}
 Requires:	Qt6Multimedia-devel = %{version}
+Requires:	Qt6MultimediaWidgets = %{version}
 Requires:	Qt6Widgets-devel = %{version}
 
 %description -n Qt6MultimediaWidgets-devel
@@ -1398,7 +1398,7 @@ Summary(pl.UTF-8):	Biblioteka Qt6 Network - pliki programistyczne
 Group:		Development/Libraries
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Network = %{version}
-%requires_ge	openssl-devel
+%requires_ge openssl-devel
 
 %description -n Qt6Network-devel
 Header files for Qt6 Network library.
@@ -1480,9 +1480,9 @@ Forum.
 Summary:	The Qt6 Nfc - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 Nfc - pliki programistyczne
 Group:		Development/Libraries
-Requires:	Qt6Nfc = %{version}
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6DBus-devel = %{version}
+Requires:	Qt6Nfc = %{version}
 
 %description -n Qt6Nfc-devel
 The Qt6 Nfc - development files.
@@ -1533,9 +1533,9 @@ Moduł Qt OpcUa implementuje łączność OPC UA poprzez API Qt.
 Summary:	Qt6 OpcUa library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 OpcUa - pliki programistyczne
 Group:		Development/Libraries
-Requires:	Qt6OpcUa = %{version}
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Network-devel = %{version}
+Requires:	Qt6OpcUa = %{version}
 
 %description -n Qt6OpcUa-devel
 Qt6 OpcUa library - development files.
@@ -1669,8 +1669,8 @@ Summary:	QWebEngineView plugin for Qt6 Designer
 Summary(pl.UTF-8):	Wtyczka QWebEngineView dla Qt6 Designera
 Group:		X11/Libraries
 Requires:	Qt6Core = %{version}
-Requires:	Qt6Gui = %{version}
 Requires:	Qt6Designer = %{version}
+Requires:	Qt6Gui = %{version}
 Requires:	Qt6WebEngine = %{version}
 Requires:	Qt6Widgets = %{version}
 
@@ -2471,8 +2471,8 @@ Group:		X11/Development/Libraries
 Requires:	OpenGL-devel
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}
-Requires:	Qt6Widgets-devel = %{version}
 Requires:	Qt6UiTools = %{version}
+Requires:	Qt6Widgets-devel = %{version}
 
 %description -n Qt6UiTools-devel
 Header files and static Qt6 Ui Tools library.
@@ -2568,12 +2568,12 @@ Summary:	Qt6 WaylandCompositor library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 WaylandCompositor - pliki programistyczne
 Group:		Development/Libraries
 Requires:	OpenGL-devel
-Requires:	Qt6WaylandCompositor = %{version}
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}
 Requires:	Qt6Network-devel = %{version}
 Requires:	Qt6Qml-devel = %{version}
 Requires:	Qt6Quick-devel = %{version}
+Requires:	Qt6WaylandCompositor = %{version}
 Requires:	wayland-devel >= 1.4.0
 Requires:	xorg-lib-libxkbcommon-devel >= 0.2.0
 Obsoletes:	Qt6Compositor-devel < 5.8.0
@@ -3831,6 +3831,8 @@ rm -rf $RPM_BUILD_ROOT
 # R: Core Gui Widgets
 %attr(755,root,root) %{_libdir}/libQt6Charts.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Charts.so.6
+%attr(755,root,root) %{_libdir}/libQt6ChartsQml.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6ChartsQml.so.6
 %dir %{qt6dir}/qml/QtCharts
 %{qt6dir}/qml/QtCharts/designer
 # R: Core Gui Qml Quick Widgets
@@ -3841,10 +3843,14 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6Charts-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Charts.so
+%attr(755,root,root) %{_libdir}/libQt6ChartsQml.so
 %{_libdir}/libQt6Charts.prl
+%{_libdir}/libQt6ChartsQml.prl
 %{_includedir}/qt6/QtCharts
+%{_includedir}/qt6/QtChartsQml
 %{_pkgconfigdir}/Qt6Charts.pc
 %{_libdir}/cmake/Qt6Charts
+%{_libdir}/cmake/Qt6ChartsQml
 %{qt6dir}/mkspecs/modules/qt_lib_charts.pri
 %{qt6dir}/mkspecs/modules/qt_lib_charts_private.pri
 
@@ -3934,6 +3940,8 @@ rm -rf $RPM_BUILD_ROOT
 # R: Qt6Core Qt6Gui
 %attr(755,root,root) %{_libdir}/libQt6DataVisualization.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6DataVisualization.so.6
+%attr(755,root,root) %{_libdir}/libQt6DataVisualizationQml.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6DataVisualizationQml.so.6
 %dir %{qt6dir}/qml/QtDataVisualization
 # R: Qt6Core Qt6Gui Qt6Qml Qt6Quick
 %attr(755,root,root) %{qt6dir}/qml/QtDataVisualization/libdatavisualizationqmlplugin.so
@@ -3944,10 +3952,14 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6DataVisualization-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6DataVisualization.so
+%attr(755,root,root) %{_libdir}/libQt6DataVisualizationQml.so
 %{_libdir}/libQt6DataVisualization.prl
+%{_libdir}/libQt6DataVisualizationQml.prl
 %{_includedir}/qt6/QtDataVisualization
+%{_includedir}/qt6/QtDataVisualizationQml
 %{_pkgconfigdir}/Qt6DataVisualization.pc
 %{_libdir}/cmake/Qt6DataVisualization
+%{_libdir}/cmake/Qt6DataVisualizationQml
 %{qt6dir}/mkspecs/modules/qt_lib_datavisualization.pri
 %{qt6dir}/mkspecs/modules/qt_lib_datavisualization_private.pri
 
@@ -3976,6 +3988,13 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_dbus.pri
 %{qt6dir}/mkspecs/modules/qt_lib_dbus_private.pri
 
+%files -n Qt6Designer
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Designer.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Designer.so.6
+%attr(755,root,root) %{_libdir}/libQt6DesignerComponents.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6DesignerComponents.so.6
+
 %files -n Qt6Designer-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Designer.so
@@ -3985,7 +4004,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtDesigner
 %{_includedir}/qt6/QtDesignerComponents
 %{_pkgconfigdir}/Qt6Designer.pc
-%{_libdir}/cmake/Qt6Designer/Qt6DesignerConfig*.cmake
+%{_libdir}/cmake/Qt6Designer/Qt6Designer*.cmake
 %{_libdir}/cmake/Qt6DesignerComponentsPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_designer.pri
 %{qt6dir}/mkspecs/modules/qt_lib_designer_private.pri
@@ -4001,7 +4020,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtDeviceDiscoverySupport
 %{_libdir}/libQt6DeviceDiscoverySupport.a
 %{_libdir}/libQt6DeviceDiscoverySupport.prl
-#%{_libdir}/cmake/Qt6DeviceDiscoverySupport
+%{_libdir}/cmake/Qt6DeviceDiscoverySupportPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_devicediscovery_support_private.pri
 
 %files -n Qt6EglSupport-devel
@@ -4203,7 +4222,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/metatypes/qt6gui_pld_metatypes.json
 %{_includedir}/qt6/QtGui
 %{_pkgconfigdir}/Qt6Gui.pc
-%{_libdir}/cmake/Qt6Gui/Qt6GuiConfig*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6Gui*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QEvdevKeyboardPlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QEvdevMousePlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QEvdevTabletPlugin*.cmake
@@ -4350,11 +4369,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6Network.prl
 %{_includedir}/qt6/QtNetwork
 %{_pkgconfigdir}/Qt6Network.pc
-%dir %{_libdir}/cmake/Qt6Network
-%{_libdir}/cmake/Qt6Network/Qt6NetworkConfig*.cmake
-#%{_libdir}/cmake/Qt6Network/Qt6NetworkQConnmanEnginePlugin*.cmake
-#%{_libdir}/cmake/Qt6Network/Qt6NetworkQGenericEnginePlugin*.cmake
-#%{_libdir}/cmake/Qt6Network/Qt6NetworkQNetworkManagerEnginePlugin*.cmake
+%{_libdir}/cmake/Qt6Network
 %{qt6dir}/mkspecs/modules/qt_lib_network.pri
 %{qt6dir}/mkspecs/modules/qt_lib_network_private.pri
 
@@ -4415,6 +4430,8 @@ rm -rf $RPM_BUILD_ROOT
 # R: Qt6Core Qt6Network openssl
 %attr(755,root,root) %{_libdir}/libQt6OpcUa.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6OpcUa.so.6
+%attr(755,root,root) %{_libdir}/libQt6DeclarativeOpcua.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6DeclarativeOpcua.so.6
 %dir %{qt6dir}/plugins/opcua
 # R: Qt6Core Qt6OpcUa open62541
 %attr(755,root,root) %{qt6dir}/plugins/opcua/libopen62541_backend.so
@@ -4427,10 +4444,14 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6OpcUa-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6OpcUa.so
+%attr(755,root,root) %{_libdir}/libQt6DeclarativeOpcua.so
 %{_libdir}/libQt6OpcUa.prl
+%{_libdir}/libQt6DeclarativeOpcua.prl
 %{_includedir}/qt6/QtOpcUa
+%{_includedir}/qt6/QtDeclarativeOpcua
 %{_pkgconfigdir}/Qt6OpcUa.pc
 %{_libdir}/cmake/Qt6OpcUa
+%{_libdir}/cmake/Qt6DeclarativeOpcua
 %{qt6dir}/mkspecs/modules/qt_lib_opcua.pri
 %{qt6dir}/mkspecs/modules/qt_lib_opcua_private.pri
 
@@ -4448,14 +4469,20 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6OpenGL.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6OpenGL.so.6
+%attr(755,root,root) %{_libdir}/libQt6OpenGLWidgets.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6OpenGLWidgets.so.6
 
 %files -n Qt6OpenGL-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6OpenGL.so
+%attr(755,root,root) %{_libdir}/libQt6OpenGLWidgets.so
 %{_libdir}/libQt6OpenGL.prl
+%{_libdir}/libQt6OpenGLWidgets.prl
 %{_includedir}/qt6/QtOpenGL
+%{_includedir}/qt6/QtOpenGLWidgets
 %{_pkgconfigdir}/Qt6OpenGL.pc
 %{_libdir}/cmake/Qt6OpenGL
+%{_libdir}/cmake/Qt6OpenGLWidgets
 %{qt6dir}/mkspecs/modules/qt_lib_opengl.pri
 %{qt6dir}/mkspecs/modules/qt_lib_opengl_private.pri
 
@@ -4465,6 +4492,8 @@ rm -rf $RPM_BUILD_ROOT
 # R: Qt6Core Qt6Gui Qt6Network freetype libjpeg zlib
 %attr(755,root,root) %{_libdir}/libQt6Pdf.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Pdf.so.6
+%attr(755,root,root) %{_libdir}/libQt6PdfQuick.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6PdfQuick.so.6
 # R: Qt6Core Qt6Gui Qt6Pdf Qt6Widgets
 %attr(755,root,root) %{_libdir}/libQt6PdfWidgets.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6PdfWidgets.so.6
@@ -4480,15 +4509,19 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6Pdf-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Pdf.so
+%attr(755,root,root) %{_libdir}/libQt6PdfQuick.so
 %attr(755,root,root) %{_libdir}/libQt6PdfWidgets.so
 %{_libdir}/libQt6Pdf.prl
+%{_libdir}/libQt6PdfQuick.prl
 %{_libdir}/libQt6PdfWidgets.prl
 %{_includedir}/qt6/QtPdf
+%{_includedir}/qt6/QtPdfQuick
 %{_includedir}/qt6/QtPdfWidgets
 %{_pkgconfigdir}/Qt6Pdf.pc
 %{_pkgconfigdir}/Qt6PdfWidgets.pc
 %{_libdir}/cmake/Qt6Gui/Qt6QPdfPlugin*.cmake
 %{_libdir}/cmake/Qt6Pdf
+%{_libdir}/cmake/Qt6PdfQuick
 %{_libdir}/cmake/Qt6PdfWidgets
 %{qt6dir}/mkspecs/modules/qt_lib_pdf.pri
 %{qt6dir}/mkspecs/modules/qt_lib_pdf_private.pri
@@ -4523,7 +4556,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtPrintSupport
 %{_pkgconfigdir}/Qt6PrintSupport.pc
 %dir %{_libdir}/cmake/Qt6PrintSupport
-%{_libdir}/cmake/Qt6PrintSupport/Qt6PrintSupportConfig*.cmake
+%{_libdir}/cmake/Qt6PrintSupport/Qt6PrintSupport*.cmake
 %if %{with cups}
 %{_libdir}/cmake/Qt6PrintSupport/Qt6QCupsPrinterSupportPlugin*.cmake
 %endif
@@ -4532,13 +4565,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Qml -f qtdeclarative.lang
 %defattr(644,root,root,755)
-%doc LICENSE.GPL3-EXCEPT
+%attr(755,root,root) %{_libdir}/libQt6Positioning.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Positioning.so.6
+%attr(755,root,root) %{_libdir}/libQt6PositioningQuick.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6PositioningQuick.so.6
 %attr(755,root,root) %{_libdir}/libQt6Qml.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Qml.so.6
+%attr(755,root,root) %{_libdir}/libQt6QmlCore.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QmlCore.so.6
 %attr(755,root,root) %{_libdir}/libQt6QmlModels.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6QmlModels.so.6
 %attr(755,root,root) %{_libdir}/libQt6QmlWorkerScript.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6QmlWorkerScript.so.6
+%attr(755,root,root) %{_libdir}/libQt6QmlLocalStorage.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QmlLocalStorage.so.6
+%attr(755,root,root) %{_libdir}/libQt6QmlXmlListModel.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QmlXmlListModel.so.6
 
 # loaded from src/qml/debugger/{qqmldebugserver,qqmlinspectorservice}.cpp
 %dir %{qt6dir}/plugins/qmltooling
@@ -4613,28 +4655,54 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Qml-devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Positioning.so
+%attr(755,root,root) %{_libdir}/libQt6PositioningQuick.so
 %attr(755,root,root) %{_libdir}/libQt6Qml.so
+%attr(755,root,root) %{_libdir}/libQt6QmlCore.so
 %attr(755,root,root) %{_libdir}/libQt6QmlModels.so
 %attr(755,root,root) %{_libdir}/libQt6QmlWorkerScript.so
+%attr(755,root,root) %{_libdir}/libQt6QmlLocalStorage.so
+%attr(755,root,root) %{_libdir}/libQt6QmlXmlListModel.so
 # static-only
 %{_libdir}/libQt6PacketProtocol.a
+%{_libdir}/libQt6QmlCompiler.a
 %{_libdir}/libQt6QmlDebug.a
+%{_libdir}/libQt6QmlDom.a
+%{_libdir}/libQt6QmlLint.a
 %{_libdir}/libQt6PacketProtocol.prl
+%{_libdir}/libQt6Positioning.prl
+%{_libdir}/libQt6PositioningQuick.prl
+%{_libdir}/libQt6QmlCompiler.prl
 %{_libdir}/libQt6Qml.prl
+%{_libdir}/libQt6QmlCore.prl
 %{_libdir}/libQt6QmlDebug.prl
+%{_libdir}/libQt6QmlDom.prl
+%{_libdir}/libQt6QmlLint.prl
+%{_libdir}/libQt6QmlLocalStorage.prl
 %{_libdir}/libQt6QmlModels.prl
 %{_libdir}/libQt6QmlWorkerScript.prl
+%{_libdir}/libQt6QmlXmlListModel.prl
 %{_libdir}/metatypes/qt6qml_pld_metatypes.json
 %{_libdir}/metatypes/qt6qmlmodels_pld_metatypes.json
 %{_libdir}/metatypes/qt6qmlworkerscript_pld_metatypes.json
+%{_includedir}/qt6/QtPositioning
+%{_includedir}/qt6/QtPositioningQuick
 %{_includedir}/qt6/QtQml
+%{_includedir}/qt6/QtQmlCompiler
+%{_includedir}/qt6/QtQmlCore
 %{_includedir}/qt6/QtQmlDebug
+%{_includedir}/qt6/QtQmlDom
+%{_includedir}/qt6/QtQmlIntegration
+%{_includedir}/qt6/QtQmlLint
 %{_includedir}/qt6/QtQmlModels
 %{_includedir}/qt6/QtQmlWorkerScript
 %{_includedir}/qt6/QtPacketProtocol
+%{_includedir}/qt6/QtQmlXmlListModel
 %{_pkgconfigdir}/Qt6Qml.pc
 %{_pkgconfigdir}/Qt6QmlModels.pc
 %{_pkgconfigdir}/Qt6QmlWorkerScript.pc
+%{_libdir}/cmake/Qt6PacketProtocolPrivate
+%{_libdir}/cmake/Qt6Positioning
 %{_libdir}/cmake/Qt6Qml
 %{_libdir}/cmake/Qt6QmlImportScanner
 %{_libdir}/cmake/Qt6QmlModels
@@ -4688,6 +4756,22 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libQt6QuickTest.so.6
 %attr(755,root,root) %{_libdir}/libQt6QuickWidgets.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6QuickWidgets.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2Impl.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2Impl.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickDialogs2.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickDialogs2.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickDialogs2QuickImpl.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickDialogs2QuickImpl.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickDialogs2Utils.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickDialogs2Utils.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickLayouts.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickLayouts.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickTemplates2.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickTemplates2.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickTimeline.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickTimeline.so.6
 
 # R: Core Gui Qml Quick
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_inspector.so
@@ -4761,22 +4845,52 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Quick-devel
 %defattr(644,root,root,755)
+%{_libdir}/libQt6QuickControlsTestUtils.a
+%{_libdir}/libQt6QuickTestUtils.a
 %attr(755,root,root) %{_libdir}/libQt6Quick.so
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2Impl.so
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2.so
+%attr(755,root,root) %{_libdir}/libQt6QuickDialogs2QuickImpl.so
+%attr(755,root,root) %{_libdir}/libQt6QuickDialogs2.so
+%attr(755,root,root) %{_libdir}/libQt6QuickDialogs2Utils.so
+%attr(755,root,root) %{_libdir}/libQt6QuickLayouts.so
 %attr(755,root,root) %{_libdir}/libQt6QuickParticles.so
 %attr(755,root,root) %{_libdir}/libQt6QuickShapes.so
+%attr(755,root,root) %{_libdir}/libQt6QuickTemplates2.so
 %attr(755,root,root) %{_libdir}/libQt6QuickTest.so
+%attr(755,root,root) %{_libdir}/libQt6QuickTimeline.so
 %attr(755,root,root) %{_libdir}/libQt6QuickWidgets.so
 %{_libdir}/libQt6Quick.prl
+%{_libdir}/libQt6QuickControls2Impl.prl
+%{_libdir}/libQt6QuickControls2.prl
+%{_libdir}/libQt6QuickControlsTestUtils.prl
+%{_libdir}/libQt6QuickDialogs2.prl
+%{_libdir}/libQt6QuickDialogs2QuickImpl.prl
+%{_libdir}/libQt6QuickDialogs2Utils.prl
+%{_libdir}/libQt6QuickLayouts.prl
 %{_libdir}/libQt6QuickParticles.prl
 %{_libdir}/libQt6QuickShapes.prl
+%{_libdir}/libQt6QuickTemplates2.prl
 %{_libdir}/libQt6QuickTest.prl
+%{_libdir}/libQt6QuickTestUtils.prl
+%{_libdir}/libQt6QuickTimeline.prl
 %{_libdir}/libQt6QuickWidgets.prl
 %{_libdir}/metatypes/qt6quick_pld_metatypes.json
 %{_libdir}/metatypes/qt6quicktest_pld_metatypes.json
 %{_includedir}/qt6/QtQuick
+%{_includedir}/qt6/QtQuickControls2
+%{_includedir}/qt6/QtQuickControls2Impl
+%{_includedir}/qt6/QtQuickControlsTestUtils
+%{_includedir}/qt6/QtQuickDialogs2
+%{_includedir}/qt6/QtQuickDialogs2QuickImpl
+%{_includedir}/qt6/QtQuickDialogs2Utils
+%{_includedir}/qt6/QtQuickLayouts
 %{_includedir}/qt6/QtQuickParticles
 %{_includedir}/qt6/QtQuickShapes
+%{_includedir}/qt6/QtQuickTemplates2
 %{_includedir}/qt6/QtQuickTest
+%{_includedir}/qt6/QtQuickTestUtils
+%{_includedir}/qt6/QtQuickTimeline
 %{_includedir}/qt6/QtQuickWidgets
 %{_pkgconfigdir}/Qt6Quick.pc
 %{_pkgconfigdir}/Qt6QuickTest.pc
@@ -4832,6 +4946,18 @@ rm -rf $RPM_BUILD_ROOT
 # R: Qt6Core Qt6Gui Qt6Quick3DUtils
 %attr(755,root,root) %{_libdir}/libQt6Quick3DAssetImport.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DAssetImport.so.6
+%attr(755,root,root) %{_libdir}/libQt6Quick3DAssetUtils.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DEffects.so.6
+%attr(755,root,root) %{_libdir}/libQt6Quick3DGlslParser.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DGlslParser.so.6
+%attr(755,root,root) %{_libdir}/libQt6Quick3DHelpers.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DHelpers.so.6
+%attr(755,root,root) %{_libdir}/libQt6Quick3DIblBaker.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DIblBaker.so.6
+%attr(755,root,root) %{_libdir}/libQt6Quick3DParticleEffects.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DParticleEffects.so.6
+%attr(755,root,root) %{_libdir}/libQt6Quick3DParticles.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DParticles.so.6
 # R: Qt6Core Qt6Gui Qt6Quick3DUtils Qt6Quick3DAssetImport
 %attr(755,root,root) %{_libdir}/libQt6Quick3DRuntimeRender.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DRuntimeRender.so.6
@@ -4871,14 +4997,33 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Quick3D.so
 %attr(755,root,root) %{_libdir}/libQt6Quick3DAssetImport.so
+%attr(755,root,root) %{_libdir}/libQt6Quick3DAssetUtils.so
+%attr(755,root,root) %{_libdir}/libQt6Quick3DEffects.so
+%attr(755,root,root) %{_libdir}/libQt6Quick3DGlslParser.so
+%attr(755,root,root) %{_libdir}/libQt6Quick3DHelpers.so
+%attr(755,root,root) %{_libdir}/libQt6Quick3DIblBaker.so
+%attr(755,root,root) %{_libdir}/libQt6Quick3DParticleEffects.so
+%attr(755,root,root) %{_libdir}/libQt6Quick3DParticles.so
 %attr(755,root,root) %{_libdir}/libQt6Quick3DRuntimeRender.so
 %attr(755,root,root) %{_libdir}/libQt6Quick3DUtils.so
 %{_libdir}/libQt6Quick3D.prl
 %{_libdir}/libQt6Quick3DAssetImport.prl
+%{_libdir}/libQt6Quick3DAssetUtils.prl
+%{_libdir}/libQt6Quick3DEffects.prl
+%{_libdir}/libQt6Quick3DGlslParser.prl
+%{_libdir}/libQt6Quick3DHelpers.prl
+%{_libdir}/libQt6Quick3DIblBaker.prl
+%{_libdir}/libQt6Quick3DParticleEffects.prl
+%{_libdir}/libQt6Quick3DParticles.prl
 %{_libdir}/libQt6Quick3DRuntimeRender.prl
 %{_libdir}/libQt6Quick3DUtils.prl
 %{_includedir}/qt6/QtQuick3D
 %{_includedir}/qt6/QtQuick3DAssetImport
+%{_includedir}/qt6/QtQuick3DAssetUtils
+%{_includedir}/qt6/QtQuick3DGlslParser
+%{_includedir}/qt6/QtQuick3DHelpers
+%{_includedir}/qt6/QtQuick3DIblBaker
+%{_includedir}/qt6/QtQuick3DParticles
 %{_includedir}/qt6/QtQuick3DRuntimeRender
 %{_includedir}/qt6/QtQuick3DUtils
 %{_pkgconfigdir}/Qt6Quick3D.pc
@@ -4913,6 +5058,8 @@ rm -rf $RPM_BUILD_ROOT
 # R: Qt6Core Qt6Network
 %attr(755,root,root) %{_libdir}/libQt6RemoteObjects.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6RemoteObjects.so.6
+%attr(755,root,root) %{_libdir}/libQt6RemoteObjectsQml.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6RemoteObjectsQml.so.6
 # R: Qt6Core
 %attr(755,root,root) %{qt6dir}/libexec/repc
 %dir %{qt6dir}/qml/QtRemoteObjects
@@ -4924,7 +5071,9 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6RemoteObjects-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6RemoteObjects.so
+%attr(755,root,root) %{_libdir}/libQt6RemoteObjectsQml.so
 %{_libdir}/libQt6RemoteObjects.prl
+%{_libdir}/libQt6RemoteObjectsQml.prl
 %{_includedir}/qt6/QtRemoteObjects
 %{_includedir}/qt6/QtRepParser
 %{_pkgconfigdir}/Qt6RemoteObjects.pc
@@ -4954,6 +5103,8 @@ rm -rf $RPM_BUILD_ROOT
 # R: Qt6Core Qt6Qml
 %attr(755,root,root) %{_libdir}/libQt6Scxml.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Scxml.so.6
+%attr(755,root,root) %{_libdir}/libQt6ScxmlQml.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6ScxmlQml.so.6
 # R: Qt6Core
 %attr(755,root,root) %{qt6dir}/libexec/qscxmlc
 %dir %{qt6dir}/qml/QtScxml
@@ -4965,8 +5116,11 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6Scxml-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Scxml.so
+%attr(755,root,root) %{_libdir}/libQt6ScxmlQml.so
 %{_libdir}/libQt6Scxml.prl
+%{_libdir}/libQt6ScxmlQml.prl
 %{_includedir}/qt6/QtScxml
+%{_includedir}/qt6/QtScxmlQml
 %{_pkgconfigdir}/Qt6Scxml.pc
 %{_libdir}/cmake/Qt6Scxml
 %{qt6dir}/mkspecs/features/qscxmlc.prf
@@ -4987,6 +5141,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Sensors.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Sensors.so.6
+%attr(755,root,root) %{_libdir}/libQt6SensorsQuick.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6SensorsQuick.so.6
 %dir %{qt6dir}/plugins/sensors
 %attr(755,root,root) %{qt6dir}/plugins/sensors/libqtsensors_dummy.so
 # R: Core Sensors
@@ -5002,8 +5158,11 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6Sensors-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Sensors.so
+%attr(755,root,root) %{_libdir}/libQt6SensorsQuick.so
 %{_libdir}/libQt6Sensors.prl
+%{_libdir}/libQt6SensorsQuick.prl
 %{_includedir}/qt6/QtSensors
+%{_includedir}/qt6/QtSensorsQuick
 %{_pkgconfigdir}/Qt6Sensors.pc
 %{_libdir}/cmake/Qt6Sensors
 %{qt6dir}/mkspecs/modules/qt_lib_sensors.pri
@@ -5157,7 +5316,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6Sql.prl
 %{_includedir}/qt6/QtSql
 %{_pkgconfigdir}/Qt6Sql.pc
-%{_libdir}/cmake/Qt6Sql/Qt6SqlConfig*.cmake
+%{_libdir}/cmake/Qt6Sql/Qt6Sql*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_sql.pri
 %{qt6dir}/mkspecs/modules/qt_lib_sql_private.pri
 
@@ -5165,6 +5324,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Svg.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Svg.so.6
+%attr(755,root,root) %{_libdir}/libQt6SvgWidgets.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6SvgWidgets.so.6
 # R: Core Gui Svg
 %attr(755,root,root) %{qt6dir}/plugins/iconengines/libqsvgicon.so
 # R: Core Gui Svg
@@ -5173,8 +5334,11 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6Svg-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Svg.so
+%attr(755,root,root) %{_libdir}/libQt6SvgWidgets.so
 %{_libdir}/libQt6Svg.prl
+%{_libdir}/libQt6SvgWidgets.prl
 %{_includedir}/qt6/QtSvg
+%{_includedir}/qt6/QtSvgWidgets
 %{_pkgconfigdir}/Qt6Svg.pc
 %dir %{_libdir}/cmake/Qt6Svg
 %{_libdir}/cmake/Qt6Svg/Qt6Svg*.cmake
@@ -5313,6 +5477,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6WaylandCompositor.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6WaylandCompositor.so.6
+%attr(755,root,root) %{_libdir}/libQt6WaylandEglCompositorHwIntegration.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6WaylandEglCompositorHwIntegration.so.6
 %dir %{qt6dir}/plugins/wayland-graphics-integration-server
 %attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-dmabuf-server-buffer.so
 %attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-drm-egl-server-buffer.so
@@ -5333,7 +5499,9 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6WaylandCompositor-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6WaylandCompositor.so
+%attr(755,root,root) %{_libdir}/libQt6WaylandEglCompositorHwIntegration.so
 %{_libdir}/libQt6WaylandCompositor.prl
+%{_libdir}/libQt6WaylandEglCompositorHwIntegration.prl
 %{_includedir}/qt6/QtWaylandCompositor
 %{_pkgconfigdir}/Qt6WaylandCompositor.pc
 %{_libdir}/cmake/Qt6WaylandCompositor
@@ -5354,6 +5522,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6WaylandClient.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6WaylandClient.so.6
+%attr(755,root,root) %{_libdir}/libQt6WaylandEglClientHwIntegration.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6WaylandEglClientHwIntegration.so.6
 %attr(755,root,root) %{qt6dir}/libexec/qtwaylandscanner
 %attr(755,root,root) %{qt6dir}/plugins/platforms/libqwayland-egl.so
 %attr(755,root,root) %{qt6dir}/plugins/platforms/libqwayland-generic.so
@@ -5379,7 +5549,9 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6WaylandClient-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6WaylandClient.so
+%attr(755,root,root) %{_libdir}/libQt6WaylandEglClientHwIntegration.so
 %{_libdir}/libQt6WaylandClient.prl
+%{_libdir}/libQt6WaylandEglClientHwIntegration.prl
 %{_includedir}/qt6/QtWaylandClient
 %{_pkgconfigdir}/Qt6WaylandClient.pc
 %{_libdir}/cmake/Qt6Gui/Qt6QWaylandEglPlatformIntegrationPlugin*.cmake
@@ -5402,8 +5574,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtWidgets
 %{_pkgconfigdir}/Qt6Widgets.pc
 %dir %{_libdir}/cmake/Qt6Widgets
-%{_libdir}/cmake/Qt6Widgets/Qt6WidgetsConfig*.cmake
-%{_libdir}/cmake/Qt6Widgets/Qt6WidgetsMacros.cmake
+%{_libdir}/cmake/Qt6Widgets/Qt6Widgets*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_widgets.pri
 %{qt6dir}/mkspecs/modules/qt_lib_widgets_private.pri
 
@@ -5599,6 +5770,8 @@ rm -rf $RPM_BUILD_ROOT
 # R: Qt6Core Qt6Qml
 %attr(755,root,root) %{_libdir}/libQt6WebView.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6WebView.so.6
+%attr(755,root,root) %{_libdir}/libQt6WebViewQuick.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6WebViewQuick.so.6
 %dir %{qt6dir}/plugins/webview
 %dir %{qt6dir}/qml/QtWebView
 # R: Qt6Core Qt6Qml Qt6Quick Qt6WebView
@@ -5609,11 +5782,14 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6WebView-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6WebView.so
+%attr(755,root,root) %{_libdir}/libQt6WebViewQuick.so
 %{_libdir}/libQt6WebView.prl
+%{_libdir}/libQt6WebViewQuick.prl
 %{_includedir}/qt6/QtWebView
+%{_includedir}/qt6/QtWebViewQuick
 %{_pkgconfigdir}/Qt6WebView.pc
 %dir %{_libdir}/cmake/Qt6WebView
-%{_libdir}/cmake/Qt6WebView/Qt6WebViewConfig*.cmake
+%{_libdir}/cmake/Qt6WebView/Qt6WebView*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_webview.pri
 %{qt6dir}/mkspecs/modules/qt_lib_webview_private.pri
 

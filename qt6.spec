@@ -818,7 +818,6 @@ Requires:	Qt6Designer = %{version}
 Requires:	Qt6Gui = %{version}
 Requires:	Qt6Widgets = %{version}
 Requires:	Qt6Xml = %{version}
-Obsoletes:	qt6-qttools-devel < 5.2.0-1
 
 %description -n Qt6Designer-devel
 Header files for Qt6 Designer libraries.
@@ -1162,7 +1161,6 @@ Requires:	Qt6Gui-devel = %{version}
 Requires:	Qt6Help = %{version}
 Requires:	Qt6Sql-devel = %{version}
 Requires:	Qt6Widgets-devel = %{version}
-Obsoletes:	qt6-qttools-devel < 5.2.0-1
 
 %description -n Qt6Help-devel
 Header files for Qt6 Help library.
@@ -2553,7 +2551,6 @@ Requires:	Qt6Qml = %{version}
 Requires:	Qt6Quick = %{version}
 Requires:	wayland >= 1.4.0
 Requires:	xorg-lib-libxkbcommon >= 0.2.0
-Obsoletes:	Qt6Compositor < 5.8.0
 
 %description -n Qt6WaylandCompositor
 Qt6 WaylandCompositor library enables the creation of Wayland
@@ -2576,7 +2573,6 @@ Requires:	Qt6Quick-devel = %{version}
 Requires:	Qt6WaylandCompositor = %{version}
 Requires:	wayland-devel >= 1.4.0
 Requires:	xorg-lib-libxkbcommon-devel >= 0.2.0
-Obsoletes:	Qt6Compositor-devel < 5.8.0
 
 %description -n Qt6WaylandCompositor-devel
 Qt6 WaylandCompositor library - development files.
@@ -4581,6 +4577,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libQt6QmlLocalStorage.so.6
 %attr(755,root,root) %{_libdir}/libQt6QmlXmlListModel.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6QmlXmlListModel.so.6
+%attr(755,root,root) %{_libdir}/libQt6StateMachine.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6StateMachine.so.6
+%attr(755,root,root) %{_libdir}/libQt6StateMachineQml.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6StateMachineQml.so.6
 
 # loaded from src/qml/debugger/{qqmldebugserver,qqmlinspectorservice}.cpp
 %dir %{qt6dir}/plugins/qmltooling
@@ -4663,6 +4663,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6QmlWorkerScript.so
 %attr(755,root,root) %{_libdir}/libQt6QmlLocalStorage.so
 %attr(755,root,root) %{_libdir}/libQt6QmlXmlListModel.so
+%attr(755,root,root) %{_libdir}/libQt6StateMachine.so
+%attr(755,root,root) %{_libdir}/libQt6StateMachineQml.so
 # static-only
 %{_libdir}/libQt6PacketProtocol.a
 %{_libdir}/libQt6QmlCompiler.a
@@ -4682,11 +4684,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6QmlModels.prl
 %{_libdir}/libQt6QmlWorkerScript.prl
 %{_libdir}/libQt6QmlXmlListModel.prl
+%{_libdir}/libQt6StateMachine.prl
+%{_libdir}/libQt6StateMachineQml.prl
 %{_libdir}/metatypes/qt6qml_pld_metatypes.json
 %{_libdir}/metatypes/qt6qmlmodels_pld_metatypes.json
 %{_libdir}/metatypes/qt6qmlworkerscript_pld_metatypes.json
 %{_includedir}/qt6/QtPositioning
 %{_includedir}/qt6/QtPositioningQuick
+%{_includedir}/qt6/QtStateMachineQml
 %{_includedir}/qt6/QtQml
 %{_includedir}/qt6/QtQmlCompiler
 %{_includedir}/qt6/QtQmlCore
@@ -4694,6 +4699,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtQmlDom
 %{_includedir}/qt6/QtQmlIntegration
 %{_includedir}/qt6/QtQmlLint
+%{_includedir}/qt6/QtQmlLocalStorage
 %{_includedir}/qt6/QtQmlModels
 %{_includedir}/qt6/QtQmlWorkerScript
 %{_includedir}/qt6/QtPacketProtocol
@@ -5170,6 +5176,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6RemoteObjects.prl
 %{_libdir}/libQt6RemoteObjectsQml.prl
 %{_includedir}/qt6/QtRemoteObjects
+%{_includedir}/qt6/QtRemoteObjectsQml
 %{_includedir}/qt6/QtRepParser
 %{_pkgconfigdir}/Qt6RemoteObjects.pc
 %{_pkgconfigdir}/Qt6RepParser.pc
@@ -5579,6 +5586,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libQt6WaylandCompositor.so.6
 %attr(755,root,root) %{_libdir}/libQt6WaylandEglCompositorHwIntegration.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6WaylandEglCompositorHwIntegration.so.6
+%attr(755,root,root) %{_libdir}/libQt6WlShellIntegration.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6WlShellIntegration.so.6
 %dir %{qt6dir}/plugins/wayland-graphics-integration-server
 %attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-dmabuf-server-buffer.so
 %attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-drm-egl-server-buffer.so
@@ -5600,9 +5609,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6WaylandCompositor.so
 %attr(755,root,root) %{_libdir}/libQt6WaylandEglCompositorHwIntegration.so
+%attr(755,root,root) %{_libdir}/libQt6WlShellIntegration.so
 %{_libdir}/libQt6WaylandCompositor.prl
+%{_libdir}/libQt6WlShellIntegration.prl
 %{_libdir}/libQt6WaylandEglCompositorHwIntegration.prl
 %{_includedir}/qt6/QtWaylandCompositor
+%{_includedir}/qt6/QtWaylandEglCompositorHwIntegration
+%{_includedir}/qt6/QtWaylandGlobal
+%{_includedir}/qt6/QtWlShellIntegration
 %{_pkgconfigdir}/Qt6WaylandCompositor.pc
 %{_libdir}/cmake/Qt6WaylandCompositor
 %{qt6dir}/mkspecs/modules/qt_lib_waylandcompositor.pri
@@ -5653,6 +5667,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6WaylandClient.prl
 %{_libdir}/libQt6WaylandEglClientHwIntegration.prl
 %{_includedir}/qt6/QtWaylandClient
+%{_includedir}/qt6/QtWaylandEglClientHwIntegration
 %{_pkgconfigdir}/Qt6WaylandClient.pc
 %{_libdir}/cmake/Qt6Gui/Qt6QWaylandEglPlatformIntegrationPlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QWaylandIntegrationPlugin*.cmake

@@ -4747,6 +4747,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtqmltest
 %{_docdir}/qt6-doc/qtqmlworkerscript
 %{_docdir}/qt6-doc/qtqmlxmllistmodel
+%{_docdir}/qt6-doc/qtstatemachine
 
 %files -n Qt6Qml-doc-qch
 %defattr(644,root,root,755)
@@ -4758,6 +4759,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtqmltest.qch
 %{_docdir}/qt6-doc/qtqmlworkerscript.qch
 %{_docdir}/qt6-doc/qtqmlxmllistmodel.qch
+%{_docdir}/qt6-doc/qtstatemachine.qch
 %endif
 
 %files -n Qt6Quick
@@ -6006,6 +6008,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/qmake-qt6
 %attr(755,root,root) %{qt6dir}/bin/qmake
+%attr(755,root,root) %{qt6dir}/bin/qmake6
 %{qt6dir}/mkspecs/aix-*
 %{qt6dir}/mkspecs/android-*
 %{qt6dir}/mkspecs/common

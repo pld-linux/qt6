@@ -3933,6 +3933,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{qt6dir}/plugins
 %dir %{_datadir}/qt6
 %dir %{_datadir}/qt6/translations
+%dir %{qt6dir}/qml/QtCore
+%attr(755,root,root) %{qt6dir}/qml/QtCore/libqtqmlcoreplugin.so
+%{qt6dir}/qml/QtCore/plugins.qmltypes
+%{qt6dir}/qml/QtCore/qmldir
 
 %files -n Qt6Core-devel
 %defattr(644,root,root,755)
@@ -4687,6 +4691,11 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQml/Models/plugins.qmltypes
 %{qt6dir}/qml/QtQml/Models/qmldir
 
+%dir %{qt6dir}/qml/QtPositioning
+%attr(755,root,root) %{qt6dir}/qml/QtPositioning/libpositioningquickplugin.so
+%{qt6dir}/qml/QtPositioning/plugins.qmltypes
+%{qt6dir}/qml/QtPositioning/qmldir
+
 %dir %{qt6dir}/qml/QtQml/StateMachine
 # R: Core Qml
 %attr(755,root,root) %{qt6dir}/qml/QtQml/StateMachine/libqtqmlstatemachineplugin.so
@@ -4994,6 +5003,11 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQuick/Shapes/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Shapes/qmldir
 
+%dir %{qt6dir}/qml/QtQuick/Templates
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Templates/libqtquicktemplates2plugin.so
+%{qt6dir}/qml/QtQuick/Templates/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/Templates/qmldir
+
 %dir %{qt6dir}/qml/QtQuick/Window
 # R: Core Gui Qml Quick
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Window/libquickwindowplugin.so
@@ -5203,7 +5217,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQuick3D/ParticleEffects/qmldir
 %dir %{qt6dir}/qml/QtQuick3D/Particles3D
 %attr(755,root,root) %{qt6dir}/qml/QtQuick3D/Particles3D/libqtquick3dparticles3dplugin.so
-%{qt6dir}/qml/QtQuick3D/Particles3D/designer/Affector3DSection.qml
+%{qt6dir}/qml/QtQuick3D/Particles3D/designer
 %{qt6dir}/qml/QtQuick3D/Particles3D/plugins.qmltypes
 %{qt6dir}/qml/QtQuick3D/Particles3D/qmldir
 

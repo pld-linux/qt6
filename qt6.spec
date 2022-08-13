@@ -838,19 +838,6 @@ QQuickWidget (Quick2) plugin for Qt6 Designer.
 %description -n Qt6Designer-plugin-qquickwidget -l pl.UTF-8
 Wtyczka QQuickWidget (Quick2) dla Qt6 Designera.
 
-%package -n Qt6EglSupport-devel
-Summary:	Qt6 EglSupport library - development files
-Summary(pl.UTF-8):	Biblioteka Qt6 EglSupport - pliki programistyczne
-Group:		Development/Libraries
-# for (subset of) Qt6Core headers
-Requires:	Qt6Core-devel = %{version}
-
-%description -n Qt6EglSupport-devel
-Qt6 EglSupport library - development files.
-
-%description -n Qt6EglSupport-devel -l pl.UTF-8
-Biblioteka Qt6 EglSupport - pliki programistyczne.
-
 %package -n Qt6FbSupport-devel
 Summary:	Qt6 FbSupport library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 FbSupport - pliki programistyczne
@@ -3556,6 +3543,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/qt6/phrasebooks
 %{_libdir}/cmake/Qt6Linguist
 %{_libdir}/cmake/Qt6LinguistTools
+%{_pkgconfigdir}/Qt6Linguist.pc
 
 %files -n qt6-qdbus
 %defattr(644,root,root,755)
@@ -3926,6 +3914,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtCharts
 %{_includedir}/qt6/QtChartsQml
 %{_pkgconfigdir}/Qt6Charts.pc
+%{_pkgconfigdir}/Qt6ChartsQml.pc
 %{_libdir}/cmake/Qt6Charts
 %{_libdir}/cmake/Qt6ChartsQml
 %{qt6dir}/mkspecs/modules/qt_lib_charts.pri
@@ -4049,6 +4038,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtDataVisualization
 %{_includedir}/qt6/QtDataVisualizationQml
 %{_pkgconfigdir}/Qt6DataVisualization.pc
+%{_pkgconfigdir}/Qt6DataVisualizationQml.pc
 %{_libdir}/cmake/Qt6DataVisualization
 %{_libdir}/cmake/Qt6DataVisualizationQml
 %{qt6dir}/mkspecs/modules/qt_lib_datavisualization.pri
@@ -4127,22 +4117,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/qt6/modules/DeviceDiscoverySupportPrivate.json
 %{_libdir}/metatypes/qt6devicediscoverysupportprivate_pld_metatypes.json
 
-%files -n Qt6EglSupport-devel
-%defattr(644,root,root,755)
-#%{_includedir}/qt6/QtEglSupport
-#%{_libdir}/libQt6EglSupport.a
-#%{_libdir}/libQt6EglSupport.prl
-#%{_libdir}/cmake/Qt6EglSupport
-#%{qt6dir}/mkspecs/modules/qt_lib_egl_support_private.pri
-
 %files -n Qt6FbSupport-devel
 %defattr(644,root,root,755)
-#%{_includedir}/qt6/QtFbSupport
-#%{_libdir}/libQt6FbSupport.a
-#%{_libdir}/libQt6FbSupport.prl
-#%{_libdir}/cmake/Qt6FbSupport
+%{_includedir}/qt6/QtFbSupport
+%{_libdir}/libQt6FbSupport.a
+%{_libdir}/libQt6FbSupport.prl
 %{_libdir}/cmake/Qt6FbSupportPrivate
-#%{qt6dir}/mkspecs/modules/qt_lib_fb_support_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_fb_support_private.pri
 %{_datadir}/qt6/modules/FbSupportPrivate.json
 %{_libdir}/metatypes/qt6fbsupportprivate_pld_metatypes.json
 
@@ -4249,12 +4230,18 @@ rm -rf $RPM_BUILD_ROOT
 # R: gl egl libdrm libgbm udev
 %attr(755,root,root) %{_libdir}/libQt6EglFsKmsSupport.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6EglFsKmsSupport.so.6
+%attr(755,root,root) %{_libdir}/libQt6EglFsKmsGbmSupport.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6EglFsKmsGbmSupport.so.6
 %attr(755,root,root) %{qt6dir}/plugins/egldeviceintegrations/libqeglfs-kms-integration.so
 %attr(755,root,root) %{qt6dir}/plugins/egldeviceintegrations/libqeglfs-kms-egldevice-integration.so
 
 %files -n Qt6Gui-platform-eglfs-kms-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6EglFsKmsSupport.so
+%attr(755,root,root) %{_libdir}/libQt6EglFsKmsGbmSupport.so
+%{_includedir}/qt6/QtEglFsKmsGbmSupport
+%{_includedir}/qt6/QtEglFsKmsSupport
+%{_libdir}/libQt6EglFsKmsGbmSupport.prl
 %{_libdir}/libQt6EglFsKmsSupport.prl
 %{_libdir}/cmake/Qt6EglFsKmsGbmSupportPrivate
 %{_libdir}/cmake/Qt6EglFsKmsSupportPrivate
@@ -4584,11 +4571,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6DeclarativeOpcua.so
 %{_libdir}/libQt6OpcUa.prl
 %{_libdir}/libQt6DeclarativeOpcua.prl
-%{_includedir}/qt6/QtOpcUa
 %{_includedir}/qt6/QtDeclarativeOpcua
+%{_includedir}/qt6/QtOpcUa
+%{_pkgconfigdir}/Qt6DeclarativeOpcua.pc
 %{_pkgconfigdir}/Qt6OpcUa.pc
-%{_libdir}/cmake/Qt6OpcUa
 %{_libdir}/cmake/Qt6DeclarativeOpcua
+%{_libdir}/cmake/Qt6OpcUa
 %{qt6dir}/mkspecs/modules/qt_lib_opcua.pri
 %{qt6dir}/mkspecs/modules/qt_lib_opcua_private.pri
 %{_datadir}/qt6/modules/DeclarativeOpcua.json
@@ -4622,6 +4610,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtOpenGL
 %{_includedir}/qt6/QtOpenGLWidgets
 %{_pkgconfigdir}/Qt6OpenGL.pc
+%{_pkgconfigdir}/Qt6OpenGLWidgets.pc
 %{_libdir}/cmake/Qt6OpenGL
 %{_libdir}/cmake/Qt6OpenGLWidgets
 %{qt6dir}/mkspecs/modules/qt_lib_opengl.pri
@@ -4663,6 +4652,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtPdfQuick
 %{_includedir}/qt6/QtPdfWidgets
 %{_pkgconfigdir}/Qt6Pdf.pc
+%{_pkgconfigdir}/Qt6PdfQuick.pc
 %{_pkgconfigdir}/Qt6PdfWidgets.pc
 %{_libdir}/cmake/Qt6Gui/Qt6QPdfPlugin*.cmake
 %{_libdir}/cmake/Qt6Pdf
@@ -4934,6 +4924,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtLabsSettings
 %{_includedir}/qt6/QtPositioning
 %{_includedir}/qt6/QtPositioningQuick
+%{_includedir}/qt6/QtStateMachine
 %{_includedir}/qt6/QtStateMachineQml
 %{_includedir}/qt6/QtQml
 %{_includedir}/qt6/QtQmlCompiler
@@ -4954,6 +4945,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6Qml.pc
 %{_pkgconfigdir}/Qt6QmlModels.pc
 %{_pkgconfigdir}/Qt6QmlWorkerScript.pc
+%{_pkgconfigdir}/Qt6StateMachine.pc
+%{_pkgconfigdir}/Qt6StateMachineQml.pc
+%{_pkgconfigdir}/Qt6QmlCore.pc
+%{_pkgconfigdir}/Qt6QmlIntegration.pc
+%{_pkgconfigdir}/Qt6QmlLocalStorage.pc
+%{_pkgconfigdir}/Qt6QmlXmlListModel.pc
+%{_pkgconfigdir}/Qt6Positioning.pc
+%{_pkgconfigdir}/Qt6PositioningQuick.pc
 %{_libdir}/cmake/Qt6LabsAnimation
 %{_libdir}/cmake/Qt6LabsFolderListModel
 %{_libdir}/cmake/Qt6LabsQmlModels
@@ -5291,7 +5290,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6LabsWavefrontMesh.pc
 %{_pkgconfigdir}/Qt6Quick.pc
 %{_pkgconfigdir}/Qt6QuickTest.pc
+%{_pkgconfigdir}/Qt6QuickTimeline.pc
 %{_pkgconfigdir}/Qt6QuickWidgets.pc
+%{_pkgconfigdir}/Qt6QuickControls2.pc
+%{_pkgconfigdir}/Qt6QuickControls2Impl.pc
+%{_pkgconfigdir}/Qt6QuickDialogs2.pc
+%{_pkgconfigdir}/Qt6QuickDialogs2QuickImpl.pc
+%{_pkgconfigdir}/Qt6QuickDialogs2Utils.pc
+%{_pkgconfigdir}/Qt6QuickLayouts.pc
+%{_pkgconfigdir}/Qt6QuickTemplates2.pc
 %{_libdir}/cmake/Qt6LabsSharedImage
 %{_libdir}/cmake/Qt6LabsWavefrontMesh
 %{_libdir}/cmake/Qt6Quick
@@ -5394,6 +5401,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6Quick3DAssetImport.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DAssetImport.so.6
 %attr(755,root,root) %{_libdir}/libQt6Quick3DAssetUtils.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DAssetUtils.so.6
+%attr(755,root,root) %{_libdir}/libQt6Quick3DEffects.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DEffects.so.6
 %attr(755,root,root) %{_libdir}/libQt6Quick3DGlslParser.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DGlslParser.so.6
@@ -5494,6 +5503,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6Quick3DAssetImport.pc
 %{_pkgconfigdir}/Qt6Quick3DRuntimeRender.pc
 %{_pkgconfigdir}/Qt6Quick3DUtils.pc
+%{_pkgconfigdir}/Qt6Quick3DAssetUtils.pc
+%{_pkgconfigdir}/Qt6Quick3DEffects.pc
+%{_pkgconfigdir}/Qt6Quick3DHelpers.pc
+%{_pkgconfigdir}/Qt6Quick3DIblBaker.pc
+%{_pkgconfigdir}/Qt6Quick3DParticleEffects.pc
+%{_pkgconfigdir}/Qt6Quick3DParticles.pc
 %{_libdir}/cmake/Qt6Quick3D
 %{_libdir}/cmake/Qt6Quick3DAssetImport
 %{_libdir}/cmake/Qt6Quick3DAssetUtils
@@ -5572,6 +5587,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtRemoteObjectsQml
 %{_includedir}/qt6/QtRepParser
 %{_pkgconfigdir}/Qt6RemoteObjects.pc
+%{_pkgconfigdir}/Qt6RemoteObjectsQml.pc
 %{_pkgconfigdir}/Qt6RepParser.pc
 %{_libdir}/cmake/Qt6RemoteObjects
 %{_libdir}/cmake/Qt6RemoteObjectsQml
@@ -5624,6 +5640,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtScxml
 %{_includedir}/qt6/QtScxmlQml
 %{_pkgconfigdir}/Qt6Scxml.pc
+%{_pkgconfigdir}/Qt6ScxmlQml.pc
 %{_libdir}/cmake/Qt6Scxml
 %{_libdir}/cmake/Qt6ScxmlQml
 %{_libdir}/cmake/Qt6ScxmlTools
@@ -5672,6 +5689,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtSensors
 %{_includedir}/qt6/QtSensorsQuick
 %{_pkgconfigdir}/Qt6Sensors.pc
+%{_pkgconfigdir}/Qt6SensorsQuick.pc
 %{_libdir}/cmake/Qt6Sensors
 %{_libdir}/cmake/Qt6SensorsQuick
 %{qt6dir}/mkspecs/modules/qt_lib_sensors.pri
@@ -5859,6 +5877,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtSvg
 %{_includedir}/qt6/QtSvgWidgets
 %{_pkgconfigdir}/Qt6Svg.pc
+%{_pkgconfigdir}/Qt6SvgWidgets.pc
 %{_libdir}/cmake/Qt6Svg
 %{_libdir}/cmake/Qt6SvgWidgets
 %{qt6dir}/mkspecs/modules/qt_lib_svg.pri
@@ -6380,6 +6399,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtWebView
 %{_includedir}/qt6/QtWebViewQuick
 %{_pkgconfigdir}/Qt6WebView.pc
+%{_pkgconfigdir}/Qt6WebViewQuick.pc
 %{_libdir}/cmake/Qt6WebView
 %{_libdir}/cmake/Qt6WebViewQuick
 %{qt6dir}/mkspecs/modules/qt_lib_webview.pri

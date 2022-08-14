@@ -1168,6 +1168,52 @@ Qt6 InputSupport library - development files.
 %description -n Qt6InputSupport-devel -l pl.UTF-8
 Biblioteka Qt6 InputSupport - pliki programistyczne.
 
+%package -n Qt6JsonRpc
+Summary:	Qt6 JsonRpc library
+Summary(pl.UTF-8):	Biblioteka Qt6 JsonRpc
+Group:		X11/Libraries
+Requires:	Qt6Core = %{version}
+
+%description -n Qt6JsonRpc
+Qt6 LanguageServer library provides an implementation of the JSON-RPC
+protocol.
+
+%package -n Qt6JsonRpc-devel
+Summary:	Qt6 JsonRpc library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 JsonRpc - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6JsonRpc-devel = %{version}
+
+%description -n Qt6JsonRpc-devel
+Qt6 JsonRpc library - development files.
+
+%description -n Qt6JsonRpc-devel -l pl.UTF-8
+Biblioteka Qt6 JsonRpc - pliki programistyczne.
+
+%package -n Qt6LanguageServer
+Summary:	Qt6 LanguageServer library
+Summary(pl.UTF-8):	Biblioteka Qt6 LanguageServer
+Group:		X11/Libraries
+Requires:	Qt6Core = %{version}
+
+%description -n Qt6LanguageServer
+Qt6 LanguageServer library provides an implementation of the Language
+Server Protocol.
+
+%package -n Qt6LanguageServer-devel
+Summary:	Qt6 LanguageServer library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 LanguageServer - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6LanguageServer-devel = %{version}
+
+%description -n Qt6LanguageServer-devel
+Qt6 LanguageServer library - development files.
+
+%description -n Qt6LanguageServer-devel -l pl.UTF-8
+Biblioteka Qt6 LanguageServer - pliki programistyczne.
+
 %package -n Qt6KmsSupport-devel
 Summary:	Qt6 KmsSupport library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 KmsSupport - pliki programistyczne
@@ -2271,6 +2317,64 @@ Qt6 SerialPort documentation in QCH format.
 %description -n Qt6SerialPort-doc-qch -l pl.UTF-8
 Dokumentacja do biblioteki Qt6 SerialPort w formacie QCH.
 
+%package -n qt6-shadertools
+Summary:	The Qt6 ShaderTools library comman line tools
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6ShaderTools = %{version}
+
+%description -n qt6-shadertools
+The Qt6 ShaderTools library comman line tools.
+
+%package -n Qt6ShaderTools
+Summary:	The Qt6 ShaderTools library
+Summary(pl.UTF-8):	Biblioteka Qt6 ShaderTools
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+
+%description -n Qt6ShaderTools
+The Qt Shader Tools module builds on the SPIR-V Open Source Ecosystem
+as described at the Khronos SPIR-V web site https://www.khronos.org/spir/
+
+%package -n Qt6ShaderTools-devel
+Summary:	Qt6 ShaderTools library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 ShaderTools - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6ShaderTools = %{version}
+
+%description -n Qt6ShaderTools-devel
+Qt6 ShaderTools library - development files.
+
+%description -n Qt6ShaderTools-devel -l pl.UTF-8
+Biblioteka Qt6 ShaderTools - pliki programistyczne.
+
+%package -n Qt6ShaderTools-doc
+Summary:	Qt6 ShaderTools documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 ShaderTools w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6ShaderTools-doc
+Qt6 ShaderTools documentation in HTML format.
+
+%description -n Qt6ShaderTools-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 ShaderTools w formacie HTML.
+
+%package -n Qt6ShaderTools-doc-qch
+Summary:	Qt6 ShaderTools documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 ShaderTools w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6ShaderTools-doc-qch
+Qt6 ShaderTools documentation in QCH format.
+
+%description -n Qt6ShaderTools-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 ShaderTools w formacie QCH.
+
 %package -n Qt6Sql
 Summary:	Qt6 Sql library
 Summary(pl.UTF-8):	Biblioteka Qt6 Sql
@@ -3288,6 +3392,7 @@ qmltestrunner \
 qmltime \
 qtdiag \
 qtpaths \
+qsb \
 qtplugininfo ; do
 	ln -sf ../%{_lib}/qt6/bin/${prog} ${prog}-qt6
 done
@@ -3401,6 +3506,12 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n Qt6Help -p /sbin/ldconfig
 %postun	-n Qt6Help -p /sbin/ldconfig
 
+%post	-n Qt6JsonRpc -p /sbin/ldconfig
+%postun	-n Qt6JsonRpc -p /sbin/ldconfig
+
+%post	-n Qt6LanguageServer -p /sbin/ldconfig
+%postun	-n Qt6LanguageServer -p /sbin/ldconfig
+
 %post	-n Qt6Mqtt -p /sbin/ldconfig
 %postun	-n Qt6Mqtt -p /sbin/ldconfig
 
@@ -3460,6 +3571,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	-n Qt6SerialPort -p /sbin/ldconfig
 %postun	-n Qt6SerialPort -p /sbin/ldconfig
+
+%post	-n Qt6ShaderTools -p /sbin/ldconfig
+%postun	-n Qt6ShaderTools -p /sbin/ldconfig
 
 %post	-n Qt6Sql -p /sbin/ldconfig
 %postun	-n Qt6Sql -p /sbin/ldconfig
@@ -4367,6 +4481,36 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_input_support_private.pri
 %{_datadir}/qt6/modules/InputSupportPrivate.json
 %{_libdir}/metatypes/qt6inputsupportprivate_pld_metatypes.json
+
+%files -n Qt6JsonRpc
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6JsonRpc.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6JsonRpc.so.6
+
+%files -n Qt6JsonRpc-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6JsonRpc.so
+%{_libdir}/libQt6JsonRpc.prl
+%{_includedir}/qt6/QtJsonRpc
+%{_libdir}/cmake/Qt6JsonRpcPrivate
+%{_libdir}/metatypes/qt6jsonrpcprivate_pld_metatypes.json
+%{qt6dir}/mkspecs/modules/qt_lib_jsonrpc_private.pri
+%{_datadir}/qt6/modules/JsonRpcPrivate.json
+
+%files -n Qt6LanguageServer
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6LanguageServer.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6LanguageServer.so.6
+
+%files -n Qt6LanguageServer-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6LanguageServer.so
+%{_libdir}/libQt6LanguageServer.prl
+%{_includedir}/qt6/QtLanguageServer
+%{_libdir}/cmake/Qt6LanguageServerPrivate
+%{_libdir}/metatypes/qt6languageserverprivate_pld_metatypes.json
+%{qt6dir}/mkspecs/modules/qt_lib_languageserver_private.pri
+%{_datadir}/qt6/modules/LanguageServerPrivate.json
 
 %files -n Qt6KmsSupport-devel
 %defattr(644,root,root,755)
@@ -5770,6 +5914,39 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6SerialPort-doc-qch
 %defattr(644,root,root,755)
 %{_docdir}/qt6-doc/qtserialport.qch
+%endif
+
+%files -n qt6-shadertools
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/qsb-qt6
+%attr(755,root,root) %{qt6dir}/bin/qsb
+
+%files -n Qt6ShaderTools
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6ShaderTools.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6ShaderTools.so.6
+
+%files -n Qt6ShaderTools-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6ShaderTools.so
+%{_libdir}/libQt6ShaderTools.prl
+%{_includedir}/qt6/QtShaderTools
+%{_libdir}/cmake/Qt6ShaderTools
+%{_libdir}/cmake/Qt6ShaderToolsTools
+%{_libdir}/metatypes/qt6shadertools_pld_metatypes.json
+%{_pkgconfigdir}/Qt6ShaderTools.pc
+%{qt6dir}/mkspecs/modules/qt_lib_shadertools.pri
+%{qt6dir}/mkspecs/modules/qt_lib_shadertools_private.pri
+%{_datadir}/qt6/modules/ShaderTools.json
+
+%if %{with doc}
+%files -n Qt6ShaderTools-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtshadertools
+
+%files -n Qt6ShaderTools-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtshadertools.qch
 %endif
 
 %files -n Qt6Sql

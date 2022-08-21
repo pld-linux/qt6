@@ -683,7 +683,6 @@ Requires:	libicu-devel
 Requires:	libstdc++-devel >= 6:4.7
 Requires:	pcre2-16-devel >= 10.20
 Requires:	qt6-build = %{version}
-Requires:	qt6-qmake = %{version}
 Requires:	zlib-devel >= 1.0.8
 
 %description -n Qt6Core-devel
@@ -3157,6 +3156,7 @@ Przykłady do podstawowych komponentów szkieletu aplikacji Qt6.
 Summary:	Qt6 build tools
 Summary(pl.UTF-8):	Narzędzia do budowania dla Qt6
 Group:		Development/Tools
+Provides:	qt6-qmake = %{version}-%{release}
 
 %description -n qt6-build
 This package includes the Qt resource compiler (rcc), meta objects
@@ -3166,17 +3166,6 @@ compiler (moc), user interface compiler (uic) etc.
 Ten pakiet zawiera kompilator zasobów Qt (rcc), kompilator
 metaobiektów (moc), kompilator interfejsów użytkownika (uic) i podobne
 narzędzia.
-
-%package -n qt6-qmake
-Summary:	Qt6 makefile generator
-Summary(pl.UTF-8):	Generator plików makefile dla aplikacji Qt6
-Group:		Development/Tools
-
-%description -n qt6-qmake
-Qt6 makefile generator.
-
-%description -n qt6-qmake -l pl.UTF-8
-Generator plików makefile dla aplikacji Qt6.
 
 %prep
 %setup -q -n qt-everywhere-src-%{version}
@@ -3395,6 +3384,7 @@ qmlprofiler \
 qmlscene \
 qmltestrunner \
 qmltime \
+qt-cmake \
 qtdiag \
 qtpaths \
 qsb \
@@ -6711,7 +6701,9 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with doc}
 %files doc
 %defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtdoc
 %{_docdir}/qt6-doc/qmake
+%{_docdir}/qt6-doc/qtcmake
 %{_docdir}/qt6-doc/qtconcurrent
 %{_docdir}/qt6-doc/qtcore
 %{_docdir}/qt6-doc/qtdbus
@@ -6727,7 +6719,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files doc-qch
 %defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtdoc.qch
 %{_docdir}/qt6-doc/qmake.qch
+%{_docdir}/qt6-doc/qtcmake.qch
 %{_docdir}/qt6-doc/qtconcurrent.qch
 %{_docdir}/qt6-doc/qtcore.qch
 %{_docdir}/qt6-doc/qtdbus.qch
@@ -6748,26 +6742,30 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n qt6-build
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/qt-cmake-qt6
 %attr(755,root,root) %{_bindir}/moc-qt6
 %attr(755,root,root) %{_bindir}/qdbuscpp2xml-qt6
 %attr(755,root,root) %{_bindir}/qdbusxml2cpp-qt6
 %attr(755,root,root) %{_bindir}/qdoc-qt6
 %attr(755,root,root) %{_bindir}/qlalr-qt6
+%attr(755,root,root) %{_bindir}/qmake-qt6
 %attr(755,root,root) %{_bindir}/rcc-qt6
 %attr(755,root,root) %{_bindir}/uic-qt6
 %attr(755,root,root) %{qt6dir}/bin/qdbuscpp2xml
 %attr(755,root,root) %{qt6dir}/bin/qdbusxml2cpp
+%attr(755,root,root) %{qt6dir}/bin/qmake
+%attr(755,root,root) %{qt6dir}/bin/qmake6
+%attr(755,root,root) %{qt6dir}/bin/qt-cmake
+%attr(755,root,root) %{qt6dir}/bin/qt-cmake-private
+%attr(755,root,root) %{qt6dir}/bin/qt-cmake-private-install.cmake
+%attr(755,root,root) %{qt6dir}/bin/qt-cmake-standalone-test
 %attr(755,root,root) %{qt6dir}/libexec/moc
 %attr(755,root,root) %{qt6dir}/libexec/qlalr
 %attr(755,root,root) %{qt6dir}/libexec/rcc
 %attr(755,root,root) %{qt6dir}/libexec/syncqt.pl
 %attr(755,root,root) %{qt6dir}/libexec/uic
-
-%files -n qt6-qmake
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/qmake-qt6
-%attr(755,root,root) %{qt6dir}/bin/qmake
-%attr(755,root,root) %{qt6dir}/bin/qmake6
+%attr(755,root,root) %{qt6dir}/libexec/cmake_automoc_parser
+%attr(755,root,root) %{qt6dir}/libexec/ensure_pro_file.cmake
 %{qt6dir}/mkspecs/aix-*
 %{qt6dir}/mkspecs/android-*
 %{qt6dir}/mkspecs/common

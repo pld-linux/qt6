@@ -3353,6 +3353,11 @@ DESTDIR=$RPM_BUILD_ROOT %{__cmake} --install build/
 
 %if %{with doc}
 DESTDIR=$RPM_BUILD_ROOT %{__cmake} --build build/ --target install_docs
+
+# win32 only
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/qt6-doc/activeqt*
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/qt6-doc/qtdoc/activeqt*
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/qt6-doc/qtdoc/qt-activex*
 %endif
 
 # external plugins loaded from qtbase libs
@@ -4033,6 +4038,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6ChartsQml
 %{qt6dir}/mkspecs/modules/qt_lib_charts.pri
 %{qt6dir}/mkspecs/modules/qt_lib_charts_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_chartsqml.pri
+%{qt6dir}/mkspecs/modules/qt_lib_chartsqml_private.pri
 %{_datadir}/qt6/modules/Charts.json
 %{_datadir}/qt6/modules/ChartsQml.json
 %{_libdir}/metatypes/qt6charts_pld_metatypes.json
@@ -4157,6 +4164,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6DataVisualizationQml
 %{qt6dir}/mkspecs/modules/qt_lib_datavisualization.pri
 %{qt6dir}/mkspecs/modules/qt_lib_datavisualization_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_datavisualizationqml.pri
+%{qt6dir}/mkspecs/modules/qt_lib_datavisualizationqml_private.pri
 %{_datadir}/qt6/modules/DataVisualization.json
 %{_datadir}/qt6/modules/DataVisualizationQml.json
 %{_libdir}/metatypes/qt6datavisualization_pld_metatypes.json
@@ -4362,6 +4371,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Gui/Qt6QEglFSKmsEglDeviceIntegrationPlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QEglFSKmsGbmIntegrationPlugin*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_eglfs_kms_support_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_eglfs_kms_gbm_support_private.pri
 %{_datadir}/qt6/modules/EglFsKmsGbmSupportPrivate.json
 %{_datadir}/qt6/modules/EglFsKmsSupportPrivate.json
 %{_libdir}/metatypes/qt6eglfskmssupportprivate_pld_metatypes.json
@@ -4721,6 +4731,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6OpcUa.pc
 %{_libdir}/cmake/Qt6DeclarativeOpcua
 %{_libdir}/cmake/Qt6OpcUa
+%{qt6dir}/mkspecs/modules/qt_lib_declarativeopcua.pri
+%{qt6dir}/mkspecs/modules/qt_lib_declarativeopcua_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_opcua.pri
 %{qt6dir}/mkspecs/modules/qt_lib_opcua_private.pri
 %{_datadir}/qt6/modules/DeclarativeOpcua.json
@@ -4759,6 +4771,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6OpenGLWidgets
 %{qt6dir}/mkspecs/modules/qt_lib_opengl.pri
 %{qt6dir}/mkspecs/modules/qt_lib_opengl_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_openglwidgets.pri
+%{qt6dir}/mkspecs/modules/qt_lib_openglwidgets_private.pri
 %{_datadir}/qt6/modules/OpenGL.json
 %{_datadir}/qt6/modules/OpenGLWidgets.json
 %{_libdir}/metatypes/qt6opengl_pld_metatypes.json
@@ -4804,6 +4818,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6PdfWidgets
 %{qt6dir}/mkspecs/modules/qt_lib_pdf.pri
 %{qt6dir}/mkspecs/modules/qt_lib_pdf_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_pdfquick.pri
+%{qt6dir}/mkspecs/modules/qt_lib_pdfquick_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_pdfwidgets.pri
 %{qt6dir}/mkspecs/modules/qt_lib_pdfwidgets_private.pri
 %{_datadir}/qt6/modules/Pdf.json
@@ -5130,15 +5146,34 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_labssettings.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labssettings_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_packetprotocol_private.pri
-%{qt6dir}/mkspecs/modules/qt_lib_qml.pri
-%{qt6dir}/mkspecs/modules/qt_lib_qml_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_positioning.pri
+%{qt6dir}/mkspecs/modules/qt_lib_positioning_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_positioningquick.pri
+%{qt6dir}/mkspecs/modules/qt_lib_positioningquick_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmlcompiler_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmlcore.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmlcore_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmldebug_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmldom_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmlintegration.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmlintegration_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmllint_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmllocalstorage.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmllocalstorage_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlmodels.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlmodels_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qml.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qml_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmltest.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmltest_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlworkerscript.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlworkerscript_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmlxmllistmodel.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmlxmllistmodel_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_statemachine.pri
+%{qt6dir}/mkspecs/modules/qt_lib_statemachine_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_statemachineqml.pri
+%{qt6dir}/mkspecs/modules/qt_lib_statemachineqml_private.pri
 %{_datadir}/qt6/modules/LabsAnimation.json
 %{_datadir}/qt6/modules/LabsFolderListModel.json
 %{_datadir}/qt6/modules/LabsQmlModels.json
@@ -5163,6 +5198,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with doc}
 %files -n Qt6Qml-doc
 %defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtlabsplatform
 %{_docdir}/qt6-doc/qtplatformintegration
 %{_docdir}/qt6-doc/qtpositioning
 %{_docdir}/qt6-doc/qtqml
@@ -5175,6 +5211,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Qml-doc-qch
 %defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtlabsplatform.qch
 %{_docdir}/qt6-doc/qtplatformintegration.qch
 %{_docdir}/qt6-doc/qtpositioning.qch
 %{_docdir}/qt6-doc/qtqmlcore.qch
@@ -5465,10 +5502,26 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_labssharedimage_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labswavefrontmesh.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2impl.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2impl_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrolstestutilsprivate_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickdialogs2.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickdialogs2_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickdialogs2quickimpl.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickdialogs2quickimpl_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickdialogs2utils.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickdialogs2utils_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quicklayouts.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quicklayouts_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickparticles_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick_private.pri
-%{qt6dir}/mkspecs/modules/qt_lib_quickparticles_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickshapes_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quicktemplates2.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quicktemplates2_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quicktestutilsprivate_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickwidgets.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickwidgets_private.pri
 %{_datadir}/qt6/modules/LabsSharedImage.json
@@ -5665,10 +5718,23 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Quick3DRuntimeRender
 %{_libdir}/cmake/Qt6Quick3DTools
 %{_libdir}/cmake/Qt6Quick3DUtils
-%{qt6dir}/mkspecs/modules/qt_lib_quick3d.pri
-%{qt6dir}/mkspecs/modules/qt_lib_quick3d_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dassetimport.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dassetimport_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dassetutils.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dassetutils_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3deffects.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3deffects_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dglslparser_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dhelpers.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dhelpers_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3diblbaker.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3diblbaker_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dparticleeffects.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dparticleeffects_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dparticles.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dparticles_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3d.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3d_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick3druntimerender.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick3druntimerender_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dutils.pri
@@ -5742,6 +5808,8 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/features/repparser.prf
 %{qt6dir}/mkspecs/modules/qt_lib_remoteobjects.pri
 %{qt6dir}/mkspecs/modules/qt_lib_remoteobjects_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_remoteobjectsqml.pri
+%{qt6dir}/mkspecs/modules/qt_lib_remoteobjectsqml_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_repparser.pri
 %{qt6dir}/mkspecs/modules/qt_lib_repparser_private.pri
 %{_datadir}/qt6/modules/RemoteObjects.json
@@ -5791,6 +5859,8 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/features/qscxmlc.prf
 %{qt6dir}/mkspecs/modules/qt_lib_scxml.pri
 %{qt6dir}/mkspecs/modules/qt_lib_scxml_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_scxmlqml.pri
+%{qt6dir}/mkspecs/modules/qt_lib_scxmlqml_private.pri
 %{_datadir}/qt6/modules/Scxml.json
 %{_datadir}/qt6/modules/ScxmlQml.json
 %{_libdir}/metatypes/qt6scxml_pld_metatypes.json
@@ -5838,6 +5908,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6SensorsQuick
 %{qt6dir}/mkspecs/modules/qt_lib_sensors.pri
 %{qt6dir}/mkspecs/modules/qt_lib_sensors_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_sensorsquick.pri
+%{qt6dir}/mkspecs/modules/qt_lib_sensorsquick_private.pri
 %{_datadir}/qt6/modules/Sensors.json
 %{_datadir}/qt6/modules/SensorsQuick.json
 %{_libdir}/metatypes/qt6sensors_pld_metatypes.json
@@ -6059,6 +6131,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6SvgWidgets
 %{qt6dir}/mkspecs/modules/qt_lib_svg.pri
 %{qt6dir}/mkspecs/modules/qt_lib_svg_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_svgwidgets.pri
+%{qt6dir}/mkspecs/modules/qt_lib_svgwidgets_private.pri
 %{_datadir}/qt6/modules/Svg.json
 %{_datadir}/qt6/modules/SvgWidgets.json
 %{_libdir}/metatypes/qt6svg_pld_metatypes.json
@@ -6267,6 +6341,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6WaylandEglCompositorHwIntegrationPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_waylandcompositor.pri
 %{qt6dir}/mkspecs/modules/qt_lib_waylandcompositor_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_wayland_egl_compositor_hw_integration_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_waylandglobal_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_wl_shell_integration_private.pri
 %{_datadir}/qt6/modules/WaylandCompositor.json
 %{_datadir}/qt6/modules/WaylandEglCompositorHwIntegrationPrivate.json
 %{_datadir}/qt6/modules/WaylandGlobalPrivate.json
@@ -6329,6 +6406,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6WaylandEglClientHwIntegrationPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_waylandclient.pri
 %{qt6dir}/mkspecs/modules/qt_lib_waylandclient_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_wayland_egl_client_hw_integration_private.pri
 %{_datadir}/qt6/modules/WaylandClient.json
 %{_datadir}/qt6/modules/WaylandEglClientHwIntegrationPrivate.json
 %{_libdir}/metatypes/qt6waylandclient_pld_metatypes.json
@@ -6488,13 +6566,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6WebEngineQuick
 %{_libdir}/cmake/Qt6WebEngineQuickDelegatesQml
 %{_libdir}/cmake/Qt6WebEngineWidgets
-#%{qt6dir}/mkspecs/modules/qt_lib_webengine.pri
-#%{qt6dir}/mkspecs/modules/qt_lib_webengine_private.pri
-%{_libdir}/qt6/mkspecs/modules/qt_lib_webenginecore.pri
-%{_libdir}/qt6/mkspecs/modules/qt_lib_webenginecore_private.pri
-#%{_libdir}/qt6/mkspecs/modules/qt_lib_webenginecoreheaders_private.pri
-%{_libdir}/qt6/mkspecs/modules/qt_lib_webenginewidgets.pri
-%{_libdir}/qt6/mkspecs/modules/qt_lib_webenginewidgets_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_webenginecore.pri
+%{qt6dir}/mkspecs/modules/qt_lib_webenginecore_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_webenginequickdelegatesqml.pri
+%{qt6dir}/mkspecs/modules/qt_lib_webenginequickdelegatesqml_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_webenginequick.pri
+%{qt6dir}/mkspecs/modules/qt_lib_webenginequick_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_webenginewidgets.pri
+%{qt6dir}/mkspecs/modules/qt_lib_webenginewidgets_private.pri
 %{_datadir}/qt6/modules/WebEngineCore.json
 %{_datadir}/qt6/modules/WebEngineQuick.json
 %{_datadir}/qt6/modules/WebEngineQuickDelegatesQml.json
@@ -6581,6 +6660,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6WebViewQuick
 %{qt6dir}/mkspecs/modules/qt_lib_webview.pri
 %{qt6dir}/mkspecs/modules/qt_lib_webview_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_webviewquick.pri
+%{qt6dir}/mkspecs/modules/qt_lib_webviewquick_private.pri
 %{_datadir}/qt6/modules/WebView.json
 %{_datadir}/qt6/modules/WebViewQuick.json
 %{_libdir}/metatypes/qt6webview_pld_metatypes.json
@@ -6690,10 +6771,10 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/aix-*
 %{qt6dir}/mkspecs/android-*
 %{qt6dir}/mkspecs/common
-%{qt6dir}/mkspecs/dummy
 %{qt6dir}/mkspecs/cygwin-*
 %{qt6dir}/mkspecs/darwin-*
 %{qt6dir}/mkspecs/devices
+%{qt6dir}/mkspecs/dummy
 %{qt6dir}/mkspecs/features
 %{qt6dir}/mkspecs/freebsd-*
 %{qt6dir}/mkspecs/haiku-*
@@ -6707,9 +6788,9 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/macx-*
 %{qt6dir}/mkspecs/netbsd-*
 %{qt6dir}/mkspecs/openbsd-*
+%{qt6dir}/mkspecs/*.pri
 %{qt6dir}/mkspecs/qnx-*
 %{qt6dir}/mkspecs/solaris-*
 %{qt6dir}/mkspecs/unsupported
 %{qt6dir}/mkspecs/wasm-emscripten
 %{qt6dir}/mkspecs/win32-*
-%{qt6dir}/mkspecs/*.pri

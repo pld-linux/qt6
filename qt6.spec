@@ -6,16 +6,20 @@
 #
 # TODO:
 #   /usr/include/qt6/QtTools
+#   /usr/lib64/cmake/Qt6Tools
+#   /usr/lib64/cmake/Qt6ToolsTools
+#   /usr/lib64/qt6/mkspecs/modules/qt_lib_tools_private.pri
+#   /usr/share/qt6/modules/Tools.json
+#
 #   /usr/lib64/cmake/Qt6BundledOpenwnn/Qt6BundledOpenwnnDependencies.cmake
 #   /usr/lib64/cmake/Qt6BundledPinyin/Qt6BundledPinyinDependencies.cmake
 #   /usr/lib64/cmake/Qt6BundledTcime/Qt6BundledTcimeDependencies.cmake
 #   /usr/lib64/cmake/Qt6Bundled_Clip2Tri/Qt6Bundled_Clip2TriDependencies.cmake
+#
 #   /usr/lib64/cmake/Qt6Gui/Qt6QVkKhrDisplayIntegrationPlugin*.cmake
 #   /usr/lib64/cmake/Qt6Gui/Qt6QWbmpPlugin*.cmake
 #   /usr/lib64/cmake/Qt6GuiTools/Qt6GuiTools*.cmake
 #   /usr/lib64/cmake/Qt6HostInfo/Qt6HostInfoConfig.cmake
-#   /usr/lib64/cmake/Qt6Tools
-#   /usr/lib64/cmake/Qt6ToolsTools
 #   /usr/lib64/objects-PLD/QmlCompilerPrivate_resources_1/.rcc/qrc_builtins.cpp.o
 #   /usr/lib64/pkgconfig/Qt6Platform.pc
 #   /usr/lib64/qt6/bin/androiddeployqt
@@ -31,11 +35,6 @@
 #   /usr/lib64/qt6/libexec/android_emulator_launcher.sh
 #   /usr/lib64/qt6/libexec/gn
 #   /usr/lib64/qt6/mkspecs/modules/README
-#   /usr/lib64/qt6/mkspecs/modules/qt_lib_linguist.pri
-#   /usr/lib64/qt6/mkspecs/modules/qt_lib_linguist_private.pri
-#   /usr/lib64/qt6/mkspecs/modules/qt_lib_quicktimeline.pri
-#   /usr/lib64/qt6/mkspecs/modules/qt_lib_quicktimeline_private.pri
-#   /usr/lib64/qt6/mkspecs/modules/qt_lib_tools_private.pri
 #   /usr/lib64/qt6/mkspecs/qtdoc_dummy_file.txt
 #   /usr/lib64/qt6/plugins/networkinformation/libqglib.so
 #   /usr/lib64/qt6/plugins/networkinformation/libqnetworkmanager.so
@@ -46,7 +45,6 @@
 #   /usr/lib64/qt6/plugins/renderers/librhirenderer.so
 #   /usr/lib64/qt6/plugins/tls/libqcertonlybackend.so
 #   /usr/lib64/qt6/plugins/tls/libqopensslbackend.so
-#   /usr/share/qt6/modules/Tools.json
 #
 # Conditional build:
 # -- build targets
@@ -2887,7 +2885,6 @@ Group:		Libraries
 Requires:	Qt6Core = %{version}
 Requires:	Qt6Gui = %{version}
 Requires:	Qt6Network = %{version}
-Requires:	Qt6Positioning = %{version}
 Requires:	Qt6Qml = %{version}
 Requires:	Qt6Quick = %{version}
 Requires:	Qt6WebChannel = %{version}
@@ -2917,7 +2914,6 @@ Group:		Development/Libraries
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}
 Requires:	Qt6Network-devel = %{version}
-Requires:	Qt6Positioning-devel = %{version}
 Requires:	Qt6PrintSupport-devel = %{version}
 Requires:	Qt6Qml-devel = %{version}
 Requires:	Qt6Quick-devel = %{version}
@@ -3694,10 +3690,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/libexec/lrelease-pro
 %attr(755,root,root) %{qt6dir}/libexec/lupdate-pro
 %{_datadir}/qt6/phrasebooks
+# devel?
 %{_libdir}/cmake/Qt6Linguist
 %{_libdir}/cmake/Qt6LinguistTools
 %{_pkgconfigdir}/Qt6Linguist.pc
 %{_datadir}/qt6/modules/Linguist.json
+%{qt6dir}/mkspecs/modules/qt_lib_linguist.pri
+%{qt6dir}/mkspecs/modules/qt_lib_linguist_private.pri
 
 %files -n qt6-qdbus
 %defattr(644,root,root,755)
@@ -5491,6 +5490,8 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_quicktemplates2.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quicktemplates2_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quicktestutilsprivate_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quicktimeline.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quicktimeline_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickwidgets.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickwidgets_private.pri
 %{_datadir}/qt6/modules/LabsSharedImage.json

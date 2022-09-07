@@ -5,46 +5,26 @@
 # together with module, and the rest of .cmake files in appropriate -devel subpackage.
 #
 # TODO:
-#   /usr/include/qt6/QtTools
-#   /usr/lib64/cmake/Qt6Tools
-#   /usr/lib64/cmake/Qt6ToolsTools
-#   /usr/lib64/qt6/mkspecs/modules/qt_lib_tools_private.pri
-#   /usr/share/qt6/modules/Tools.json
 #
 #   /usr/lib64/cmake/Qt6BundledOpenwnn/Qt6BundledOpenwnnDependencies.cmake
 #   /usr/lib64/cmake/Qt6BundledPinyin/Qt6BundledPinyinDependencies.cmake
 #   /usr/lib64/cmake/Qt6BundledTcime/Qt6BundledTcimeDependencies.cmake
 #   /usr/lib64/cmake/Qt6Bundled_Clip2Tri/Qt6Bundled_Clip2TriDependencies.cmake
 #
-#   /usr/lib64/cmake/Qt6Gui/Qt6QVkKhrDisplayIntegrationPlugin*.cmake
-#   /usr/lib64/cmake/Qt6Gui/Qt6QWbmpPlugin*.cmake
-#   /usr/lib64/cmake/Qt6GuiTools/Qt6GuiTools*.cmake
 #   /usr/lib64/cmake/Qt6HostInfo/Qt6HostInfoConfig.cmake
 #   /usr/lib64/objects-PLD/QmlCompilerPrivate_resources_1/.rcc/qrc_builtins.cpp.o
-#   /usr/lib64/pkgconfig/Qt6Platform.pc
-#   /usr/lib64/qt6/bin/androiddeployqt
-#   /usr/lib64/qt6/bin/androidtestrunner
-#   /usr/lib64/qt6/bin/balsamui
 #   /usr/lib64/qt6/bin/instancer
 #   /usr/lib64/qt6/bin/materialeditor
 #   /usr/lib64/qt6/bin/qt-configure-module
-#   /usr/lib64/qt6/bin/qtdiag6
-#   /usr/lib64/qt6/bin/qtpaths6
 #   /usr/lib64/qt6/bin/shadergen
 #   /usr/lib64/qt6/bin/shapegen
-#   /usr/lib64/qt6/libexec/android_emulator_launcher.sh
 #   /usr/lib64/qt6/libexec/gn
 #   /usr/lib64/qt6/mkspecs/modules/README
 #   /usr/lib64/qt6/mkspecs/qtdoc_dummy_file.txt
+# android:
+#   /usr/lib64/qt6/libexec/android_emulator_launcher.sh
 #   /usr/lib64/qt6/plugins/networkinformation/libqglib.so
 #   /usr/lib64/qt6/plugins/networkinformation/libqnetworkmanager.so
-#   /usr/lib64/qt6/plugins/platforms/libqvkkhrdisplay.so
-#   /usr/lib64/qt6/plugins/position/libqtposition_geoclue2.so
-#   /usr/lib64/qt6/plugins/position/libqtposition_nmea.so
-#   /usr/lib64/qt6/plugins/position/libqtposition_positionpoll.so
-#   /usr/lib64/qt6/plugins/renderers/librhirenderer.so
-#   /usr/lib64/qt6/plugins/tls/libqcertonlybackend.so
-#   /usr/lib64/qt6/plugins/tls/libqopensslbackend.so
 #
 # Conditional build:
 # -- build targets
@@ -108,7 +88,7 @@ Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
 Version:	6.3.1
-Release:	0.1
+Release:	0.2
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.3/%{version}/single/qt-everywhere-src-%{version}.tar.xz
@@ -407,6 +387,7 @@ Requires:	Qt6Concurrent-devel = %{version}
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}
 Requires:	Qt6Qml-devel = %{version}
+Requires:	qt6-qttools = %{version}
 
 %description -n Qt63D-devel
 Qt6 3D - development files.
@@ -3652,10 +3633,20 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/qtdiag-qt6
 %attr(755,root,root) %{_bindir}/qtpaths-qt6
 %attr(755,root,root) %{_bindir}/qtplugininfo-qt6
+%attr(755,root,root) %{qt6dir}/bin/androiddeployqt
+%attr(755,root,root) %{qt6dir}/bin/androidtestrunner
 %attr(755,root,root) %{qt6dir}/bin/pixeltool
 %attr(755,root,root) %{qt6dir}/bin/qtdiag
+%attr(755,root,root) %{qt6dir}/bin/qtdiag6
 %attr(755,root,root) %{qt6dir}/bin/qtpaths
+%attr(755,root,root) %{qt6dir}/bin/qtpaths6
 %attr(755,root,root) %{qt6dir}/bin/qtplugininfo
+# devel?
+%{_includedir}/qt6/QtTools
+%{_libdir}/cmake/Qt6Tools
+%{_libdir}/cmake/Qt6ToolsTools
+%{qt6dir}/mkspecs/modules/qt_lib_tools_private.pri
+%{_datadir}/qt6/modules/Tools.json
 
 %files -n qt6-assistant -f assistant.lang
 %defattr(644,root,root,755)
@@ -3689,8 +3680,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/libexec/lprodump
 %attr(755,root,root) %{qt6dir}/libexec/lrelease-pro
 %attr(755,root,root) %{qt6dir}/libexec/lupdate-pro
-%{_datadir}/qt6/phrasebooks
 # devel?
+%{_datadir}/qt6/phrasebooks
 %{_libdir}/cmake/Qt6Linguist
 %{_libdir}/cmake/Qt6LinguistTools
 %{_pkgconfigdir}/Qt6Linguist.pc
@@ -3788,7 +3779,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/qt6/plugins/geometryloaders/libgltfgeometryloader.so
 # - loaded from src/render/qrendererpluginfactory.cpp
 %dir %{qt6dir}/plugins/renderers
-%{qt6dir}/plugins/renderers/libopenglrenderer.so
+%attr(755,root,root) %{qt6dir}/plugins/renderers/libopenglrenderer.so
+%attr(755,root,root) %{qt6dir}/plugins/renderers/librhirenderer.so
 # - loaded from src/render/frontend/qrenderpluginfactory.cpp
 %dir %{qt6dir}/plugins/renderplugins
 %attr(755,root,root) %{_libdir}/qt6/plugins/renderplugins/libscene2d.so
@@ -4118,6 +4110,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/qml/QtCore/libqtqmlcoreplugin.so
 %{qt6dir}/qml/QtCore/plugins.qmltypes
 %{qt6dir}/qml/QtCore/qmldir
+%dir %{qt6dir}/plugins/tls
+%attr(755,root,root) %{qt6dir}/plugins/tls/libqcertonlybackend.so
+%attr(755,root,root) %{qt6dir}/plugins/tls/libqopensslbackend.so
+%dir %{qt6dir}/plugins/platforms
+%attr(755,root,root) %{qt6dir}/plugins/platforms/libqvkkhrdisplay.so
 
 %files -n Qt6Core-devel
 %defattr(644,root,root,755)
@@ -4129,6 +4126,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_includedir}/qt6/QtSolutions
 %{_includedir}/qt6/QtCore
 %{_pkgconfigdir}/Qt6Core.pc
+%{_pkgconfigdir}/Qt6Platform.pc
 %{_libdir}/cmake/Qt6
 %{_libdir}/cmake/Qt6Core
 %{_libdir}/cmake/Qt6CoreTools
@@ -4454,6 +4452,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Gui/Qt6QMngPlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QTgaPlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QTiffPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QVkKhrDisplayIntegrationPlugin*.cmake
+%{_libdir}/cmake/Qt6GuiTools
 %{qt6dir}/mkspecs/modules/qt_lib_gui.pri
 %{qt6dir}/mkspecs/modules/qt_lib_gui_private.pri
 %{_datadir}/qt6/modules/Gui.json
@@ -4928,6 +4928,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_profiler.so
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_server.so
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_tcp.so
+%dir %{qt6dir}/plugins/position
+%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_geoclue2.so
+%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_nmea.so
+%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_positionpoll.so
 
 %dir %{qt6dir}/qml
 %dir %{qt6dir}/qml/Qt
@@ -5585,9 +5589,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/bin/balsam
 %attr(755,root,root) %{qt6dir}/bin/meshdebug
 %dir %{qt6dir}/plugins/assetimporters
-# Qt6Core Qt6Gui Qt6Quick3DAssetImport assimp
 %attr(755,root,root) %{qt6dir}/plugins/assetimporters/libassimp.so
-# Qt6Core Qt6Gui Qt6Quick3DAssetImport
 %attr(755,root,root) %{qt6dir}/plugins/assetimporters/libuip.so
 %dir %{qt6dir}/plugins/qmltooling
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_quick3dprofiler.so
@@ -6499,6 +6501,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6WebEngineQuickDelegatesQml
 %{_libdir}/cmake/Qt6WebEngineWidgets
 %{_libdir}/cmake/Qt6Gui/Qt6QWebpPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QWbmpPlugin*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_webenginecore.pri
 %{qt6dir}/mkspecs/modules/qt_lib_webenginecore_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_webenginequickdelegatesqml.pri

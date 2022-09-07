@@ -4272,6 +4272,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/plugins/imageformats/libqtga.so
 %attr(755,root,root) %{qt6dir}/plugins/imageformats/libqtiff.so
 %attr(755,root,root) %{qt6dir}/plugins/imageformats/libqwbmp.so
+%attr(755,root,root) %{qt6dir}/plugins/imageformats/libqwebp.so
 # loaded from src/gui/kernel/qplatforminputcontextfactory.cpp
 %dir %{qt6dir}/plugins/platforminputcontexts
 %attr(755,root,root) %{qt6dir}/plugins/platforminputcontexts/libcomposeplatforminputcontextplugin.so
@@ -4453,6 +4454,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Gui/Qt6QTgaPlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QTiffPlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QVkKhrDisplayIntegrationPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QWebpPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QWbmpPlugin*.cmake
 %{_libdir}/cmake/Qt6GuiTools
 %{qt6dir}/mkspecs/modules/qt_lib_gui.pri
 %{qt6dir}/mkspecs/modules/qt_lib_gui_private.pri
@@ -6413,7 +6416,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libQt6WebEngineQuickDelegatesQml.so.6
 %attr(755,root,root) %{_libdir}/libQt6WebEngineWidgets.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6WebEngineWidgets.so.6
-%attr(755,root,root) %{qt6dir}/plugins/imageformats/libqwebp.so
 %dir %{qt6dir}/qml/QtWebEngine
 %{qt6dir}/qml/QtWebEngine/plugins.qmltypes
 %{qt6dir}/qml/QtWebEngine/qmldir
@@ -6500,8 +6502,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6WebEngineQuick
 %{_libdir}/cmake/Qt6WebEngineQuickDelegatesQml
 %{_libdir}/cmake/Qt6WebEngineWidgets
-%{_libdir}/cmake/Qt6Gui/Qt6QWebpPlugin*.cmake
-%{_libdir}/cmake/Qt6Gui/Qt6QWbmpPlugin*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_webenginecore.pri
 %{qt6dir}/mkspecs/modules/qt_lib_webenginecore_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_webenginequickdelegatesqml.pri

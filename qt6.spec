@@ -88,7 +88,7 @@ Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
 Version:	6.3.1
-Release:	1
+Release:	2
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.3/%{version}/single/qt-everywhere-src-%{version}.tar.xz
@@ -3646,6 +3646,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Tools
 %{_libdir}/cmake/Qt6ToolsTools
 %{qt6dir}/mkspecs/modules/qt_lib_tools_private.pri
+%dir %{_datadir}/qt6/modules
 %{_datadir}/qt6/modules/Tools.json
 
 %files -n qt6-assistant -f assistant.lang
@@ -4204,6 +4205,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libQt6Designer.so.6
 %attr(755,root,root) %{_libdir}/libQt6DesignerComponents.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6DesignerComponents.so.6
+%dir %{qt6dir}/plugins/designer
 
 %files -n Qt6Designer-devel
 %defattr(644,root,root,755)
@@ -4214,6 +4216,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtDesigner
 %{_includedir}/qt6/QtDesignerComponents
 %{_pkgconfigdir}/Qt6Designer.pc
+%dir %{_libdir}/cmake/Qt6Designer
 %{_libdir}/cmake/Qt6Designer/Qt6Designer*.cmake
 %{_libdir}/cmake/Qt6DesignerComponentsPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_designer.pri

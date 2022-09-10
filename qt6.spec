@@ -387,7 +387,6 @@ Requires:	Qt6Concurrent-devel = %{version}
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}
 Requires:	Qt6Qml-devel = %{version}
-Requires:	qt6-qttools = %{version}
 
 %description -n Qt63D-devel
 Qt6 3D - development files.
@@ -706,6 +705,7 @@ Requires:	libicu-devel
 Requires:	libstdc++-devel >= 6:4.7
 Requires:	pcre2-16-devel >= 10.20
 Requires:	qt6-build = %{version}
+Requires:	qt6-qttools = %{version}
 Requires:	zlib-devel >= 1.0.8
 
 %description -n Qt6Core-devel

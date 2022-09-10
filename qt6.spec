@@ -2791,7 +2791,6 @@ Group:		Development/Libraries
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6DBus-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}
-Requires:	Qt6PlatformCompositorSupport-devel = %{version}
 Requires:	Qt6WaylandClient = %{version}
 Requires:	wayland-devel >= 1.4.0
 Requires:	xorg-lib-libxkbcommon-devel >= 0.2.0

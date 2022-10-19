@@ -77,7 +77,7 @@
 %ifnarch %{arm} aarch64
 %define		with_red_reloc	1
 %endif
-%ifarch %{ix86} x32
+%ifnarch %{x8664} aarch64
 %undefine	with_webengine
 %endif
 

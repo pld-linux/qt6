@@ -29,6 +29,8 @@
 # Conditional build:
 # -- build targets
 %bcond_without	doc		# Documentation
+%bcond_without	qt3d		# Qt 3d
+%bcond_without	qtquick3d	# Qt Quick3d
 %bcond_without	qtwebengine	# Qt WebEngine
 # -- features
 %bcond_without	cups		# CUPS printing support
@@ -107,7 +109,9 @@ BuildRequires:	OpenGL-devel
 %{?with_kms:BuildRequires:	OpenGLESv2-devel}
 BuildRequires:	Vulkan-Loader-devel
 BuildRequires:	alsa-lib-devel
+%if %{with qt3d} || %{with qtquick3d}
 BuildRequires:	assimp-devel >= 5
+%endif
 BuildRequires:	at-spi2-core-devel
 BuildRequires:	bluez-libs-devel
 # qdoc
@@ -3242,6 +3246,8 @@ mkdir -p build
 cd build
 %cmake ../ \
 	-GNinja \
+	%{cmake_on_off qt3d BUILD_qt3d} \
+	%{cmake_on_off qtquick3d BUILD_qtquick3d} \
 	%{cmake_on_off qtwebengine BUILD_qtwebengine} \
 	-DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/samu \
 	-DNinja_EXECUTABLE:FILEPATH=/usr/bin/samu \
@@ -3747,6 +3753,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/libexec/qmlimportscanner
 %attr(755,root,root) %{qt6dir}/libexec/qmltyperegistrar
 
+%if %{with qt3d}
 %files -n Qt63D
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt63DAnimation.so.*.*.*
@@ -3945,6 +3952,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt63D-doc-qch
 %defattr(644,root,root,755)
 %{_docdir}/qt6-doc/qt3d.qch
+%endif
 %endif
 
 %files -n Qt6Bluetooth
@@ -5567,6 +5575,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtquicktimeline.qch
 %endif
 
+%if %{with qtquick3d}
 %files -n Qt6Quick3D
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Quick3D.so.*.*.*
@@ -5739,6 +5748,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6Quick3D-doc-qch
 %defattr(644,root,root,755)
 %{_docdir}/qt6-doc/qtquick3d.qch
+%endif
 %endif
 
 %files -n Qt6RemoteObjects

@@ -29,7 +29,7 @@
 # Conditional build:
 # -- build targets
 %bcond_without	doc		# Documentation
-%bcond_without	webengine	# Qt WebEngine
+%bcond_without	qtwebengine	# Qt WebEngine
 # -- features
 %bcond_without	cups		# CUPS printing support
 %bcond_with	directfb	# DirectFB platform support
@@ -78,7 +78,7 @@
 %define		with_red_reloc	1
 %endif
 %ifnarch %{x8664} aarch64
-%undefine	with_webengine
+%undefine	with_qtwebengine
 %endif
 
 %define		icu_abi		71
@@ -146,7 +146,7 @@ BuildRequires:	libxml2-devel
 BuildRequires:	minizip-devel
 BuildRequires:	mtdev-devel
 %{?with_mysql:BuildRequires:	mysql-devel}
-%{?with_webengine:BuildRequires:	nodejs}
+%{?with_qtwebengine:BuildRequires:	nodejs}
 BuildRequires:	openssl-devel >= 1.1.1
 BuildRequires:	opus-devel
 %{?with_oci:BuildRequires:	oracle-instantclient-devel}
@@ -3242,7 +3242,7 @@ mkdir -p build
 cd build
 %cmake ../ \
 	-GNinja \
-	%{cmake_on_off webengine BUILD_qtwebengine} \
+	%{cmake_on_off qtwebengine BUILD_qtwebengine} \
 	-DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/samu \
 	-DNinja_EXECUTABLE:FILEPATH=/usr/bin/samu \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
@@ -4768,7 +4768,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/metatypes/qt6opengl_pld_metatypes.json
 %{_libdir}/metatypes/qt6openglwidgets_pld_metatypes.json
 
-%if %{with webengine}
+%if %{with qtwebengine}
 %files -n Qt6Pdf
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Pdf.so.*.*.*
@@ -6407,7 +6407,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtwebchannel.qch
 %endif
 
-%if %{with webengine}
+%if %{with qtwebengine}
 %files -n Qt6WebEngine -f qtwebengine.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6WebEngineCore.so.*.*.*
@@ -6601,7 +6601,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/metatypes/qt6webview_pld_metatypes.json
 %{_libdir}/metatypes/qt6webviewquick_pld_metatypes.json
 
-%if %{with webengine}
+%if %{with qtwebengine}
 %files -n Qt6WebView-plugin-webengine
 %defattr(644,root,root,755)
 %attr(755,root,root) %{qt6dir}/plugins/webview/libqtwebview_webengine.so

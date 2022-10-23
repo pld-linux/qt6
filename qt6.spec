@@ -1226,7 +1226,7 @@ Summary:	Qt6 JsonRpc library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 JsonRpc - pliki programistyczne
 Group:		Development/Libraries
 Requires:	Qt6Core-devel = %{version}
-Requires:	Qt6JsonRpc-devel = %{version}
+Requires:	Qt6JsonRpc = %{version}
 
 %description -n Qt6JsonRpc-devel
 Qt6 JsonRpc library - development files.
@@ -1249,7 +1249,7 @@ Summary:	Qt6 LanguageServer library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 LanguageServer - pliki programistyczne
 Group:		Development/Libraries
 Requires:	Qt6Core-devel = %{version}
-Requires:	Qt6LanguageServer-devel = %{version}
+Requires:	Qt6LanguageServer = %{version}
 
 %description -n Qt6LanguageServer-devel
 Qt6 LanguageServer library - development files.
@@ -1801,6 +1801,7 @@ Summary:	Qt6 Qt5Compat libraries - development files
 Summary(pl.UTF-8):	Biblioteki Qt6 Qt5Compat - pliki programistyczne
 Group:		Development/Libraries
 Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Qt5Compat = %{version}
 
 %description -n Qt6Qt5Compat-devel
 Qt6 Qt5Compat libraries - development files.

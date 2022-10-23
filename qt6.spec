@@ -1154,6 +1154,7 @@ Summary(pl.UTF-8):	Biblioteka Qt6 Gui - pliki programistyczne
 Group:		Development/Libraries
 Requires:	OpenGL-devel
 Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6DBus-devel = %{version}
 Requires:	Qt6Gui = %{version}
 Requires:	Vulkan-Loader-devel
 Requires:	libpng-devel

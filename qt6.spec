@@ -128,31 +128,41 @@ BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.2.0
 %{?with_pch:BuildRequires:	gcc >= 5:4.0}
 BuildRequires:	gdb
-BuildRequires:	glib2-devel >= 2.0.0
+BuildRequires:	glib2-devel >= 1:2.32.0
+%{?with_qtwebengine:BuildRequires:	glibc-headers >= 6:2.16}
+%{?with_qtwebengine:BuildRequires:	gperf}
 %{?with_gtk:BuildRequires:	gtk+3-devel >= 3.6}
-BuildRequires:	harfbuzz-devel >= 1.6.0
-BuildRequires:	harfbuzz-subset-devel
+BuildRequires:	harfbuzz-devel >= 2.9.0
+BuildRequires:	harfbuzz-subset-devel >= 2.9.0
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
+BuildRequires:	hunspell-devel
+BuildRequires:	jasper-devel
+%{?with_qtwebengine:BuildRequires:	khrplatform-devel}
 BuildRequires:	lcms2-devel
-%{?with_kms:BuildRequires:	libdrm-devel}
+%if %{with kms} || %{with qtwebengine}
+BuildRequires:	libdrm-devel
+%endif
 BuildRequires:	libevent-devel
 # see dependency on libicu version below
 BuildRequires:	libicu-devel < %{next_icu_abi}
 BuildRequires:	libicu-devel >= %{icu_abi}
 %{?with_libinput:BuildRequires:	libinput-devel}
 BuildRequires:	libjpeg-devel
-BuildRequires:	libpng-devel >= 2:1.0.8
+BuildRequires:	libmng-devel
+BuildRequires:	libpng-devel >= 2:1.6.0
 BuildRequires:	libstdc++-devel >= 6:4.7
-BuildRequires:	libvpx-devel
+BuildRequires:	libvpx-devel >= 1.10.0
 BuildRequires:	libwebp-devel
 BuildRequires:	libxcb-devel >= 1.12
 BuildRequires:	libxml2-devel
+%{?with_qtwebengine:BuildRequires:	libxslt-devel}
 BuildRequires:	minizip-devel
 BuildRequires:	mtdev-devel
 %{?with_mysql:BuildRequires:	mysql-devel}
 %{?with_qtwebengine:BuildRequires:	nodejs}
+%{?with_qtwebengine:BuildRequires:	nss-devel >= 3.26}
 BuildRequires:	openssl-devel >= 1.1.1
-BuildRequires:	opus-devel
+BuildRequires:	opus-devel >= 1.3.1
 %{?with_oci:BuildRequires:	oracle-instantclient-devel}
 BuildRequires:	pciutils-devel
 BuildRequires:	pcre2-16-devel >= 10.20
@@ -160,6 +170,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	poppler-cpp-devel
 %{?with_pgsql:BuildRequires:	postgresql-devel}
 BuildRequires:	pulseaudio-devel
+BuildRequires:	python3
 BuildRequires:	python3-html5lib
 BuildRequires:	re2-devel
 BuildRequires:	rpm-build >= 4.6
@@ -181,6 +192,7 @@ BuildRequires:	xcb-util-wm-devel >= 0.3.9
 BuildRequires:	xorg-lib-libICE-devel
 BuildRequires:	xorg-lib-libSM-devel
 BuildRequires:	xorg-lib-libX11-devel
+%{?with_qtwebengine:BuildRequires:	xorg-lib-libXcomposite-devel}
 BuildRequires:	xorg-lib-libXcursor-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXfixes-devel
@@ -188,8 +200,12 @@ BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libXrandr-devel
 BuildRequires:	xorg-lib-libXrender-devel >= 0.6
+%{?with_qtwebengine:BuildRequires:	xorg-lib-libXtst-devel}
 BuildRequires:	xorg-lib-libxkbcommon-devel >= 0.5.0
 BuildRequires:	xorg-lib-libxkbcommon-x11-devel >= 0.5.0
+%{?with_qtwebengine:BuildRequires:	xorg-lib-libxkbfile-devel}
+%{?with_qtwebengine:BuildRequires:	xorg-lib-libxshmfence-devel}
+%{?with_qtwebengine:BuildRequires:	xorg-proto-glproto-devel}
 BuildRequires:	xz
 BuildRequires:	zlib-devel >= 1.0.8
 BuildRequires:	zstd-devel >= 1.3
@@ -2878,7 +2894,7 @@ Requires:	harfbuzz >= 3.0.0
 Requires:	harfbuzz-subset >= 3.0.0
 Requires:	libicu >= 65
 Requires:	libpng >= 2:1.6.0
-Requires:	libvpx >= 1.8.0
+Requires:	libvpx >= 1.10.0
 Requires:	nss >= 3.26
 Requires:	opus >= 1.3.1
 Requires:	pulseaudio-libs >= 0.9.10

@@ -113,6 +113,7 @@ BuildRequires:	alsa-lib-devel
 BuildRequires:	assimp-devel >= 5
 %endif
 BuildRequires:	at-spi2-core-devel
+%{?with_qtwebengine:BuildRequires:	bison}
 BuildRequires:	bluez-libs-devel
 # qdoc
 BuildRequires:	clang-devel
@@ -123,6 +124,7 @@ BuildRequires:	dbus-devel >= 1.2
 BuildRequires:	double-conversion-devel
 %{?with_fbx:BuildRequires:	fbxsdk-devel}
 BuildRequires:	ffmpeg-devel
+%{?with_qtwebengine:BuildRequires:	flex}
 BuildRequires:	fontconfig-devel
 %{?with_freetds:BuildRequires:	freetds-devel}
 BuildRequires:	freetype-devel >= 2.2.0

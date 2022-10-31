@@ -209,6 +209,7 @@ BuildRequires:	xorg-lib-libxkbcommon-x11-devel >= 0.5.0
 BuildRequires:	xz
 BuildRequires:	zlib-devel >= 1.0.8
 BuildRequires:	zstd-devel >= 1.3
+BuildConflicts:	Qt6Core
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		filterout	-flto

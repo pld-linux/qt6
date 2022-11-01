@@ -11,7 +11,6 @@
 #   /usr/lib64/cmake/Qt6BundledTcime/Qt6BundledTcimeDependencies.cmake
 #   /usr/lib64/cmake/Qt6Bundled_Clip2Tri/Qt6Bundled_Clip2TriDependencies.cmake
 #
-#   /usr/lib64/cmake/Qt6HostInfo/Qt6HostInfoConfig.cmake
 #   /usr/lib64/objects-PLD/QmlCompilerPrivate_resources_1/.rcc/qrc_builtins.cpp.o
 #   /usr/lib64/qt6/bin/instancer
 #   /usr/lib64/qt6/bin/materialeditor
@@ -31,6 +30,7 @@
 %bcond_without	doc		# Documentation
 %bcond_without	qt3d		# Qt 3d
 %bcond_without	qtquick3d	# Qt Quick3d
+%bcond_without	qtquick3dphysics	# Qt Quick3d Physics
 %bcond_without	qtwebengine	# Qt WebEngine
 # -- features
 %bcond_without	cups		# CUPS printing support
@@ -82,6 +82,9 @@
 %ifnarch %{x8664} aarch64
 %undefine	with_qtwebengine
 %endif
+%if %{without qtquick3d}
+%undefine	with_qtquick3dphysics
+%endif
 
 %define		icu_abi		71
 %define		next_icu_abi	%(echo $((%{icu_abi} + 1)))
@@ -89,17 +92,18 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.3.2
-Release:	2
+Version:	6.4.0
+Release:	0.1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
-Source0:	https://download.qt.io/official_releases/qt/6.3/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	bc928a9897698ec397b11c3dbff40e53
+Source0:	https://download.qt.io/official_releases/qt/6.4/%{version}/single/qt-everywhere-src-%{version}.tar.xz
+# Source0-md5:	b45c32495e87cffa4739b24b5d062c50
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		%{name}-gn.patch
 Patch3:		no-implicit-sse2.patch
 Patch4:		x32.patch
+Patch5:		llvm15.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -1201,6 +1205,33 @@ Header files for Qt6 Help library.
 %description -n Qt6Help-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 Help.
 
+%package -n Qt6HttpServer
+Summary:	Qt6 HttpServer library
+Summary(pl.UTF-8):	Biblioteka Qt6 HttpServer
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Network = %{version}
+Requires:	Qt6WebSockets = %{version}
+
+%description -n Qt6HttpServer
+Qt6 HttpServer library provides HTTP server framework.
+
+%description -n Qt6HttpServer
+Biblioteka Qt6 HttpServer dostarcza szkielet do budowy serwera HTTP.
+
+%package -n Qt6HttpServer-devel
+Summary:	Qt6 HttpServer library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 HttpServer - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6HttpServer = %{version}
+
+%description -n Qt6HttpServer-devel
+Qt6 HttpServer library - development files.
+
+%description -n Qt6HttpServer-devel -l pl.UTF-8
+Biblioteka Qt6 HttpServer - pliki programistyczne.
+
 %package -n Qt6InputSupport-devel
 Summary:	Qt6 InputSupport library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 InputSupport - pliki programistyczne
@@ -2001,6 +2032,15 @@ Qt6 Declarative documentation in QCH format.
 %description -n Qt6Quick-doc-qch -l pl.UTF-8
 Dokumentacja do bibliotek Qt6 Declarative w formacie QCH.
 
+%package -n qt6-quick3d
+Summary:	The Qt6 Quick3D library command line tools
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Quick3D = %{version}
+
+%description -n qt6-quick3d
+The Qt6 Quick3D library command line tools.
+
 %package -n Qt6Quick3D
 Summary:	The Qt6 Quick3D library
 Summary(pl.UTF-8):	Biblioteka Qt6 Quick3D
@@ -2056,6 +2096,36 @@ Qt6 Quick3D documentation in QCH format.
 
 %description -n Qt6Quick3D-doc-qch -l pl.UTF-8
 Dokumentacja do biblioteki Qt6 Quick3D w formacie QCH.
+
+%package -n Qt6Quick3DPhysics
+Summary:	Qt6 Quick3DPhysics library
+Summary(pl.UTF-8):	Biblioteka Qt6 Quick3DPhysics
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Quick3D = %{version}
+
+%description -n Qt6Quick3DPhysics
+Qt6 Quick3DPhysics library provides a high-level API for physics
+simulation.
+
+%description -n Qt6Quick3DPhysics
+Biblioteka Qt6 Quick3DPhysics dostarcza wysokpoziomowe API do
+symulacji fizycznych.
+
+%package -n Qt6Quick3DPhysics-devel
+Summary:	Qt6 Quick3DPhysics library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Quick3DPhysics - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Quick3DPhysics = %{version}
+
+%description -n Qt6Quick3DPhysics-devel
+Qt6 Quick3DPhysics library - development files.
+
+%description -n Qt6Quick3DPhysics-devel -l pl.UTF-8
+Biblioteka Qt6 Quick3DPhysics - pliki programistyczne.
 
 %package -n Qt6Quick-Timeline
 Summary:	The Qt6 Quick Timeline module
@@ -2365,13 +2435,13 @@ Qt6 SerialPort documentation in QCH format.
 Dokumentacja do biblioteki Qt6 SerialPort w formacie QCH.
 
 %package -n qt6-shadertools
-Summary:	The Qt6 ShaderTools library comman line tools
+Summary:	The Qt6 ShaderTools library command line tools
 Group:		Libraries
 Requires:	Qt6Core = %{version}
 Requires:	Qt6ShaderTools = %{version}
 
 %description -n qt6-shadertools
-The Qt6 ShaderTools library comman line tools.
+The Qt6 ShaderTools library command line tools.
 
 %package -n Qt6ShaderTools
 Summary:	The Qt6 ShaderTools library
@@ -2421,6 +2491,35 @@ Qt6 ShaderTools documentation in QCH format.
 
 %description -n Qt6ShaderTools-doc-qch -l pl.UTF-8
 Dokumentacja do biblioteki Qt6 ShaderTools w formacie QCH.
+
+%package -n Qt6SpatialAudio
+Summary:	Qt6 SpatialAudio library
+Summary(pl.UTF-8):	Biblioteka Qt6 SpatialAudio
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Multimedia = %{version}
+
+%description -n Qt6SpatialAudio
+Qt6 SpatialAudio library provides support for sound fields in 3D
+space.
+
+%description -n Qt6SpatialAudio
+Biblioteka Qt6 SpatialAudio dostarcza wsparcia dla pól dźwiękowych w
+przestrzeni 3D.
+
+%package -n Qt6SpatialAudio-devel
+Summary:	Qt6 SpatialAudio library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 SpatialAudio - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6SpatialAudio = %{version}
+
+%description -n Qt6SpatialAudio-devel
+Qt6 SpatialAudio library - development files.
+
+%description -n Qt6SpatialAudio-devel -l pl.UTF-8
+Biblioteka Qt6 SpatialAudio - pliki programistyczne.
 
 %package -n Qt6Sql
 Summary:	Qt6 Sql library
@@ -2629,6 +2728,34 @@ Header files for Qt6 Test library.
 
 %description -n Qt6Test-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 Test.
+
+%package -n Qt6TextToSpeech
+Summary:	Qt6 TextToSpeech library
+Summary(pl.UTF-8):	Biblioteka Qt6 TextToSpeech
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Qml = %{version}
+
+%description -n Qt6TextToSpeech
+Qt6 TextToSpeech library enables text read out by using speech
+synthesis.
+
+%description -n Qt6TextToSpeech
+Biblioteka Qt6 TextToSpeech umożliwia odczytywanie tekstu przy użyciu
+syntezatora mowy.
+
+%package -n Qt6TextToSpeech-devel
+Summary:	Qt6 TextToSpeech library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 TextToSpeech - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6TextToSpeech = %{version}
+
+%description -n Qt6TextToSpeech-devel
+Qt6 TextToSpeech library - development files.
+
+%description -n Qt6TextToSpeech-devel -l pl.UTF-8
+Biblioteka Qt6 TextToSpeech - pliki programistyczne.
 
 %package -n Qt6UiTools
 Summary:	Qt6 Ui Tools library
@@ -3219,6 +3346,9 @@ narzędzia.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+cd qttools
+%patch5 -p1
+cd ..
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 
@@ -3269,6 +3399,7 @@ cd build
 	-GNinja \
 	%{cmake_on_off qt3d BUILD_qt3d} \
 	%{cmake_on_off qtquick3d BUILD_qtquick3d} \
+	%{cmake_on_off qtquick3dphysics BUILD_qtquick3dphysics} \
 	%{cmake_on_off qtwebengine BUILD_qtwebengine} \
 	-DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/samu \
 	-DNinja_EXECUTABLE:FILEPATH=/usr/bin/samu \
@@ -4159,6 +4290,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6
 %{_libdir}/cmake/Qt6Core
 %{_libdir}/cmake/Qt6CoreTools
+%{_libdir}/cmake/Qt6HostInfo
 %dir %{_libdir}/cmake/Qt6BuildInternals
 %{_libdir}/cmake/Qt6BuildInternals/*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_core.pri
@@ -4509,6 +4641,23 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/qt6/modules/Help.json
 %{_libdir}/metatypes/qt6help_pld_metatypes.json
 
+%files -n Qt6HttpServer
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6HttpServer.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6HttpServer.so.6
+
+%files -n Qt6HttpServer-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6HttpServer.so
+%{_libdir}/libQt6HttpServer.prl
+%{_includedir}/qt6/QtHttpServer
+%{_libdir}/cmake/Qt6HttpServer
+%{_libdir}/metatypes/qt6httpserver_pld_metatypes.json
+%{_pkgconfigdir}/Qt6HttpServer.pc
+%{qt6dir}/mkspecs/modules/qt_lib_httpserver.pri
+%{qt6dir}/mkspecs/modules/qt_lib_httpserver_private.pri
+%{_datadir}/qt6/modules/HttpServer.json
+
 %files -n Qt6InputSupport-devel
 %defattr(644,root,root,755)
 %{_includedir}/qt6/QtInputSupport
@@ -4809,8 +4958,12 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{qt6dir}/qml/QtQuick/Pdf
 %{qt6dir}/qml/QtQuick/Pdf/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Pdf/qmldir
-%{qt6dir}/qml/QtQuick/Pdf/qml
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Pdf/libqtpdfquickplugin.so
+%{qt6dir}/qml/QtQuick/Pdf/*.qml
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/Pdf/libpdfquickplugin.so
+%dir %{qt6dir}/qml/QtQuick/Pdf/+Material
+%{qt6dir}/qml/QtQuick/Pdf/+Material/*.qml
+%dir %{qt6dir}/qml/QtQuick/Pdf/+Universal
+%{qt6dir}/qml/QtQuick/Pdf/+Universal/*.qml
 %attr(755,root,root) %{_libdir}/qt6/plugins/imageformats/libqpdf.so
 
 %files -n Qt6Pdf-devel
@@ -4937,6 +5090,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libQt6PositioningQuick.so.6
 %attr(755,root,root) %{_libdir}/libQt6Qml.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Qml.so.6
+%attr(755,root,root) %{_libdir}/libQt6QmlCompiler.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QmlCompiler.so.6
 %attr(755,root,root) %{_libdir}/libQt6QmlCore.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6QmlCore.so.6
 %attr(755,root,root) %{_libdir}/libQt6QmlModels.so.*.*.*
@@ -5037,6 +5192,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6Positioning.so
 %attr(755,root,root) %{_libdir}/libQt6PositioningQuick.so
 %attr(755,root,root) %{_libdir}/libQt6Qml.so
+%attr(755,root,root) %{_libdir}/libQt6QmlCompiler.so
 %attr(755,root,root) %{_libdir}/libQt6QmlCore.so
 %attr(755,root,root) %{_libdir}/libQt6QmlModels.so
 %attr(755,root,root) %{_libdir}/libQt6QmlWorkerScript.so
@@ -5046,10 +5202,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6StateMachineQml.so
 # static-only
 %{_libdir}/libQt6PacketProtocol.a
-%{_libdir}/libQt6QmlCompiler.a
 %{_libdir}/libQt6QmlDebug.a
 %{_libdir}/libQt6QmlDom.a
-%{_libdir}/libQt6QmlLint.a
 %{_libdir}/libQt6LabsAnimation.prl
 %{_libdir}/libQt6LabsFolderListModel.prl
 %{_libdir}/libQt6LabsQmlModels.prl
@@ -5065,7 +5219,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/metatypes/qt6qmlcore_pld_metatypes.json
 %{_libdir}/metatypes/qt6qmldebugprivate_pld_metatypes.json
 %{_libdir}/metatypes/qt6qmldomprivate_pld_metatypes.json
-%{_libdir}/metatypes/qt6qmllintprivate_pld_metatypes.json
 %{_libdir}/metatypes/qt6qmllocalstorage_pld_metatypes.json
 %{_libdir}/metatypes/qt6qmlmodels_pld_metatypes.json
 %{_libdir}/metatypes/qt6qml_pld_metatypes.json
@@ -5076,12 +5229,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6PacketProtocol.prl
 %{_libdir}/libQt6Positioning.prl
 %{_libdir}/libQt6PositioningQuick.prl
-%{_libdir}/libQt6QmlCompiler.prl
 %{_libdir}/libQt6Qml.prl
+%{_libdir}/libQt6QmlCompiler.prl
 %{_libdir}/libQt6QmlCore.prl
 %{_libdir}/libQt6QmlDebug.prl
 %{_libdir}/libQt6QmlDom.prl
-%{_libdir}/libQt6QmlLint.prl
 %{_libdir}/libQt6QmlLocalStorage.prl
 %{_libdir}/libQt6QmlModels.prl
 %{_libdir}/libQt6QmlWorkerScript.prl
@@ -5102,7 +5254,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtQmlDebug
 %{_includedir}/qt6/QtQmlDom
 %{_includedir}/qt6/QtQmlIntegration
-%{_includedir}/qt6/QtQmlLint
 %{_includedir}/qt6/QtQmlLocalStorage
 %{_includedir}/qt6/QtQmlModels
 %{_includedir}/qt6/QtQmlWorkerScript
@@ -5137,7 +5288,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6QmlDomPrivate
 %{_libdir}/cmake/Qt6QmlImportScanner
 %{_libdir}/cmake/Qt6QmlIntegration
-%{_libdir}/cmake/Qt6QmlLintPrivate
 %{_libdir}/cmake/Qt6QmlLocalStorage
 %{_libdir}/cmake/Qt6QmlModels
 %{_libdir}/cmake/Qt6StateMachine
@@ -5167,7 +5317,6 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_qmldom_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlintegration.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlintegration_private.pri
-%{qt6dir}/mkspecs/modules/qt_lib_qmllint_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmllocalstorage.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmllocalstorage_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlmodels.pri
@@ -5197,7 +5346,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/qt6/modules/QmlDebugPrivate.json
 %{_datadir}/qt6/modules/QmlDomPrivate.json
 %{_datadir}/qt6/modules/QmlIntegration.json
-%{_datadir}/qt6/modules/QmlLintPrivate.json
 %{_datadir}/qt6/modules/QmlLocalStorage.json
 %{_datadir}/qt6/modules/QmlModels.json
 %{_datadir}/qt6/modules/QmlWorkerScript.json
@@ -5318,9 +5466,9 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQuick/Controls/Imagine/qmldir
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Imagine/libqtquickcontrols2imaginestyleplugin.so
 %dir %{qt6dir}/qml/QtQuick/Controls/Imagine/impl
+%{qt6dir}/qml/QtQuick/Controls/Imagine/impl/qtquickcontrols2imaginestyleimplplugin.qmltypes
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Imagine/impl/libqtquickcontrols2imaginestyleimplplugin.so
 %{qt6dir}/qml/QtQuick/Controls/Imagine/impl/*.qml
-%{qt6dir}/qml/QtQuick/Controls/Imagine/impl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Imagine/impl/qmldir
 %dir %{qt6dir}/qml/QtQuick/Controls/Material
 %{qt6dir}/qml/QtQuick/Controls/Material/*.qml
@@ -5597,6 +5745,14 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %if %{with qtquick3d}
+%files -n qt6-quick3d
+%defattr(644,root,root,755)
+%attr(755,root,root) %{qt6dir}/bin/balsamui
+%attr(755,root,root) %{qt6dir}/bin/instancer
+%attr(755,root,root) %{qt6dir}/bin/materialeditor
+%attr(755,root,root) %{qt6dir}/bin/shadergen
+%attr(755,root,root) %{qt6dir}/bin/shapegen
+
 %files -n Qt6Quick3D
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Quick3D.so.*.*.*
@@ -5625,7 +5781,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/bin/meshdebug
 %dir %{qt6dir}/plugins/assetimporters
 %attr(755,root,root) %{qt6dir}/plugins/assetimporters/libassimp.so
-%attr(755,root,root) %{qt6dir}/plugins/assetimporters/libuip.so
 %dir %{qt6dir}/plugins/qmltooling
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_quick3dprofiler.so
 %dir %{qt6dir}/qml/QtQuick3D
@@ -5770,6 +5925,44 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_docdir}/qt6-doc/qtquick3d.qch
 %endif
+%endif
+
+%if %{with qtquick3dphysics}
+%files -n Qt6Quick3DPhysics
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Quick3DPhysics.so.*.*.*
+%attr(755,root,root) %{_libdir}/libQt6Quick3DPhysicsHelpers.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DPhysics.so.6
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DPhysicsHelpers.so.6
+%dir %{qt6dir}/qml/QtQuick3D/Physics
+%{qt6dir}/qml/QtQuick3D/Physics/qmldir
+%{qt6dir}/qml/QtQuick3D/Physics/plugins.qmltypes
+%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/Physics/libqquick3dphysicsplugin.so
+%dir %{qt6dir}/qml/QtQuick3D/Physics/Helpers
+%{qt6dir}/qml/QtQuick3D/Physics/Helpers/qmldir
+%{qt6dir}/qml/QtQuick3D/Physics/Helpers/plugins.qmltypes
+%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/Physics/Helpers/libqtquick3dphysicshelpersplugin.so
+
+%files -n Qt6Quick3DPhysics-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Quick3DPhysics.so
+%attr(755,root,root) %{_libdir}/libQt6Quick3DPhysicsHelpers.so
+%{_libdir}/libQt6Quick3DPhysics.prl
+%{_libdir}/libQt6Quick3DPhysicsHelpers.prl
+%{_includedir}/qt6/QtQuick3DPhysics
+%{_includedir}/qt6/QtQuick3DPhysicsHelpers
+%{_libdir}/cmake/Qt6Quick3DPhysics
+%{_libdir}/cmake/Qt6Quick3DPhysicsHelpers
+%{_libdir}/metatypes/qt6quick3dphysics_pld_metatypes.json
+%{_libdir}/metatypes/qt6quick3dphysicshelpers_pld_metatypes.json
+%{_pkgconfigdir}/Qt6Quick3DPhysics.pc
+%{_pkgconfigdir}/Qt6Quick3DPhysicsHelpers.pc
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dphysics.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dphysics_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dphysicshelpers.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dphysicshelpers_private.pri
+%{_datadir}/qt6/modules/Quick3DPhysics.json
+%{_datadir}/qt6/modules/Quick3DPhysicsHelpers.json
 %endif
 
 %files -n Qt6RemoteObjects
@@ -5979,6 +6172,23 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtserialport.qch
 %endif
 
+%files -n Qt6SpatialAudio
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6SpatialAudio.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6SpatialAudio.so.6
+
+%files -n Qt6SpatialAudio-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6SpatialAudio.so
+%{_libdir}/libQt6SpatialAudio.prl
+%{_includedir}/qt6/QtSpatialAudio
+%{_libdir}/cmake/Qt6SpatialAudio
+%{_libdir}/metatypes/qt6spatialaudio_pld_metatypes.json
+%{_pkgconfigdir}/Qt6SpatialAudio.pc
+%{qt6dir}/mkspecs/modules/qt_lib_spatialaudio.pri
+%{qt6dir}/mkspecs/modules/qt_lib_spatialaudio_private.pri
+%{_datadir}/qt6/modules/SpatialAudio.json
+
 %files -n qt6-shadertools
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/qsb-qt6
@@ -6152,6 +6362,29 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/libexec/qt-internal-configure-tests
 %attr(755,root,root) %{qt6dir}/libexec/qt-testrunner.py
 
+%files -n Qt6TextToSpeech
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6TextToSpeech.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6TextToSpeech.so.6
+%dir %{qt6dir}/plugins/texttospeech
+%attr(755,root,root) %{qt6dir}/plugins/texttospeech/libqtexttospeech_mock.so
+%dir %{qt6dir}/qml/QtTextToSpeech
+%{qt6dir}/qml/QtTextToSpeech/qmldir
+%{qt6dir}/qml/QtTextToSpeech/plugins.qmltypes
+%attr(755,root,root) %{qt6dir}/qml/QtTextToSpeech/libtexttospeechqmlplugin.so
+
+%files -n Qt6TextToSpeech-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6TextToSpeech.so
+%{_libdir}/libQt6TextToSpeech.prl
+%{_includedir}/qt6/QtTextToSpeech
+%{_libdir}/cmake/Qt6TextToSpeech
+%{_libdir}/metatypes/qt6texttospeech_pld_metatypes.json
+%{_pkgconfigdir}/Qt6TextToSpeech.pc
+%{qt6dir}/mkspecs/modules/qt_lib_texttospeech.pri
+%{qt6dir}/mkspecs/modules/qt_lib_texttospeech_private.pri
+%{_datadir}/qt6/modules/TextToSpeech.json
+
 %files -n Qt6UiTools
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6UiTools.so.*.*.*
@@ -6181,26 +6414,64 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6VirtualKeyboard.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6VirtualKeyboard.so.6
 %attr(755,root,root) %{qt6dir}/plugins/platforminputcontexts/libqtvirtualkeyboardplugin.so
-%dir %{qt6dir}/plugins/virtualkeyboard
-%attr(755,root,root) %{qt6dir}/plugins/virtualkeyboard/libqtvirtualkeyboard_hangul.so
-%attr(755,root,root) %{qt6dir}/plugins/virtualkeyboard/libqtvirtualkeyboard_hunspell.so
-%if %{with lipi}
-%attr(755,root,root) %{qt6dir}/plugins/virtualkeyboard/libqtvirtualkeyboard_lipi.so
-%endif
-%attr(755,root,root) %{qt6dir}/plugins/virtualkeyboard/libqtvirtualkeyboard_openwnn.so
-%attr(755,root,root) %{qt6dir}/plugins/virtualkeyboard/libqtvirtualkeyboard_pinyin.so
-%attr(755,root,root) %{qt6dir}/plugins/virtualkeyboard/libqtvirtualkeyboard_tcime.so
-%attr(755,root,root) %{qt6dir}/plugins/virtualkeyboard/libqtvirtualkeyboard_thai.so
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/libqtquickvirtualkeyboardplugin.so
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/libqtvkbplugin.so
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/qmldir
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/*.qml
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Components
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/qmldir
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/qtvkbcomponentsplugin.qmltypes
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/*.qml
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/libqtvkbcomponentsplugin.so
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Layouts
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Layouts/qmldir
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Layouts/qtvkblayoutsplugin.qmltypes
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Layouts/libqtvkblayoutsplugin.so
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/qmldir
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/qtvkbpluginsplugin.qmltypes
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/libqtvkbpluginsplugin.so
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hangul
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hangul/libqtvkbhangulplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hangul/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hangul/qmldir
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hunspell
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hunspell/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hunspell/qmldir
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hunspell/libqtvkbhunspellplugin.so
+%if %{with lipi}
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Lipi
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Lipi/libqtvkblipiplugin.so
+%endif
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/OpenWNN
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/OpenWNN/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/OpenWNN/qmldir
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/OpenWNN/libqtvkbopenwnnplugin.so
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Pinyin
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Pinyin/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Pinyin/qmldir
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Pinyin/libqtvkbpinyinplugin.so
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/TCIme
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/TCIme/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/TCIme/qmldir
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/TCIme/libqtvkbtcimeplugin.so
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Thai
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Thai/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Thai/qmldir
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Thai/libqtvkbthaiplugin.so
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Settings
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Settings/libqtquickvirtualkeyboardsettingsplugin.so
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Settings/libqtvkbsettingsplugin.so
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Settings/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Settings/qmldir
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/libqtquickvirtualkeyboardstylesplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/*.qml
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/*.js
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/libqtvkbstylesplugin.so
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/Builtin
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/Builtin/plugins.qmltypes
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/Builtin/qmldir
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/Builtin/libqtvkbbuiltinstylesplugin.so
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/qmldir
 %if %{with lipi}
@@ -6228,17 +6499,19 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6VirtualKeyboard.prl
 %{_includedir}/qt6/QtHunspellInputMethod
 %{_includedir}/qt6/QtVirtualKeyboard
+%{_pkgconfigdir}/Qt6HunspellInputMethod.pc
 %{_pkgconfigdir}/Qt6VirtualKeyboard.pc
 %{_libdir}/cmake/Qt6Gui/Qt6QVirtualKeyboardPlugin*.cmake
+%{_libdir}/cmake/Qt6HunspellInputMethod
 %{_libdir}/cmake/Qt6VirtualKeyboard
-%{_libdir}/cmake/Qt6HunspellInputMethodPrivate
+%{qt6dir}/mkspecs/modules/qt_lib_hunspellinputmethod.pri
 %{qt6dir}/mkspecs/modules/qt_lib_hunspellinputmethod_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_virtualkeyboard.pri
 %{qt6dir}/mkspecs/modules/qt_lib_virtualkeyboard_private.pri
-%{_datadir}/qt6/modules/HunspellInputMethodPrivate.json
+%{_datadir}/qt6/modules/HunspellInputMethod.json
 %{_datadir}/qt6/modules/VirtualKeyboard.json
+%{_libdir}/metatypes/qt6hunspellinputmethod_pld_metatypes.json
 %{_libdir}/metatypes/qt6virtualkeyboard_pld_metatypes.json
-%{_libdir}/metatypes/qt6hunspellinputmethodprivate_pld_metatypes.json
 
 %if %{with doc}
 %files -n Qt6VirtualKeyboard-doc

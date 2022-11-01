@@ -54,8 +54,8 @@
  
  #if defined(Q_CC_GNU)
  #  define Q_DECL_RESTRICT __restrict__
--#  if defined(Q_PROCESSOR_X86_32) && defined(Q_CC_GNU) && !defined(Q_CC_CLANG) && !defined(Q_CC_INTEL)
-+#  if defined(Q_PROCESSOR_X86_32) && defined(Q_CC_GNU) && !defined(Q_CC_CLANG) && !defined(Q_CC_INTEL) && defined(__SSE2__)
+-#  if defined(Q_PROCESSOR_X86_32) && defined(Q_CC_GNU) && !defined(Q_CC_CLANG)
++#  if defined(Q_PROCESSOR_X86_32) && defined(Q_CC_GNU) && !defined(Q_CC_CLANG) && defined(__SSE2__)
  #    define Q_DECL_VECTORCALL __attribute__((sseregparm,regparm(3)))
  #  else
  #    define Q_DECL_VECTORCALL

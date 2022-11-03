@@ -93,7 +93,7 @@ Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
 Version:	6.4.0
-Release:	0.1
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.4/%{version}/single/qt-everywhere-src-%{version}.tar.xz
@@ -104,6 +104,7 @@ Patch2:		%{name}-gn.patch
 Patch3:		no-implicit-sse2.patch
 Patch4:		x32.patch
 Patch5:		llvm15.patch
+Patch6:		github-crash.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -1216,7 +1217,7 @@ Requires:	Qt6WebSockets = %{version}
 %description -n Qt6HttpServer
 Qt6 HttpServer library provides HTTP server framework.
 
-%description -n Qt6HttpServer
+%description -n Qt6HttpServer -l pl.UTF-8
 Biblioteka Qt6 HttpServer dostarcza szkielet do budowy serwera HTTP.
 
 %package -n Qt6HttpServer-devel
@@ -2110,7 +2111,7 @@ Requires:	Qt6Quick3D = %{version}
 Qt6 Quick3DPhysics library provides a high-level API for physics
 simulation.
 
-%description -n Qt6Quick3DPhysics
+%description -n Qt6Quick3DPhysics -l pl.UTF-8
 Biblioteka Qt6 Quick3DPhysics dostarcza wysokpoziomowe API do
 symulacji fizycznych.
 
@@ -2504,7 +2505,7 @@ Requires:	Qt6Multimedia = %{version}
 Qt6 SpatialAudio library provides support for sound fields in 3D
 space.
 
-%description -n Qt6SpatialAudio
+%description -n Qt6SpatialAudio -l pl.UTF-8
 Biblioteka Qt6 SpatialAudio dostarcza wsparcia dla pól dźwiękowych w
 przestrzeni 3D.
 
@@ -2740,7 +2741,7 @@ Requires:	Qt6Qml = %{version}
 Qt6 TextToSpeech library enables text read out by using speech
 synthesis.
 
-%description -n Qt6TextToSpeech
+%description -n Qt6TextToSpeech -l pl.UTF-8
 Biblioteka Qt6 TextToSpeech umożliwia odczytywanie tekstu przy użyciu
 syntezatora mowy.
 
@@ -3348,6 +3349,9 @@ narzędzia.
 %patch4 -p1
 cd qttools
 %patch5 -p1
+cd ..
+cd qtwebengine
+%patch6 -p1
 cd ..
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf

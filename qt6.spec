@@ -91,6 +91,9 @@
 %ifnarch %{x86_with_sse2} %{arm_with_neon}
 %undefine	with_qtquick3dphysics
 %endif
+%ifarch x32
+%undefine	with_qtquick3dphysics
+%endif
 %define		specflags	%{!?with_simd:-DDISABLE_SIMD -DPFFFT_SIMD_DISABLE}
 
 %define		icu_abi		71

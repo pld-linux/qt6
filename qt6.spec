@@ -85,6 +85,13 @@
 %if %{without qtquick3d}
 %undefine	with_qtquick3dphysics
 %endif
+%ifarch %{x86_with_sse} %{arm_with_neon}
+%define		with_simd	1
+%endif
+%ifnarch %{x86_with_sse2} %{arm_with_neon}
+%undefine	with_qtquick3dphysics
+%endif
+%define		specflags	%{!?with_simd:-DDISABLE_SIMD -DPFFFT_SIMD_DISABLE}
 
 %define		icu_abi		71
 %define		next_icu_abi	%(echo $((%{icu_abi} + 1)))
@@ -181,7 +188,7 @@ BuildRequires:	python3
 BuildRequires:	python3-html5lib
 BuildRequires:	re2-devel
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 1.752
+BuildRequires:	rpmbuild(macros) >= 2.007
 BuildRequires:	samurai
 BuildRequires:	sed >= 4.0
 BuildRequires:	snappy-devel

@@ -137,6 +137,7 @@ BuildRequires:	double-conversion-devel
 %{?with_fbx:BuildRequires:	fbxsdk-devel}
 BuildRequires:	ffmpeg-devel
 %{?with_qtwebengine:BuildRequires:	flex}
+BuildRequires:	flite-devel
 BuildRequires:	fontconfig-devel
 %{?with_freetds:BuildRequires:	freetds-devel}
 BuildRequires:	freetype-devel >= 2.2.0
@@ -192,6 +193,7 @@ BuildRequires:	rpmbuild(macros) >= 2.007
 BuildRequires:	samurai
 BuildRequires:	sed >= 4.0
 BuildRequires:	snappy-devel
+BuildRequires:	speech-dispatcher-devel
 %{?with_sqlite3:BuildRequires:	sqlite3-devel}
 %{?with_systemd:BuildRequires:	systemd-devel}
 BuildRequires:	tar >= 1:1.22
@@ -6378,7 +6380,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6TextToSpeech.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6TextToSpeech.so.6
 %dir %{qt6dir}/plugins/texttospeech
+%attr(755,root,root) %{qt6dir}/plugins/texttospeech/libqtexttospeech_flite.so
 %attr(755,root,root) %{qt6dir}/plugins/texttospeech/libqtexttospeech_mock.so
+%attr(755,root,root) %{qt6dir}/plugins/texttospeech/libqtexttospeech_speechd.so
 %dir %{qt6dir}/qml/QtTextToSpeech
 %{qt6dir}/qml/QtTextToSpeech/qmldir
 %{qt6dir}/qml/QtTextToSpeech/plugins.qmltypes

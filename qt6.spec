@@ -150,6 +150,7 @@ BuildRequires:	glib2-devel >= 1:2.32.0
 %{?with_qtwebengine:BuildRequires:	glibc-headers >= 6:2.16}
 %{?with_qtwebengine:BuildRequires:	gperf}
 %{?with_gtk:BuildRequires:	gtk+3-devel >= 3.6}
+BuildRequires:	gypsy-devel
 BuildRequires:	harfbuzz-devel >= 2.9.0
 BuildRequires:	harfbuzz-subset-devel >= 2.9.0
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
@@ -5135,6 +5136,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_tcp.so
 %dir %{qt6dir}/plugins/position
 %attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_geoclue2.so
+%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_gypsy.so
 %attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_nmea.so
 %attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_positionpoll.so
 

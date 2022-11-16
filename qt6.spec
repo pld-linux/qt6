@@ -155,6 +155,10 @@ BuildRequires:	gdb
 BuildRequires:	glib2-devel >= 1:2.32.0
 %{?with_qtwebengine:BuildRequires:	glibc-headers >= 6:2.16}
 %{?with_qtwebengine:BuildRequires:	gperf}
+BuildRequires:	gstreamer-devel >= 1.0
+BuildRequires:	gstreamer-gl-devel >= 1.0
+BuildRequires:	gstreamer-plugins-bad-devel >= 1.0
+BuildRequires:	gstreamer-plugins-base-devel >= 1.0
 %{?with_gtk:BuildRequires:	gtk+3-devel >= 3.6}
 BuildRequires:	gypsy-devel
 BuildRequires:	harfbuzz-devel >= 2.9.0
@@ -1414,6 +1418,18 @@ FFmpeg plugin for Qt6 Multimedia.
 
 %description -n Qt6Multimedia-plugin-ffmpeg -l pl.UTF-8
 Wtyczka FFmpeg dla Qt6 Multimediaa.
+
+%package -n Qt6Multimedia-plugin-gstreamer
+Summary:	GStreamer plugin for Qt6 Multimedia
+Summary(pl.UTF-8):	Wtyczka GStreamer dla Qt6 Multimedia
+Group:		X11/Libraries
+Requires:	Qt6Multimedia = %{version}
+
+%description -n Qt6Multimedia-plugin-gstreamer
+GStreamer plugin for Qt6 Multimedia.
+
+%description -n Qt6Multimedia-plugin-gstreamer -l pl.UTF-8
+Wtyczka GStreamer dla Qt6 Multimediaa.
 
 %package -n Qt6Multimedia-devel
 Summary:	Qt6 Multimedia libraries - development files
@@ -4779,6 +4795,10 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6Multimedia-plugin-ffmpeg
 %defattr(644,root,root,755)
 %attr(755,root,root) %{qt6dir}/plugins/multimedia/libffmpegmediaplugin.so
+
+%files -n Qt6Multimedia-plugin-gstreamer
+%defattr(644,root,root,755)
+%attr(755,root,root) %{qt6dir}/plugins/multimedia/libgstreamermediaplugin.so
 
 %files -n Qt6Multimedia-devel
 %defattr(644,root,root,755)

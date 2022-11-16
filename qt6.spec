@@ -35,6 +35,8 @@
 %bcond_without	kerberos5	# KRB5 GSSAPI Support
 %bcond_without	kms		# KMS platform support
 %bcond_without	libinput	# libinput support
+%bcond_with	opengl_desktop	# Use "desktop" OpenGL API
+%bcond_with	gles		# Use OpenGL ES API
 %bcond_without	pch		# pch (pre-compiled headers) in qmake
 %bcond_without	statx		# build without statx()
 %bcond_with	systemd		# logging to journald
@@ -93,6 +95,14 @@
 %define		icu_abi		71
 %define		next_icu_abi	%(echo $((%{icu_abi} + 1)))
 
+%if %{without opengl_desktop} && %{without gles}
+%ifarch %{arm} aarch64
+%define		with_gles		1
+%else
+%define		with_opengl_desktop	1
+%endif
+%endif
+
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
@@ -114,7 +124,10 @@ BuildRequires:	EGL-devel
 BuildRequires:	GConf2-devel
 %{?with_kms:BuildRequires:	Mesa-libgbm-devel}
 BuildRequires:	OpenGL-devel
-%{?with_kms:BuildRequires:	OpenGLESv2-devel}
+%if %{with kms} || %{with gles}
+BuildRequires:	OpenGLESv2-devel
+%endif
+%{?with_gles:BuildRequires:	OpenGLESv3-devel}
 BuildRequires:	Vulkan-Loader-devel
 BuildRequires:	alsa-lib-devel
 %if %{with qt3d} || %{with qtquick3d}
@@ -3439,6 +3452,8 @@ cd build
 	-DQT_FEATURE_glib=ON \
 	-DQT_FEATURE_icu=ON \
 	-DQT_FEATURE_xcb=ON \
+	%{cmake_on_off opengl_desktop QT_FEATURE_opengl_desktop} \
+	%{cmake_on_off gles QT_FEATURE_opengles2} \
 	-DQT_FEATURE_xcb_sm=ON \
 	-DQT_FEATURE_xkbcommon=ON \
 	-DQT_FEATURE_system_doubleconversion=ON \
@@ -4578,10 +4593,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/plugins/xcbglintegrations/libqxcb-egl-integration.so
 %{_libdir}/cmake/Qt6Gui/Qt6QXcbEglIntegrationPlugin*.cmake
 
+%if %{with opengl_desktop}
 %files -n Qt6Gui-platform-xcb-glx
 %defattr(644,root,root,755)
 %attr(755,root,root) %{qt6dir}/plugins/xcbglintegrations/libqxcb-glx-integration.so
 %{_libdir}/cmake/Qt6Gui/Qt6QXcbGlxIntegrationPlugin*.cmake
+%endif
 
 %if %{with gtk}
 %files -n Qt6Gui-platformtheme-gtk3

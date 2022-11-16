@@ -12,18 +12,12 @@
 #   /usr/lib64/cmake/Qt6Bundled_Clip2Tri/Qt6Bundled_Clip2TriDependencies.cmake
 #
 #   /usr/lib64/objects-PLD/QmlCompilerPrivate_resources_1/.rcc/qrc_builtins.cpp.o
-#   /usr/lib64/qt6/bin/instancer
-#   /usr/lib64/qt6/bin/materialeditor
 #   /usr/lib64/qt6/bin/qt-configure-module
-#   /usr/lib64/qt6/bin/shadergen
-#   /usr/lib64/qt6/bin/shapegen
 #   /usr/lib64/qt6/libexec/gn
 #   /usr/lib64/qt6/mkspecs/modules/README
 #   /usr/lib64/qt6/mkspecs/qtdoc_dummy_file.txt
 # android:
 #   /usr/lib64/qt6/libexec/android_emulator_launcher.sh
-#   /usr/lib64/qt6/plugins/networkinformation/libqglib.so
-#   /usr/lib64/qt6/plugins/networkinformation/libqnetworkmanager.so
 #
 # Conditional build:
 # -- build targets
@@ -102,19 +96,17 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.4.0
-Release:	2
+Version:	6.4.1
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.4/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	b45c32495e87cffa4739b24b5d062c50
+# Source0-md5:	ae18c8d4c2d0b8fb757c6881f6e273ea
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		%{name}-gn.patch
 Patch3:		no-implicit-sse2.patch
 Patch4:		x32.patch
-Patch5:		llvm15.patch
-Patch6:		github-crash.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -3361,12 +3353,6 @@ narzędzia.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-cd qttools
-%patch5 -p1
-cd ..
-cd qtwebengine
-%patch6 -p1
-cd ..
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 
@@ -4806,6 +4792,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6MultimediaWidgets.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6MultimediaWidgets.so.6
+%dir %{qt6dir}/plugins/multimedia
+%attr(755,root,root) %{qt6dir}/plugins/multimedia/libffmpegmediaplugin.so
 
 %files -n Qt6MultimediaWidgets-devel
 %defattr(644,root,root,755)
@@ -4823,6 +4811,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Network.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Network.so.6
+%dir %{qt6dir}/plugins/networkinformation
+%attr(755,root,root) %{qt6dir}/plugins/networkinformation/libqglib.so
+%attr(755,root,root) %{qt6dir}/plugins/networkinformation/libqnetworkmanager.so
 
 %files -n Qt6Network-devel
 %defattr(644,root,root,755)
@@ -5767,6 +5758,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n qt6-quick3d
 %defattr(644,root,root,755)
 %attr(755,root,root) %{qt6dir}/bin/balsamui
+%{?with_qtquick3dphysics:%attr(755,root,root) %{qt6dir}/bin/cooker}
 %attr(755,root,root) %{qt6dir}/bin/instancer
 %attr(755,root,root) %{qt6dir}/bin/materialeditor
 %attr(755,root,root) %{qt6dir}/bin/shadergen
@@ -6193,19 +6185,33 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6SpatialAudio
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Quick3DSpatialAudio.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DSpatialAudio.so.6
 %attr(755,root,root) %{_libdir}/libQt6SpatialAudio.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6SpatialAudio.so.6
+%dir %{qt6dir}/qml/QtQuick3D/SpatialAudio
+%{qt6dir}/qml/QtQuick3D/SpatialAudio/qmldir
+%{qt6dir}/qml/QtQuick3D/SpatialAudio/plugins.qmltypes
+%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/SpatialAudio/libquick3dspatialaudioplugin.so
+
 
 %files -n Qt6SpatialAudio-devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Quick3DSpatialAudio.so
 %attr(755,root,root) %{_libdir}/libQt6SpatialAudio.so
+%{_libdir}/libQt6Quick3DSpatialAudio.prl
 %{_libdir}/libQt6SpatialAudio.prl
+%{_includedir}/qt6/QtQuick3DSpatialAudio
 %{_includedir}/qt6/QtSpatialAudio
+%{_libdir}/cmake/Qt6Quick3DSpatialAudioPrivate
 %{_libdir}/cmake/Qt6SpatialAudio
+%{_libdir}/metatypes/qt6quick3dspatialaudioprivate_pld_metatypes.json
 %{_libdir}/metatypes/qt6spatialaudio_pld_metatypes.json
 %{_pkgconfigdir}/Qt6SpatialAudio.pc
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dspatialaudio_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_spatialaudio.pri
 %{qt6dir}/mkspecs/modules/qt_lib_spatialaudio_private.pri
+%{_datadir}/qt6/modules/Quick3DSpatialAudioPrivate.json
 %{_datadir}/qt6/modules/SpatialAudio.json
 
 %files -n qt6-shadertools

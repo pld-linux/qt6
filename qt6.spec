@@ -1403,6 +1403,18 @@ functionality.
 Biblioteki Qt6 Multimedia dostarczają funkcjonalność związaną z
 dźwiękiem, obrazem, radiem i kamerą.
 
+%package -n Qt6Multimedia-plugin-ffmpeg
+Summary:	FFmpeg plugin for Qt6 Multimedia
+Summary(pl.UTF-8):	Wtyczka FFmpeg dla Qt6 Multimedia
+Group:		X11/Libraries
+Requires:	Qt6Multimedia = %{version}
+
+%description -n Qt6Multimedia-plugin-ffmpeg
+FFmpeg plugin for Qt6 Multimedia.
+
+%description -n Qt6Multimedia-plugin-ffmpeg -l pl.UTF-8
+Wtyczka FFmpeg dla Qt6 Multimediaa.
+
 %package -n Qt6Multimedia-devel
 Summary:	Qt6 Multimedia libraries - development files
 Summary(pl.UTF-8):	Biblioteki Qt6 Multimedia - pliki programistyczne
@@ -4762,6 +4774,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libQt6Multimedia.so.6
 # common for base -devel and plugin-specific files
 %dir %{_libdir}/cmake/Qt6Multimedia
+%dir %{qt6dir}/plugins/multimedia
+
+%files -n Qt6Multimedia-plugin-ffmpeg
+%defattr(644,root,root,755)
+%attr(755,root,root) %{qt6dir}/plugins/multimedia/libffmpegmediaplugin.so
 
 %files -n Qt6Multimedia-devel
 %defattr(644,root,root,755)
@@ -4809,8 +4826,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6MultimediaWidgets.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6MultimediaWidgets.so.6
-%dir %{qt6dir}/plugins/multimedia
-%attr(755,root,root) %{qt6dir}/plugins/multimedia/libffmpegmediaplugin.so
 
 %files -n Qt6MultimediaWidgets-devel
 %defattr(644,root,root,755)

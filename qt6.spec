@@ -200,7 +200,9 @@ BuildRequires:	poppler-cpp-devel
 %{?with_pgsql:BuildRequires:	postgresql-devel}
 BuildRequires:	pulseaudio-devel
 BuildRequires:	python3
+BuildRequires:	python3-devel-tools
 BuildRequires:	python3-html5lib
+BuildRequires:	python3-modules
 BuildRequires:	re2-devel
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 2.007

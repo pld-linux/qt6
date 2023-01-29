@@ -1185,6 +1185,7 @@ Wtyczka motywów platform Qt6 Gui dla xdg-desktop-portal.
 Summary:	Qt6 Gui library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 Gui - pliki programistyczne
 Group:		Development/Libraries
+Requires:	EGL-devel
 Requires:	OpenGL-devel
 %{?with_gles:Requires:	OpenGLESv3-devel}
 Requires:	Qt6Core-devel = %{version}

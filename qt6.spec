@@ -92,7 +92,7 @@
 %endif
 %define		specflags	%{!?with_simd:-DDISABLE_SIMD -DPFFFT_SIMD_DISABLE}
 
-%define		icu_abi		71
+%define		icu_abi		72
 %define		next_icu_abi	%(echo $((%{icu_abi} + 1)))
 
 %if %{without opengl_desktop} && %{without gles}

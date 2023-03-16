@@ -106,12 +106,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.4.2
-Release:	2
+Version:	6.4.3
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.4/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	15e2530292b65a2b3dc23fc03f140796
+# Source0-md5:	2b05efca0036dd1c52d91f259c807a26
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		%{name}-gn.patch
@@ -145,6 +145,7 @@ BuildRequires:	dbus-devel >= 1.2
 BuildRequires:	double-conversion-devel
 %{?with_fbx:BuildRequires:	fbxsdk-devel}
 BuildRequires:	ffmpeg-devel
+%{?with_qtwebengine:BuildRequires:	ffmpeg-devel < 5.0}
 %{?with_qtwebengine:BuildRequires:	flex}
 BuildRequires:	flite-devel
 BuildRequires:	fontconfig-devel

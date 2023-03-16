@@ -3731,6 +3731,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n Qt6Help -p /sbin/ldconfig
 %postun	-n Qt6Help -p /sbin/ldconfig
 
+%post	-n Qt6HttpServer -p /sbin/ldconfig
+%postun	-n Qt6HttpServer -p /sbin/ldconfig
+
 %post	-n Qt6JsonRpc -p /sbin/ldconfig
 %postun	-n Qt6JsonRpc -p /sbin/ldconfig
 
@@ -3782,6 +3785,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n Qt6Quick3D -p /sbin/ldconfig
 %postun	-n Qt6Quick3D -p /sbin/ldconfig
 
+%post	-n Qt6Quick3DPhysics -p /sbin/ldconfig
+%postun	-n Qt6Quick3DPhysics -p /sbin/ldconfig
+
 %post	-n Qt6RemoteObjects -p /sbin/ldconfig
 %postun	-n Qt6RemoteObjects -p /sbin/ldconfig
 
@@ -3800,6 +3806,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n Qt6ShaderTools -p /sbin/ldconfig
 %postun	-n Qt6ShaderTools -p /sbin/ldconfig
 
+%post	-n Qt6SpatialAudio -p /sbin/ldconfig
+%postun	-n Qt6SpatialAudio -p /sbin/ldconfig
+
 %post	-n Qt6Sql -p /sbin/ldconfig
 %postun	-n Qt6Sql -p /sbin/ldconfig
 
@@ -3808,6 +3817,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	-n Qt6Test -p /sbin/ldconfig
 %postun	-n Qt6Test -p /sbin/ldconfig
+
+%post	-n Qt6TextToSpeech -p /sbin/ldconfig
+%postun	-n Qt6TextToSpeech -p /sbin/ldconfig
+
+%post	-n Qt6UiTools -p /sbin/ldconfig
+%postun	-n Qt6UiTools -p /sbin/ldconfig
 
 %post	-n Qt6VirtualKeyboard -p /sbin/ldconfig
 %postun	-n Qt6VirtualKeyboard -p /sbin/ldconfig

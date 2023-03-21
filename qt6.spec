@@ -245,6 +245,8 @@ BuildRequires:	zstd-devel >= 1.3
 BuildConflicts:	Qt6Core
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_enable_debug_packages	0
+
 %define		filterout	-flto
 
 %define		qt6dir		%{_libdir}/qt6

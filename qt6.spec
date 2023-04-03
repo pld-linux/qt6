@@ -196,6 +196,7 @@ BuildRequires:	opus-devel >= 1.3.1
 %{?with_oci:BuildRequires:	oracle-instantclient-devel}
 BuildRequires:	pciutils-devel
 BuildRequires:	pcre2-16-devel >= 10.20
+BuildRequires:	pcsc-lite-devel
 BuildRequires:	pkgconfig
 BuildRequires:	poppler-cpp-devel
 %{?with_pgsql:BuildRequires:	postgresql-devel}

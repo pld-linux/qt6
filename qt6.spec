@@ -169,6 +169,7 @@ BuildRequires:	hunspell-devel
 BuildRequires:	jasper-devel
 %{?with_qtwebengine:BuildRequires:	khrplatform-devel}
 BuildRequires:	lcms2-devel
+BuildRequires:	libb2-devel
 %if %{with kms} || %{with qtwebengine}
 BuildRequires:	libdrm-devel
 %endif

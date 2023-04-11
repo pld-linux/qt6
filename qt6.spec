@@ -203,6 +203,8 @@ BuildRequires:	pcsc-lite-devel
 BuildRequires:	pkgconfig
 BuildRequires:	poppler-cpp-devel
 %{?with_pgsql:BuildRequires:	postgresql-devel}
+BuildRequires:	protobuf-c-devel
+BuildRequires:	protobuf-devel
 BuildRequires:	pulseaudio-devel
 BuildRequires:	python3
 BuildRequires:	python3-devel-tools
@@ -4625,6 +4627,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6Grpc.prl
 %{_includedir}/qt6/QtGrpc
 %{_libdir}/cmake/Qt6Grpc
+%{_libdir}/cmake/Qt6GrpcTools
+%{_libdir}/cmake/Qt6ProtobufTools
+%attr(755,root,root) %{qt6dir}/libexec/qtgrpcgen
+%attr(755,root,root) %{qt6dir}/libexec/qtprotobufgen
 %{qt6dir}/metatypes/qt6grpc_pld_metatypes.json
 %{_pkgconfigdir}/Qt6Grpc.pc
 %{qt6dir}/mkspecs/modules/qt_lib_grpc.pri

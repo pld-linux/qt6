@@ -107,7 +107,7 @@ Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
 Version:	6.5.0
-Release:	2
+Release:	3
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.5/%{version}/single/qt-everywhere-src-%{version}.tar.xz
@@ -1892,6 +1892,67 @@ Qt6 Pdf documentation in QCH format.
 
 %description -n Qt6Pdf-doc-qch -l pl.UTF-8
 Dokumentacja do biblioteki Qt6 Pdf w formacie QCH.
+
+%package -n Qt6Positioning
+Summary:	The Qt6 Positioning library
+Summary(pl.UTF-8):	Biblioteka Qt6 Positioning
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Network = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6Quick = %{version}
+
+%description -n Qt6Positioning
+Qt6 Positioning library provides positioning information via QML and
+C++ interfaces.
+
+%description -n Qt6Positioning -l pl.UTF-8
+Biblioteka Qt6 Positioning udostępnia informacje o położeniu poprzez
+interfejsy QML i C++.
+
+%package -n Qt6Positioning-devel
+Summary:	Qt6 Positioning library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Positioning - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Network-devel = %{version}
+Requires:	Qt6Positioning = %{version}
+Requires:	Qt6Qml-devel = %{version}
+Requires:	Qt6Quick-devel = %{version}
+
+%description -n Qt6Positioning-devel
+Qt6 Positioning library - development files.
+
+%description -n Qt6Positioning-devel -l pl.UTF-8
+Biblioteka Qt6 Positioning - pliki programistyczne.
+
+%package -n Qt6Positioning-doc
+Summary:	Qt6 Positioning documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Positioning w formacie HTML
+License:	FDL v1.3
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Positioning-doc
+Qt6 Positioning documentation in HTML format.
+
+%description -n Qt6Positioning-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Positioning w formacie HTML.
+
+%package -n Qt6Positioning-doc-qch
+Summary:	Qt6 Positioning documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 Positioning w formacie QCH
+License:	FDL v1.3
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6Positioning-doc-qch
+Qt6 Positioning documentation in QCH format.
+
+%description -n Qt6Positioning-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 Positioning w formacie QCH.
 
 %package -n Qt6Designer-plugin-qwebengineview
 Summary:	QWebEngineView plugin for Qt6 Designer
@@ -3904,6 +3965,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n Qt6Pdf -p /sbin/ldconfig
 %postun	-n Qt6Pdf -p /sbin/ldconfig
 
+%post	-n Qt6Positioning -p /sbin/ldconfig
+%postun	-n Qt6Positioning -p /sbin/ldconfig
+
 %post	-n Qt6PrintSupport -p /sbin/ldconfig
 %postun	-n Qt6PrintSupport -p /sbin/ldconfig
 
@@ -5272,6 +5336,53 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 %endif
 
+%files -n Qt6Positioning
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Positioning.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6Positioning.so.6
+%attr(755,root,root) %{_libdir}/libQt6PositioningQuick.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6PositioningQuick.so.6
+%dir %{qt6dir}/plugins/position
+%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_geoclue2.so
+%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_gypsy.so
+%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_nmea.so
+%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_positionpoll.so
+%dir %{qt6dir}/qml/QtPositioning
+%attr(755,root,root) %{qt6dir}/qml/QtPositioning/libpositioningquickplugin.so
+%{qt6dir}/qml/QtPositioning/plugins.qmltypes
+%{qt6dir}/qml/QtPositioning/qmldir
+
+%files -n Qt6Positioning-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6Positioning.so
+%attr(755,root,root) %{_libdir}/libQt6PositioningQuick.so
+%{_libdir}/libQt6Positioning.prl
+%{_libdir}/libQt6PositioningQuick.prl
+%{_includedir}/qt6/QtPositioning
+%{_includedir}/qt6/QtPositioningQuick
+%{_pkgconfigdir}/Qt6Positioning.pc
+%{_pkgconfigdir}/Qt6PositioningQuick.pc
+%{_libdir}/cmake/Qt6Positioning
+%{_libdir}/cmake/Qt6PositioningQuick
+%{qt6dir}/metatypes/qt6positioning_pld_metatypes.json
+%{qt6dir}/metatypes/qt6positioningquick_pld_metatypes.json
+%{qt6dir}/mkspecs/modules/qt_lib_positioning.pri
+%{qt6dir}/mkspecs/modules/qt_lib_positioning_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_positioningquick.pri
+%{qt6dir}/mkspecs/modules/qt_lib_positioningquick_private.pri
+%{qt6dir}/modules/Positioning.json
+%{qt6dir}/modules/PositioningQuick.json
+
+%if %{with doc}
+%files -n Qt6Positioning-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtpositioning
+
+%files -n Qt6Positioning-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtpositioning.qch
+%endif
+
 %files -n Qt6PrintSupport
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6PrintSupport.so.*.*.*
@@ -5365,10 +5476,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libQt6LabsQmlModels.so.6
 %attr(755,root,root) %{_libdir}/libQt6LabsSettings.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6LabsSettings.so.6
-%attr(755,root,root) %{_libdir}/libQt6Positioning.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Positioning.so.6
-%attr(755,root,root) %{_libdir}/libQt6PositioningQuick.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6PositioningQuick.so.6
 %attr(755,root,root) %{_libdir}/libQt6Qml.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Qml.so.6
 %attr(755,root,root) %{_libdir}/libQt6QmlCompiler.so.*.*.*
@@ -5398,11 +5505,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_profiler.so
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_server.so
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_tcp.so
-%dir %{qt6dir}/plugins/position
-%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_geoclue2.so
-%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_gypsy.so
-%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_nmea.so
-%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_positionpoll.so
 
 %dir %{qt6dir}/qml
 
@@ -5453,11 +5555,6 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQml/Models/plugins.qmltypes
 %{qt6dir}/qml/QtQml/Models/qmldir
 
-%dir %{qt6dir}/qml/QtPositioning
-%attr(755,root,root) %{qt6dir}/qml/QtPositioning/libpositioningquickplugin.so
-%{qt6dir}/qml/QtPositioning/plugins.qmltypes
-%{qt6dir}/qml/QtPositioning/qmldir
-
 %dir %{qt6dir}/qml/QtQml/Base
 %attr(755,root,root) %{qt6dir}/qml/QtQml/Base/libqmlplugin.so
 %{qt6dir}/qml/QtQml/Base/plugins.qmltypes
@@ -5487,8 +5584,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6LabsFolderListModel.so
 %attr(755,root,root) %{_libdir}/libQt6LabsQmlModels.so
 %attr(755,root,root) %{_libdir}/libQt6LabsSettings.so
-%attr(755,root,root) %{_libdir}/libQt6Positioning.so
-%attr(755,root,root) %{_libdir}/libQt6PositioningQuick.so
 %attr(755,root,root) %{_libdir}/libQt6Qml.so
 %attr(755,root,root) %{_libdir}/libQt6QmlCompiler.so
 %attr(755,root,root) %{_libdir}/libQt6QmlCore.so
@@ -5512,8 +5607,6 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/metatypes/qt6labsqmlmodels_pld_metatypes.json
 %{qt6dir}/metatypes/qt6labssettings_pld_metatypes.json
 %{qt6dir}/metatypes/qt6packetprotocolprivate_pld_metatypes.json
-%{qt6dir}/metatypes/qt6positioning_pld_metatypes.json
-%{qt6dir}/metatypes/qt6positioningquick_pld_metatypes.json
 %{qt6dir}/metatypes/qt6qml_pld_metatypes.json
 %{qt6dir}/metatypes/qt6qmlcompilerprivate_pld_metatypes.json
 %{qt6dir}/metatypes/qt6qmlcore_pld_metatypes.json
@@ -5527,8 +5620,6 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/metatypes/qt6statemachine_pld_metatypes.json
 %{qt6dir}/metatypes/qt6statemachineqml_pld_metatypes.json
 %{_libdir}/libQt6PacketProtocol.prl
-%{_libdir}/libQt6Positioning.prl
-%{_libdir}/libQt6PositioningQuick.prl
 %{_libdir}/libQt6Qml.prl
 %{_libdir}/libQt6QmlCompiler.prl
 %{_libdir}/libQt6QmlCore.prl
@@ -5546,8 +5637,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtLabsQmlModels
 %{_includedir}/qt6/QtLabsSettings
 %{_includedir}/qt6/QtPacketProtocol
-%{_includedir}/qt6/QtPositioning
-%{_includedir}/qt6/QtPositioningQuick
 %{_includedir}/qt6/QtQml
 %{_includedir}/qt6/QtQmlCompiler
 %{_includedir}/qt6/QtQmlCore
@@ -5574,15 +5663,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6QmlIntegration.pc
 %{_pkgconfigdir}/Qt6QmlLocalStorage.pc
 %{_pkgconfigdir}/Qt6QmlXmlListModel.pc
-%{_pkgconfigdir}/Qt6Positioning.pc
-%{_pkgconfigdir}/Qt6PositioningQuick.pc
 %{_libdir}/cmake/Qt6LabsAnimation
 %{_libdir}/cmake/Qt6LabsFolderListModel
 %{_libdir}/cmake/Qt6LabsQmlModels
 %{_libdir}/cmake/Qt6LabsSettings
 %{_libdir}/cmake/Qt6PacketProtocolPrivate
-%{_libdir}/cmake/Qt6Positioning
-%{_libdir}/cmake/Qt6PositioningQuick
 %{_libdir}/cmake/Qt6Qml
 %{_libdir}/cmake/Qt6QmlCompilerPrivate
 %{_libdir}/cmake/Qt6QmlCore
@@ -5609,10 +5694,6 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_labssettings.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labssettings_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_packetprotocol_private.pri
-%{qt6dir}/mkspecs/modules/qt_lib_positioning.pri
-%{qt6dir}/mkspecs/modules/qt_lib_positioning_private.pri
-%{qt6dir}/mkspecs/modules/qt_lib_positioningquick.pri
-%{qt6dir}/mkspecs/modules/qt_lib_positioningquick_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlcompiler_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlcore.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlcore_private.pri
@@ -5642,8 +5723,6 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/LabsQmlModels.json
 %{qt6dir}/modules/LabsSettings.json
 %{qt6dir}/modules/PacketProtocolPrivate.json
-%{qt6dir}/modules/Positioning.json
-%{qt6dir}/modules/PositioningQuick.json
 %{qt6dir}/modules/Qml.json
 %{qt6dir}/modules/QmlCompilerPrivate.json
 %{qt6dir}/modules/QmlCore.json
@@ -5663,7 +5742,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_docdir}/qt6-doc/qtlabsplatform
 %{_docdir}/qt6-doc/qtplatformintegration
-%{_docdir}/qt6-doc/qtpositioning
 %{_docdir}/qt6-doc/qtqml
 %{_docdir}/qt6-doc/qtqmlcore
 %{_docdir}/qt6-doc/qtqmlmodels
@@ -5676,7 +5754,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_docdir}/qt6-doc/qtlabsplatform.qch
 %{_docdir}/qt6-doc/qtplatformintegration.qch
-%{_docdir}/qt6-doc/qtpositioning.qch
 %{_docdir}/qt6-doc/qtqmlcore.qch
 %{_docdir}/qt6-doc/qtqmlmodels.qch
 %{_docdir}/qt6-doc/qtqml.qch

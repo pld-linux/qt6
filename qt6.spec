@@ -158,6 +158,7 @@ BuildRequires:	gdb
 BuildRequires:	glib2-devel >= 1:2.32.0
 %{?with_qtwebengine:BuildRequires:	glibc-headers >= 6:2.16}
 %{?with_qtwebengine:BuildRequires:	gperf}
+BuildRequires:	grpc-devel
 BuildRequires:	gstreamer-devel >= 1.0
 BuildRequires:	gstreamer-gl-devel >= 1.0
 BuildRequires:	gstreamer-plugins-bad-devel >= 1.0

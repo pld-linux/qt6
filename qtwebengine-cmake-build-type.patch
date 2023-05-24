@@ -2,7 +2,7 @@
 +++ qt-everywhere-src-6.5.0/qtwebengine/cmake/Functions.cmake	2023-04-04 18:58:51.778567461 +0200
 @@ -848,7 +848,7 @@
          if(WIN32)
-             list(APPEND gnArgArg enable_iterator_debugging=true v8_optimized_debug=false)
+             list(APPEND gnArgArg enable_iterator_debugging=true)
          endif()
 -    elseif(${config} STREQUAL "Release")
 +    elseif(${config} STREQUAL "Release" OR ${config} STREQUAL "PLD")

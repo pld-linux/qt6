@@ -106,19 +106,18 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.5.0
-Release:	4
+Version:	6.5.1
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.5/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	10247444e4264ea9cee7d4a7c13efd34
+# Source0-md5:	4c1ec00f50833bc3c74d372d2ca6b556
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		%{name}-gn.patch
 Patch3:		no-implicit-sse2.patch
 Patch4:		x32.patch
 Patch5:		qtwebengine-cmake-build-type.patch
-Patch6:		QTBUG-113109.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -2390,21 +2389,10 @@ Narzędzia Qt6 Quick Effect Maker.
 %package -n Qt6QuickEffectMaker
 Summary:	Qt6 Quick Effect Maker
 Group:		Development/Libraries
+Obsoletes:	Qt6QuickEffectMaker-devel < 6.5.1
 
 %description -n Qt6QuickEffectMaker
 Qt6 Quick Effect Maker.
-
-%package -n Qt6QuickEffectMaker-devel
-Summary:	Qt6 Quick Effect Maker - development files
-Summary(pl.UTF-8):	Qt6 Quick Effect Maker - pliki programistyczne
-Group:		Development/Libraries
-Requires:	Qt6Core-devel = %{version}
-
-%description -n Qt6QuickEffectMaker-devel
-Qt6 Quick Effect Maker - development files.
-
-%description -n Qt6QuickEffectMaker-devel -l pl.UTF-8
-Qt6 Quick Effect Maker - pliki programistyczne.
 
 %package -n Qt6RemoteObjects
 Summary:	The Qt6 RemoteObjects library
@@ -3586,9 +3574,6 @@ narzędzia.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-cd qtwebengine
-%patch6 -p1
-cd ..
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 
@@ -6388,10 +6373,6 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6QuickEffectMaker
 %defattr(644,root,root,755)
 %{qt6dir}/qml/QtQuickEffectMaker
-
-%files -n Qt6QuickEffectMaker-devel
-%defattr(644,root,root,755)
-%{_libdir}/cmake/Qt6QQEffectMakerTools
 
 %files -n qt6-quickeffectmaker
 %defattr(644,root,root,755)

@@ -106,20 +106,18 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.5.1
-Release:	4
+Version:	6.5.2
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.5/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	4c1ec00f50833bc3c74d372d2ca6b556
+# Source0-md5:	87f56fd8aedd2e429047c40397e9be48
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		%{name}-gn.patch
 Patch3:		no-implicit-sse2.patch
 Patch4:		x32.patch
 Patch5:		qtwebengine-cmake-build-type.patch
-Patch6:		QTBUG-113579.patch
-Patch7:		CVE-2023-34410-qtbase-6.5.diff
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -767,7 +765,7 @@ Summary:	Qt6 Core library - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 Core - pliki programistyczne
 Group:		Development/Libraries
 Requires:	Qt6Core = %{version}
-Requires:	libicu-devel
+%requires_ge	libicu-devel
 Requires:	libstdc++-devel >= 6:4.7
 Requires:	pcre2-16-devel >= 10.20
 Requires:	qt6-build = %{version}
@@ -3253,7 +3251,7 @@ Requires:	alsa-lib >= 1.0.10
 Requires:	freetype >= 1:2.4.2
 Requires:	harfbuzz >= 3.0.0
 Requires:	harfbuzz-subset >= 3.0.0
-Requires:	libicu >= 65
+%requires_ge_to	libicu libicu-devel
 Requires:	libpng >= 2:1.6.0
 Requires:	libvpx >= 1.10.0
 Requires:	nss >= 3.26
@@ -3576,12 +3574,6 @@ narzędzia.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-cd qtwebengine
-%patch6 -p1
-cd ..
-cd qtbase
-%patch7 -p1
-cd ..
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 
@@ -6494,7 +6486,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6SensorsQuick.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6SensorsQuick.so.6
 %dir %{qt6dir}/plugins/sensors
-%attr(755,root,root) %{qt6dir}/plugins/sensors/libqtsensors_dummy.so
 %attr(755,root,root) %{qt6dir}/plugins/sensors/libqtsensors_generic.so
 %attr(755,root,root) %{qt6dir}/plugins/sensors/libqtsensors_iio-sensor-proxy.so
 %dir %{qt6dir}/qml/QtSensors

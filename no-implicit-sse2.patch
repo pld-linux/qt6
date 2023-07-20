@@ -1,6 +1,6 @@
---- qt-everywhere-src-6.3.1/qtbase/cmake/QtInternalTargets.cmake~	2022-05-25 10:58:52.000000000 +0200
-+++ qt-everywhere-src-6.3.1/qtbase/cmake/QtInternalTargets.cmake	2022-08-01 09:55:49.012682536 +0200
-@@ -315,47 +315,6 @@
+--- qt-everywhere-src-6.5.2/qtbase/cmake/QtInternalTargets.cmake.orig	2023-07-19 17:30:07.482041879 +0200
++++ qt-everywhere-src-6.5.2/qtbase/cmake/QtInternalTargets.cmake	2023-07-19 17:36:34.820978372 +0200
+@@ -348,47 +348,6 @@
      target_link_options(PlatformCommonInternal INTERFACE "-Wl,--enable-new-dtags")
  endif()
  
@@ -8,8 +8,8 @@
 -    set(is_shared_lib "$<STREQUAL:$<TARGET_PROPERTY:TYPE>,SHARED_LIBRARY>")
 -    set(is_static_lib "$<STREQUAL:$<TARGET_PROPERTY:TYPE>,STATIC_LIBRARY>")
 -    set(is_static_qt_build "$<NOT:$<BOOL:${QT_BUILD_SHARED_LIBS}>>")
--    set(is_staitc_lib_during_static_qt_build "$<AND:${is_static_qt_build},${is_static_lib}>")
--    set(enable_sse2_condition "$<OR:${is_shared_lib},${is_staitc_lib_during_static_qt_build}>")
+-    set(is_static_lib_during_static_qt_build "$<AND:${is_static_qt_build},${is_static_lib}>")
+-    set(enable_sse2_condition "$<OR:${is_shared_lib},${is_static_lib_during_static_qt_build}>")
 -    set(${out_var} "${enable_sse2_condition}" PARENT_SCOPE)
 -endfunction()
 -

@@ -1232,6 +1232,7 @@ Requires:	Qt6DBus-devel = %{version}
 Requires:	Qt6Gui = %{version}
 Requires:	Vulkan-Loader-devel
 Requires:	libpng-devel
+Requires:	xorg-lib-libxkbcommon-devel >= 0.5.0
 
 %description -n Qt6Gui-devel
 Header files for Qt6 Gui library.

@@ -3083,6 +3083,31 @@ Qt6 VirtualKeyboard documentation in QCH format.
 %description -n Qt6VirtualKeyboard-doc-qch -l pl.UTF-8
 Dokumentacja do biblioteki Qt6 VirtualKeyboard w formacie QCH.
 
+%package -n Qt6Wayland
+Summary:	Common files for Qt6 Wayland
+Summary(pl.UTF-8):	Wspólne pliki dla Qt6 Wayland
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+
+%description -n Qt6Wayland
+Common files for Qt6 Wayland.
+
+%description -n Qt6Wayland -l pl.UTF-8
+Wspólne pliki dla Qt6 Wayland.
+
+%package -n Qt6Wayland-devel
+Summary:	Common development files for Qt6 Wayland
+Summary(pl.UTF-8):	Wspólne pliki programistyczne dla Qt6 Wayland
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Wayland = %{version}
+
+%description -n Qt6Wayland-devel
+Common development files for Qt6 Wayland.
+
+%description -n Qt6Wayland-devel -l pl.UTF-8
+Wspólne pliki programistyczne dla Qt6 Wayland.
+
 %package -n Qt6WaylandCompositor
 Summary:	The Qt6 WaylandCompositor library
 Summary(pl.UTF-8):	Biblioteka Qt6 WaylandCompositor
@@ -3091,6 +3116,7 @@ Requires:	Qt6Core = %{version}
 Requires:	Qt6Gui = %{version}
 Requires:	Qt6Qml = %{version}
 Requires:	Qt6Quick = %{version}
+Requires:	Qt6Wayland = %{version}
 Requires:	wayland >= 1.4.0
 Requires:	xorg-lib-libxkbcommon >= 0.2.0
 
@@ -3112,6 +3138,7 @@ Requires:	Qt6Gui-devel = %{version}
 Requires:	Qt6Network-devel = %{version}
 Requires:	Qt6Qml-devel = %{version}
 Requires:	Qt6Quick-devel = %{version}
+Requires:	Qt6Wayland-devel = %{version}
 Requires:	Qt6WaylandCompositor = %{version}
 Requires:	wayland-devel >= 1.4.0
 Requires:	xorg-lib-libxkbcommon-devel >= 0.2.0
@@ -3155,6 +3182,7 @@ Group:		Libraries
 Requires:	Qt6Core = %{version}
 Requires:	Qt6DBus = %{version}
 Requires:	Qt6Gui = %{version}
+Requires:	Qt6Wayland = %{version}
 Requires:	wayland >= 1.4.0
 Requires:	xorg-lib-libxkbcommon >= 0.2.0
 
@@ -3173,6 +3201,7 @@ Group:		Development/Libraries
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6DBus-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6Wayland-devel = %{version}
 Requires:	Qt6WaylandClient = %{version}
 Requires:	wayland-devel >= 1.4.0
 Requires:	xorg-lib-libxkbcommon-devel >= 0.2.0
@@ -6956,6 +6985,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtvirtualkeyboard.qch
 %endif
 
+%files -n Qt6Wayland
+%defattr(644,root,root,755)
+%dir %{qt6dir}/qml/QtWayland
+
+%files -n Qt6Wayland-devel
+%defattr(644,root,root,755)
+%{_includedir}/qt6/QtWaylandGlobal
+%{_libdir}/cmake/Qt6WaylandGlobalPrivate
+%{qt6dir}/mkspecs/modules/qt_lib_waylandglobal_private.pri
+%{qt6dir}/modules/WaylandGlobalPrivate.json
+
 %files -n Qt6WaylandCompositor
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6WaylandCompositor.so.*.*.*
@@ -6972,8 +7012,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-vulkan-server.so
 %attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-wayland-egl.so
 %attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-wayland-eglstream-controller.so
-# dir shared Qt6WaylandClient
-%dir %{qt6dir}/qml/QtWayland
 %dir %{qt6dir}/qml/QtWayland/Compositor
 %attr(755,root,root) %{qt6dir}/qml/QtWayland/Compositor/libqwaylandcompositorplugin.so
 %{qt6dir}/qml/QtWayland/Compositor/qmldir
@@ -7012,21 +7050,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6WaylandEglCompositorHwIntegration.prl
 %{_includedir}/qt6/QtWaylandCompositor
 %{_includedir}/qt6/QtWaylandEglCompositorHwIntegration
-%{_includedir}/qt6/QtWaylandGlobal
 %{_includedir}/qt6/QtWlShellIntegration
 %{_pkgconfigdir}/Qt6WaylandCompositor.pc
 %{_libdir}/cmake/Qt6WaylandCompositor
-%{_libdir}/cmake/Qt6WaylandGlobalPrivate
 %{_libdir}/cmake/Qt6WlShellIntegrationPrivate
 %{_libdir}/cmake/Qt6WaylandEglCompositorHwIntegrationPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_waylandcompositor.pri
 %{qt6dir}/mkspecs/modules/qt_lib_waylandcompositor_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_wayland_egl_compositor_hw_integration_private.pri
-%{qt6dir}/mkspecs/modules/qt_lib_waylandglobal_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_wl_shell_integration_private.pri
 %{qt6dir}/modules/WaylandCompositor.json
 %{qt6dir}/modules/WaylandEglCompositorHwIntegrationPrivate.json
-%{qt6dir}/modules/WaylandGlobalPrivate.json
 %{qt6dir}/modules/WlShellIntegrationPrivate.json
 %{qt6dir}/metatypes/qt6waylandcompositor_pld_metatypes.json
 %{qt6dir}/metatypes/qt6waylandeglcompositorhwintegrationprivate_pld_metatypes.json

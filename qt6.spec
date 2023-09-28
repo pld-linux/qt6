@@ -7503,4 +7503,5 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/solaris-*
 %{qt6dir}/mkspecs/unsupported
 %{qt6dir}/mkspecs/wasm-emscripten
+%{qt6dir}/mkspecs/wasm-emscripten-64
 %{qt6dir}/mkspecs/win32-*

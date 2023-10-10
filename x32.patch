@@ -1,7 +1,7 @@
 --- qt-everywhere-src-6.3.1/qtbase/src/corelib/thread/qthread.h~	2022-05-25 10:58:52.000000000 +0200
 +++ qt-everywhere-src-6.3.1/qtbase/src/corelib/thread/qthread.h	2022-08-01 21:54:57.783355420 +0200
 @@ -196,7 +196,7 @@
- #elif defined(Q_PROCESSOR_X86_64) && defined(Q_OS_DARWIN64)
+ #elif defined(Q_PROCESSOR_X86_64) && defined(Q_OS_DARWIN)
      // 64bit macOS uses GS, see https://github.com/apple/darwin-xnu/blob/master/libsyscall/os/tsd.h
      __asm__("movq %%gs:0, %0" : "=r" (tid) : : );
 -#elif defined(Q_PROCESSOR_X86_64) && ((defined(Q_OS_LINUX) && defined(__GLIBC__)) || defined(Q_OS_FREEBSD))

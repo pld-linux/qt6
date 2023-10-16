@@ -149,7 +149,6 @@ BuildRequires:	dbus-devel >= 1.2
 BuildRequires:	double-conversion-devel
 %{?with_fbx:BuildRequires:	fbxsdk-devel}
 BuildRequires:	ffmpeg-devel
-%{?with_qtwebengine:BuildRequires:	ffmpeg-devel < 5.0}
 %{?with_qtwebengine:BuildRequires:	flex}
 BuildRequires:	flite-devel
 BuildRequires:	fontconfig-devel

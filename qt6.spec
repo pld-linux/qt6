@@ -125,7 +125,7 @@ BuildRequires:	EGL-devel
 %{?with_ibase:BuildRequires:	Firebird-devel}
 BuildRequires:	GConf2-devel
 %if %{with kms} || %{with qtwebengine}
-BuildRequires:	Mesa-libgbm-devel}
+BuildRequires:	Mesa-libgbm-devel
 %endif
 BuildRequires:	OpenGL-devel
 %if %{with kms} || %{with gles}

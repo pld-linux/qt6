@@ -121,6 +121,7 @@ Patch3:		no-implicit-sse2.patch
 Patch4:		x32.patch
 Patch5:		qtwebengine-cmake-build-type.patch
 Patch6:		libxkbcommon1.6.patch
+Patch7:		ffmpeg-binutils.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -3645,6 +3646,7 @@ narzędzia.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1 -d qtbase
+%patch7 -p1 -d qtwebengine/src/3rdparty
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 

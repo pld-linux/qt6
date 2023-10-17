@@ -58,6 +58,8 @@
 %bcond_with	sse42		# use SSE4.2 instructions (the same)
 %bcond_with	avx		# use AVX instructions (Intel since Sandy Bridge, AMD since Bulldozer)
 %bcond_with	avx2		# use AVX2 instructions (Intel since Haswell)
+# -- system libraries
+%bcond_with	qtwebengine_system_ffmpeg	# use system FFmpeg in qtwebengine
 
 %ifnarch %{ix86} %{x8664} x32 sparc sparcv9 alpha ppc
 %undefine	with_ibase
@@ -149,6 +151,9 @@ BuildRequires:	dbus-devel >= 1.2
 BuildRequires:	double-conversion-devel
 %{?with_fbx:BuildRequires:	fbxsdk-devel}
 BuildRequires:	ffmpeg-devel
+%if %{with qtwebengine} && %{with qtwebengine_system_ffmpeg}
+BuildRequires:	ffmpeg-devel < 5.0
+%endif
 %{?with_qtwebengine:BuildRequires:	flex}
 BuildRequires:	flite-devel
 BuildRequires:	fontconfig-devel
@@ -3742,7 +3747,7 @@ cd build
 	-DQT_FEATURE_system_zlib=ON \
 	-DQT_FEATURE_webengine_proprietary_codecs=ON \
 	-DQT_FEATURE_webengine_system_alsa=ON \
-	-DQT_FEATURE_webengine_system_ffmpeg=ON \
+	%{cmake_on_off qtwebengine_system_ffmpeg QT_FEATURE_webengine_system_ffmpeg} \
 	-DQT_FEATURE_webengine_system_freetype=ON \
 	-DQT_FEATURE_webengine_system_glib=ON \
 	-DQT_FEATURE_webengine_system_harfbuzz=ON \

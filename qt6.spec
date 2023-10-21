@@ -109,7 +109,7 @@ Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
 Version:	6.6.0
-Release:	1
+Release:	2
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.6/%{version}/single/qt-everywhere-src-%{version}.tar.xz
@@ -4751,6 +4751,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Graphs.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Graphs.so.6
+%dir %{qt6dir}/qml/QtGraphs
 %attr(755,root,root) %{qt6dir}/qml/QtGraphs/libgraphsplugin.so
 %{qt6dir}/qml/QtGraphs/plugins.qmltypes
 %dir %{qt6dir}/qml/QtGraphs/qml

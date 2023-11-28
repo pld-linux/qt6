@@ -122,6 +122,7 @@ Patch4:		x32.patch
 Patch5:		qtwebengine-cmake-build-type.patch
 Patch6:		libxkbcommon1.6.patch
 Patch7:		ffmpeg-binutils.patch
+Patch8:		libxml2.12.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -3647,6 +3648,7 @@ narzędzia.
 %patch5 -p1
 %patch6 -p1 -d qtbase
 %patch7 -p1 -d qtwebengine/src/3rdparty
+%patch8 -p1 -d qtwebengine
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 

@@ -1,0 +1,36 @@
+--- qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/core/xml/xslt_processor.h.orig	2023-11-20 17:08:07.000000000 +0100
++++ qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/core/xml/xslt_processor.h	2023-11-28 00:01:08.206020832 +0100
+@@ -30,6 +30,7 @@
+ #include "third_party/blink/renderer/platform/wtf/text/string_hash.h"
+ 
+ #include <libxml/parserInternals.h>
++#include <libxml/xmlversion.h>
+ #include <libxslt/documents.h>
+ 
+ namespace blink {
+@@ -77,7 +78,11 @@
+ 
+   void reset();
+ 
++#if defined(LIBXML_VERSION) && LIBXML_VERSION >= 21200
++  static void ParseErrorFunc(void* user_data, const xmlError*);
++#else
+   static void ParseErrorFunc(void* user_data, xmlError*);
++#endif
+   static void GenericErrorFunc(void* user_data, const char* msg, ...);
+ 
+   // Only for libXSLT callbacks
+--- qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/core/xml/xslt_processor_libxslt.cc.orig	2023-11-20 17:08:07.000000000 +0100
++++ qtwebengine/src/3rdparty/chromium/third_party/blink/renderer/core/xml/xslt_processor_libxslt.cc	2023-11-28 00:12:15.789955472 +0100
+@@ -66,7 +66,11 @@
+   // It would be nice to do something with this error message.
+ }
+ 
++#if defined(LIBXML_VERSION) && LIBXML_VERSION >= 21200
++void XSLTProcessor::ParseErrorFunc(void* user_data, const xmlError* error) {
++#else
+ void XSLTProcessor::ParseErrorFunc(void* user_data, xmlError* error) {
++#endif
+   FrameConsole* console = static_cast<FrameConsole*>(user_data);
+   if (!console)
+     return;

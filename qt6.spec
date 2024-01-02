@@ -109,7 +109,7 @@ Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
 Version:	6.6.1
-Release:	2
+Release:	3
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.6/%{version}/single/qt-everywhere-src-%{version}.tar.xz
@@ -121,6 +121,7 @@ Patch3:		no-implicit-sse2.patch
 Patch4:		x32.patch
 Patch5:		qtwebengine-cmake-build-type.patch
 Patch6:		libxml2.12.patch
+Patch7:		CVE-2023-51714.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -2054,7 +2055,7 @@ Requires:	Qt6Core = %{version}
 Qt6 Protobuf library provides integration with Protocol Buffers.
 
 %description -n Qt6Protobuf -l pl.UTF-8
-Biblioteka Qt6 Protobuf dostarcza integrację z Protocol Buffers. 
+Biblioteka Qt6 Protobuf dostarcza integrację z Protocol Buffers.
 
 %package -n Qt6Protobuf-devel
 Summary:	Qt6 Protobuf library - development files
@@ -3645,6 +3646,7 @@ narzędzia.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1 -d qtwebengine
+%patch7 -p1 -d qtbase
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 

@@ -108,12 +108,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.6.2
+Version:	6.6.3
 Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.6/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	b92112e12298f4b27050ef7060658191
+# Source0-md5:	0e2c9dd87cbc6768da2bfc7f776c272f
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		%{name}-gn.patch
@@ -5921,8 +5921,28 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libQt6QuickWidgets.so.6
 %attr(755,root,root) %{_libdir}/libQt6QuickControls2.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2Basic.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2Basic.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2BasicStyleImpl.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2BasicStyleImpl.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2Fusion.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2Fusion.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2FusionStyleImpl.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2FusionStyleImpl.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2Imagine.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2Imagine.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2ImagineStyleImpl.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2ImagineStyleImpl.so.6
 %attr(755,root,root) %{_libdir}/libQt6QuickControls2Impl.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2Impl.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2Material.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2Material.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2MaterialStyleImpl.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2MaterialStyleImpl.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2Universal.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2Universal.so.6
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2UniversalStyleImpl.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2UniversalStyleImpl.so.6
 %attr(755,root,root) %{_libdir}/libQt6QuickDialogs2.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6QuickDialogs2.so.6
 %attr(755,root,root) %{_libdir}/libQt6QuickDialogs2QuickImpl.so.*.*.*
@@ -5988,9 +6008,9 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQuick/Controls/Imagine/qmldir
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Imagine/libqtquickcontrols2imaginestyleplugin.so
 %dir %{qt6dir}/qml/QtQuick/Controls/Imagine/impl
-%{qt6dir}/qml/QtQuick/Controls/Imagine/impl/qtquickcontrols2imaginestyleimplplugin.qmltypes
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Imagine/impl/libqtquickcontrols2imaginestyleimplplugin.so
 %{qt6dir}/qml/QtQuick/Controls/Imagine/impl/*.qml
+%{qt6dir}/qml/QtQuick/Controls/Imagine/impl/QuickControls2ImagineStyleImpl.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Imagine/impl/qmldir
 %dir %{qt6dir}/qml/QtQuick/Controls/Material
 %{qt6dir}/qml/QtQuick/Controls/Material/*.qml
@@ -6101,8 +6121,18 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6LabsWavefrontMesh.so
 %attr(755,root,root) %{_libdir}/libQt6Quick.so
 %attr(755,root,root) %{_libdir}/libQt6QuickEffects.so
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2Impl.so
 %attr(755,root,root) %{_libdir}/libQt6QuickControls2.so
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2Basic.so
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2BasicStyleImpl.so
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2Fusion.so
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2FusionStyleImpl.so
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2Imagine.so
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2ImagineStyleImpl.so
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2Impl.so
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2Material.so
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2MaterialStyleImpl.so
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2Universal.so
+%attr(755,root,root) %{_libdir}/libQt6QuickControls2UniversalStyleImpl.so
 %attr(755,root,root) %{_libdir}/libQt6QuickDialogs2QuickImpl.so
 %attr(755,root,root) %{_libdir}/libQt6QuickDialogs2.so
 %attr(755,root,root) %{_libdir}/libQt6QuickDialogs2Utils.so
@@ -6116,8 +6146,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6LabsSharedImage.prl
 %{_libdir}/libQt6LabsWavefrontMesh.prl
 %{_libdir}/libQt6Quick.prl
-%{_libdir}/libQt6QuickControls2Impl.prl
 %{_libdir}/libQt6QuickControls2.prl
+%{_libdir}/libQt6QuickControls2Basic.prl
+%{_libdir}/libQt6QuickControls2BasicStyleImpl.prl
+%{_libdir}/libQt6QuickControls2Fusion.prl
+%{_libdir}/libQt6QuickControls2FusionStyleImpl.prl
+%{_libdir}/libQt6QuickControls2Imagine.prl
+%{_libdir}/libQt6QuickControls2ImagineStyleImpl.prl
+%{_libdir}/libQt6QuickControls2Impl.prl
+%{_libdir}/libQt6QuickControls2Material.prl
+%{_libdir}/libQt6QuickControls2MaterialStyleImpl.prl
+%{_libdir}/libQt6QuickControls2Universal.prl
+%{_libdir}/libQt6QuickControls2UniversalStyleImpl.prl
 %{_libdir}/libQt6QuickControlsTestUtils.prl
 %{_libdir}/libQt6QuickDialogs2.prl
 %{_libdir}/libQt6QuickDialogs2QuickImpl.prl
@@ -6137,7 +6177,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtLabsWavefrontMesh
 %{_includedir}/qt6/QtQuick
 %{_includedir}/qt6/QtQuickControls2
+%{_includedir}/qt6/QtQuickControls2Basic
+%{_includedir}/qt6/QtQuickControls2BasicStyleImpl
+%{_includedir}/qt6/QtQuickControls2Fusion
+%{_includedir}/qt6/QtQuickControls2FusionStyleImpl
+%{_includedir}/qt6/QtQuickControls2Imagine
+%{_includedir}/qt6/QtQuickControls2ImagineStyleImpl
 %{_includedir}/qt6/QtQuickControls2Impl
+%{_includedir}/qt6/QtQuickControls2Material
+%{_includedir}/qt6/QtQuickControls2MaterialStyleImpl
+%{_includedir}/qt6/QtQuickControls2Universal
+%{_includedir}/qt6/QtQuickControls2UniversalStyleImpl
 %{_includedir}/qt6/QtQuickControlsTestUtils
 %{_includedir}/qt6/QtQuickDialogs2
 %{_includedir}/qt6/QtQuickDialogs2QuickImpl
@@ -6158,7 +6208,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6QuickTimeline.pc
 %{_pkgconfigdir}/Qt6QuickWidgets.pc
 %{_pkgconfigdir}/Qt6QuickControls2.pc
+%{_pkgconfigdir}/Qt6QuickControls2Basic.pc
+%{_pkgconfigdir}/Qt6QuickControls2BasicStyleImpl.pc
+%{_pkgconfigdir}/Qt6QuickControls2Fusion.pc
+%{_pkgconfigdir}/Qt6QuickControls2FusionStyleImpl.pc
+%{_pkgconfigdir}/Qt6QuickControls2Imagine.pc
+%{_pkgconfigdir}/Qt6QuickControls2ImagineStyleImpl.pc
 %{_pkgconfigdir}/Qt6QuickControls2Impl.pc
+%{_pkgconfigdir}/Qt6QuickControls2Material.pc
+%{_pkgconfigdir}/Qt6QuickControls2MaterialStyleImpl.pc
+%{_pkgconfigdir}/Qt6QuickControls2Universal.pc
+%{_pkgconfigdir}/Qt6QuickControls2UniversalStyleImpl.pc
 %{_pkgconfigdir}/Qt6QuickDialogs2.pc
 %{_pkgconfigdir}/Qt6QuickDialogs2QuickImpl.pc
 %{_pkgconfigdir}/Qt6QuickDialogs2Utils.pc
@@ -6168,7 +6228,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6LabsWavefrontMesh
 %{_libdir}/cmake/Qt6Quick
 %{_libdir}/cmake/Qt6QuickControls2
+%{_libdir}/cmake/Qt6QuickControls2Basic
+%{_libdir}/cmake/Qt6QuickControls2BasicStyleImpl
+%{_libdir}/cmake/Qt6QuickControls2Fusion
+%{_libdir}/cmake/Qt6QuickControls2FusionStyleImpl
+%{_libdir}/cmake/Qt6QuickControls2Imagine
+%{_libdir}/cmake/Qt6QuickControls2ImagineStyleImpl
 %{_libdir}/cmake/Qt6QuickControls2Impl
+%{_libdir}/cmake/Qt6QuickControls2Material
+%{_libdir}/cmake/Qt6QuickControls2MaterialStyleImpl
+%{_libdir}/cmake/Qt6QuickControls2Universal
+%{_libdir}/cmake/Qt6QuickControls2UniversalStyleImpl
 %{_libdir}/cmake/Qt6QuickControlsTestUtilsPrivate
 %{_libdir}/cmake/Qt6QuickDialogs2
 %{_libdir}/cmake/Qt6QuickDialogs2QuickImpl
@@ -6187,10 +6257,30 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_labssharedimage_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labswavefrontmesh.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri
-%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2impl.pri
-%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2impl_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2basic.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2basic_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2basicstyleimpl_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2fusion.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2fusion_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2fusionstyleimpl_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2imagine.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2imagine_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2imaginestyleimpl_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2impl.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2impl_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2material.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2material_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2materialstyleimpl_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2universal.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2universal_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2universalstyleimpl_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickcontrolstestutilsprivate_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickdialogs2.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickdialogs2_private.pri
@@ -6216,7 +6306,17 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/LabsWavefrontMesh.json
 %{qt6dir}/modules/Quick.json
 %{qt6dir}/modules/QuickControls2.json
+%{qt6dir}/modules/QuickControls2Basic.json
+%{qt6dir}/modules/QuickControls2BasicStyleImpl.json
+%{qt6dir}/modules/QuickControls2Fusion.json
+%{qt6dir}/modules/QuickControls2FusionStyleImpl.json
+%{qt6dir}/modules/QuickControls2Imagine.json
+%{qt6dir}/modules/QuickControls2ImagineStyleImpl.json
 %{qt6dir}/modules/QuickControls2Impl.json
+%{qt6dir}/modules/QuickControls2Material.json
+%{qt6dir}/modules/QuickControls2MaterialStyleImpl.json
+%{qt6dir}/modules/QuickControls2Universal.json
+%{qt6dir}/modules/QuickControls2UniversalStyleImpl.json
 %{qt6dir}/modules/QuickControlsTestUtilsPrivate.json
 %{qt6dir}/modules/QuickDialogs2.json
 %{qt6dir}/modules/QuickDialogs2QuickImpl.json
@@ -6233,7 +6333,17 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/metatypes/qt6labssharedimage_pld_metatypes.json
 %{qt6dir}/metatypes/qt6labswavefrontmesh_pld_metatypes.json
 %{qt6dir}/metatypes/qt6quickcontrols2_pld_metatypes.json
+%{qt6dir}/metatypes/qt6quickcontrols2basic_pld_metatypes.json
+%{qt6dir}/metatypes/qt6quickcontrols2basicstyleimpl_pld_metatypes.json
+%{qt6dir}/metatypes/qt6quickcontrols2fusion_pld_metatypes.json
+%{qt6dir}/metatypes/qt6quickcontrols2fusionstyleimpl_pld_metatypes.json
+%{qt6dir}/metatypes/qt6quickcontrols2imagine_pld_metatypes.json
+%{qt6dir}/metatypes/qt6quickcontrols2imaginestyleimpl_pld_metatypes.json
 %{qt6dir}/metatypes/qt6quickcontrols2impl_pld_metatypes.json
+%{qt6dir}/metatypes/qt6quickcontrols2material_pld_metatypes.json
+%{qt6dir}/metatypes/qt6quickcontrols2materialstyleimpl_pld_metatypes.json
+%{qt6dir}/metatypes/qt6quickcontrols2universal_pld_metatypes.json
+%{qt6dir}/metatypes/qt6quickcontrols2universalstyleimpl_pld_metatypes.json
 %{qt6dir}/metatypes/qt6quickcontrolstestutilsprivate_pld_metatypes.json
 %{qt6dir}/metatypes/qt6quickdialogs2_pld_metatypes.json
 %{qt6dir}/metatypes/qt6quickdialogs2quickimpl_pld_metatypes.json
@@ -6989,6 +7099,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libQt6HunspellInputMethod.so.6
 %attr(755,root,root) %{_libdir}/libQt6VirtualKeyboard.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6VirtualKeyboard.so.6
+%attr(755,root,root) %{_libdir}/libQt6VirtualKeyboardSettings.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6VirtualKeyboardSettings.so.6
 %attr(755,root,root) %{qt6dir}/plugins/platforminputcontexts/libqtvirtualkeyboardplugin.so
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/libqtvkbplugin.so
@@ -7071,23 +7183,32 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6HunspellInputMethod.so
 %attr(755,root,root) %{_libdir}/libQt6VirtualKeyboard.so
+%attr(755,root,root) %{_libdir}/libQt6VirtualKeyboardSettings.so
 %{_libdir}/libQt6HunspellInputMethod.prl
 %{_libdir}/libQt6VirtualKeyboard.prl
+%{_libdir}/libQt6VirtualKeyboardSettings.prl
 %{_includedir}/qt6/QtHunspellInputMethod
 %{_includedir}/qt6/QtVirtualKeyboard
+%{_includedir}/qt6/QtVirtualKeyboardSettings
 %{_pkgconfigdir}/Qt6HunspellInputMethod.pc
 %{_pkgconfigdir}/Qt6VirtualKeyboard.pc
+%{_pkgconfigdir}/Qt6VirtualKeyboardSettings.pc
 %{_libdir}/cmake/Qt6Gui/Qt6QVirtualKeyboardPlugin*.cmake
 %{_libdir}/cmake/Qt6HunspellInputMethod
 %{_libdir}/cmake/Qt6VirtualKeyboard
+%{_libdir}/cmake/Qt6VirtualKeyboardSettings
 %{qt6dir}/mkspecs/modules/qt_lib_hunspellinputmethod.pri
 %{qt6dir}/mkspecs/modules/qt_lib_hunspellinputmethod_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_virtualkeyboard.pri
 %{qt6dir}/mkspecs/modules/qt_lib_virtualkeyboard_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_virtualkeyboardsettings.pri
+%{qt6dir}/mkspecs/modules/qt_lib_virtualkeyboardsettings_private.pri
 %{qt6dir}/modules/HunspellInputMethod.json
 %{qt6dir}/modules/VirtualKeyboard.json
+%{qt6dir}/modules/VirtualKeyboardSettings.json
 %{qt6dir}/metatypes/qt6hunspellinputmethod_pld_metatypes.json
 %{qt6dir}/metatypes/qt6virtualkeyboard_pld_metatypes.json
+%{qt6dir}/metatypes/qt6virtualkeyboardsettings_pld_metatypes.json
 
 %if %{with doc}
 %files -n Qt6VirtualKeyboard-doc

@@ -2308,9 +2308,11 @@ Biblioteki Qt6 Quick3D.
 Summary:	Qt6 Quick3D - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 Quick3D - pliki programistyczne
 Group:		X11/Development/Libraries
+Requires:	Qt6Concurrent-devel = %{version}
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}
 Requires:	Qt6Quick3D = %{version}
+Requires:	Qt6ShaderTools-devel = %{version}
 
 %description -n Qt6Quick3D-devel
 Qt6 Quick3D - development files.

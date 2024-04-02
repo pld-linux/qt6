@@ -2242,6 +2242,7 @@ Group:		X11/Development/Libraries
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}
 Requires:	Qt6Network-devel = %{version}
+Requires:	Qt6OpenGL-devel = %{version}
 Requires:	Qt6Qml-devel = %{version}
 Requires:	Qt6Quick = %{version}
 Requires:	Qt6Widgets-devel = %{version}

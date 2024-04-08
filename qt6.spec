@@ -450,6 +450,7 @@ Qt6 3D libraries.
 
 %description -n Qt63D -l pl.UTF-8
 Biblioteki Qt6 3D.
+
 %package -n Qt63D-devel
 Summary:	Qt6 3D - development files
 Summary(pl.UTF-8):	Biblioteki Qt6 3D - pliki programistyczne
@@ -1358,8 +1359,11 @@ Group:		X11/Libraries
 Requires:	Qt6Core = %{version}
 
 %description -n Qt6JsonRpc
-Qt6 LanguageServer library provides an implementation of the JSON-RPC
+Qt6 JsonRpc library provides an implementation of the JSON-RPC
 protocol.
+
+%description -n Qt6JsonRpc -l pl.UTF-8
+Biblioteka Qt6 JsonRpc dostarcza implementację protokołu JSON-RPC.
 
 %package -n Qt6JsonRpc-devel
 Summary:	Qt6 JsonRpc library - development files
@@ -1383,6 +1387,10 @@ Requires:	Qt6Core = %{version}
 %description -n Qt6LanguageServer
 Qt6 LanguageServer library provides an implementation of the Language
 Server Protocol.
+
+%description -n Qt6LanguageServer -l pl.UTF-8
+Biblioteka Qt6 LanguageServer dostarcza implementację protokołu
+Language Server Protocol.
 
 %package -n Qt6LanguageServer-devel
 Summary:	Qt6 LanguageServer library - development files
@@ -1994,22 +2002,6 @@ Qt6 Positioning documentation in QCH format.
 %description -n Qt6Positioning-doc-qch -l pl.UTF-8
 Dokumentacja do biblioteki Qt6 Positioning w formacie QCH.
 
-%package -n Qt6Designer-plugin-qwebengineview
-Summary:	QWebEngineView plugin for Qt6 Designer
-Summary(pl.UTF-8):	Wtyczka QWebEngineView dla Qt6 Designera
-Group:		X11/Libraries
-Requires:	Qt6Core = %{version}
-Requires:	Qt6Designer = %{version}
-Requires:	Qt6Gui = %{version}
-Requires:	Qt6WebEngine = %{version}
-Requires:	Qt6Widgets = %{version}
-
-%description -n Qt6Designer-plugin-qwebengineview
-QWebEngineView plugin for Qt6 Designer.
-
-%description -n Qt6Designer-plugin-qwebengineview -l pl.UTF-8
-Wtyczka QWebEngineView dla Qt6 Designera.
-
 %package -n Qt6PrintSupport
 Summary:	Qt6 PrintSupport library
 Summary(pl.UTF-8):	Biblioteka Qt6 PrintSupport
@@ -2076,6 +2068,9 @@ Requires:	Qt6Core = %{version}
 
 %description -n Qt6Qt5Compat
 Qt6 Qt5Compat libraries.
+
+%description -n Qt6Qt5Compat -l pl.UTF-8
+Biblioteki Qt6 Qt5Compat.
 
 %package -n Qt6Qt5Compat-devel
 Summary:	Qt6 Qt5Compat libraries - development files
@@ -2282,12 +2277,16 @@ Dokumentacja do bibliotek Qt6 Declarative w formacie QCH.
 
 %package -n qt6-quick3d
 Summary:	The Qt6 Quick3D library command line tools
+Summary(pl.UTF-8):	Narzędzia linii poleceń do biblioteki Qt6 Quick3D
 Group:		Libraries
 Requires:	Qt6Core = %{version}
 Requires:	Qt6Quick3D = %{version}
 
 %description -n qt6-quick3d
 The Qt6 Quick3D library command line tools.
+
+%description -n qt6-quick3d -l pl.UTF-8
+Narzędzia linii poleceń do biblioteki Qt6 Quick3D.
 
 %package -n Qt6Quick3D
 Summary:	The Qt6 Quick3D library
@@ -2419,6 +2418,7 @@ Dokumentacja do modułu Qt6 Quick Timeline w formacie QCH.
 
 %package -n qt6-quickeffectmaker
 Summary:	The Qt6 Quick Effect Maker tools
+Summary(pl.UTF-8):	Narzędzia do modułu Qt6 Quick Effect Maker
 Group:		Applications
 Requires:	Qt6Core = %{version}
 
@@ -2426,15 +2426,19 @@ Requires:	Qt6Core = %{version}
 The Qt6 Quick Effect Maker tools.
 
 %description -n qt6-quickeffectmaker -l pl.UTF-8
-Narzędzia Qt6 Quick Effect Maker.
+Narzędzia do modułu Qt6 Quick Effect Maker.
 
 %package -n Qt6QuickEffectMaker
-Summary:	Qt6 Quick Effect Maker
-Group:		Development/Libraries
+Summary:	Qt6 Quick Effect Maker module
+Summary(pl.UTF-8):	Moduł Qt6 Quick Effect Maker module
+Group:		Libraries
 Obsoletes:	Qt6QuickEffectMaker-devel < 6.5.1
 
 %description -n Qt6QuickEffectMaker
-Qt6 Quick Effect Maker.
+Qt6 Quick Effect Maker moduke.
+
+%description -n Qt6QuickEffectMaker -l pl.UTF-8
+Moduł Qt6 Quick Effect Maker module.
 
 %package -n Qt6RemoteObjects
 Summary:	The Qt6 RemoteObjects library
@@ -2705,12 +2709,16 @@ Dokumentacja do biblioteki Qt6 SerialPort w formacie QCH.
 
 %package -n qt6-shadertools
 Summary:	The Qt6 ShaderTools library command line tools
+Summary(pl.UTF-8):	Narzędzia linii poleceń do biblioteki Qt6 ShaderTools
 Group:		Libraries
 Requires:	Qt6Core = %{version}
 Requires:	Qt6ShaderTools = %{version}
 
 %description -n qt6-shadertools
 The Qt6 ShaderTools library command line tools.
+
+%description -n qt6-shadertools -l pl.UTF-8
+Narzędzia linii poleceń do biblioteki Qt6 ShaderTools.
 
 %package -n Qt6ShaderTools
 Summary:	The Qt6 ShaderTools library
@@ -2720,7 +2728,13 @@ Requires:	Qt6Core = %{version}
 
 %description -n Qt6ShaderTools
 The Qt Shader Tools module builds on the SPIR-V Open Source Ecosystem
-as described at the Khronos SPIR-V web site https://www.khronos.org/spir/
+as described at the Khronos SPIR-V web site
+<https://www.khronos.org/spir/>.
+
+%description -n Qt6ShaderTools -l pl.UTF-8
+Moduł Qt Shader Tools jest zbudowany w oparciu o mający otwarte źródła
+ekosystem SPIR-V, opisany na stronie Khronos SPIR-V
+<https://www.khronos.org/spir/>.
 
 %package -n Qt6ShaderTools-devel
 Summary:	Qt6 ShaderTools library - development files
@@ -3357,6 +3371,22 @@ Qt6 WebEngine library - development files.
 
 %description -n Qt6WebEngine-devel -l pl.UTF-8
 Biblioteka Qt6 WebEngine - pliki programistyczne.
+
+%package -n Qt6Designer-plugin-qwebengineview
+Summary:	QWebEngineView plugin for Qt6 Designer
+Summary(pl.UTF-8):	Wtyczka QWebEngineView dla Qt6 Designera
+Group:		X11/Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Designer = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6WebEngine = %{version}
+Requires:	Qt6Widgets = %{version}
+
+%description -n Qt6Designer-plugin-qwebengineview
+QWebEngineView plugin for Qt6 Designer.
+
+%description -n Qt6Designer-plugin-qwebengineview -l pl.UTF-8
+Wtyczka QWebEngineView dla Qt6 Designera.
 
 %package -n Qt6WebEngine-doc
 Summary:	Qt6 WebEngine documentation in HTML format
@@ -6631,14 +6661,14 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/Quick3DPhysicsHelpers.json
 %endif
 
-%files -n Qt6QuickEffectMaker
-%defattr(644,root,root,755)
-%{qt6dir}/qml/QtQuickEffectMaker
-
 %files -n qt6-quickeffectmaker
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/qqem-qt6
 %attr(755,root,root) %{qt6dir}/bin/qqem
+
+%files -n Qt6QuickEffectMaker
+%defattr(644,root,root,755)
+%{qt6dir}/qml/QtQuickEffectMaker
 
 %files -n Qt6RemoteObjects
 %defattr(644,root,root,755)

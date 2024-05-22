@@ -1,8 +1,8 @@
---- qt-everywhere-src-6.5.2/qtbase/cmake/QtInternalTargets.cmake.orig	2023-07-19 17:30:07.482041879 +0200
-+++ qt-everywhere-src-6.5.2/qtbase/cmake/QtInternalTargets.cmake	2023-07-19 17:36:34.820978372 +0200
-@@ -348,47 +348,6 @@
-     qt_internal_platform_link_options(PlatformCommonInternal INTERFACE "-Wl,--enable-new-dtags")
- endif()
+--- qt-everywhere-src-6.7.0/qtbase/cmake/QtInternalTargets.cmake.orig	2024-04-26 20:52:14.710896412 +0200
++++ qt-everywhere-src-6.7.0/qtbase/cmake/QtInternalTargets.cmake	2024-04-26 21:44:26.699022644 +0200
+@@ -375,47 +375,6 @@
+ endfunction()
+ qt_internal_apply_coverage_flags()
  
 -function(qt_get_implicit_sse2_genex_condition out_var)
 -    set(is_shared_lib "$<STREQUAL:$<TARGET_PROPERTY:TYPE>,SHARED_LIBRARY>")

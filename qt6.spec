@@ -105,6 +105,10 @@
 %endif
 %endif
 
+%ifarch %{x8664} aarch64 armv7hl armv7hnl pentium4
+%define		with_qml_jit	1
+%endif
+
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
@@ -3833,7 +3837,8 @@ cd build
 	%{cmake_on_off statx QT_FEATURE_statx} \
 	%{cmake_on_off kms QT_FEATURE_kms} \
 	%{cmake_on_off libinput QT_FEATURE_libinput} \
-	%{cmake_on_off tslib QT_FEATURE_tslib}
+	%{cmake_on_off tslib QT_FEATURE_tslib} \
+	%{cmake_on_off qml_jit QT_FEATURE_qml_jit}
 
 # Make sure arg-less sub-invocations will follow our parallel build setting
 export CMAKE_BUILD_PARALLEL_LEVEL="%__jobs"

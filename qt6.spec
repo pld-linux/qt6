@@ -112,12 +112,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.7.1
-Release:	2
+Version:	6.7.2
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.7/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	dfe73333c2fa22582ad76a679f0ab1e1
+# Source0-md5:	06d35b47349c7c0a45710daad359e07b
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		%{name}-gn.patch

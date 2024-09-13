@@ -32,7 +32,6 @@
 %bcond_with	systemd		# logging to journald
 %bcond_without	tslib		# tslib support
 # -- databases
-%bcond_without	freetds		# TDS (Sybase/MS SQL) plugin
 %bcond_without	mysql		# MySQL plugin
 %bcond_without	odbc		# unixODBC plugin
 %bcond_without	pgsql		# PostgreSQL plugin
@@ -152,7 +151,6 @@ BuildRequires:	ffmpeg-devel < 5.0
 %{?with_qtwebengine:BuildRequires:	flex}
 BuildRequires:	flite-devel
 BuildRequires:	fontconfig-devel
-%{?with_freetds:BuildRequires:	freetds-devel}
 BuildRequires:	freetype-devel >= 2.2.0
 %{?with_pch:BuildRequires:	gcc >= 5:4.0}
 BuildRequires:	gdb
@@ -2817,6 +2815,7 @@ Summary:	Qt6 Sql library
 Summary(pl.UTF-8):	Biblioteka Qt6 Sql
 Group:		Libraries
 Requires:	Qt6Core = %{version}
+Obsoletes:	Qt6Sql-sqldriver-tds < 6.7.2-4
 
 %description -n Qt6Sql
 The Qt6 Sql library provides a driver layer, SQL API layer, and a user
@@ -2923,19 +2922,6 @@ Qt6 Sql driver for PostgreSQL database.
 
 %description -n Qt6Sql-sqldriver-pgsql -l pl.UTF-8
 Sterownik Qt6 Sql dla bazy danych PostgreSQL.
-
-%package -n Qt6Sql-sqldriver-tds
-Summary:	Qt6 Sql driver for Sybase/MS SQL database (using TDS interface)
-Summary(pl.UTF-8):	Sterownik Qt6 Sql dla bazy danych Sybase/MS SQL (wykorzystujący interfejs TDS)
-Group:		Libraries
-Requires:	Qt6Sql = %{version}
-
-%description -n Qt6Sql-sqldriver-tds
-Qt6 Sql driver for Sybase/MS SQL database (using TDS interface).
-
-%description -n Qt6Sql-sqldriver-tds -l pl.UTF-8
-Sterownik Qt6 Sql dla bazy danych Sybase/MS SQL (wykorzystujący
-interfejs TDS).
 
 %package -n Qt6Svg
 Summary:	The Qt6 Svg library
@@ -3824,7 +3810,6 @@ cd build
 	%{cmake_on_off odbc QT_FEATURE_sql_odbc} \
 	%{cmake_on_off pgsql QT_FEATURE_sql_psql} \
 	%{cmake_on_off sqlite3 QT_FEATURE_sql_sqlite} \
-	%{cmake_on_off freetds QT_FEATURE_sql_tds} \
 	%{cmake_on_off directfb QT_FEATURE_directfb} \
 	%{cmake_on_off gtk QT_FEATURE_gtk3} \
 	%{cmake_on_off egl QT_FEATURE_eglfs} \
@@ -7097,13 +7082,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqlpsql.so
 %{_libdir}/cmake/Qt6Sql/Qt6QPSQLDriverPlugin*.cmake
-%endif
-
-%if %{with freetds}
-%files -n Qt6Sql-sqldriver-tds
-%defattr(644,root,root,755)
-#%attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqltds.so
-#%{_libdir}/cmake/Qt6Sql/Qt6QTDSDriverPlugin*.cmake
 %endif
 
 %files -n Qt6Sql-devel

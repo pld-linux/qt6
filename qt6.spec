@@ -5,9 +5,11 @@
 # together with module, and the rest of .cmake files in appropriate -devel subpackage.
 #
 # TODO:
+# - unpackaged files:
 #   /usr/lib64/qt6/libexec/gn
 #   /usr/lib64/qt6/mkspecs/modules/README
 #   /usr/share/qt6/translations/catalogs.json
+# - -doc/-doc-qch mess: make packages per library (then split qt6-doc and qt6-doc-qch) or per submodule (like in qt5)?
 #
 # Conditional build:
 # -- build targets

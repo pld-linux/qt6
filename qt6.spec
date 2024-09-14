@@ -3865,16 +3865,18 @@ DESTDIR=$RPM_BUILD_ROOT %{__cmake} --build build/ --target install_docs
 %endif
 
 # bundled libs, not required by installed components - probably no need to package
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/libQt6BundledEmbree.a
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libQt6BundledPhysX.a
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libQt6BundledResonanceAudio.a
-%{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6BundledEmbree
 %{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6BundledOpenwnn
 %{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6BundledPhysX
 %{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6BundledPinyin
 %{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6BundledResonanceAudio
 %{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6BundledTcime
 %{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6Bundled_Clip2Tri
+%ifarch %{x8664} aarch64
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libQt6BundledEmbree.a
+%{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6BundledEmbree
+%endif
 
 # external plugins loaded from qtbase libs
 install -d $RPM_BUILD_ROOT%{qt6dir}/plugins/{iconengines,webview}

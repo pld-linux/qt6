@@ -7832,7 +7832,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtprotobuf
 %{_docdir}/qt6-doc/qtqmlcompiler
 %{_docdir}/qt6-doc/qtqmlnetwork
+%if %{with qtquick3dphysics}
 %{_docdir}/qt6-doc/qtquick3dphysics
+%endif
 %{_docdir}/qt6-doc/qtquickeffectmaker
 %{_docdir}/qt6-doc/qtspatialaudio
 %{_docdir}/qt6-doc/qttexttospeech
@@ -7863,7 +7865,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtprotobuf.qch
 %{_docdir}/qt6-doc/qtqmlcompiler.qch
 %{_docdir}/qt6-doc/qtqmlnetwork.qch
+%if %{with qtquick3dphysics}
 %{_docdir}/qt6-doc/qtquick3dphysics.qch
+%endif
 %{_docdir}/qt6-doc/qtquickeffectmaker.qch
 %{_docdir}/qt6-doc/qtspatialaudio.qch
 %{_docdir}/qt6-doc/qttexttospeech.qch

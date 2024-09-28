@@ -103,20 +103,18 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.7.2
-Release:	4
+Version:	6.7.3
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.7/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	06d35b47349c7c0a45710daad359e07b
+# Source0-md5:	3efadf18f1e16e3271abd09c606d3c9b
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		%{name}-gn.patch
 Patch3:		no-implicit-sse2.patch
 Patch4:		x32.patch
 Patch5:		qtwebengine-cmake-build-type.patch
-Patch6:		CVE-2024-39936-qtbase-6.7.patch
-Patch7:		gcc14.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -3673,8 +3671,6 @@ narzędzia.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1 -d qtbase
-%patch7 -p1 -d qtbase
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 
@@ -5288,13 +5284,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Multimedia-plugin-gstreamer-devel
 %defattr(644,root,root,755)
-%{_libdir}/libQt6QGstreamerMediaPlugin.a
-%{_libdir}/libQt6QGstreamerMediaPlugin.prl
-%{_includedir}/qt6/QtQGstreamerMediaPlugin
-%{_libdir}/cmake/Qt6QGstreamerMediaPluginPrivate
-%{qt6dir}/metatypes/qt6qgstreamermediapluginprivate_pld_metatypes.json
-%{qt6dir}/mkspecs/modules/qt_lib_qgstreamermediaplugin_private.pri
-%{qt6dir}/modules/QGstreamerMediaPluginPrivate.json
+%{_libdir}/libQt6QGstreamerMediaPluginImpl.a
+%{_libdir}/libQt6QGstreamerMediaPluginImpl.prl
+%{_includedir}/qt6/QtQGstreamerMediaPluginImpl
+%{_libdir}/cmake/Qt6QGstreamerMediaPluginImplPrivate
+%{qt6dir}/metatypes/qt6qgstreamermediapluginimplprivate_pld_metatypes.json
+%{qt6dir}/mkspecs/modules/qt_lib_qgstreamermediapluginimpl_private.pri
+%{qt6dir}/modules/QGstreamerMediaPluginImplPrivate.json
 
 %files -n Qt6Network
 %defattr(644,root,root,755)

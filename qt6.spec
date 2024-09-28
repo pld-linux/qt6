@@ -115,6 +115,7 @@ Patch2:		%{name}-gn.patch
 Patch3:		no-implicit-sse2.patch
 Patch4:		x32.patch
 Patch5:		qtwebengine-cmake-build-type.patch
+Patch6:		qtquick3d-6.6.2-gcc14.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -3671,6 +3672,7 @@ narzędzia.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1 -d qtquick3d
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 

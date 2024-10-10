@@ -272,8 +272,9 @@ Qt to programowy toolkit do tworzenia aplikacji.
 Summary:	Development tools for Qt 6
 Summary(pl.UTF-8):	Narzędzia programistyczne dla Qt 6
 Group:		X11/Libraries
+# androiddeployqt,androidtestrunner: Core
 # pixeltool: Core, Gui, Widgets
-# qtdiag: Core Gui Network Widgets
+# qtdiag: Core Gui Network OpenGL Widgets
 # qtpaths: Core
 # qtplugininfo: Core
 Requires:	Qt6Core = %{version}
@@ -301,7 +302,7 @@ Summary(pl.UTF-8):	Przeglądarka dokumentacji Qt
 Group:		X11/Development/Tools
 # assistant: Core, Gui, Help, Network, PrintSupport, Sql, Widgets
 # qdistancefieldgenerator: Core Gui Quick Widgets
-# qdoc: Core, clang-libs
+# qdoc: Core, Qml, clang-libs, llvm-libs
 # qhelpgenerator: Core, Gui, Help Sql; sqldriver-sqlite3 to work
 # qtattributionsscanner: Core
 Requires:	Qt6Core = %{version}
@@ -309,6 +310,7 @@ Requires:	Qt6Gui = %{version}
 Requires:	Qt6Help = %{version}
 Requires:	Qt6Network = %{version}
 Requires:	Qt6PrintSupport = %{version}
+Requires:	Qt6Qml = %{version}
 Requires:	Qt6Sql = %{version}
 Requires:	Qt6Sql-sqldriver-sqlite3 = %{version}
 Requires:	Qt6Widgets = %{version}
@@ -344,11 +346,14 @@ przy użyciu biblioteki Qt 6.
 Summary:	Translation helper for Qt 6
 Summary(pl.UTF-8):	Aplikacja ułatwiająca tłumaczenie aplikacji opartych na Qt 6
 Group:		X11/Development/Tools
-# lconvert,lprodump,lrelease*,lupdate*: Core
-# linguist: Core, Gui, PrintSupport, Widgets
+# lconvert,lprodump,lrelease*,lupdate-pro: Core
+# linguist: Core, Gui, PrintSupport, UiTools, Widgets
+# lupdate: Core, Qml, clang-libs, llvm-libs
 Requires:	Qt6Core = %{version}
 Requires:	Qt6Gui = %{version}
 Requires:	Qt6PrintSupport = %{version}
+Requires:	Qt6Qml = %{version}
+Requires:	Qt6UiTools = %{version}
 Requires:	Qt6Widgets = %{version}
 Requires:	Qt6Xml = %{version}
 
@@ -381,23 +386,26 @@ Summary:	The Qt6 Declarative libraries
 Summary(pl.UTF-8):	Biblioteki Qt6 Declarative
 Group:		X11/Libraries
 # qml: Core Gui Qml Widgets
-# qmlcachegen: Core
+# qmlcachegen: Core Qml[+Compiler]
 # qmleasing: Core Gui Qml Quick Widgets
-# qmlformat: Core
-# qmlimportscanner: Core
-# qmllint: Core
-# qmlmin: Core
+# qmlformat: Core Qml[+Compiler]
+# qmlimportscanner: Core Qml[+Compiler]
+# qmljsrootgen: Core Qml
+# qmllint: Core Qml[+Compiler]
 # qmlplugindump: Core Gui Qml Widgets
 # qmlpreview: Core Network
 # qmlprofiler: Core Network
 # qmlscene: Core Gui Qml Quick Widgets
-# qmltestrunner: Core QuickTest
+# qmltestrunner: Core Quick[Test]
+# qmltime: Core Gui Qml Quick
 # qmltyperegistrar: Core
+# svgtoqml: Core Gui Qml Quick[+Shapes] Svg
 Requires:	Qt6Core = %{version}
 Requires:	Qt6Gui = %{version}
 Requires:	Qt6Network = %{version}
 Requires:	Qt6Qml = %{version}
 Requires:	Qt6Quick = %{version}
+Requires:	Qt6Svg = %{version}
 Requires:	Qt6Widgets = %{version}
 
 %description -n qt6-qtdeclarative
@@ -773,6 +781,7 @@ Requires:	Qt6Core = %{version}
 Requires:	libstdc++-devel >= 6:4.7
 Requires:	pcre2-16-devel >= 10.20
 Requires:	qt6-build = %{version}
+# for qtpaths, but it pulls also Qt6{Gui,Network,OpenGL,Widgets} (FIXME)
 Requires:	qt6-qttools = %{version}
 Requires:	zlib-devel >= 1.0.8
 
@@ -2122,11 +2131,25 @@ Dokumentacja do bibliotek Qt6 Qt5Compat w formacie QCH.
 Summary:	Qt6 Qml libraries
 Summary(pl.UTF-8):	Biblioteki Qt6 Qml
 Group:		Libraries
+# Qt6LabsAnimation: Core Qml
+# Qt6LabsFolderListModel: Core Qml
+# Qt6LabsQmlModels: Core Qml QmlModels
+# Qt6LabsSettings: Core Qml
 # Qt6Qml: Core Network
+# Qt6QmlCompiler: Core Qml
+# Qt6QmlCore: Core Qml
+# Qt6QmlLocalStorage: Core Qml Sql
 # Qt6QmlModels: Core Qml
+# Qt6QmlNetwork: Core Network Qml
 # Qt6QmlWorkerScript: Core Network Qml
+# Qt6QmlXmlListModel: Core Network Qml
+# Qt6StateMachine: Core Gui [FIXME: part of scxml]
+# Qt6StateMachineQml: Core Qml StateMachine [FIXME: part of scxml]
 Requires:	Qt6Core = %{version}
 Requires:	Qt6Network = %{version}
+Requires:	Qt6Sql = %{version}
+# FIXME: move Qt6StateMachine
+Requires:	Qt6Gui = %{version}
 
 %description -n Qt6Qml
 The Qt6 QML module provides a framework for developing applications
@@ -2148,15 +2171,26 @@ QML, jak i C++.
 Summary:	Qt6 Qml libraries - development files
 Summary(pl.UTF-8):	Biblioteki Qt6 Qml - pliki programistyczne
 Group:		Development/Libraries
-# Qt6Qml: Core Network
-# Qt6QmlModels: Core Network Qml
-# Qt6QmlWorkerScript: Core Network Qml
-# Qt6PacketProtocol.a: Core
-# Qt6QmlDebug.a: Core Network PacketProtocol Qml
-# Qt6QmlDevTools.a: Core
+# Qt6LabsAnimation: Qml Quick
+# Qt6LabsFolderListModel: Core Qml QmlModels
+# Qt6LabsQmlModels: Qml QmlModels
+# Qt6LabsSettings: Core Qml
+# Qt6Qml: Core Network QmlIntegration
+# Qt6QmlBuiltins: Core QmlIntegration
+# Qt6QmlCompiler: Core Qml
+# Qt6QmlCore: Core Qml
+# Qt6QmlIntegration: Core
+# Qt6QmlLocalStorage: Core Qml Sql
+# Qt6QmlModels: Core Qml
+# Qt6QmlNetwork: Core Network Qml
+# Qt6QmlWorkerScript: Core Qml
+# Qt6QmlXmlListModel: Core Qml
+# Qt6StateMachine: Core Gui [FIXME: not here, belongs to scxml]
+# Qt6StateMachineQml: Core Qml StateMachine [FIXME: not here, belongs to scxml]
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Network-devel = %{version}
 Requires:	Qt6Qml = %{version}
+Requires:	Qt6Sql-devel = %{version}
 
 %description -n Qt6Qml-devel
 Qt6 Qml libraries - development files.
@@ -2194,14 +2228,37 @@ Dokumentacja do bibliotek Qt6 Declarative w formacie QCH.
 Summary:	Qt6 Quick libraries
 Summary(pl.UTF-8):	Biblioteki Qt6 Quick
 Group:		X11/Libraries
-# Qt6Quick: Core Gui Network Qml QmlModels
-# Qt6QuickParticles: Core Gui Qml Quick GL
+# Qt6LabsSharedImage: Core Gui Qml Quick
+# Qt6LabsWavefrontMesh: Core Gui Qml Quick
+# Qt6Quick: Core Gui Network OpenGL Qml QmlModels
+# Qt6QuickControls2: Core Gui Qml Quick QuickTemplates2
+# Qt6QuickControls2Basic: Core Gui Qml QuickTemplates2
+# Qt6QuickControls2BasicStyleImpl: Core Gui Qml Quick QuickControls2Impl
+# Qt6QuickControls2Fusion: Core Gui Qml Quick
+# Qt6QuickControls2FusionStyleImpl: Core Gui Qml Quick
+# Qt6QuickControls2Imagine: Core Gui Qml Quick QuickControls2 QuickTemplates2
+# Qt6QuickControls2ImagineStyleImpl: Core Qml
+# Qt6QuickControls2Impl: Core Gui Qml Quick QuickTemplates2
+# Qt6QuickControls2Material: Core Gui Qml QuickControls2 QuickTemplates2
+# Qt6QuickControls2MaterialStyleImpl: Core Gui Qml Quick QuickControls2Impl QuickTemplates2
+# Qt6QuickControls2Universal: Core Gui Qml QuickControls2 QuickTemplates2
+# Qt6QuickControls2UniversalStyleImpl: Core Gui Qml Quick QuickControls2Impl
+# Qt6QuickDialogs2: Core Gui Qml Quick QuickDialogs2QuickImpl QuickDialogs2Utils
+# Qt6QuickDialogs2QuickImpl: Core Gui Qml Quick QuickControls2Impl QuickDialogs2Utils QuickTemplates2
+# Qt6QuickDialogs2Utils: Core Gui
+# Qt6QuickEffects: Core Gui Qml Quick
+# Qt6QuickLayouts: Core Gui Qml Quick
+# Qt6QuickParticles: Core Gui Qml Quick
 # Qt6QuickShapes: Core Gui Qml Quick
-# Qt6QuickTest: Core Gui Qml Quick Test Widgets
+# Qt6QuickTemplates2: Core Gui Qml QmlModels Quick
+# Qt6QuickTest: Core Gui Qml Quick Test
+# Qt6QuickTimeline: Core Gui Qml Quick
+# Qt6QuickTimelineBlendTrees: Core Gui Qml Quick QuickTimeline
 # Qt6QuickWidgets: Core Gui Qml Quick Widgets
 Requires:	Qt6Core = %{version}
 Requires:	Qt6Gui = %{version}
 Requires:	Qt6Network = %{version}
+Requires:	Qt6OpenGL = %{version}
 Requires:	Qt6Qml = %{version}
 Requires:	Qt6Test = %{version}
 Requires:	Qt6Widgets = %{version}
@@ -2236,19 +2293,36 @@ języka C++ do rozszerzania aplikacji QML przy użyciu kodu w C++.
 Summary:	Qt6 Qml libraries - development files
 Summary(pl.UTF-8):	Biblioteki Qt6 Qml - pliki programistyczne
 Group:		X11/Development/Libraries
-# Qt6Quick: Core Gui Network Qml QmlModels
-# Qt6QuickParticles: Core Gui Network Qml QmlModels Quick
-# Qt6QuickShapes: Core Gui Network Qml QmlModels Quick
-# Qt6QuickTest: Core Gui Test Widgets
-# Qt6QuickWidgets: Core Gui Network Qml QmlModels Quick Test Widgets
+# Qt6LabsSharedImage: Core Gui Quick
+# Qt6LabsWavefrontMesh: Core Gui Quick
+# Qt6Quick: Core Gui OpenGL Qml QmlModels
+# Qt6QuickControls2: Core Gui Quick
+# Qt6QuickControls2Impl: Core Gui Quick
+# Qt6QuickDialogs2: Core Gui Quick
+# Qt6QuickDialogs2QuickImpl: Core Gui Quick
+# Qt6QuickDialogs2Utils: Core
+# Qt6QuickLayouts: Core Gui Qml Quick
+# Qt6QuickTemplates2: Core Gui QmlModels Quick
+# Qt6QuickTest: Core Test
+# Qt6QuickTimeline: Core Qml Quick
+# Qt6QuickTimelineBlendTrees: Core Qml Quick QuickTimeline
+# Qt6QuickWidgets: Core Gui Qml Quick Widgets
+# bin/qmldom: Core Qml QmlCompiler
+# bin/qmlls: Core JsonRpc LanguageServer Qml QmlCompiler [FIXME: part of qtlanguageserver, not qtdeclarative]
+# bin/qmltc: Core Qml QmlCompiler
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}
 Requires:	Qt6Network-devel = %{version}
 Requires:	Qt6OpenGL-devel = %{version}
 Requires:	Qt6Qml-devel = %{version}
 Requires:	Qt6Quick = %{version}
+Requires:	Qt6Test-devel = %{version}
 Requires:	Qt6Widgets-devel = %{version}
+# for qmlcachegen (to be verified if really required)
 Requires:	qt6-qtdeclarative = %{version}
+# two below for qmltc [FIXME: move to proper package]
+Requires:	Qt6JsonRpc = %{version}
+Requires:	Qt6LanguageServer = %{version}
 
 %description -n Qt6Quick-devel
 Qt6 Qml libraries - development files.
@@ -3227,12 +3301,16 @@ Dokumentacja do bibliotek Qt6 Wayland w formacie QCH.
 Summary:	The Qt6 WaylandClient library
 Summary(pl.UTF-8):	Biblioteka Qt6 WaylandClient
 Group:		Libraries
+# WaylandClient: Core Gui, wayland[client,cursor] libxkbcommon
+# Qt6WaylandEglClientHwIntegration: Core Gui OpenGL WaylandClient, EGL OpenGL wayland[client] wayland-egl
 Requires:	Qt6Core = %{version}
 Requires:	Qt6DBus = %{version}
 Requires:	Qt6Gui = %{version}
 Requires:	Qt6Wayland = %{version}
 Requires:	wayland >= 1.4.0
 Requires:	xorg-lib-libxkbcommon >= 0.2.0
+# plugins/wayland-shell-integration/libwl-shell-plugin.so requires libQt6WlShellIntegration.so.6 [TODO: verify packaging]
+Requires:	Qt6WaylandCompositor = %{version}
 
 %description -n Qt6WaylandClient
 Qt6 WaylandClient library enables Qt applications to be run as Wayland

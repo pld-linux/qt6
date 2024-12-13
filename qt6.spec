@@ -51,7 +51,6 @@
 %bcond_with	avx2		# use AVX2 instructions (Intel since Haswell)
 # -- system libraries
 %bcond_with	qtwebengine_system_ffmpeg	# use system FFmpeg in qtwebengine
-%bcond_with	qtwebengine_system_libvpx	# use system libvpx in qtwebengine (build fails QTBUG-129955)
 
 %ifnarch %{ix86} %{x8664} x32 sparc sparcv9 alpha ppc
 %undefine	with_ibase
@@ -104,19 +103,20 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.8.1
-Release:	2
+Version:	6.7.3
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
-Source0:	https://download.qt.io/official_releases/qt/6.8/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	4068b07ca6366bcb9ba56508bbbf20e6
+Source0:	https://download.qt.io/official_releases/qt/6.7/%{version}/single/qt-everywhere-src-%{version}.tar.xz
+# Source0-md5:	3efadf18f1e16e3271abd09c606d3c9b
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
-Patch2:		arm-no-xnnpack.patch
+Patch2:		%{name}-gn.patch
 Patch3:		no-implicit-sse2.patch
 Patch4:		x32.patch
 Patch5:		qtwebengine-cmake-build-type.patch
 Patch6:		qtquick3d-6.6.2-gcc14.patch
+Patch7:		qttools-llvm19.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -188,7 +188,7 @@ BuildRequires:	libpng-devel >= 2:1.6.0
 BuildRequires:	libstdc++-devel >= 6:4.7
 %{?with_qtwebengine:BuildRequires:	libtiff-devel >= 4.2.0}
 BuildRequires:	libva-devel
-%{?with_qtwebengine_system_libvpx:BuildRequires:	libvpx-devel >= 1.10.0}
+BuildRequires:	libvpx-devel >= 1.10.0
 BuildRequires:	libwebp-devel
 BuildRequires:	libxcb-devel >= 1.12
 BuildRequires:	libxml2-devel
@@ -3413,7 +3413,7 @@ Requires:	harfbuzz-subset >= 3.0.0
 %requires_ge_to	libicu libicu-devel
 Requires:	libpng >= 2:1.6.0
 Requires:	libtiff >= 4.2.0
-%{?with_qtwebengine_system_libvpx:Requires:	libvpx >= 1.10.0}
+Requires:	libvpx >= 1.10.0
 Requires:	nss >= 3.26
 Requires:	opus >= 1.3.1
 Requires:	pulseaudio-libs >= 0.9.10
@@ -3747,11 +3747,12 @@ narzędzia.
 %setup -q -n qt-everywhere-src-%{version}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1 -d qtwebengine
+%patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1 -d qtquick3d
+%patch7 -p1 -d qttools
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 
@@ -3863,7 +3864,7 @@ cd build
 	-DQT_FEATURE_webengine_system_libpci=ON \
 	-DQT_FEATURE_webengine_system_libpng=ON \
 	-DQT_FEATURE_webengine_system_libtiff=ON \
-	%{cmake_on_off qtwebengine_system_libvpx QT_FEATURE_webengine_system_libvpx} \
+	-DQT_FEATURE_webengine_system_libvpx=ON \
 	-DQT_FEATURE_webengine_system_libwebp=ON \
 	-DQT_FEATURE_webengine_system_libxml=ON \
 	-DQT_FEATURE_webengine_system_minizip=ON \

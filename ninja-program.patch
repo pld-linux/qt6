@@ -1,11 +1,11 @@
 --- qt-everywhere-src-6.3.1/qtwebengine/src/CMakeLists.txt.orig	2022-06-08 08:40:31.000000000 +0200
 +++ qt-everywhere-src-6.3.1/qtwebengine/src/CMakeLists.txt	2022-07-27 21:47:18.766238322 +0200
 @@ -137,6 +137,8 @@
-                    -DCMAKE_PREFIX_PATH:PATH=<INSTALL_DIR>
-                    -DWEBENGINE_ROOT_BUILD_DIR=${PROJECT_BINARY_DIR}
-                    -DQT_ALLOW_SYMLINK_IN_PATHS=${QT_ALLOW_SYMLINK_IN_PATHS}
+                    -DCMAKE_CXX_FLAGS=
+                    -DQT_FEATURE_qtwebengine_build=${QT_FEATURE_qtwebengine_build}
+                    -DQT_FEATURE_qtpdf_build=${QT_FEATURE_qtpdf_build}
 +                   -DNinja_EXECUTABLE:FILEPATH=${Ninja_EXECUTABLE}
 +                   -DCMAKE_MAKE_PROGRAM:FILEPATH=${CMAKE_MAKE_PROGRAM}
      )
-     if(QT_FEATURE_qtwebengine_core_build)
-         add_dependencies(run_core_GnReady gn)
+     if(QT_FEATURE_qtwebengine_build)
+         add_dependencies(run_core_GnReady hostBuild)

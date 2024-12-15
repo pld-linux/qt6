@@ -1,0 +1,13 @@
+--- qtwebengine/src/core/CMakeLists.txt.orig	2024-11-21 05:36:37.000000000 +0100
++++ qtwebengine/src/core/CMakeLists.txt	2024-12-12 11:38:19.861355612 +0100
+@@ -544,6 +544,10 @@
+                     )
+                 endif()
+             endif()
++            if(cpu MATCHES "arm.*")
++                # https://bugreports.qt.io/browse/QTBUG-129985
++                list(APPEND gnArgArg build_webnn_with_xnnpack=false)
++            endif()
+             unset(cpu)
+         endif()
+ 

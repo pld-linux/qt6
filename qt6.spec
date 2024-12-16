@@ -6086,7 +6086,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtplatformintegration
 %{_docdir}/qt6-doc/qtqml
 %{_docdir}/qt6-doc/qtqmlcore
-%{_docdir}/qt6-doc/qtqmlmeta
 %{_docdir}/qt6-doc/qtqmlmodels
 %{_docdir}/qt6-doc/qtqmltest
 %{_docdir}/qt6-doc/qtqmlworkerscript
@@ -6098,7 +6097,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtlabsplatform.qch
 %{_docdir}/qt6-doc/qtplatformintegration.qch
 %{_docdir}/qt6-doc/qtqmlcore.qch
-%{_docdir}/qt6-doc/qtqmlmeta.qch
 %{_docdir}/qt6-doc/qtqmlmodels.qch
 %{_docdir}/qt6-doc/qtqml.qch
 %{_docdir}/qt6-doc/qtqmltest.qch
@@ -6823,7 +6821,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Quick3DTools
 %{_libdir}/cmake/Qt6Quick3DUtils
 %{?with_openxr:%{_libdir}/cmake/Qt6Quick3DXr}
-%{?with_openxr:%{qt6dir}/mkspecs/modules/qt_ext_openxr_loader.pri}
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dassetimport.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dassetimport_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dassetutils.pri

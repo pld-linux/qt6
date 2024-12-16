@@ -2365,6 +2365,7 @@ Biblioteki Qt6 Quick3D.
 Summary:	Qt6 Quick3D - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 Quick3D - pliki programistyczne
 Group:		X11/Development/Libraries
+%{?with_openxr:Requires:	OpenXR-devel = 1.0.29}
 Requires:	Qt6Concurrent-devel = %{version}
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}

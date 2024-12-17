@@ -110,7 +110,7 @@ Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
 Version:	6.8.1
-Release:	1
+Release:	2
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.8/%{version}/single/qt-everywhere-src-%{version}.tar.xz
@@ -2349,6 +2349,7 @@ Narzędzia linii poleceń do biblioteki Qt6 Quick3D.
 Summary:	The Qt6 Quick3D library
 Summary(pl.UTF-8):	Biblioteka Qt6 Quick3D
 Group:		X11/Libraries
+%{?with_openxr:Requires:	OpenXR >= 1.0.29}
 Requires:	Qt6Core = %{version}
 Requires:	Qt6Gui = %{version}
 Requires:	Qt6Qml = %{version}
@@ -2365,7 +2366,7 @@ Biblioteki Qt6 Quick3D.
 Summary:	Qt6 Quick3D - development files
 Summary(pl.UTF-8):	Biblioteka Qt6 Quick3D - pliki programistyczne
 Group:		X11/Development/Libraries
-%{?with_openxr:Requires:	OpenXR-devel = 1.0.29}
+%{?with_openxr:Requires:	OpenXR-devel >= 1.0.29}
 Requires:	Qt6Concurrent-devel = %{version}
 Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}

@@ -1026,6 +1026,7 @@ Requires:	Qt6DBus = %{version}
 # for compose platforminputcontext plugin
 Requires:	xorg-lib-libxkbcommon >= 0.4.1
 Suggests:	Qt6Gui-platform-xcb
+Suggests:	Qt6WaylandClient
 
 %description -n Qt6Gui
 The Qt6 GUI library provides the basic enablers for graphical

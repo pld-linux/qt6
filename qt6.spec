@@ -110,7 +110,7 @@ Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
 Version:	6.8.2
-Release:	2
+Release:	3
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.8/%{version}/single/qt-everywhere-src-%{version}.tar.xz
@@ -3724,14 +3724,14 @@ narzędzia.
 
 %prep
 %setup -q -n qt-everywhere-src-%{version}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1 -d qtwebengine
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1 -d qtquick3d
-%patch7 -p1 -d qtwebengine/src/3rdparty/chromium
+%patch -P0 -p1
+%patch -P1 -p1
+%patch -P2 -p1 -d qtwebengine
+%patch -P3 -p1
+%patch -P4 -p1
+%patch -P5 -p1
+%patch -P6 -p1 -d qtquick3d
+%patch -P7 -p1 -d qtwebengine/src/3rdparty/chromium
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 

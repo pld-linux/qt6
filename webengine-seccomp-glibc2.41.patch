@@ -1,0 +1,34 @@
+glibc 2.41 ships with support for getrandom() in vdso on x86-65 and aarch64. in
+turn it started using mmap() sysctl internally on these platforms. chromium's
+seccomp filter allows mmap() but only with specific set of flags which do not
+include newly introduced one for getrandom(): MAP_DROPPABLE. it results in
+blocking syscall usually on chromium->fontconfig->expat code path and an
+eventual crash.
+
+add MAP_DROPPABLE to allowed flags and define it if not yet defined to avoid
+dependency on most recent glibc
+
+Signed-off-by: Jan Palus <atler@pld-linux.org>
+--- chromium/sandbox/linux/seccomp-bpf-helpers/syscall_parameters_restrictions.cc.orig	2025-01-24 11:49:20.000000000 +0100
++++ chromium/sandbox/linux/seccomp-bpf-helpers/syscall_parameters_restrictions.cc	2025-02-06 15:52:33.188403354 +0100
+@@ -68,6 +68,11 @@
+ #define PROT_BTI 0x10
+ #endif
+ 
++// Introduced in glibc 2.41
++#ifndef MAP_DROPPABLE
++#define MAP_DROPPABLE   0x08            /* Zero memory under memory pressure.  */
++#endif
++
+ namespace {
+ 
+ inline bool IsArchitectureX86_64() {
+@@ -238,7 +243,7 @@
+   // TODO(davidung), remove MAP_DENYWRITE with updated Tegra libraries.
+   const uint64_t kAllowedMask = MAP_SHARED | MAP_PRIVATE | MAP_ANONYMOUS |
+                                 MAP_STACK | MAP_NORESERVE | MAP_FIXED |
+-                                MAP_DENYWRITE | MAP_LOCKED |
++                                MAP_DENYWRITE | MAP_LOCKED | MAP_DROPPABLE |
+                                 kArchSpecificAllowedMask;
+   const Arg<int> flags(3);
+   return If((flags & ~kAllowedMask) == 0, Allow()).Else(CrashSIGSYS());

@@ -109,12 +109,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.8.2
-Release:	3
+Version:	6.8.3
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.8/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	ccc7100bc687005c167a8a43a4f99050
+# Source0-md5:	10a39c4b4af4f465c4ff0352a6d18a0a
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		arm-no-xnnpack.patch
@@ -1637,6 +1637,18 @@ Qt6 Multimedia Widgets library - development files.
 
 %description -n Qt6MultimediaWidgets-devel -l pl.UTF-8
 Biblioteka Qt6 Multimedia Widgets - pliki programistyczne.
+
+%package -n Qt6Multimedia-plugin-ffmpeg-devel
+Summary:	Qt6 Multimedia FFmpeg plugin - development files
+Summary(pl.UTF-8):	Wtyczka FFmpeg dla Qt6 Multimedia - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6Multimedia-devel = %{version}
+
+%description -n Qt6Multimedia-plugin-ffmpeg-devel
+Qt6 Multimedia FFmpeg plugin - development files.
+
+%description -n Qt6Multimedia-plugin-ffmpeg-devel -l pl.UTF-8
+Wtyczka FFmpeg dla Qt6 Multimedia - pliki programistyczne.
 
 %package -n Qt6Multimedia-plugin-gstreamer-devel
 Summary:	Qt6 Multimedia GStreamer plugin - development files
@@ -5357,15 +5369,25 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/MultimediaWidgets.json
 %{qt6dir}/metatypes/qt6multimediawidgets_pld_metatypes.json
 
+%files -n Qt6Multimedia-plugin-ffmpeg-devel
+%defattr(644,root,root,755)
+%{_libdir}/libQt6FFmpegMediaPluginImpl.a
+%{_libdir}/libQt6FFmpegMediaPluginImpl.prl
+%{_includedir}/qt6/QtFFmpegMediaPluginImpl
+%{_libdir}/cmake/Qt6FFmpegMediaPluginImplPrivate
+%{qt6dir}/metatypes/qt6ffmpegmediapluginimplprivate_pld_metatypes.json
+%{qt6dir}/mkspecs/modules/qt_lib_ffmpegmediapluginimpl_private.pri
+%{qt6dir}/modules/FFmpegMediaPluginImplPrivate.json
+
 %files -n Qt6Multimedia-plugin-gstreamer-devel
 %defattr(644,root,root,755)
-%{_libdir}/libQt6QGstreamerMediaPluginImpl.a
-%{_libdir}/libQt6QGstreamerMediaPluginImpl.prl
-%{_includedir}/qt6/QtQGstreamerMediaPluginImpl
-%{_libdir}/cmake/Qt6QGstreamerMediaPluginImplPrivate
-%{qt6dir}/metatypes/qt6qgstreamermediapluginimplprivate_pld_metatypes.json
-%{qt6dir}/mkspecs/modules/qt_lib_qgstreamermediapluginimpl_private.pri
-%{qt6dir}/modules/QGstreamerMediaPluginImplPrivate.json
+%{_libdir}/libQt6GstreamerMediaPluginImpl.a
+%{_libdir}/libQt6GstreamerMediaPluginImpl.prl
+%{_includedir}/qt6/QtGstreamerMediaPluginImpl
+%{_libdir}/cmake/Qt6GstreamerMediaPluginImplPrivate
+%{qt6dir}/metatypes/qt6gstreamermediapluginimplprivate_pld_metatypes.json
+%{qt6dir}/mkspecs/modules/qt_lib_gstreamermediapluginimpl_private.pri
+%{qt6dir}/modules/GstreamerMediaPluginImplPrivate.json
 
 %files -n Qt6Network
 %defattr(644,root,root,755)

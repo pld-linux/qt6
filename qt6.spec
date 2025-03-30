@@ -13,43 +13,43 @@
 #
 # Conditional build:
 # -- build targets
-%bcond_without	doc		# Documentation
-%bcond_without	qt3d		# Qt 3d
-%bcond_without	qtquick3d	# Qt Quick3d
-%bcond_without	qtquick3dphysics	# Qt Quick3d Physics
-%bcond_without	qtwebengine	# Qt WebEngine
+%bcond_without	doc				# Documentation
+%bcond_without	qt3d				# Qt 3d
+%bcond_without	qtquick3d			# Qt Quick3d
+%bcond_without	qtquick3dphysics		# Qt Quick3d Physics
+%bcond_without	qtwebengine			# Qt WebEngine
 # -- features
-%bcond_without	cups		# CUPS printing support
-%bcond_with	directfb	# DirectFB platform support
-%bcond_without	egl		# EGL (EGLFS, minimal EGL) platform support
-%bcond_with	fbx		# Autodesk FBX SDK support (proprietary)
-%bcond_without	gtk		# GTK+ theme integration
-%bcond_without	kerberos5	# KRB5 GSSAPI Support
-%bcond_without	kms		# KMS platform support
-%bcond_without	libinput	# libinput support
-%bcond_with	opengl_desktop	# Use "desktop" OpenGL API
-%bcond_without	openxr		# XR devices support
-%bcond_with	gles		# Use OpenGL ES API
-%bcond_without	pch		# pch (pre-compiled headers) in qmake
-%bcond_without	statx		# build without statx()
-%bcond_with	systemd		# logging to journald
-%bcond_without	tslib		# tslib support
+%bcond_without	cups				# CUPS printing support
+%bcond_with	directfb			# DirectFB platform support
+%bcond_without	egl				# EGL (EGLFS, minimal EGL) platform support
+%bcond_with	fbx				# Autodesk FBX SDK support (proprietary)
+%bcond_without	gtk				# GTK+ theme integration
+%bcond_without	kerberos5			# KRB5 GSSAPI Support
+%bcond_without	kms				# KMS platform support
+%bcond_without	libinput			# libinput support
+%bcond_with	opengl_desktop			# Use "desktop" OpenGL API
+%bcond_without	openxr				# XR devices support
+%bcond_with	gles				# Use OpenGL ES API
+%bcond_without	pch				# pch (pre-compiled headers) in qmake
+%bcond_without	statx				# build without statx()
+%bcond_with	systemd				# logging to journald
+%bcond_without	tslib				# tslib support
 # -- databases
-%bcond_without	mysql		# MySQL plugin
-%bcond_without	odbc		# unixODBC plugin
-%bcond_without	pgsql		# PostgreSQL plugin
-%bcond_without	sqlite3		# SQLite3 plugin
-%bcond_without	ibase		# ibase (InterBase/Firebird) plugin
-%bcond_with	db2		# DB2 support
-%bcond_with	oci		# OCI (Oracle) support
+%bcond_without	mysql				# MySQL plugin
+%bcond_without	odbc				# unixODBC plugin
+%bcond_without	pgsql				# PostgreSQL plugin
+%bcond_without	sqlite3				# SQLite3 plugin
+%bcond_without	ibase				# ibase (InterBase/Firebird) plugin
+%bcond_with	ibmdb2				# IBM DB2 support
+%bcond_with	oci				# OCI (Oracle) support
 # -- SIMD CPU instructions
-%bcond_with	sse2		# use SSE2 instructions
-%bcond_with	sse3		# use SSE3 instructions (since: Intel middle Pentium4, AMD Athlon64)
-%bcond_with	ssse3		# use SSSE3 instructions (Intel since Core2, Via Nano)
-%bcond_with	sse41		# use SSE4.1 instructions (Intel since middle Core2)
-%bcond_with	sse42		# use SSE4.2 instructions (the same)
-%bcond_with	avx		# use AVX instructions (Intel since Sandy Bridge, AMD since Bulldozer)
-%bcond_with	avx2		# use AVX2 instructions (Intel since Haswell)
+%bcond_with	sse2				# use SSE2 instructions
+%bcond_with	sse3				# use SSE3 instructions (since: Intel middle Pentium4, AMD Athlon64)
+%bcond_with	ssse3				# use SSSE3 instructions (Intel since Core2, Via Nano)
+%bcond_with	sse41				# use SSE4.1 instructions (Intel since middle Core2)
+%bcond_with	sse42				# use SSE4.2 instructions (the same)
+%bcond_with	avx				# use AVX instructions (Intel since Sandy Bridge, AMD since Bulldozer)
+%bcond_with	avx2				# use AVX2 instructions (Intel since Haswell)
 # -- system libraries
 %bcond_with	qtwebengine_system_ffmpeg	# use system FFmpeg in qtwebengine
 %bcond_with	qtwebengine_system_libvpx	# use system libvpx in qtwebengine (build fails QTBUG-129955)
@@ -3876,7 +3876,7 @@ cd build
 	%{cmake_on_off avx2 QT_FEATURE_avx2} \
 	%{cmake_on_off cups QT_FEATURE_cups} \
 	%{cmake_on_off systemd QT_FEATURE_journald} \
-	%{cmake_on_off db2 QT_FEATURE_sql_db2} \
+	%{cmake_on_off ibmdb2 QT_FEATURE_sql_db2} \
 	%{cmake_on_off ibase QT_FEATURE_sql_ibase} \
 	%{cmake_on_off mysql QT_FEATURE_sql_mysql} \
 	%{cmake_on_off oci QT_FEATURE_sql_oci} \
@@ -7237,7 +7237,7 @@ rm -rf $RPM_BUILD_ROOT
 # common for base -devel and plugin-specific files
 %dir %{_libdir}/cmake/Qt6Sql
 
-%if %{with db2}
+%if %{with ibmdb2}
 %files -n Qt6Sql-sqldriver-db2
 %defattr(644,root,root,755)
 %attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqldb2.so

@@ -3725,6 +3725,8 @@ Summary:	Qt6 build tools
 Summary(pl.UTF-8):	Narzędzia do budowania dla Qt6
 Group:		Development/Tools
 Provides:	qt6-qmake = %{version}-%{release}
+Requires:	Qt6Core = %{version}
+Requires:	Qt6DBus = %{version}
 
 %description -n qt6-build
 This package includes the Qt resource compiler (rcc), meta objects

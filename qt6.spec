@@ -177,6 +177,7 @@ BuildRequires:	harfbuzz-devel >= 2.9.0
 BuildRequires:	harfbuzz-subset-devel >= 2.9.0
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	hunspell-devel
+%{?with_ibmdb2:BuildRequires:	ibm-db2-clidriver-devel}
 BuildRequires:	jasper-devel
 %{?with_qtwebengine:BuildRequires:	khrplatform-devel}
 BuildRequires:	lcms2-devel

@@ -265,7 +265,7 @@ BuildRequires:	python3-html5lib
 BuildRequires:	python3-modules
 BuildRequires:	re2-devel >=  20230601
 BuildRequires:	rpm-build >= 4.6
-BuildRequires:	rpmbuild(macros) >= 2.007
+BuildRequires:	rpmbuild(macros) >= 2.047
 BuildRequires:	samurai
 BuildRequires:	sed >= 4.0
 BuildRequires:	snappy-devel
@@ -3826,18 +3826,18 @@ narzędzia.
 %endif
 
 %build
-# We're using samurai instead of ninja because teh later
+# We're using samurai instead of ninja because the latter
 # cannot be told what command line flags to use globally
-mkdir -p build
-cd build
-%cmake ../ \
+%cmake -B build \
 	-GNinja \
-	%{cmake_on_off qt3d BUILD_qt3d} \
-	%{cmake_on_off qtquick3d BUILD_qtquick3d} \
-	%{cmake_on_off qtquick3dphysics BUILD_qtquick3dphysics} \
-	%{cmake_on_off qtwebengine BUILD_qtwebengine} \
+	%{?with_ibmdb2:-DDB2_INCLUDE_DIR=%{_libdir}/clidriver/include} \
+	-DBUILD_SHARED_LIBS=ON \
+	-DBUILD_WITH_PCH=%{__ON_OFF pch} \
+	-DBUILD_qt3d=%{__ON_OFF qt3d} \
+	-DBUILD_qtquick3d=%{__ON_OFF qtquick3d} \
+	-DBUILD_qtquick3dphysics=%{__ON_OFF qtquick3dphysics} \
+	-DBUILD_qtwebengine=%{__ON_OFF qtwebengine} \
 	-DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/samu \
-	-DNinja_EXECUTABLE:FILEPATH=/usr/bin/samu \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
 	-DINSTALL_ARCHDATADIR=%{qt6dir} \
 	-DINSTALL_BINDIR=%{qt6dir}/bin \
@@ -3852,43 +3852,63 @@ cd build
 	-DINSTALL_QMLDIR=%{qt6dir}/qml \
 	-DINSTALL_SYSCONFDIR=%{_sysconfdir}/qt6 \
 	-DINSTALL_TRANSLATIONSDIR=%{_datadir}/qt6/translations \
-	-DBUILD_SHARED_LIBS=ON \
+	-DNinja_EXECUTABLE:FILEPATH=/usr/bin/samu \
 	%{?with_oci:-DOracle_INCLUDE_DIR=%{_includedir}/oracle/client} \
-	-DQT_DISABLE_RPATH=TRUE \
 	-DQT_BUILD_EXAMPLES=OFF \
+	-DQT_DISABLE_RPATH=TRUE \
+	-DQT_FEATURE_accessibility=ON \
+	-DQT_FEATURE_avx2=%{__ON_OFF avx2} \
+	-DQT_FEATURE_avx=%{__ON_OFF avx} \
+	-DQT_FEATURE_cups=%{__ON_OFF cups} \
+	-DQT_FEATURE_dbus_linked=ON \
+	-DQT_FEATURE_directfb=%{__ON_OFF directfb} \
+	-DQT_FEATURE_eglfs=%{__ON_OFF egl} \
+	-DQT_FEATURE_enable_new_dtags=ON \
+	-DQT_FEATURE_fontconfig=ON \
+	-DQT_FEATURE_glib=ON \
+	-DQT_FEATURE_gtk3=%{__ON_OFF gtk} \
+	-DQT_FEATURE_icu=ON \
+	-DQT_FEATURE_journald=%{__ON_OFF systemd} \
+	-DQT_FEATURE_kms=%{__ON_OFF kms} \
+	-DQT_FEATURE_libinput=%{__ON_OFF libinput} \
+	-DQT_FEATURE_opengl_desktop=%{__ON_OFF opengl_desktop} \
+	-DQT_FEATURE_opengles2=%{__ON_OFF gles} \
+	-DQT_FEATURE_openssl_linked=ON \
+	-DQT_FEATURE_qml_jit=%{__ON_OFF qml_jit} \
+	-DQT_FEATURE_quick3dxr_openxr=%{__ON_OFF openxr} \
+	-DQT_FEATURE_reduce_relocations=%{__ON_OFF red_reloc} \
 	-DQT_FEATURE_relocatable=OFF \
 	-DQT_FEATURE_rpath=OFF \
 	-DQT_FEATURE_separate_debug_info=OFF \
-	%{cmake_on_off red_reloc QT_FEATURE_reduce_relocations} \
-	%{cmake_on_off pch BUILD_WITH_PCH} \
-	-DQT_FEATURE_use_gold_linker=ON \
-	-DQT_FEATURE_enable_new_dtags=ON \
-	-DQT_FEATURE_dbus_linked=ON \
-	-DQT_FEATURE_openssl_linked=ON \
-	-DQT_FEATURE_accessibility=ON \
-	-DQT_FEATURE_fontconfig=ON \
-	-DQT_FEATURE_glib=ON \
-	-DQT_FEATURE_icu=ON \
-	-DQT_FEATURE_xcb=ON \
-	%{cmake_on_off opengl_desktop QT_FEATURE_opengl_desktop} \
-	%{cmake_on_off gles QT_FEATURE_opengles2} \
-	%{cmake_on_off openxr QT_FEATURE_quick3dxr_openxr} \
-	%{?with_openxr:-DQT_FEATURE_system_openxr=ON} \
-	-DQT_FEATURE_xcb_sm=ON \
-	-DQT_FEATURE_xkbcommon=ON \
+	-DQT_FEATURE_sql_db2=%{__ON_OFF ibmdb2} \
+	-DQT_FEATURE_sql_ibase=%{__ON_OFF ibase} \
+	-DQT_FEATURE_sql_mysql=%{__ON_OFF mysql} \
+	-DQT_FEATURE_sql_oci=%{__ON_OFF oci} \
+	-DQT_FEATURE_sql_odbc=%{__ON_OFF odbc} \
+	-DQT_FEATURE_sql_psql=%{__ON_OFF pgsql} \
+	-DQT_FEATURE_sql_sqlite=%{__ON_OFF sqlite3} \
+	-DQT_FEATURE_sse2=%{__ON_OFF sse2} \
+	-DQT_FEATURE_sse3=%{__ON_OFF sse3} \
+	-DQT_FEATURE_sse4_1=%{__ON_OFF sse41} \
+	-DQT_FEATURE_sse4_2=%{__ON_OFF sse42} \
+	-DQT_FEATURE_ssse3=%{__ON_OFF ssse3} \
+	-DQT_FEATURE_statx=%{__ON_OFF statx} \
 	-DQT_FEATURE_system_doubleconversion=ON \
 	-DQT_FEATURE_system_freetype=ON \
 	-DQT_FEATURE_system_harfbuzz=ON \
 	-DQT_FEATURE_system_jpeg=ON \
 	-DQT_FEATURE_system_libjpeg=ON \
-	-DQT_FEATURE_system_png=ON \
 	-DQT_FEATURE_system_libpng=ON \
+	%{?with_openxr:-DQT_FEATURE_system_openxr=ON} \
 	-DQT_FEATURE_system_pcre2=ON \
+	-DQT_FEATURE_system_png=ON \
 	-DQT_FEATURE_system_sqlite=ON \
 	-DQT_FEATURE_system_zlib=ON \
+	-DQT_FEATURE_tslib=%{__ON_OFF tslib} \
+	-DQT_FEATURE_use_gold_linker=ON \
 	-DQT_FEATURE_webengine_proprietary_codecs=ON \
 	-DQT_FEATURE_webengine_system_alsa=ON \
-	%{cmake_on_off qtwebengine_system_ffmpeg QT_FEATURE_webengine_system_ffmpeg} \
+	-DQT_FEATURE_webengine_system_ffmpeg=%{__ON_OFF qtwebengine_system_ffmpeg} \
 	-DQT_FEATURE_webengine_system_freetype=ON \
 	-DQT_FEATURE_webengine_system_glib=ON \
 	-DQT_FEATURE_webengine_system_harfbuzz=ON \
@@ -3900,7 +3920,7 @@ cd build
 	-DQT_FEATURE_webengine_system_libpci=ON \
 	-DQT_FEATURE_webengine_system_libpng=ON \
 	-DQT_FEATURE_webengine_system_libtiff=ON \
-	%{cmake_on_off qtwebengine_system_libvpx QT_FEATURE_webengine_system_libvpx} \
+	-DQT_FEATURE_webengine_system_libvpx=%{__ON_OFF qtwebengine_system_libvpx} \
 	-DQT_FEATURE_webengine_system_libwebp=ON \
 	-DQT_FEATURE_webengine_system_libxml=ON \
 	-DQT_FEATURE_webengine_system_minizip=ON \
@@ -3910,30 +3930,9 @@ cd build
 	-DQT_FEATURE_webengine_system_re2=ON \
 	-DQT_FEATURE_webengine_system_snappy=ON \
 	-DQT_FEATURE_webengine_system_zlib=ON \
-	%{cmake_on_off sse2 QT_FEATURE_sse2} \
-	%{cmake_on_off sse3 QT_FEATURE_sse3} \
-	%{cmake_on_off ssse3 QT_FEATURE_ssse3} \
-	%{cmake_on_off sse41 QT_FEATURE_sse4_1} \
-	%{cmake_on_off sse42 QT_FEATURE_sse4_2} \
-	%{cmake_on_off avx QT_FEATURE_avx} \
-	%{cmake_on_off avx2 QT_FEATURE_avx2} \
-	%{cmake_on_off cups QT_FEATURE_cups} \
-	%{cmake_on_off systemd QT_FEATURE_journald} \
-	%{cmake_on_off ibmdb2 QT_FEATURE_sql_db2} \
-	%{cmake_on_off ibase QT_FEATURE_sql_ibase} \
-	%{cmake_on_off mysql QT_FEATURE_sql_mysql} \
-	%{cmake_on_off oci QT_FEATURE_sql_oci} \
-	%{cmake_on_off odbc QT_FEATURE_sql_odbc} \
-	%{cmake_on_off pgsql QT_FEATURE_sql_psql} \
-	%{cmake_on_off sqlite3 QT_FEATURE_sql_sqlite} \
-	%{cmake_on_off directfb QT_FEATURE_directfb} \
-	%{cmake_on_off gtk QT_FEATURE_gtk3} \
-	%{cmake_on_off egl QT_FEATURE_eglfs} \
-	%{cmake_on_off statx QT_FEATURE_statx} \
-	%{cmake_on_off kms QT_FEATURE_kms} \
-	%{cmake_on_off libinput QT_FEATURE_libinput} \
-	%{cmake_on_off tslib QT_FEATURE_tslib} \
-	%{cmake_on_off qml_jit QT_FEATURE_qml_jit} \
+	-DQT_FEATURE_xcb=ON \
+	-DQT_FEATURE_xcb_sm=ON \
+	-DQT_FEATURE_xkbcommon=ON \
 	-DQT_GENERATE_SBOM:BOOL=OFF
 
 # Make sure arg-less sub-invocations will follow our parallel build setting
@@ -3944,11 +3943,11 @@ export CFLAGS="%{rpmcflags}"
 export CXXFLAGS="%{rpmcxxflags}"
 export LDFLAGS="%{rpmldflags}"
 
-%{__cmake} --build . --verbose %{_smp_mflags}
+%{__cmake} --build build --verbose %{_smp_mflags}
 
 %if %{with doc}
-export QT_PLUGIN_PATH="$(pwd)/qtbase/%{_lib}/qt6/plugins"
-%{__cmake} --build . --target docs --verbose %{_smp_mflags}
+export QT_PLUGIN_PATH="$(pwd)/build/qtbase/%{_lib}/qt6/plugins"
+%{__cmake} --build build --target docs --verbose %{_smp_mflags}
 %endif
 
 %install

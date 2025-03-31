@@ -6,9 +6,49 @@
 #
 # TODO:
 # - unpackaged files:
-#   /usr/lib64/qt6/libexec/gn
-#   /usr/lib64/qt6/mkspecs/modules/README
-#   /usr/share/qt6/translations/catalogs.json
+#
+#   %attr(755,root,root) %{_libdir}/qt6/plugins/help/libhelpplugin.so
+#
+#   %{_libdir}/libQt6ExamplesAssetDownloader.a
+#   %{_libdir}/libQt6ExamplesAssetDownloader.prl
+#   %{_includedir}/qt6/QtExamplesAssetDownloader
+#   %{_libdir}/cmake/Qt6ExamplesAssetDownloaderPrivate
+#   %{_libdir}/qt6/metatypes/qt6examplesassetdownloaderprivate_pld_metatypes.json
+#   %{_libdir}/qt6/mkspecs/modules/qt_lib_examples_asset_downloader_private.pri
+#   %{_libdir}/qt6/modules/ExamplesAssetDownloaderPrivate.json
+#
+#   %{_libdir}/libQt6MultimediaTestLib.a
+#   %{_libdir}/libQt6MultimediaTestLib.prl
+#   %{_includedir}/qt6/QtMultimediaTestLib
+#   %{_libdir}/cmake/Qt6MultimediaTestLibPrivate
+#   %{_libdir}/qt6/metatypes/qt6multimediatestlibprivate_pld_metatypes.json
+#   %{_libdir}/qt6/mkspecs/modules/qt_lib_multimediatestlibprivate_private.pri
+#   %{_libdir}/qt6/modules/MultimediaTestLibPrivate.json
+#
+#   %{_libdir}/libQt6QmlAssetDownloader.a
+#   %{_libdir}/libQt6QmlAssetDownloader.prl
+#   %{_includedir}/qt6/QtQmlAssetDownloader
+#   %{_pkgconfigdir}/Qt6QmlAssetDownloader.pc
+#   %{_libdir}/cmake/Qt6QmlAssetDownloader
+#   %dir %{_libdir}/qt6/qml/Assets
+#   %dir %{_libdir}/qt6/qml/Assets/Downloader
+#   %{_libdir}/qt6/qml/Assets/Downloader/libqmlassetdownloaderplugin.a
+#   %{_libdir}/qt6/qml/Assets/Downloader/libqmlassetdownloaderplugin.prl
+#   %{_libdir}/qt6/qml/Assets/Downloader/plugins.qmltypes
+#   %{_libdir}/qt6/qml/Assets/Downloader/qmldir
+#   %{_libdir}/qt6/metatypes/qt6qmlassetdownloader_pld_metatypes.json
+#   %{_libdir}/qt6/mkspecs/modules/qt_lib_qmlassetdownloader.pri
+#   %{_libdir}/qt6/mkspecs/modules/qt_lib_qmlassetdownloader_private.pri
+#   %{_libdir}/qt6/modules/QmlAssetDownloader.json
+#
+#   %{_libdir}/cmake/Qt6TestInternalsPrivate
+#   %{_libdir}/qt6/mkspecs/modules/qt_lib_testinternals_private.pri
+#   %{_libdir}/qt6/modules/TestInternalsPrivate.json
+#
+#   %{_libdir}/qt6/mkspecs/REUSE.toml
+#   %{_libdir}/qt6/mkspecs/modules/README
+#   %{_datadir}/qt6/translations/catalogs.json
+#
 # - -doc/-doc-qch mess: make packages per library (then split qt6-doc and qt6-doc-qch) or per submodule (like in qt5)?
 #
 # Conditional build:
@@ -3933,6 +3973,7 @@ DESTDIR=$RPM_BUILD_ROOT %{__cmake} --build build/ --target install_docs
 %{__rm} -r $RPM_BUILD_ROOT%{_libdir}/objects-PLD
 %{__rm} -r $RPM_BUILD_ROOT%{qt6dir}/mkspecs/qtdoc_dummy_file.txt
 %{__rm} $RPM_BUILD_ROOT%{qt6dir}/libexec/sanitizer-testrunner.py
+%{__rm} -r $RPM_BUILD_ROOT%{qt6dir}/qml/Assets/Downloader/objects-PLD
 %{__rm} -r $RPM_BUILD_ROOT%{qt6dir}/qml/Qt/test/controls/objects-PLD
 
 %if %{without qtwebengine}

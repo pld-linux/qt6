@@ -1,0 +1,10 @@
+--- qtwebengine/src/3rdparty/chromium/chrome/test/chromedriver/BUILD.gn.orig	2025-03-18 20:28:59.000000000 +0100
++++ qtwebengine/src/3rdparty/chromium/chrome/test/chromedriver/BUILD.gn	2025-04-04 21:08:15.145686277 +0200
+@@ -445,6 +445,7 @@
+       "//net/server:http_server",
+       "//net/traffic_annotation:test_support",
+       "//services/network/public/mojom",
++      "//ui/gl:buildflags",
+     ]
+ 
+     if (is_mac && is_component_ffmpeg) {

@@ -149,12 +149,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.8.3
-Release:	2
+Version:	6.9.0
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
-Source0:	https://download.qt.io/official_releases/qt/6.8/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	10a39c4b4af4f465c4ff0352a6d18a0a
+Source0:	https://download.qt.io/official_releases/qt/6.9/%{version}/single/qt-everywhere-src-%{version}.tar.xz
+# Source0-md5:	6c3e4eceffe8a0e76c7a89a74d33be00
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		arm-no-xnnpack.patch
@@ -806,6 +806,18 @@ Header files for Qt6 Concurrent library.
 
 %description -n Qt6Concurrent-devel -l pl.UTF-8
 Pliki nagłówkowe biblioteki Qt6 Concurrent.
+
+%package -n Qt6Connectivity-devel
+Summary:	The Qt6 Connectivity - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 Connectivity - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+
+%description -n Qt6Connectivity-devel
+The Qt6 Connectivity - development files.
+
+%description -n Qt6Connectivity-devel -l pl.UTF-8
+Biblioteka Qt6 Connectivity - pliki programistyczne.
 
 %package -n Qt6Core
 Summary:	Qt6 Core library
@@ -4541,18 +4553,31 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt63DQuickScene3D.pc
 %{_pkgconfigdir}/Qt63DRender.pc
 %{_libdir}/cmake/Qt63DAnimation
+%{_libdir}/cmake/Qt63DAnimationPrivate
 %{_libdir}/cmake/Qt63DCore
+%{_libdir}/cmake/Qt63DCorePrivate
 %{_libdir}/cmake/Qt63DExtras
+%{_libdir}/cmake/Qt63DExtrasPrivate
 %{_libdir}/cmake/Qt63DInput
+%{_libdir}/cmake/Qt63DInputPrivate
 %{_libdir}/cmake/Qt63DLogic
+%{_libdir}/cmake/Qt63DLogicPrivate
 %{_libdir}/cmake/Qt63DQuick
+%{_libdir}/cmake/Qt63DQuickPrivate
 %{_libdir}/cmake/Qt63DQuickAnimation
+%{_libdir}/cmake/Qt63DQuickAnimationPrivate
 %{_libdir}/cmake/Qt63DQuickExtras
+%{_libdir}/cmake/Qt63DQuickExtrasPrivate
 %{_libdir}/cmake/Qt63DQuickInput
+%{_libdir}/cmake/Qt63DQuickInputPrivate
 %{_libdir}/cmake/Qt63DQuickRender
+%{_libdir}/cmake/Qt63DQuickRenderPrivate
 %{_libdir}/cmake/Qt63DQuickScene2D
+%{_libdir}/cmake/Qt63DQuickScene2DPrivate
 %{_libdir}/cmake/Qt63DQuickScene3D
+%{_libdir}/cmake/Qt63DQuickScene3DPrivate
 %{_libdir}/cmake/Qt63DRender
+%{_libdir}/cmake/Qt63DRenderPrivate
 %{qt6dir}/metatypes/qt63danimation_pld_metatypes.json
 %{qt6dir}/metatypes/qt63dcore_pld_metatypes.json
 %{qt6dir}/metatypes/qt63dextras_pld_metatypes.json
@@ -4630,6 +4655,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtBluetooth
 %{_pkgconfigdir}/Qt6Bluetooth.pc
 %{_libdir}/cmake/Qt6Bluetooth
+%{_libdir}/cmake/Qt6BluetoothPrivate
 %{qt6dir}/metatypes/qt6bluetooth_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_bluetooth.pri
 %{qt6dir}/mkspecs/modules/qt_lib_bluetooth_private.pri
@@ -4699,7 +4725,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6Charts.pc
 %{_pkgconfigdir}/Qt6ChartsQml.pc
 %{_libdir}/cmake/Qt6Charts
+%{_libdir}/cmake/Qt6ChartsPrivate
 %{_libdir}/cmake/Qt6ChartsQml
+%{_libdir}/cmake/Qt6ChartsQmlPrivate
 %{qt6dir}/metatypes/qt6charts_pld_metatypes.json
 %{qt6dir}/metatypes/qt6chartsqml_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_charts.pri
@@ -4731,6 +4759,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtCoap
 %{_pkgconfigdir}/Qt6Coap.pc
 %{_libdir}/cmake/Qt6Coap
+%{_libdir}/cmake/Qt6CoapPrivate
 %{qt6dir}/metatypes/qt6coap_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_coap.pri
 %{qt6dir}/mkspecs/modules/qt_lib_coap_private.pri
@@ -4758,10 +4787,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtConcurrent
 %{_pkgconfigdir}/Qt6Concurrent.pc
 %{_libdir}/cmake/Qt6Concurrent
+%{_libdir}/cmake/Qt6ConcurrentPrivate
 %{qt6dir}/metatypes/qt6concurrent_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_concurrent.pri
 %{qt6dir}/mkspecs/modules/qt_lib_concurrent_private.pri
 %{qt6dir}/modules/Concurrent.json
+
+%files -n Qt6Connectivity-devel
+%defattr(644,root,root,755)
+%{_includedir}/qt6/QtConnectivity
+%{_libdir}/cmake/Qt6Connectivity
+%{qt6dir}/modules/Connectivity.json
 
 %files -n Qt6Core -f qtbase.lang
 %defattr(644,root,root,755)
@@ -4800,6 +4836,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6Platform.pc
 %{_libdir}/cmake/Qt6
 %{_libdir}/cmake/Qt6Core
+%{_libdir}/cmake/Qt6CorePrivate
 %{_libdir}/cmake/Qt6CoreTools
 %{_libdir}/cmake/Qt6HostInfo
 %dir %{_libdir}/cmake/Qt6BuildInternals
@@ -4832,7 +4869,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6DataVisualization.pc
 %{_pkgconfigdir}/Qt6DataVisualizationQml.pc
 %{_libdir}/cmake/Qt6DataVisualization
+%{_libdir}/cmake/Qt6DataVisualizationPrivate
 %{_libdir}/cmake/Qt6DataVisualizationQml
+%{_libdir}/cmake/Qt6DataVisualizationQmlPrivate
 %{qt6dir}/metatypes/qt6datavisualization_pld_metatypes.json
 %{qt6dir}/metatypes/qt6datavisualizationqml_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_datavisualization.pri
@@ -4864,6 +4903,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtDBus
 %{_pkgconfigdir}/Qt6DBus.pc
 %{_libdir}/cmake/Qt6DBus
+%{_libdir}/cmake/Qt6DBusPrivate
 %{_libdir}/cmake/Qt6DBusTools
 %{qt6dir}/metatypes/qt6dbus_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_dbus.pri
@@ -4890,6 +4930,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/cmake/Qt6Designer
 %{_libdir}/cmake/Qt6Designer/Qt6Designer*.cmake
 %{_libdir}/cmake/Qt6DesignerComponentsPrivate
+%{_libdir}/cmake/Qt6DesignerPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_designer.pri
 %{qt6dir}/mkspecs/modules/qt_lib_designer_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_designercomponents_private.pri
@@ -4951,7 +4992,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtGraphs
 %{_includedir}/qt6/QtGraphsWidgets
 %{_libdir}/cmake/Qt6Graphs
+%{_libdir}/cmake/Qt6GraphsPrivate
 %{_libdir}/cmake/Qt6GraphsWidgets
+%{_libdir}/cmake/Qt6GraphsWidgetsPrivate
 %{qt6dir}/metatypes/qt6graphs_pld_metatypes.json
 %{qt6dir}/metatypes/qt6graphswidgets_pld_metatypes.json
 %{_pkgconfigdir}/Qt6Graphs.pc
@@ -4983,7 +5026,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtGrpc
 %{_includedir}/qt6/QtGrpcQuick
 %{_libdir}/cmake/Qt6Grpc
+%{_libdir}/cmake/Qt6GrpcPrivate
 %{_libdir}/cmake/Qt6GrpcQuick
+%{_libdir}/cmake/Qt6GrpcQuickPrivate
 %{_libdir}/cmake/Qt6GrpcTools
 %{_libdir}/cmake/Qt6ProtobufTools
 %attr(755,root,root) %{qt6dir}/libexec/qtgrpcgen
@@ -5208,6 +5253,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Gui/Qt6QVkKhrDisplayIntegrationPlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QWebpPlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QWbmpPlugin*.cmake
+%{_libdir}/cmake/Qt6GuiPrivate
 %{_libdir}/cmake/Qt6GuiTools
 %{qt6dir}/mkspecs/modules/qt_lib_gui.pri
 %{qt6dir}/mkspecs/modules/qt_lib_gui_private.pri
@@ -5225,6 +5271,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtHelp
 %{_pkgconfigdir}/Qt6Help.pc
 %{_libdir}/cmake/Qt6Help
+%{_libdir}/cmake/Qt6HelpPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_help.pri
 %{qt6dir}/mkspecs/modules/qt_lib_help_private.pri
 %{qt6dir}/modules/Help.json
@@ -5241,6 +5288,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6HttpServer.prl
 %{_includedir}/qt6/QtHttpServer
 %{_libdir}/cmake/Qt6HttpServer
+%{_libdir}/cmake/Qt6HttpServerPrivate
 %{qt6dir}/metatypes/qt6httpserver_pld_metatypes.json
 %{_pkgconfigdir}/Qt6HttpServer.pc
 %{qt6dir}/mkspecs/modules/qt_lib_httpserver.pri
@@ -5306,6 +5354,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6Location.prl
 %{_includedir}/qt6/QtLocation
 %{_libdir}/cmake/Qt6Location
+%{_libdir}/cmake/Qt6LocationPrivate
 %{qt6dir}/metatypes/qt6location_pld_metatypes.json
 %{_pkgconfigdir}/Qt6Location.pc
 %{qt6dir}/mkspecs/modules/qt_lib_location.pri
@@ -5324,6 +5373,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtMqtt
 %{_pkgconfigdir}/Qt6Mqtt.pc
 %{_libdir}/cmake/Qt6Mqtt
+%{_libdir}/cmake/Qt6MqttPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_mqtt.pri
 %{qt6dir}/mkspecs/modules/qt_lib_mqtt_private.pri
 %{qt6dir}/modules/Mqtt.json
@@ -5362,6 +5412,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtMultimedia
 %{_pkgconfigdir}/Qt6Multimedia.pc
 %{_libdir}/cmake/Qt6Multimedia
+%{_libdir}/cmake/Qt6MultimediaPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_multimedia.pri
 %{qt6dir}/mkspecs/modules/qt_lib_multimedia_private.pri
 %{qt6dir}/modules/Multimedia.json
@@ -5409,6 +5460,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtMultimediaWidgets
 %{_pkgconfigdir}/Qt6MultimediaWidgets.pc
 %{_libdir}/cmake/Qt6MultimediaWidgets
+%{_libdir}/cmake/Qt6MultimediaWidgetsPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_multimediawidgets.pri
 %{qt6dir}/mkspecs/modules/qt_lib_multimediawidgets_private.pri
 %{qt6dir}/modules/MultimediaWidgets.json
@@ -5449,6 +5501,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtNetwork
 %{_pkgconfigdir}/Qt6Network.pc
 %{_libdir}/cmake/Qt6Network
+%{_libdir}/cmake/Qt6NetworkPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_network.pri
 %{qt6dir}/mkspecs/modules/qt_lib_network_private.pri
 %{qt6dir}/modules/Network.json
@@ -5465,6 +5518,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6NetworkAuth.prl
 %{_includedir}/qt6/QtNetworkAuth
 %{_libdir}/cmake/Qt6NetworkAuth
+%{_libdir}/cmake/Qt6NetworkAuthPrivate
 %{_pkgconfigdir}/Qt6NetworkAuth.pc
 %{_libdir}/qt6/mkspecs/modules/qt_lib_networkauth.pri
 %{_libdir}/qt6/mkspecs/modules/qt_lib_networkauth_private.pri
@@ -5493,6 +5547,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtNfc
 %{_pkgconfigdir}/Qt6Nfc.pc
 %{_libdir}/cmake/Qt6Nfc
+%{_libdir}/cmake/Qt6NfcPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_nfc.pri
 %{qt6dir}/mkspecs/modules/qt_lib_nfc_private.pri
 %{qt6dir}/modules/Nfc.json
@@ -5534,8 +5589,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6DeclarativeOpcua.pc
 %{_pkgconfigdir}/Qt6OpcUa.pc
 %{_libdir}/cmake/Qt6DeclarativeOpcua
+%{_libdir}/cmake/Qt6DeclarativeOpcuaPrivate
 %{_libdir}/cmake/Qt6OpcUa
-%{_libdir}/cmake/Qt6QtOpcUaTools
+%{_libdir}/cmake/Qt6OpcUaPrivate
+%{_libdir}/cmake/Qt6OpcUaTools
 %attr(755,root,root) %{qt6dir}/bin/qopcuaxmldatatypes2cpp
 %{qt6dir}/mkspecs/modules/qt_lib_declarativeopcua.pri
 %{qt6dir}/mkspecs/modules/qt_lib_declarativeopcua_private.pri
@@ -5574,7 +5631,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6OpenGL.pc
 %{_pkgconfigdir}/Qt6OpenGLWidgets.pc
 %{_libdir}/cmake/Qt6OpenGL
+%{_libdir}/cmake/Qt6OpenGLPrivate
 %{_libdir}/cmake/Qt6OpenGLWidgets
+%{_libdir}/cmake/Qt6OpenGLWidgetsPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_opengl.pri
 %{qt6dir}/mkspecs/modules/qt_lib_opengl_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_openglwidgets.pri
@@ -5620,8 +5679,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6PdfWidgets.pc
 %{_libdir}/cmake/Qt6Gui/Qt6QPdfPlugin*.cmake
 %{_libdir}/cmake/Qt6Pdf
+%{_libdir}/cmake/Qt6PdfPrivate
 %{_libdir}/cmake/Qt6PdfQuick
+%{_libdir}/cmake/Qt6PdfQuickPrivate
 %{_libdir}/cmake/Qt6PdfWidgets
+%{_libdir}/cmake/Qt6PdfWidgetsPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_pdf.pri
 %{qt6dir}/mkspecs/modules/qt_lib_pdf_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_pdfquick.pri
@@ -5673,7 +5735,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6Positioning.pc
 %{_pkgconfigdir}/Qt6PositioningQuick.pc
 %{_libdir}/cmake/Qt6Positioning
+%{_libdir}/cmake/Qt6PositioningPrivate
 %{_libdir}/cmake/Qt6PositioningQuick
+%{_libdir}/cmake/Qt6PositioningQuickPrivate
 %{qt6dir}/metatypes/qt6positioning_pld_metatypes.json
 %{qt6dir}/metatypes/qt6positioningquick_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_positioning.pri
@@ -5714,6 +5778,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with cups}
 %{_libdir}/cmake/Qt6PrintSupport/Qt6QCupsPrinterSupportPlugin*.cmake
 %endif
+%{_libdir}/cmake/Qt6PrintSupportPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_printsupport.pri
 %{qt6dir}/mkspecs/modules/qt_lib_printsupport_private.pri
 %{qt6dir}/modules/PrintSupport.json
@@ -5754,10 +5819,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtProtobufQtGuiTypes
 %{_includedir}/qt6/QtProtobufWellKnownTypes
 %{_libdir}/cmake/Qt6Protobuf
+%{_libdir}/cmake/Qt6ProtobufPrivate
 %{_libdir}/cmake/Qt6ProtobufQuick
+%{_libdir}/cmake/Qt6ProtobufQuickPrivate
 %{_libdir}/cmake/Qt6ProtobufQtCoreTypes
+%{_libdir}/cmake/Qt6ProtobufQtCoreTypesPrivate
 %{_libdir}/cmake/Qt6ProtobufQtGuiTypes
+%{_libdir}/cmake/Qt6ProtobufQtGuiTypesPrivate
 %{_libdir}/cmake/Qt6ProtobufWellKnownTypes
+%{_libdir}/cmake/Qt6ProtobufWellKnownTypesPrivate
 %{qt6dir}/metatypes/qt6protobuf_pld_metatypes.json
 %{qt6dir}/metatypes/qt6protobufquick_pld_metatypes.json
 %{qt6dir}/metatypes/qt6protobufqtcoretypes_pld_metatypes.json
@@ -5808,6 +5878,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtCore5Compat
 %{_pkgconfigdir}/Qt6Core5Compat.pc
 %{_libdir}/cmake/Qt6Core5Compat
+%{_libdir}/cmake/Qt6Core5CompatPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_core5compat.pri
 %{qt6dir}/mkspecs/modules/qt_lib_core5compat_private.pri
 %{qt6dir}/modules/Core5Compat.json
@@ -5971,6 +6042,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6PacketProtocol.a
 %{_libdir}/libQt6QmlDebug.a
 %{_libdir}/libQt6QmlDom.a
+%{_libdir}/libQt6QmlFormat.a
 %{_libdir}/libQt6QmlLS.a
 %{_libdir}/libQt6QmlLS.prl
 %{_libdir}/libQt6QmlToolingSettings.a
@@ -5992,6 +6064,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/metatypes/qt6qmlcore_pld_metatypes.json
 %{qt6dir}/metatypes/qt6qmldebugprivate_pld_metatypes.json
 %{qt6dir}/metatypes/qt6qmldomprivate_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmlformatprivate_pld_metatypes.json
 %{qt6dir}/metatypes/qt6qmllocalstorage_pld_metatypes.json
 %{qt6dir}/metatypes/qt6qmllsprivate_pld_metatypes.json
 %{qt6dir}/metatypes/qt6qmlmeta_pld_metatypes.json
@@ -6009,6 +6082,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6QmlCore.prl
 %{_libdir}/libQt6QmlDebug.prl
 %{_libdir}/libQt6QmlDom.prl
+%{_libdir}/libQt6QmlFormat.prl
 %{_libdir}/libQt6QmlLocalStorage.prl
 %{_libdir}/libQt6QmlMeta.prl
 %{_libdir}/libQt6QmlModels.prl
@@ -6029,6 +6103,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtQmlCore
 %{_includedir}/qt6/QtQmlDebug
 %{_includedir}/qt6/QtQmlDom
+%{_includedir}/qt6/QtQmlFormat
 %{_includedir}/qt6/QtQmlIntegration
 %{_includedir}/qt6/QtQmlLS
 %{_includedir}/qt6/QtQmlLocalStorage
@@ -6059,30 +6134,48 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6QmlLocalStorage.pc
 %{_pkgconfigdir}/Qt6QmlXmlListModel.pc
 %{_libdir}/cmake/Qt6LabsAnimation
+%{_libdir}/cmake/Qt6LabsAnimationPrivate
 %{_libdir}/cmake/Qt6LabsFolderListModel
+%{_libdir}/cmake/Qt6LabsFolderListModelPrivate
 %{_libdir}/cmake/Qt6LabsPlatform
+%{_libdir}/cmake/Qt6LabsPlatformPrivate
 %{_libdir}/cmake/Qt6LabsQmlModels
+%{_libdir}/cmake/Qt6LabsQmlModelsPrivate
 %{_libdir}/cmake/Qt6LabsSettings
+%{_libdir}/cmake/Qt6LabsSettingsPrivate
 %{_libdir}/cmake/Qt6PacketProtocolPrivate
 %{_libdir}/cmake/Qt6Qml
+%{_libdir}/cmake/Qt6QmlPrivate
 %{_libdir}/cmake/Qt6QmlCompiler
+%{_libdir}/cmake/Qt6QmlCompilerPrivate
 %{_libdir}/cmake/Qt6QmlCore
+%{_libdir}/cmake/Qt6QmlCorePrivate
 %{_libdir}/cmake/Qt6QmlDebugPrivate
 %{_libdir}/cmake/Qt6QmlDomPrivate
+%{_libdir}/cmake/Qt6QmlFormatPrivate
 %{_libdir}/cmake/Qt6QmlImportScanner
 %{_libdir}/cmake/Qt6QmlIntegration
+%{_libdir}/cmake/Qt6QmlIntegrationPrivate
 %{_libdir}/cmake/Qt6QmlLSPrivate
 %{_libdir}/cmake/Qt6QmlLocalStorage
+%{_libdir}/cmake/Qt6QmlLocalStoragePrivate
 %{_libdir}/cmake/Qt6QmlMeta
+%{_libdir}/cmake/Qt6QmlMetaPrivate
 %{_libdir}/cmake/Qt6QmlModels
+%{_libdir}/cmake/Qt6QmlModelsPrivate
 %{_libdir}/cmake/Qt6QmlNetwork
+%{_libdir}/cmake/Qt6QmlNetworkPrivate
 %{_libdir}/cmake/Qt6QmlTypeRegistrarPrivate
 %{_libdir}/cmake/Qt6QmlToolingSettingsPrivate
 %{_libdir}/cmake/Qt6StateMachine
+%{_libdir}/cmake/Qt6StateMachinePrivate
 %{_libdir}/cmake/Qt6StateMachineQml
+%{_libdir}/cmake/Qt6StateMachineQmlPrivate
 %{_libdir}/cmake/Qt6QmlTools
 %{_libdir}/cmake/Qt6QmlWorkerScript
+%{_libdir}/cmake/Qt6QmlWorkerScriptPrivate
 %{_libdir}/cmake/Qt6QmlXmlListModel
+%{_libdir}/cmake/Qt6QmlXmlListModelPrivate
 %{qt6dir}/mkspecs/features/qmlcache.prf
 %{qt6dir}/mkspecs/features/qmltypes.prf
 %{qt6dir}/mkspecs/modules/qt_lib_labsanimation.pri
@@ -6102,6 +6195,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_qmlcore_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmldebug_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmldom_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmlformat_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlintegration.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlintegration_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmllocalstorage.pri
@@ -6138,6 +6232,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/QmlCore.json
 %{qt6dir}/modules/QmlDebugPrivate.json
 %{qt6dir}/modules/QmlDomPrivate.json
+%{qt6dir}/modules/QmlFormatPrivate.json
 %{qt6dir}/modules/QmlIntegration.json
 %{qt6dir}/modules/QmlLSPrivate.json
 %{qt6dir}/modules/QmlLocalStorage.json
@@ -6338,6 +6433,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQuick/Controls/designer/qtquickcontrols2.metainfo
 
 %dir %{qt6dir}/qml/QtQuick/Controls/impl
+%{qt6dir}/qml/QtQuick/Controls/impl/*.qml
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/impl/libqtquickcontrols2implplugin.so
 %{qt6dir}/qml/QtQuick/Controls/impl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/impl/qmldir
@@ -6361,12 +6457,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Layouts/libqquicklayoutsplugin.so
 %{qt6dir}/qml/QtQuick/Layouts/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Layouts/qmldir
-
-%dir %{qt6dir}/qml/QtQuick/NativeStyle
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/NativeStyle/libqtquickcontrols2nativestyleplugin.so
-%{qt6dir}/qml/QtQuick/NativeStyle/controls
-%{qt6dir}/qml/QtQuick/NativeStyle/plugins.qmltypes
-%{qt6dir}/qml/QtQuick/NativeStyle/qmldir
 
 %dir %{qt6dir}/qml/QtQuick/LocalStorage
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/LocalStorage/libqmllocalstorageplugin.so
@@ -6541,42 +6631,70 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6QuickDialogs2.pc
 %{_pkgconfigdir}/Qt6QuickDialogs2QuickImpl.pc
 %{_pkgconfigdir}/Qt6QuickDialogs2Utils.pc
+%{_pkgconfigdir}/Qt6QuickEffects.pc
 %{_pkgconfigdir}/Qt6QuickLayouts.pc
 %{_pkgconfigdir}/Qt6QuickTemplates2.pc
 %{_pkgconfigdir}/Qt6QuickVectorImage.pc
 %{_libdir}/cmake/Qt6LabsSharedImage
+%{_libdir}/cmake/Qt6LabsSharedImagePrivate
 %{_libdir}/cmake/Qt6LabsWavefrontMesh
+%{_libdir}/cmake/Qt6LabsWavefrontMeshPrivate
 %{_libdir}/cmake/Qt6Quick
+%{_libdir}/cmake/Qt6QuickPrivate
 %{_libdir}/cmake/Qt6QuickControls2
+%{_libdir}/cmake/Qt6QuickControls2Private
 %{_libdir}/cmake/Qt6QuickControls2Basic
+%{_libdir}/cmake/Qt6QuickControls2BasicPrivate
 %{_libdir}/cmake/Qt6QuickControls2BasicStyleImpl
+%{_libdir}/cmake/Qt6QuickControls2BasicStyleImplPrivate
 %{_libdir}/cmake/Qt6QuickControls2FluentWinUI3StyleImpl
+%{_libdir}/cmake/Qt6QuickControls2FluentWinUI3StyleImplPrivate
 %{_libdir}/cmake/Qt6QuickControls2Fusion
+%{_libdir}/cmake/Qt6QuickControls2FusionPrivate
 %{_libdir}/cmake/Qt6QuickControls2FusionStyleImpl
+%{_libdir}/cmake/Qt6QuickControls2FusionStyleImplPrivate
 %{_libdir}/cmake/Qt6QuickControls2Imagine
+%{_libdir}/cmake/Qt6QuickControls2ImaginePrivate
 %{_libdir}/cmake/Qt6QuickControls2ImagineStyleImpl
+%{_libdir}/cmake/Qt6QuickControls2ImagineStyleImplPrivate
 %{_libdir}/cmake/Qt6QuickControls2Impl
+%{_libdir}/cmake/Qt6QuickControls2ImplPrivate
 %{_libdir}/cmake/Qt6QuickControls2Material
+%{_libdir}/cmake/Qt6QuickControls2MaterialPrivate
 %{_libdir}/cmake/Qt6QuickControls2MaterialStyleImpl
+%{_libdir}/cmake/Qt6QuickControls2MaterialStyleImplPrivate
 %{_libdir}/cmake/Qt6QuickControls2Universal
+%{_libdir}/cmake/Qt6QuickControls2UniversalPrivate
 %{_libdir}/cmake/Qt6QuickControls2UniversalStyleImpl
+%{_libdir}/cmake/Qt6QuickControls2UniversalStyleImplPrivate
 %{_libdir}/cmake/Qt6QuickControlsTestUtilsPrivate
 %{_libdir}/cmake/Qt6QuickDialogs2
+%{_libdir}/cmake/Qt6QuickDialogs2Private
 %{_libdir}/cmake/Qt6QuickDialogs2QuickImpl
+%{_libdir}/cmake/Qt6QuickDialogs2QuickImplPrivate
 %{_libdir}/cmake/Qt6QuickDialogs2Utils
+%{_libdir}/cmake/Qt6QuickDialogs2UtilsPrivate
+%{_libdir}/cmake/Qt6QuickEffects
 %{_libdir}/cmake/Qt6QuickEffectsPrivate
 %{_libdir}/cmake/Qt6QuickLayouts
+%{_libdir}/cmake/Qt6QuickLayoutsPrivate
 %{_libdir}/cmake/Qt6QuickParticlesPrivate
 %{_libdir}/cmake/Qt6QuickShapesPrivate
 %{_libdir}/cmake/Qt6QuickTemplates2
+%{_libdir}/cmake/Qt6QuickTemplates2Private
 %{_libdir}/cmake/Qt6QuickTest
+%{_libdir}/cmake/Qt6QuickTestPrivate
 %{_libdir}/cmake/Qt6QuickTestUtilsPrivate
 %{_libdir}/cmake/Qt6QuickTimeline
+%{_libdir}/cmake/Qt6QuickTimelinePrivate
 %{_libdir}/cmake/Qt6QuickTimelineBlendTrees
+%{_libdir}/cmake/Qt6QuickTimelineBlendTreesPrivate
 %{_libdir}/cmake/Qt6QuickTools
 %{_libdir}/cmake/Qt6QuickVectorImage
+%{_libdir}/cmake/Qt6QuickVectorImagePrivate
 %{_libdir}/cmake/Qt6QuickVectorImageGeneratorPrivate
 %{_libdir}/cmake/Qt6QuickWidgets
+%{_libdir}/cmake/Qt6QuickWidgetsPrivate
 %{qt6dir}/mkspecs/features/qtquickcompiler.prf
 %{qt6dir}/mkspecs/modules/qt_lib_labssharedimage.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labssharedimage_private.pri
@@ -6615,6 +6733,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_quickdialogs2quickimpl_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickdialogs2utils.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickdialogs2utils_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickeffects.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickeffects_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quicklayouts.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quicklayouts_private.pri
@@ -6654,7 +6773,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/QuickDialogs2.json
 %{qt6dir}/modules/QuickDialogs2QuickImpl.json
 %{qt6dir}/modules/QuickDialogs2Utils.json
-%{qt6dir}/modules/QuickEffectsPrivate.json
+%{qt6dir}/modules/QuickEffects.json
 %{qt6dir}/modules/QuickLayouts.json
 %{qt6dir}/modules/QuickParticlesPrivate.json
 %{qt6dir}/modules/QuickShapesPrivate.json
@@ -6685,7 +6804,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/metatypes/qt6quickdialogs2_pld_metatypes.json
 %{qt6dir}/metatypes/qt6quickdialogs2quickimpl_pld_metatypes.json
 %{qt6dir}/metatypes/qt6quickdialogs2utils_pld_metatypes.json
-%{qt6dir}/metatypes/qt6quickeffectsprivate_pld_metatypes.json
+%{qt6dir}/metatypes/qt6quickeffects_pld_metatypes.json
 %{qt6dir}/metatypes/qt6quicklayouts_pld_metatypes.json
 %{qt6dir}/metatypes/qt6quickparticlesprivate_pld_metatypes.json
 %{qt6dir}/metatypes/qt6quickshapesprivate_pld_metatypes.json
@@ -6880,18 +6999,29 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6Quick3DUtils.pc
 %{?with_openxr:%{_pkgconfigdir}/Qt6Quick3DXr.pc}
 %{_libdir}/cmake/Qt6Quick3D
+%{_libdir}/cmake/Qt6Quick3DPrivate
 %{_libdir}/cmake/Qt6Quick3DAssetImport
+%{_libdir}/cmake/Qt6Quick3DAssetImportPrivate
 %{_libdir}/cmake/Qt6Quick3DAssetUtils
+%{_libdir}/cmake/Qt6Quick3DAssetUtilsPrivate
 %{_libdir}/cmake/Qt6Quick3DEffects
+%{_libdir}/cmake/Qt6Quick3DEffectsPrivate
 %{_libdir}/cmake/Qt6Quick3DGlslParserPrivate
 %{_libdir}/cmake/Qt6Quick3DHelpers
+%{_libdir}/cmake/Qt6Quick3DHelpersPrivate
 %{_libdir}/cmake/Qt6Quick3DHelpersImpl
+%{_libdir}/cmake/Qt6Quick3DHelpersImplPrivate
 %{_libdir}/cmake/Qt6Quick3DIblBaker
+%{_libdir}/cmake/Qt6Quick3DIblBakerPrivate
 %{_libdir}/cmake/Qt6Quick3DParticleEffects
+%{_libdir}/cmake/Qt6Quick3DParticleEffectsPrivate
 %{_libdir}/cmake/Qt6Quick3DParticles
+%{_libdir}/cmake/Qt6Quick3DParticlesPrivate
 %{_libdir}/cmake/Qt6Quick3DRuntimeRender
+%{_libdir}/cmake/Qt6Quick3DRuntimeRenderPrivate
 %{_libdir}/cmake/Qt6Quick3DTools
 %{_libdir}/cmake/Qt6Quick3DUtils
+%{_libdir}/cmake/Qt6Quick3DUtilsPrivate
 %{?with_openxr:%{_libdir}/cmake/Qt6Quick3DXr}
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dassetimport.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dassetimport_private.pri
@@ -6982,7 +7112,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtQuick3DPhysics
 %{_includedir}/qt6/QtQuick3DPhysicsHelpers
 %{_libdir}/cmake/Qt6Quick3DPhysics
+%{_libdir}/cmake/Qt6Quick3DPhysicsPrivate
 %{_libdir}/cmake/Qt6Quick3DPhysicsHelpers
+%{_libdir}/cmake/Qt6Quick3DPhysicsHelpersPrivate
 %{qt6dir}/metatypes/qt6quick3dphysics_pld_metatypes.json
 %{qt6dir}/metatypes/qt6quick3dphysicshelpers_pld_metatypes.json
 %{_pkgconfigdir}/Qt6Quick3DPhysics.pc
@@ -7029,9 +7161,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6RemoteObjectsQml.pc
 %{_pkgconfigdir}/Qt6RepParser.pc
 %{_libdir}/cmake/Qt6RemoteObjects
+%{_libdir}/cmake/Qt6RemoteObjectsPrivate
 %{_libdir}/cmake/Qt6RemoteObjectsQml
+%{_libdir}/cmake/Qt6RemoteObjectsQmlPrivate
 %{_libdir}/cmake/Qt6RemoteObjectsTools
 %{_libdir}/cmake/Qt6RepParser
+%{_libdir}/cmake/Qt6RepParserPrivate
 %{qt6dir}/mkspecs/features/remoteobjects_repc.prf
 %{qt6dir}/mkspecs/features/repc*.pri
 %{qt6dir}/mkspecs/features/repparser.prf
@@ -7078,18 +7213,24 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6Scxml.prl
 %{_libdir}/libQt6ScxmlQml.prl
 %{_includedir}/qt6/QtScxml
+%{_includedir}/qt6/QtScxmlGlobal
 %{_includedir}/qt6/QtScxmlQml
 %{_pkgconfigdir}/Qt6Scxml.pc
 %{_pkgconfigdir}/Qt6ScxmlQml.pc
 %{_libdir}/cmake/Qt6Scxml
+%{_libdir}/cmake/Qt6ScxmlPrivate
+%{_libdir}/cmake/Qt6ScxmlGlobalPrivate
 %{_libdir}/cmake/Qt6ScxmlQml
+%{_libdir}/cmake/Qt6ScxmlQmlPrivate
 %{_libdir}/cmake/Qt6ScxmlTools
 %{qt6dir}/mkspecs/features/qscxmlc.prf
 %{qt6dir}/mkspecs/modules/qt_lib_scxml.pri
 %{qt6dir}/mkspecs/modules/qt_lib_scxml_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_scxmlglobal_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_scxmlqml.pri
 %{qt6dir}/mkspecs/modules/qt_lib_scxmlqml_private.pri
 %{qt6dir}/modules/Scxml.json
+%{qt6dir}/modules/ScxmlGlobalPrivate.json
 %{qt6dir}/modules/ScxmlQml.json
 %{qt6dir}/metatypes/qt6scxml_pld_metatypes.json
 %{qt6dir}/metatypes/qt6scxmlqml_pld_metatypes.json
@@ -7129,7 +7270,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6Sensors.pc
 %{_pkgconfigdir}/Qt6SensorsQuick.pc
 %{_libdir}/cmake/Qt6Sensors
+%{_libdir}/cmake/Qt6SensorsPrivate
 %{_libdir}/cmake/Qt6SensorsQuick
+%{_libdir}/cmake/Qt6SensorsQuickPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_sensors.pri
 %{qt6dir}/mkspecs/modules/qt_lib_sensors_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_sensorsquick.pri
@@ -7168,6 +7311,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtSerialBus
 %{_pkgconfigdir}/Qt6SerialBus.pc
 %{_libdir}/cmake/Qt6SerialBus
+%{_libdir}/cmake/Qt6SerialBusPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_serialbus.pri
 %{qt6dir}/mkspecs/modules/qt_lib_serialbus_private.pri
 %{qt6dir}/modules/SerialBus.json
@@ -7195,6 +7339,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtSerialPort
 %{_pkgconfigdir}/Qt6SerialPort.pc
 %{_libdir}/cmake/Qt6SerialPort
+%{_libdir}/cmake/Qt6SerialPortPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_serialport.pri
 %{qt6dir}/mkspecs/modules/qt_lib_serialport_private.pri
 %{qt6dir}/modules/SerialPort.json
@@ -7231,6 +7376,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtSpatialAudio
 %{_libdir}/cmake/Qt6Quick3DSpatialAudioPrivate
 %{_libdir}/cmake/Qt6SpatialAudio
+%{_libdir}/cmake/Qt6SpatialAudioPrivate
 %{qt6dir}/metatypes/qt6quick3dspatialaudioprivate_pld_metatypes.json
 %{qt6dir}/metatypes/qt6spatialaudio_pld_metatypes.json
 %{_pkgconfigdir}/Qt6SpatialAudio.pc
@@ -7256,6 +7402,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6ShaderTools.prl
 %{_includedir}/qt6/QtShaderTools
 %{_libdir}/cmake/Qt6ShaderTools
+%{_libdir}/cmake/Qt6ShaderToolsPrivate
 %{_libdir}/cmake/Qt6ShaderToolsTools
 %{qt6dir}/metatypes/qt6shadertools_pld_metatypes.json
 %{_pkgconfigdir}/Qt6ShaderTools.pc
@@ -7338,6 +7485,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtSql
 %{_pkgconfigdir}/Qt6Sql.pc
 %{_libdir}/cmake/Qt6Sql/Qt6Sql*.cmake
+%{_libdir}/cmake/Qt6SqlPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_sql.pri
 %{qt6dir}/mkspecs/modules/qt_lib_sql_private.pri
 %{qt6dir}/modules/Sql.json
@@ -7363,7 +7511,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6Svg.pc
 %{_pkgconfigdir}/Qt6SvgWidgets.pc
 %{_libdir}/cmake/Qt6Svg
+%{_libdir}/cmake/Qt6SvgPrivate
 %{_libdir}/cmake/Qt6SvgWidgets
+%{_libdir}/cmake/Qt6SvgWidgetsPrivate
 %{_libdir}/cmake/Qt6Gui/Qt6QSvgIconPlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QSvgPlugin*.cmake
 %{qt6dir}/mkspecs/modules/qt_lib_svg.pri
@@ -7399,6 +7549,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6BuildInternals/QtStandaloneTestTemplateProject
 %{_libdir}/cmake/Qt6BuildInternals/StandaloneTests
 %{_libdir}/cmake/Qt6Test
+%{_libdir}/cmake/Qt6TestPrivate
 %attr(755,root,root) %{qt6dir}/libexec/qt-internal-configure-tests
 %attr(755,root,root) %{qt6dir}/libexec/qt-testrunner.py
 %{qt6dir}/metatypes/qt6test_pld_metatypes.json
@@ -7453,6 +7604,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtTextToSpeech
 %{_pkgconfigdir}/Qt6TextToSpeech.pc
 %{_libdir}/cmake/Qt6TextToSpeech
+%{_libdir}/cmake/Qt6TextToSpeechPrivate
 %{qt6dir}/metatypes/qt6texttospeech_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_texttospeech.pri
 %{qt6dir}/mkspecs/modules/qt_lib_texttospeech_private.pri
@@ -7473,6 +7625,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6UiTools.pc
 %{_libdir}/cmake/Qt6UiPlugin
 %{_libdir}/cmake/Qt6UiTools
+%{_libdir}/cmake/Qt6UiToolsPrivate
 %{qt6dir}/metatypes/qt6uitools_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_uiplugin.pri
 %{qt6dir}/mkspecs/modules/qt_lib_uitools.pri
@@ -7486,19 +7639,25 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libQt6HunspellInputMethod.so.6
 %attr(755,root,root) %{_libdir}/libQt6VirtualKeyboard.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6VirtualKeyboard.so.6
+%attr(755,root,root) %{_libdir}/libQt6VirtualKeyboardQml.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6VirtualKeyboardQml.so.6
 %attr(755,root,root) %{_libdir}/libQt6VirtualKeyboardSettings.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6VirtualKeyboardSettings.so.6
 %attr(755,root,root) %{qt6dir}/plugins/platforminputcontexts/libqtvirtualkeyboardplugin.so
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/VirtualKeyboardQml.qmltypes
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/libqtvkbplugin.so
-%{qt6dir}/qml/QtQuick/VirtualKeyboard/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/qmldir
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/*.qml
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Components
-%{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/qmldir
-%{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/qtvkbcomponentsplugin.qmltypes
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/*.qml
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/libqtvkbcomponentsplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/qmldir
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/qtvkbcomponentsplugin.qmltypes
+%dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Core
+%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Core/libvirtualkeyboardplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Core/qmldir
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Core/plugins.qmltypes
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Layouts
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Layouts/qmldir
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Layouts/qtvkblayoutsplugin.qmltypes
@@ -7570,31 +7729,44 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6HunspellInputMethod.so
 %attr(755,root,root) %{_libdir}/libQt6VirtualKeyboard.so
+%attr(755,root,root) %{_libdir}/libQt6VirtualKeyboardQml.so
 %attr(755,root,root) %{_libdir}/libQt6VirtualKeyboardSettings.so
 %{_libdir}/libQt6HunspellInputMethod.prl
 %{_libdir}/libQt6VirtualKeyboard.prl
+%{_libdir}/libQt6VirtualKeyboardQml.prl
 %{_libdir}/libQt6VirtualKeyboardSettings.prl
 %{_includedir}/qt6/QtHunspellInputMethod
 %{_includedir}/qt6/QtVirtualKeyboard
+%{_includedir}/qt6/QtVirtualKeyboardQml
 %{_includedir}/qt6/QtVirtualKeyboardSettings
 %{_pkgconfigdir}/Qt6HunspellInputMethod.pc
 %{_pkgconfigdir}/Qt6VirtualKeyboard.pc
+%{_pkgconfigdir}/Qt6VirtualKeyboardQml.pc
 %{_pkgconfigdir}/Qt6VirtualKeyboardSettings.pc
 %{_libdir}/cmake/Qt6Gui/Qt6QVirtualKeyboardPlugin*.cmake
 %{_libdir}/cmake/Qt6HunspellInputMethod
+%{_libdir}/cmake/Qt6HunspellInputMethodPrivate
 %{_libdir}/cmake/Qt6VirtualKeyboard
+%{_libdir}/cmake/Qt6VirtualKeyboardPrivate
+%{_libdir}/cmake/Qt6VirtualKeyboardQml
+%{_libdir}/cmake/Qt6VirtualKeyboardQmlPrivate
 %{_libdir}/cmake/Qt6VirtualKeyboardSettings
+%{_libdir}/cmake/Qt6VirtualKeyboardSettingsPrivate
 %{qt6dir}/metatypes/qt6hunspellinputmethod_pld_metatypes.json
 %{qt6dir}/metatypes/qt6virtualkeyboard_pld_metatypes.json
+%{qt6dir}/metatypes/qt6virtualkeyboardqml_pld_metatypes.json
 %{qt6dir}/metatypes/qt6virtualkeyboardsettings_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_hunspellinputmethod.pri
 %{qt6dir}/mkspecs/modules/qt_lib_hunspellinputmethod_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_virtualkeyboard.pri
 %{qt6dir}/mkspecs/modules/qt_lib_virtualkeyboard_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_virtualkeyboardqml.pri
+%{qt6dir}/mkspecs/modules/qt_lib_virtualkeyboardqml_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_virtualkeyboardsettings.pri
 %{qt6dir}/mkspecs/modules/qt_lib_virtualkeyboardsettings_private.pri
 %{qt6dir}/modules/HunspellInputMethod.json
 %{qt6dir}/modules/VirtualKeyboard.json
+%{qt6dir}/modules/VirtualKeyboardQml.json
 %{qt6dir}/modules/VirtualKeyboardSettings.json
 
 %if %{with doc}
@@ -7700,10 +7872,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6WaylandCompositorWLShell.pc
 %{_pkgconfigdir}/Qt6WaylandCompositorXdgShell.pc
 %{_libdir}/cmake/Qt6WaylandCompositor
+%{_libdir}/cmake/Qt6WaylandCompositorPrivate
 %{_libdir}/cmake/Qt6WaylandCompositorIviapplication
+%{_libdir}/cmake/Qt6WaylandCompositorIviapplicationPrivate
 %{_libdir}/cmake/Qt6WaylandCompositorPresentationTime
+%{_libdir}/cmake/Qt6WaylandCompositorPresentationTimePrivate
 %{_libdir}/cmake/Qt6WaylandCompositorWLShell
+%{_libdir}/cmake/Qt6WaylandCompositorWLShellPrivate
 %{_libdir}/cmake/Qt6WaylandCompositorXdgShell
+%{_libdir}/cmake/Qt6WaylandCompositorXdgShellPrivate
 %{_libdir}/cmake/Qt6WlShellIntegrationPrivate
 %{_libdir}/cmake/Qt6WaylandEglCompositorHwIntegrationPrivate
 %{qt6dir}/metatypes/qt6waylandcompositor_pld_metatypes.json
@@ -7786,6 +7963,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Gui/Qt6QWaylandEglPlatformIntegrationPlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QWaylandIntegrationPlugin*.cmake
 %{_libdir}/cmake/Qt6WaylandClient
+%{_libdir}/cmake/Qt6WaylandClientPrivate
 %{_libdir}/cmake/Qt6WaylandScannerTools
 %{_libdir}/cmake/Qt6WaylandEglClientHwIntegrationPrivate
 %{qt6dir}/metatypes/qt6waylandclient_pld_metatypes.json
@@ -7809,6 +7987,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtWidgets
 %{_pkgconfigdir}/Qt6Widgets.pc
 %{_libdir}/cmake/Qt6Widgets
+%{_libdir}/cmake/Qt6WidgetsPrivate
 %{_libdir}/cmake/Qt6WidgetsTools
 %{qt6dir}/metatypes/qt6widgets_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_widgets.pri
@@ -7837,7 +8016,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6WebChannel.pc
 %{_pkgconfigdir}/Qt6WebChannelQuick.pc
 %{_libdir}/cmake/Qt6WebChannel
+%{_libdir}/cmake/Qt6WebChannelPrivate
 %{_libdir}/cmake/Qt6WebChannelQuick
+%{_libdir}/cmake/Qt6WebChannelQuickPrivate
 %{qt6dir}/metatypes/qt6webchannel_pld_metatypes.json
 %{qt6dir}/metatypes/qt6webchannelquick_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_webchannel.pri
@@ -7952,10 +8133,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6WebEngineQuickDelegatesQml.pc
 %{_pkgconfigdir}/Qt6WebEngineWidgets.pc
 %{_libdir}/cmake/Qt6WebEngineCore
+%{_libdir}/cmake/Qt6WebEngineCorePrivate
 %{_libdir}/cmake/Qt6WebEngineCoreTools
 %{_libdir}/cmake/Qt6WebEngineQuick
+%{_libdir}/cmake/Qt6WebEngineQuickPrivate
 %{_libdir}/cmake/Qt6WebEngineQuickDelegatesQml
+%{_libdir}/cmake/Qt6WebEngineQuickDelegatesQmlPrivate
 %{_libdir}/cmake/Qt6WebEngineWidgets
+%{_libdir}/cmake/Qt6WebEngineWidgetsPrivate
 %{qt6dir}/metatypes/qt6webenginecore_pld_metatypes.json
 %{qt6dir}/metatypes/qt6webenginequick_pld_metatypes.json
 %{qt6dir}/metatypes/qt6webenginequickdelegatesqml_pld_metatypes.json
@@ -8005,6 +8190,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtWebSockets
 %{_pkgconfigdir}/Qt6WebSockets.pc
 %{_libdir}/cmake/Qt6WebSockets
+%{_libdir}/cmake/Qt6WebSocketsPrivate
 %{qt6dir}/metatypes/qt6websockets_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_websockets.pri
 %{qt6dir}/mkspecs/modules/qt_lib_websockets_private.pri
@@ -8043,7 +8229,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6WebView.pc
 %{_pkgconfigdir}/Qt6WebViewQuick.pc
 %{_libdir}/cmake/Qt6WebView
+%{_libdir}/cmake/Qt6WebViewPrivate
 %{_libdir}/cmake/Qt6WebViewQuick
+%{_libdir}/cmake/Qt6WebViewQuickPrivate
 %{qt6dir}/metatypes/qt6webview_pld_metatypes.json
 %{qt6dir}/metatypes/qt6webviewquick_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_webview.pri
@@ -8082,6 +8270,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtXml
 %{_pkgconfigdir}/Qt6Xml.pc
 %{_libdir}/cmake/Qt6Xml
+%{_libdir}/cmake/Qt6XmlPrivate
 %{qt6dir}/metatypes/qt6xml_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_xml.pri
 %{qt6dir}/mkspecs/modules/qt_lib_xml_private.pri

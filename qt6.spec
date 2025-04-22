@@ -4797,6 +4797,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_includedir}/qt6/QtConnectivity
 %{_libdir}/cmake/Qt6Connectivity
+%{qt6dir}/mkspecs/modules/qt_lib_connectivity_private.pri
 %{qt6dir}/modules/Connectivity.json
 
 %files -n Qt6Core -f qtbase.lang
@@ -6368,6 +6369,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Basic/libqtquickcontrols2basicstyleplugin.so
 %dir %{qt6dir}/qml/QtQuick/Controls/Basic/impl
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Basic/impl/libqtquickcontrols2basicstyleimplplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Basic/impl/*.qml
 %{qt6dir}/qml/QtQuick/Controls/Basic/impl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Basic/impl/qmldir
 
@@ -7023,6 +7025,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Quick3DUtils
 %{_libdir}/cmake/Qt6Quick3DUtilsPrivate
 %{?with_openxr:%{_libdir}/cmake/Qt6Quick3DXr}
+%{?with_openxr:%{_libdir}/cmake/Qt6Quick3DXrPrivate}
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dassetimport.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dassetimport_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dassetutils.pri

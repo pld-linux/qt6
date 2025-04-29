@@ -4084,7 +4084,7 @@ find_qt6_qm()
 	name="$1"
 	find $RPM_BUILD_ROOT%{_datadir}/qt6/translations -name "${name}_*.qm" | \
 		sed -e "s:^$RPM_BUILD_ROOT::" \
-		    -e 's:\(.*/'$name'_\)\([a-z][a-z][a-z]\?\)\(_[A-Z][A-Z]\)\?\(\.qm\)$:%lang(\2\3) \1\2\3\4:'
+		    -ne 's:\(.*/'$name'_\)\([a-z][a-z][a-z]\?\)\(_[A-Z][A-Z]\)\?\(\.qm\)$:%lang(\2\3) \1\2\3\4:p'
 }
 
 echo '%defattr(644,root,root,755)' > qtbase.lang

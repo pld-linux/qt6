@@ -4817,9 +4817,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/qml/QtCore/libqtqmlcoreplugin.so
 %{qt6dir}/qml/QtCore/plugins.qmltypes
 %{qt6dir}/qml/QtCore/qmldir
-%dir %{qt6dir}/plugins/tls
-%attr(755,root,root) %{qt6dir}/plugins/tls/libqcertonlybackend.so
-%attr(755,root,root) %{qt6dir}/plugins/tls/libqopensslbackend.so
 
 %files -n Qt6Core-devel
 %defattr(644,root,root,755)
@@ -5492,6 +5489,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{qt6dir}/plugins/networkinformation
 %attr(755,root,root) %{qt6dir}/plugins/networkinformation/libqglib.so
 %attr(755,root,root) %{qt6dir}/plugins/networkinformation/libqnetworkmanager.so
+%dir %{qt6dir}/plugins/tls
+%attr(755,root,root) %{qt6dir}/plugins/tls/libqcertonlybackend.so
+%attr(755,root,root) %{qt6dir}/plugins/tls/libqopensslbackend.so
 
 %files -n Qt6Network-devel
 %defattr(644,root,root,755)

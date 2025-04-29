@@ -4813,10 +4813,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{qt6dir}/plugins
 %dir %{_datadir}/qt6
 %dir %{_datadir}/qt6/translations
-%dir %{qt6dir}/qml/QtCore
-%attr(755,root,root) %{qt6dir}/qml/QtCore/libqtqmlcoreplugin.so
-%{qt6dir}/qml/QtCore/plugins.qmltypes
-%{qt6dir}/qml/QtCore/qmldir
 
 %files -n Qt6Core-devel
 %defattr(644,root,root,755)
@@ -5987,6 +5983,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/qml/Qt/test/controls/libquickcontrolstestutilsprivateplugin.so
 %{qt6dir}/qml/Qt/test/controls/QuickControlsTestUtilsPrivate.qmltypes
 %{qt6dir}/qml/Qt/test/controls/qmldir
+
+%dir %{qt6dir}/qml/QtCore
+%attr(755,root,root) %{qt6dir}/qml/QtCore/libqtqmlcoreplugin.so
+%{qt6dir}/qml/QtCore/plugins.qmltypes
+%{qt6dir}/qml/QtCore/qmldir
 
 %dir %{qt6dir}/qml/QtNetwork
 %attr(755,root,root) %{qt6dir}/qml/QtNetwork/libqmlnetworkplugin.so

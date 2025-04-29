@@ -405,7 +405,6 @@ Requires:	Qt6PrintSupport = %{version}
 Requires:	Qt6Qml = %{version}
 Requires:	Qt6UiTools = %{version}
 Requires:	Qt6Widgets = %{version}
-Requires:	Qt6Xml = %{version}
 
 %description -n qt6-linguist
 Translation helper for Qt 6.

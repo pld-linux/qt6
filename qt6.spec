@@ -4820,8 +4820,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{qt6dir}/plugins/tls
 %attr(755,root,root) %{qt6dir}/plugins/tls/libqcertonlybackend.so
 %attr(755,root,root) %{qt6dir}/plugins/tls/libqopensslbackend.so
-%dir %{qt6dir}/plugins/platforms
-%attr(755,root,root) %{qt6dir}/plugins/platforms/libqvkkhrdisplay.so
 
 %files -n Qt6Core-devel
 %defattr(644,root,root,755)
@@ -5076,6 +5074,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{qt6dir}/plugins/platforms
 %attr(755,root,root) %{qt6dir}/plugins/platforms/libqminimal.so
 %attr(755,root,root) %{qt6dir}/plugins/platforms/libqoffscreen.so
+%attr(755,root,root) %{qt6dir}/plugins/platforms/libqvkkhrdisplay.so
 # loaded from src/gui/kernel/qplatformthemefactory.cpp
 %dir %{qt6dir}/plugins/platformthemes
 # common for base -devel and plugin-specific files

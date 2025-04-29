@@ -4094,6 +4094,7 @@ echo '%defattr(644,root,root,755)' > linguist.lang
 echo '%defattr(644,root,root,755)' > qt_help.lang
 echo '%defattr(644,root,root,755)' > qtconnectivity.lang
 echo '%defattr(644,root,root,755)' > qtdeclarative.lang
+echo '%defattr(644,root,root,755)' > qtlocation.lang
 echo '%defattr(644,root,root,755)' > qtmultimedia.lang
 echo '%defattr(644,root,root,755)' > qtserialport.lang
 echo '%defattr(644,root,root,755)' > qtwebengine.lang
@@ -4101,13 +4102,13 @@ echo '%defattr(644,root,root,755)' > qtwebsockets.lang
 %if %{with doc}
 find_qt6_qm qt >> qtbase.lang
 find_qt6_qm qtbase >> qtbase.lang
-find_qt6_qm qtlocation >> qtbase.lang
 find_qt6_qm assistant >> assistant.lang
 find_qt6_qm designer >> designer.lang
 find_qt6_qm linguist >> linguist.lang
 find_qt6_qm qt_help >> qt_help.lang
 find_qt6_qm qtconnectivity >> qtconnectivity.lang
 find_qt6_qm qtdeclarative >> qtdeclarative.lang
+find_qt6_qm qtlocation >> qtlocation.lang
 find_qt6_qm qtmultimedia >> qtmultimedia.lang
 find_qt6_qm qtserialport >> qtserialport.lang
 %if %{with qtwebengine}
@@ -5327,7 +5328,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_languageserver_private.pri
 %{qt6dir}/modules/LanguageServerPrivate.json
 
-%files -n Qt6Location
+%files -n Qt6Location -f qtlocation.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Location.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Location.so.6

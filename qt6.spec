@@ -164,6 +164,7 @@ Patch5:		qtwebengine-cmake-build-type.patch
 Patch6:		qtquick3d-6.6.2-gcc14.patch
 Patch7:		webengine-seccomp-glibc2.41.patch
 Patch8:		qtwebengine-missing-dep.patch
+Patch9:		QTBUG-136257.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -3799,6 +3800,7 @@ narzędzia.
 %patch -P6 -p1 -d qtquick3d
 %patch -P7 -p1 -d qtwebengine/src/3rdparty/chromium
 %patch -P8 -p1 -d qtwebengine
+%patch -P9 -p1 -d qtwebengine
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 

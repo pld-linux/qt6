@@ -188,15 +188,14 @@ BuildRequires:	at-spi2-core-devel
 BuildRequires:	bluez-libs-devel
 # qdoc
 BuildRequires:	clang-devel
-# base dir requires 3.16, gn 3.19
-BuildRequires:	cmake >= 3.19
+BuildRequires:	cmake >= 3.22
 %{?with_cups:BuildRequires:	cups-devel >= 1.4}
 BuildRequires:	dbus-devel >= 1.2
 BuildRequires:	double-conversion-devel
 %{?with_fbx:BuildRequires:	fbxsdk-devel}
 BuildRequires:	ffmpeg-devel
 %if %{with qtwebengine} && %{with qtwebengine_system_ffmpeg}
-BuildRequires:	ffmpeg-devel < 5.0
+BuildRequires:	ffmpeg-devel >= 6.0
 %endif
 %{?with_qtwebengine:BuildRequires:	flex}
 BuildRequires:	flite-devel
@@ -214,8 +213,8 @@ BuildRequires:	gstreamer-plugins-bad-devel >= 1.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0
 %{?with_gtk:BuildRequires:	gtk+3-devel >= 3.6}
 BuildRequires:	gypsy-devel
-BuildRequires:	harfbuzz-devel >= 2.9.0
-BuildRequires:	harfbuzz-subset-devel >= 2.9.0
+BuildRequires:	harfbuzz-devel >= 4.3.0
+BuildRequires:	harfbuzz-subset-devel >= 4.3.0
 %{?with_kerberos5:BuildRequires:	heimdal-devel}
 BuildRequires:	hunspell-devel
 %{?with_ibmdb2:BuildRequires:	ibm-db2-clidriver-devel}
@@ -245,7 +244,7 @@ BuildRequires:	libxml2-devel
 BuildRequires:	minizip-devel
 BuildRequires:	mtdev-devel
 %{?with_mysql:BuildRequires:	mysql-devel}
-%{?with_qtwebengine:BuildRequires:	nodejs >= 14.0}
+%{?with_qtwebengine:BuildRequires:	nodejs >= 14.9}
 %{?with_qtwebengine:BuildRequires:	nss-devel >= 3.26}
 %{?with_qtwebengine:BuildRequires:	openjpeg2-devel}
 BuildRequires:	openssl-devel >= 1.1.1
@@ -260,10 +259,10 @@ BuildRequires:	poppler-cpp-devel
 BuildRequires:	protobuf-c-devel
 BuildRequires:	protobuf-devel
 BuildRequires:	pulseaudio-devel
-BuildRequires:	python3
+BuildRequires:	python3 >= 1:3.8
 BuildRequires:	python3-devel-tools
 BuildRequires:	python3-html5lib
-BuildRequires:	python3-modules
+BuildRequires:	python3-modules >= 1:3.8
 BuildRequires:	re2-devel >=  20230601
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 2.047

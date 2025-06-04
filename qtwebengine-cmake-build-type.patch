@@ -1,5 +1,5 @@
---- qt-everywhere-src-6.5.0/qtwebengine/cmake/Functions.cmake.orig	2023-04-04 18:57:25.754463285 +0200
-+++ qt-everywhere-src-6.5.0/qtwebengine/cmake/Functions.cmake	2023-04-04 18:58:51.778567461 +0200
+--- qt-everywhere-src-6.5.0/qtwebengine/cmake/QtToolchainHelpers.cmake.orig	2023-04-04 18:57:25.754463285 +0200
++++ qt-everywhere-src-6.5.0/qtwebengine/cmake/QtToolchainHelpers.cmake	2023-04-04 18:58:51.778567461 +0200
 @@ -848,7 +848,7 @@
          if(WIN32)
              list(APPEND gnArgArg enable_iterator_debugging=true)

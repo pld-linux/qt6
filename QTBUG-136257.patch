@@ -153,7 +153,7 @@ index d12280f..1ed679d 100644
 -                                                    (EGLClientBuffer)textureId, NULL);
 +    EGLImage eglImage = m_functions->eglCreateDRMImageMESA(m_eglDisplay, attribs);
      if (eglImage == EGL_NO_IMAGE) {
-         qWarning() << "EGL: Failed to create EGLImage:" << getLastEGLErrorString();
+         qWarning("EGL: Failed to create EGLImage: %s", getLastEGLErrorString());
          return;
 diff --git a/src/core/ozone/egl_helper.h b/src/core/ozone/egl_helper.h
 index a1a1aa0..7594e1f 100644

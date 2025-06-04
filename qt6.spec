@@ -149,12 +149,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.9.0
+Version:	6.9.1
 Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.9/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	6c3e4eceffe8a0e76c7a89a74d33be00
+# Source0-md5:	96dd62d709cc6bd626750ef41777cf2f
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		arm-no-xnnpack.patch
@@ -162,9 +162,7 @@ Patch3:		no-implicit-sse2.patch
 Patch4:		x32.patch
 Patch5:		qtwebengine-cmake-build-type.patch
 Patch6:		qtquick3d-6.6.2-gcc14.patch
-Patch7:		webengine-seccomp-glibc2.41.patch
-Patch8:		qtwebengine-missing-dep.patch
-Patch9:		QTBUG-136257.patch
+Patch7:		QTBUG-136257.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -3798,9 +3796,7 @@ narzędzia.
 %patch -P4 -p1
 %patch -P5 -p1
 %patch -P6 -p1 -d qtquick3d
-%patch -P7 -p1 -d qtwebengine/src/3rdparty/chromium
-%patch -P8 -p1 -d qtwebengine
-%patch -P9 -p1 -d qtwebengine
+%patch -P7 -p1 -d qtwebengine
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 
@@ -4441,6 +4437,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libQt63DQuickExtras.so.6
 %attr(755,root,root) %{_libdir}/libQt63DQuickInput.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt63DQuickInput.so.6
+%attr(755,root,root) %{_libdir}/libQt63DQuickLogic.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt63DQuickLogic.so.6
 %attr(755,root,root) %{_libdir}/libQt63DQuickRender.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt63DQuickRender.so.6
 %attr(755,root,root) %{_libdir}/libQt63DQuickScene2D.so.*.*.*
@@ -4483,7 +4481,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/Qt3D/Input/plugins.qmltypes
 %{qt6dir}/qml/Qt3D/Input/qmldir
 %dir %{qt6dir}/qml/Qt3D/Logic
-%attr(755,root,root) %{qt6dir}/qml/Qt3D/Logic/libquick3dlogicplugin.so
+%attr(755,root,root) %{qt6dir}/qml/Qt3D/Logic/lib3dquicklogicplugin.so
 %{qt6dir}/qml/Qt3D/Logic/plugins.qmltypes
 %{qt6dir}/qml/Qt3D/Logic/qmldir
 %dir %{qt6dir}/qml/Qt3D/Render
@@ -4509,6 +4507,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt63DQuickAnimation.so
 %attr(755,root,root) %{_libdir}/libQt63DQuickExtras.so
 %attr(755,root,root) %{_libdir}/libQt63DQuickInput.so
+%attr(755,root,root) %{_libdir}/libQt63DQuickLogic.so
 %attr(755,root,root) %{_libdir}/libQt63DQuickRender.so
 %attr(755,root,root) %{_libdir}/libQt63DQuickScene2D.so
 %attr(755,root,root) %{_libdir}/libQt63DQuickScene3D.so
@@ -4522,6 +4521,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt63DQuickAnimation.prl
 %{_libdir}/libQt63DQuickExtras.prl
 %{_libdir}/libQt63DQuickInput.prl
+%{_libdir}/libQt63DQuickLogic.prl
 %{_libdir}/libQt63DQuick.prl
 %{_libdir}/libQt63DQuickRender.prl
 %{_libdir}/libQt63DQuickScene2D.prl
@@ -4536,6 +4536,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/Qt3DQuickAnimation
 %{_includedir}/qt6/Qt3DQuickExtras
 %{_includedir}/qt6/Qt3DQuickInput
+%{_includedir}/qt6/Qt3DQuickLogic
 %{_includedir}/qt6/Qt3DQuickRender
 %{_includedir}/qt6/Qt3DQuickScene2D
 %{_includedir}/qt6/Qt3DQuickScene3D
@@ -4548,6 +4549,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt63DQuickAnimation.pc
 %{_pkgconfigdir}/Qt63DQuickExtras.pc
 %{_pkgconfigdir}/Qt63DQuickInput.pc
+%{_pkgconfigdir}/Qt63DQuickLogic.pc
 %{_pkgconfigdir}/Qt63DQuick.pc
 %{_pkgconfigdir}/Qt63DQuickRender.pc
 %{_pkgconfigdir}/Qt63DQuickScene2D.pc
@@ -4571,6 +4573,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt63DQuickExtrasPrivate
 %{_libdir}/cmake/Qt63DQuickInput
 %{_libdir}/cmake/Qt63DQuickInputPrivate
+%{_libdir}/cmake/Qt63DQuickLogic
+%{_libdir}/cmake/Qt63DQuickLogicPrivate
 %{_libdir}/cmake/Qt63DQuickRender
 %{_libdir}/cmake/Qt63DQuickRenderPrivate
 %{_libdir}/cmake/Qt63DQuickScene2D
@@ -4588,6 +4592,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/metatypes/qt63dquickanimation_pld_metatypes.json
 %{qt6dir}/metatypes/qt63dquickextras_pld_metatypes.json
 %{qt6dir}/metatypes/qt63dquickinput_pld_metatypes.json
+%{qt6dir}/metatypes/qt63dquicklogic_pld_metatypes.json
 %{qt6dir}/metatypes/qt63dquickrender_pld_metatypes.json
 %{qt6dir}/metatypes/qt63dquickscene2d_pld_metatypes.json
 %{qt6dir}/metatypes/qt63dquickscene3d_pld_metatypes.json
@@ -4608,6 +4613,8 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_3dquickextras_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_3dquickinput.pri
 %{qt6dir}/mkspecs/modules/qt_lib_3dquickinput_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dquicklogic.pri
+%{qt6dir}/mkspecs/modules/qt_lib_3dquicklogic_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_3dquick.pri
 %{qt6dir}/mkspecs/modules/qt_lib_3dquick_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_3dquickrender.pri
@@ -4627,6 +4634,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/3DQuickAnimation.json
 %{qt6dir}/modules/3DQuickExtras.json
 %{qt6dir}/modules/3DQuickInput.json
+%{qt6dir}/modules/3DQuickLogic.json
 %{qt6dir}/modules/3DQuickRender.json
 %{qt6dir}/modules/3DQuickScene2D.json
 %{qt6dir}/modules/3DQuickScene3D.json
@@ -6370,7 +6378,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Basic/libqtquickcontrols2basicstyleplugin.so
 %dir %{qt6dir}/qml/QtQuick/Controls/Basic/impl
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Basic/impl/libqtquickcontrols2basicstyleimplplugin.so
-%{qt6dir}/qml/QtQuick/Controls/Basic/impl/*.qml
 %{qt6dir}/qml/QtQuick/Controls/Basic/impl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Basic/impl/qmldir
 
@@ -6436,7 +6443,6 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQuick/Controls/designer/qtquickcontrols2.metainfo
 
 %dir %{qt6dir}/qml/QtQuick/Controls/impl
-%{qt6dir}/qml/QtQuick/Controls/impl/*.qml
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/impl/libqtquickcontrols2implplugin.so
 %{qt6dir}/qml/QtQuick/Controls/impl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/impl/qmldir

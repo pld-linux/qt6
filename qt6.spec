@@ -25,22 +25,6 @@
 #   %{_libdir}/qt6/mkspecs/modules/qt_lib_multimediatestlibprivate_private.pri
 #   %{_libdir}/qt6/modules/MultimediaTestLibPrivate.json
 #
-#   %{_libdir}/libQt6QmlAssetDownloader.a
-#   %{_libdir}/libQt6QmlAssetDownloader.prl
-#   %{_includedir}/qt6/QtQmlAssetDownloader
-#   %{_pkgconfigdir}/Qt6QmlAssetDownloader.pc
-#   %{_libdir}/cmake/Qt6QmlAssetDownloader
-#   %dir %{_libdir}/qt6/qml/Assets
-#   %dir %{_libdir}/qt6/qml/Assets/Downloader
-#   %{_libdir}/qt6/qml/Assets/Downloader/libqmlassetdownloaderplugin.a
-#   %{_libdir}/qt6/qml/Assets/Downloader/libqmlassetdownloaderplugin.prl
-#   %{_libdir}/qt6/qml/Assets/Downloader/plugins.qmltypes
-#   %{_libdir}/qt6/qml/Assets/Downloader/qmldir
-#   %{_libdir}/qt6/metatypes/qt6qmlassetdownloader_pld_metatypes.json
-#   %{_libdir}/qt6/mkspecs/modules/qt_lib_qmlassetdownloader.pri
-#   %{_libdir}/qt6/mkspecs/modules/qt_lib_qmlassetdownloader_private.pri
-#   %{_libdir}/qt6/modules/QmlAssetDownloader.json
-#
 #   %{_libdir}/cmake/Qt6TestInternalsPrivate
 #   %{_libdir}/qt6/mkspecs/modules/qt_lib_testinternals_private.pri
 #   %{_libdir}/qt6/modules/TestInternalsPrivate.json
@@ -5950,6 +5934,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{qt6dir}/qml
 
+%dir %{_libdir}/qt6/qml/Assets
+%dir %{_libdir}/qt6/qml/Assets/Downloader
+%{_libdir}/qt6/qml/Assets/Downloader/plugins.qmltypes
+%{_libdir}/qt6/qml/Assets/Downloader/qmldir
+
 %dir %{qt6dir}/qml/QML
 %{qt6dir}/qml/QML/plugins.qmltypes
 %{qt6dir}/qml/QML/qmldir
@@ -6050,53 +6039,32 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6StateMachineQml.so
 # static-only
 %{_libdir}/libQt6PacketProtocol.a
+%{_libdir}/libQt6QmlAssetDownloader.a
 %{_libdir}/libQt6QmlDebug.a
 %{_libdir}/libQt6QmlDom.a
 %{_libdir}/libQt6QmlFormat.a
 %{_libdir}/libQt6QmlLS.a
-%{_libdir}/libQt6QmlLS.prl
 %{_libdir}/libQt6QmlToolingSettings.a
-%{_libdir}/libQt6QmlToolingSettings.prl
 %{_libdir}/libQt6QmlTypeRegistrar.a
 %{_libdir}/libQt6LabsAnimation.prl
 %{_libdir}/libQt6LabsFolderListModel.prl
 %{_libdir}/libQt6LabsPlatform.prl
 %{_libdir}/libQt6LabsQmlModels.prl
 %{_libdir}/libQt6LabsSettings.prl
-%{qt6dir}/metatypes/qt6labsanimation_pld_metatypes.json
-%{qt6dir}/metatypes/qt6labsfolderlistmodel_pld_metatypes.json
-%{qt6dir}/metatypes/qt6labsplatform_pld_metatypes.json
-%{qt6dir}/metatypes/qt6labsqmlmodels_pld_metatypes.json
-%{qt6dir}/metatypes/qt6labssettings_pld_metatypes.json
-%{qt6dir}/metatypes/qt6packetprotocolprivate_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qml_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qmlcompiler_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qmlcore_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qmldebugprivate_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qmldomprivate_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qmlformatprivate_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qmllocalstorage_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qmllsprivate_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qmlmeta_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qmlmodels_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qmlnetwork_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qmltoolingsettingsprivate_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qmltyperegistrarprivate_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qmlworkerscript_pld_metatypes.json
-%{qt6dir}/metatypes/qt6qmlxmllistmodel_pld_metatypes.json
-%{qt6dir}/metatypes/qt6statemachine_pld_metatypes.json
-%{qt6dir}/metatypes/qt6statemachineqml_pld_metatypes.json
 %{_libdir}/libQt6PacketProtocol.prl
 %{_libdir}/libQt6Qml.prl
+%{_libdir}/libQt6QmlAssetDownloader.prl
 %{_libdir}/libQt6QmlCompiler.prl
 %{_libdir}/libQt6QmlCore.prl
 %{_libdir}/libQt6QmlDebug.prl
 %{_libdir}/libQt6QmlDom.prl
 %{_libdir}/libQt6QmlFormat.prl
+%{_libdir}/libQt6QmlLS.prl
 %{_libdir}/libQt6QmlLocalStorage.prl
 %{_libdir}/libQt6QmlMeta.prl
 %{_libdir}/libQt6QmlModels.prl
 %{_libdir}/libQt6QmlNetwork.prl
+%{_libdir}/libQt6QmlToolingSettings.prl
 %{_libdir}/libQt6QmlTypeRegistrar.prl
 %{_libdir}/libQt6QmlWorkerScript.prl
 %{_libdir}/libQt6QmlXmlListModel.prl
@@ -6109,6 +6077,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtLabsSettings
 %{_includedir}/qt6/QtPacketProtocol
 %{_includedir}/qt6/QtQml
+%{_includedir}/qt6/QtQmlAssetDownloader
 %{_includedir}/qt6/QtQmlCompiler
 %{_includedir}/qt6/QtQmlCore
 %{_includedir}/qt6/QtQmlDebug
@@ -6132,17 +6101,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6LabsQmlModels.pc
 %{_pkgconfigdir}/Qt6LabsSettings.pc
 %{_pkgconfigdir}/Qt6Qml.pc
+%{_pkgconfigdir}/Qt6QmlAssetDownloader.pc
 %{_pkgconfigdir}/Qt6QmlCompiler.pc
+%{_pkgconfigdir}/Qt6QmlCore.pc
+%{_pkgconfigdir}/Qt6QmlIntegration.pc
+%{_pkgconfigdir}/Qt6QmlLocalStorage.pc
 %{_pkgconfigdir}/Qt6QmlMeta.pc
 %{_pkgconfigdir}/Qt6QmlModels.pc
 %{_pkgconfigdir}/Qt6QmlNetwork.pc
 %{_pkgconfigdir}/Qt6QmlWorkerScript.pc
+%{_pkgconfigdir}/Qt6QmlXmlListModel.pc
 %{_pkgconfigdir}/Qt6StateMachine.pc
 %{_pkgconfigdir}/Qt6StateMachineQml.pc
-%{_pkgconfigdir}/Qt6QmlCore.pc
-%{_pkgconfigdir}/Qt6QmlIntegration.pc
-%{_pkgconfigdir}/Qt6QmlLocalStorage.pc
-%{_pkgconfigdir}/Qt6QmlXmlListModel.pc
 %{_libdir}/cmake/Qt6LabsAnimation
 %{_libdir}/cmake/Qt6LabsAnimationPrivate
 %{_libdir}/cmake/Qt6LabsFolderListModel
@@ -6155,6 +6125,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6LabsSettingsPrivate
 %{_libdir}/cmake/Qt6PacketProtocolPrivate
 %{_libdir}/cmake/Qt6Qml
+%{_libdir}/cmake/Qt6QmlAssetDownloader
 %{_libdir}/cmake/Qt6QmlPrivate
 %{_libdir}/cmake/Qt6QmlCompiler
 %{_libdir}/cmake/Qt6QmlCompilerPrivate
@@ -6177,15 +6148,39 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6QmlNetworkPrivate
 %{_libdir}/cmake/Qt6QmlTypeRegistrarPrivate
 %{_libdir}/cmake/Qt6QmlToolingSettingsPrivate
-%{_libdir}/cmake/Qt6StateMachine
-%{_libdir}/cmake/Qt6StateMachinePrivate
-%{_libdir}/cmake/Qt6StateMachineQml
-%{_libdir}/cmake/Qt6StateMachineQmlPrivate
 %{_libdir}/cmake/Qt6QmlTools
 %{_libdir}/cmake/Qt6QmlWorkerScript
 %{_libdir}/cmake/Qt6QmlWorkerScriptPrivate
 %{_libdir}/cmake/Qt6QmlXmlListModel
 %{_libdir}/cmake/Qt6QmlXmlListModelPrivate
+%{_libdir}/cmake/Qt6StateMachine
+%{_libdir}/cmake/Qt6StateMachinePrivate
+%{_libdir}/cmake/Qt6StateMachineQml
+%{_libdir}/cmake/Qt6StateMachineQmlPrivate
+%{qt6dir}/metatypes/qt6labsanimation_pld_metatypes.json
+%{qt6dir}/metatypes/qt6labsfolderlistmodel_pld_metatypes.json
+%{qt6dir}/metatypes/qt6labsplatform_pld_metatypes.json
+%{qt6dir}/metatypes/qt6labsqmlmodels_pld_metatypes.json
+%{qt6dir}/metatypes/qt6labssettings_pld_metatypes.json
+%{qt6dir}/metatypes/qt6packetprotocolprivate_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qml_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmlassetdownloader_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmlcompiler_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmlcore_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmldebugprivate_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmldomprivate_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmlformatprivate_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmllocalstorage_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmllsprivate_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmlmeta_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmlmodels_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmlnetwork_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmltoolingsettingsprivate_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmltyperegistrarprivate_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmlworkerscript_pld_metatypes.json
+%{qt6dir}/metatypes/qt6qmlxmllistmodel_pld_metatypes.json
+%{qt6dir}/metatypes/qt6statemachine_pld_metatypes.json
+%{qt6dir}/metatypes/qt6statemachineqml_pld_metatypes.json
 %{qt6dir}/mkspecs/features/qmlcache.prf
 %{qt6dir}/mkspecs/features/qmltypes.prf
 %{qt6dir}/mkspecs/modules/qt_lib_labsanimation.pri
@@ -6199,6 +6194,8 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_labssettings.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labssettings_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_packetprotocol_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmlassetdownloader.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmlassetdownloader_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlcompiler.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlcompiler_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlcore.pri
@@ -6238,6 +6235,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/LabsSettings.json
 %{qt6dir}/modules/PacketProtocolPrivate.json
 %{qt6dir}/modules/Qml.json
+%{qt6dir}/modules/QmlAssetDownloader.json
 %{qt6dir}/modules/QmlCompiler.json
 %{qt6dir}/modules/QmlCore.json
 %{qt6dir}/modules/QmlDebugPrivate.json
@@ -6255,6 +6253,8 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/QmlXmlListModel.json
 %{qt6dir}/modules/StateMachine.json
 %{qt6dir}/modules/StateMachineQml.json
+%{qt6dir}/qml/Assets/Downloader/libqmlassetdownloaderplugin.a
+%{qt6dir}/qml/Assets/Downloader/libqmlassetdownloaderplugin.prl
 
 %if %{with doc}
 %files -n Qt6Qml-doc

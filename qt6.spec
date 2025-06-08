@@ -6126,6 +6126,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6PacketProtocolPrivate
 %{_libdir}/cmake/Qt6Qml
 %{_libdir}/cmake/Qt6QmlAssetDownloader
+%{_libdir}/cmake/Qt6QmlAssetDownloaderPrivate
 %{_libdir}/cmake/Qt6QmlPrivate
 %{_libdir}/cmake/Qt6QmlCompiler
 %{_libdir}/cmake/Qt6QmlCompilerPrivate

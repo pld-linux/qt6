@@ -6,6 +6,6 @@
          endif()
 -    elseif(${config} STREQUAL "Release")
 +    elseif(${config} STREQUAL "Release" OR ${config} STREQUAL "PLD")
-         list(APPEND gnArgArg is_debug=false symbol_level=0)
-     elseif(${config} STREQUAL "RelWithDebInfo")
-         list(APPEND gnArgArg is_debug=false)
+         list(APPEND gnArgArg
+             is_debug=false
+             symbol_level=0

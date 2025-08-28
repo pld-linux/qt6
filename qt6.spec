@@ -133,12 +133,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.9.1
-Release:	2
+Version:	6.9.2
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.9/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	96dd62d709cc6bd626750ef41777cf2f
+# Source0-md5:	78fe69ae8049f6b0139ceaa28e643f53
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		arm-no-xnnpack.patch
@@ -146,7 +146,6 @@ Patch3:		no-implicit-sse2.patch
 Patch4:		x32.patch
 Patch5:		qtwebengine-cmake-build-type.patch
 Patch6:		qtquick3d-6.6.2-gcc14.patch
-Patch7:		QTBUG-136257.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -261,6 +260,7 @@ BuildRequires:	udev-devel
 %{?with_odbc:BuildRequires:	unixODBC-devel >= 2.3.0}
 BuildRequires:	wayland-devel
 BuildRequires:	xcb-util-cursor-devel >= 0.1.1
+BuildRequires:	xcb-util-devel >= 0.1.1
 BuildRequires:	xcb-util-image-devel >= 0.3.9
 BuildRequires:	xcb-util-keysyms-devel >= 0.3.9
 BuildRequires:	xcb-util-renderutil-devel >= 0.3.9
@@ -3780,7 +3780,6 @@ narzędzia.
 %patch -P4 -p1
 %patch -P5 -p1
 %patch -P6 -p1 -d qtquick3d
-%patch -P7 -p1 -d qtwebengine
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 
@@ -3811,6 +3810,9 @@ narzędzia.
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+node(\s|$),#!/usr/bin/node\1,' \
 	qtwebchannel/examples/webchannel/qwclient/qwclient.js
+
+%{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+sh(\s|$),#!%{__sh}\1,' \
+	qtdoc/examples/demos/qtjennydemo/qtjenny_generator/gradlew
 
 %if %(echo %{cxx_version} | cut -d. -f1) < 9
 # available since gcc 9
@@ -6914,6 +6916,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/qml/QtQuick3D/libqquick3dplugin.so
 %{qt6dir}/qml/QtQuick3D/Quick3D.qmltypes
 %{qt6dir}/qml/QtQuick3D/qmldir
+%{qt6dir}/qml/QtQuick3D/*.qml
 %{qt6dir}/qml/QtQuick3D/designer
 %dir %{qt6dir}/qml/QtQuick3D/AssetUtils
 %attr(755,root,root) %{qt6dir}/qml/QtQuick3D/AssetUtils/libqtquick3dassetutilsplugin.so

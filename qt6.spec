@@ -9,14 +9,6 @@
 #
 #   %attr(755,root,root) %{_libdir}/qt6/plugins/help/libhelpplugin.so
 #
-#   %{_libdir}/libQt6ExamplesAssetDownloader.a
-#   %{_libdir}/libQt6ExamplesAssetDownloader.prl
-#   %{_includedir}/qt6/QtExamplesAssetDownloader
-#   %{_libdir}/cmake/Qt6ExamplesAssetDownloaderPrivate
-#   %{_libdir}/qt6/metatypes/qt6examplesassetdownloaderprivate_pld_metatypes.json
-#   %{_libdir}/qt6/mkspecs/modules/qt_lib_examples_asset_downloader_private.pri
-#   %{_libdir}/qt6/modules/ExamplesAssetDownloaderPrivate.json
-#
 #   %{_libdir}/libQt6MultimediaTestLib.a
 #   %{_libdir}/libQt6MultimediaTestLib.prl
 #   %{_includedir}/qt6/QtMultimediaTestLib
@@ -134,7 +126,7 @@ Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
 Version:	6.9.2
-Release:	3
+Release:	4
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.9/%{version}/single/qt-everywhere-src-%{version}.tar.xz
@@ -6040,6 +6032,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6StateMachine.so
 %attr(755,root,root) %{_libdir}/libQt6StateMachineQml.so
 # static-only
+%{_libdir}/libQt6ExamplesAssetDownloader.a
 %{_libdir}/libQt6PacketProtocol.a
 %{_libdir}/libQt6QmlAssetDownloader.a
 %{_libdir}/libQt6QmlDebug.a
@@ -6048,6 +6041,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6QmlLS.a
 %{_libdir}/libQt6QmlToolingSettings.a
 %{_libdir}/libQt6QmlTypeRegistrar.a
+%{_libdir}/libQt6ExamplesAssetDownloader.prl
 %{_libdir}/libQt6LabsAnimation.prl
 %{_libdir}/libQt6LabsFolderListModel.prl
 %{_libdir}/libQt6LabsPlatform.prl
@@ -6072,6 +6066,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6QmlXmlListModel.prl
 %{_libdir}/libQt6StateMachine.prl
 %{_libdir}/libQt6StateMachineQml.prl
+%{_includedir}/qt6/QtExamplesAssetDownloader
 %{_includedir}/qt6/QtLabsAnimation
 %{_includedir}/qt6/QtLabsFolderListModel
 %{_includedir}/qt6/QtLabsPlatform
@@ -6115,6 +6110,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6QmlXmlListModel.pc
 %{_pkgconfigdir}/Qt6StateMachine.pc
 %{_pkgconfigdir}/Qt6StateMachineQml.pc
+%{_libdir}/cmake/Qt6ExamplesAssetDownloaderPrivate
 %{_libdir}/cmake/Qt6LabsAnimation
 %{_libdir}/cmake/Qt6LabsAnimationPrivate
 %{_libdir}/cmake/Qt6LabsFolderListModel
@@ -6160,6 +6156,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6StateMachinePrivate
 %{_libdir}/cmake/Qt6StateMachineQml
 %{_libdir}/cmake/Qt6StateMachineQmlPrivate
+%{qt6dir}/metatypes/qt6examplesassetdownloaderprivate_pld_metatypes.json
 %{qt6dir}/metatypes/qt6labsanimation_pld_metatypes.json
 %{qt6dir}/metatypes/qt6labsfolderlistmodel_pld_metatypes.json
 %{qt6dir}/metatypes/qt6labsplatform_pld_metatypes.json
@@ -6186,6 +6183,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/metatypes/qt6statemachineqml_pld_metatypes.json
 %{qt6dir}/mkspecs/features/qmlcache.prf
 %{qt6dir}/mkspecs/features/qmltypes.prf
+%{qt6dir}/mkspecs/modules/qt_lib_examples_asset_downloader_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labsanimation.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labsanimation_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labsfolderlistmodel.pri
@@ -6231,6 +6229,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_statemachine_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_statemachineqml.pri
 %{qt6dir}/mkspecs/modules/qt_lib_statemachineqml_private.pri
+%{qt6dir}/modules/ExamplesAssetDownloaderPrivate.json
 %{qt6dir}/modules/LabsAnimation.json
 %{qt6dir}/modules/LabsFolderListModel.json
 %{qt6dir}/modules/LabsPlatform.json

@@ -126,7 +126,7 @@ Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
 Version:	6.9.2
-Release:	4
+Release:	5
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.9/%{version}/single/qt-everywhere-src-%{version}.tar.xz
@@ -2167,6 +2167,7 @@ Group:		Libraries
 # Qt6StateMachine: Core Gui [FIXME: part of scxml]
 # Qt6StateMachineQml: Core Qml StateMachine [FIXME: part of scxml]
 Requires:	Qt6Core = %{version}
+Requires:	Qt6Concurrent = %{version}
 Requires:	Qt6Network = %{version}
 Requires:	Qt6Sql = %{version}
 # FIXME: move Qt6StateMachine
@@ -2208,6 +2209,7 @@ Group:		Development/Libraries
 # Qt6StateMachine: Core Gui [FIXME: not here, belongs to scxml]
 # Qt6StateMachineQml: Core Qml StateMachine [FIXME: not here, belongs to scxml]
 Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Concurrent-devel = %{version}
 Requires:	Qt6Network-devel = %{version}
 Requires:	Qt6Qml = %{version}
 Requires:	Qt6Sql-devel = %{version}

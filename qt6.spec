@@ -125,12 +125,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.9.2
-Release:	5
+Version:	6.9.3
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.9/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	78fe69ae8049f6b0139ceaa28e643f53
+# Source0-md5:	d8fab224d072df8ffa09f99f6245e446
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		arm-no-xnnpack.patch
@@ -3962,7 +3962,7 @@ DESTDIR=$RPM_BUILD_ROOT %{__cmake} --build build/ --target install_docs
 %{__rm} -r $RPM_BUILD_ROOT%{_libdir}/objects-PLD
 %{__rm} -r $RPM_BUILD_ROOT%{qt6dir}/mkspecs/qtdoc_dummy_file.txt
 %{__rm} $RPM_BUILD_ROOT%{qt6dir}/libexec/sanitizer-testrunner.py
-%{__rm} -r $RPM_BUILD_ROOT%{qt6dir}/qml/Assets/Downloader/objects-PLD
+%{__rm} -r $RPM_BUILD_ROOT%{qt6dir}/qml/Qt/labs/assetdownloader/objects-PLD
 %{__rm} -r $RPM_BUILD_ROOT%{qt6dir}/qml/Qt/test/controls/objects-PLD
 
 %if %{without qtwebengine}
@@ -4461,7 +4461,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/Qt3D/Input/plugins.qmltypes
 %{qt6dir}/qml/Qt3D/Input/qmldir
 %dir %{qt6dir}/qml/Qt3D/Logic
-%attr(755,root,root) %{qt6dir}/qml/Qt3D/Logic/lib3dquicklogicplugin.so
+%attr(755,root,root) %{qt6dir}/qml/Qt3D/Logic/libquick3dlogicplugin.so
 %{qt6dir}/qml/Qt3D/Logic/plugins.qmltypes
 %{qt6dir}/qml/Qt3D/Logic/qmldir
 %dir %{qt6dir}/qml/Qt3D/Render
@@ -5930,11 +5930,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{qt6dir}/qml
 
-%dir %{_libdir}/qt6/qml/Assets
-%dir %{_libdir}/qt6/qml/Assets/Downloader
-%{_libdir}/qt6/qml/Assets/Downloader/plugins.qmltypes
-%{_libdir}/qt6/qml/Assets/Downloader/qmldir
-
 %dir %{qt6dir}/qml/QML
 %{qt6dir}/qml/QML/plugins.qmltypes
 %{qt6dir}/qml/QML/qmldir
@@ -5951,6 +5946,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/qml/Qt/labs/animation/liblabsanimationplugin.so
 %{qt6dir}/qml/Qt/labs/animation/plugins.qmltypes
 %{qt6dir}/qml/Qt/labs/animation/qmldir
+
+%dir %{_libdir}/qt6/qml/Qt/labs/assetdownloader
+%{_libdir}/qt6/qml/Qt/labs/assetdownloader/plugins.qmltypes
+%{_libdir}/qt6/qml/Qt/labs/assetdownloader/qmldir
 
 %dir %{qt6dir}/qml/Qt/labs/folderlistmodel
 %attr(755,root,root) %{qt6dir}/qml/Qt/labs/folderlistmodel/libqmlfolderlistmodelplugin.so
@@ -6257,8 +6256,8 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/QmlXmlListModel.json
 %{qt6dir}/modules/StateMachine.json
 %{qt6dir}/modules/StateMachineQml.json
-%{qt6dir}/qml/Assets/Downloader/libqmlassetdownloaderplugin.a
-%{qt6dir}/qml/Assets/Downloader/libqmlassetdownloaderplugin.prl
+%{qt6dir}/qml/Qt/labs/assetdownloader/libqmlassetdownloaderplugin.a
+%{qt6dir}/qml/Qt/labs/assetdownloader/libqmlassetdownloaderplugin.prl
 
 %if %{with doc}
 %files -n Qt6Qml-doc

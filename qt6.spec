@@ -4289,6 +4289,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/bin/qtplugininfo
 # devel?
 %{_includedir}/qt6/QtTools
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtToolsTestsConfig.cmake
 %{_libdir}/cmake/Qt6Tools
 %{_libdir}/cmake/Qt6ToolsTools
 %{qt6dir}/mkspecs/modules/qt_lib_tools_private.pri
@@ -4535,6 +4536,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt63DQuickScene2D.pc
 %{_pkgconfigdir}/Qt63DQuickScene3D.pc
 %{_pkgconfigdir}/Qt63DRender.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/Qt3DTestsConfig.cmake
 %{_libdir}/cmake/Qt63DAnimation
 %{_libdir}/cmake/Qt63DAnimationPrivate
 %{_libdir}/cmake/Qt63DCore
@@ -4676,6 +4678,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6Bodymovin.so
 %{_libdir}/libQt6Bodymovin.prl
 %{_includedir}/qt6/QtBodymovin
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtLottieTestsConfig.cmake
 %{_libdir}/cmake/Qt6BodymovinPrivate
 %{qt6dir}/metatypes/qt6bodymovinprivate_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_bodymovin_private.pri
@@ -4713,6 +4716,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtChartsQml
 %{_pkgconfigdir}/Qt6Charts.pc
 %{_pkgconfigdir}/Qt6ChartsQml.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtChartsTestsConfig.cmake
 %{_libdir}/cmake/Qt6Charts
 %{_libdir}/cmake/Qt6ChartsPrivate
 %{_libdir}/cmake/Qt6ChartsQml
@@ -4747,6 +4751,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6Coap.prl
 %{_includedir}/qt6/QtCoap
 %{_pkgconfigdir}/Qt6Coap.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtCoapTestsConfig.cmake
 %{_libdir}/cmake/Qt6Coap
 %{_libdir}/cmake/Qt6CoapPrivate
 %{qt6dir}/metatypes/qt6coap_pld_metatypes.json
@@ -4785,6 +4790,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6Connectivity-devel
 %defattr(644,root,root,755)
 %{_includedir}/qt6/QtConnectivity
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtConnectivityTestsConfig.cmake
 %{_libdir}/cmake/Qt6Connectivity
 %{qt6dir}/mkspecs/modules/qt_lib_connectivity_private.pri
 %{qt6dir}/modules/Connectivity.json
@@ -4822,6 +4828,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6HostInfo
 %dir %{_libdir}/cmake/Qt6BuildInternals
 %{_libdir}/cmake/Qt6BuildInternals/*.cmake
+%dir %{_libdir}/cmake/Qt6BuildInternals/StandaloneTests
 %attr(755,root,root) %{qt6dir}/libexec/tracegen
 %{qt6dir}/mkspecs/modules/qt_lib_core.pri
 %{qt6dir}/mkspecs/modules/qt_lib_core_private.pri
@@ -4849,6 +4856,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtDataVisualizationQml
 %{_pkgconfigdir}/Qt6DataVisualization.pc
 %{_pkgconfigdir}/Qt6DataVisualizationQml.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtDataVisualizationTestsConfig.cmake
 %{_libdir}/cmake/Qt6DataVisualization
 %{_libdir}/cmake/Qt6DataVisualizationPrivate
 %{_libdir}/cmake/Qt6DataVisualizationQml
@@ -4972,6 +4980,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6GraphsWidgets.prl
 %{_includedir}/qt6/QtGraphs
 %{_includedir}/qt6/QtGraphsWidgets
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtGraphsTestsConfig.cmake
 %{_libdir}/cmake/Qt6Graphs
 %{_libdir}/cmake/Qt6GraphsPrivate
 %{_libdir}/cmake/Qt6GraphsWidgets
@@ -5006,6 +5015,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6GrpcQuick.prl
 %{_includedir}/qt6/QtGrpc
 %{_includedir}/qt6/QtGrpcQuick
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtGrpcTestsConfig.cmake
 %{_libdir}/cmake/Qt6Grpc
 %{_libdir}/cmake/Qt6GrpcPrivate
 %{_libdir}/cmake/Qt6GrpcQuick
@@ -5269,6 +5279,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6HttpServer.so
 %{_libdir}/libQt6HttpServer.prl
 %{_includedir}/qt6/QtHttpServer
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtHttpServerTestsConfig.cmake
 %{_libdir}/cmake/Qt6HttpServer
 %{_libdir}/cmake/Qt6HttpServerPrivate
 %{qt6dir}/metatypes/qt6httpserver_pld_metatypes.json
@@ -5312,6 +5323,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6LanguageServer.a
 %{_libdir}/libQt6LanguageServer.prl
 %{_includedir}/qt6/QtLanguageServer
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtLanguageServerTestsConfig.cmake
 %{_libdir}/cmake/Qt6LanguageServerPrivate
 %{qt6dir}/metatypes/qt6languageserverprivate_pld_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_languageserver_private.pri
@@ -5335,6 +5347,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6Location.so
 %{_libdir}/libQt6Location.prl
 %{_includedir}/qt6/QtLocation
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtLocationTestsConfig.cmake
 %{_libdir}/cmake/Qt6Location
 %{_libdir}/cmake/Qt6LocationPrivate
 %{qt6dir}/metatypes/qt6location_pld_metatypes.json
@@ -5354,6 +5367,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6Mqtt.prl
 %{_includedir}/qt6/QtMqtt
 %{_pkgconfigdir}/Qt6Mqtt.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtMqttTestsConfig.cmake
 %{_libdir}/cmake/Qt6Mqtt
 %{_libdir}/cmake/Qt6MqttPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_mqtt.pri
@@ -5393,6 +5407,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6Multimedia.prl
 %{_includedir}/qt6/QtMultimedia
 %{_pkgconfigdir}/Qt6Multimedia.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtMultimediaTestsConfig.cmake
 %{_libdir}/cmake/Qt6Multimedia
 %{_libdir}/cmake/Qt6MultimediaPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_multimedia.pri
@@ -5502,6 +5517,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6NetworkAuth.so
 %{_libdir}/libQt6NetworkAuth.prl
 %{_includedir}/qt6/QtNetworkAuth
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtNetworkAuthTestsConfig.cmake
 %{_libdir}/cmake/Qt6NetworkAuth
 %{_libdir}/cmake/Qt6NetworkAuthPrivate
 %{_pkgconfigdir}/Qt6NetworkAuth.pc
@@ -5573,6 +5589,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtOpcUa
 %{_pkgconfigdir}/Qt6DeclarativeOpcua.pc
 %{_pkgconfigdir}/Qt6OpcUa.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtOpcUaTestsConfig.cmake
 %{_libdir}/cmake/Qt6DeclarativeOpcua
 %{_libdir}/cmake/Qt6DeclarativeOpcuaPrivate
 %{_libdir}/cmake/Qt6OpcUa
@@ -5719,6 +5736,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtPositioningQuick
 %{_pkgconfigdir}/Qt6Positioning.pc
 %{_pkgconfigdir}/Qt6PositioningQuick.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtPositioningTestsConfig.cmake
 %{_libdir}/cmake/Qt6Positioning
 %{_libdir}/cmake/Qt6PositioningPrivate
 %{_libdir}/cmake/Qt6PositioningQuick
@@ -5862,6 +5880,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/metatypes/qt6core5compat_pld_metatypes.json
 %{_includedir}/qt6/QtCore5Compat
 %{_pkgconfigdir}/Qt6Core5Compat.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/Qt5CompatTestsConfig.cmake
 %{_libdir}/cmake/Qt6Core5Compat
 %{_libdir}/cmake/Qt6Core5CompatPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_core5compat.pri
@@ -6111,6 +6130,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6QmlXmlListModel.pc
 %{_pkgconfigdir}/Qt6StateMachine.pc
 %{_pkgconfigdir}/Qt6StateMachineQml.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtDeclarativeTestsConfig.cmake
 %{_libdir}/cmake/Qt6ExamplesAssetDownloaderPrivate
 %{_libdir}/cmake/Qt6LabsAnimation
 %{_libdir}/cmake/Qt6LabsAnimationPrivate
@@ -6647,6 +6667,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6QuickLayouts.pc
 %{_pkgconfigdir}/Qt6QuickTemplates2.pc
 %{_pkgconfigdir}/Qt6QuickVectorImage.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtQuickTimelineTestsConfig.cmake
 %{_libdir}/cmake/Qt6LabsSharedImage
 %{_libdir}/cmake/Qt6LabsSharedImagePrivate
 %{_libdir}/cmake/Qt6LabsWavefrontMesh
@@ -7011,6 +7032,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6Quick3DRuntimeRender.pc
 %{_pkgconfigdir}/Qt6Quick3DUtils.pc
 %{?with_openxr:%{_pkgconfigdir}/Qt6Quick3DXr.pc}
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtQuick3DTestsConfig.cmake
 %{_libdir}/cmake/Qt6Quick3D
 %{_libdir}/cmake/Qt6Quick3DPrivate
 %{_libdir}/cmake/Qt6Quick3DAssetImport
@@ -7125,6 +7147,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6Quick3DPhysicsHelpers.prl
 %{_includedir}/qt6/QtQuick3DPhysics
 %{_includedir}/qt6/QtQuick3DPhysicsHelpers
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtQuick3DPhysicsTestsConfig.cmake
 %{_libdir}/cmake/Qt6Quick3DPhysics
 %{_libdir}/cmake/Qt6Quick3DPhysicsPrivate
 %{_libdir}/cmake/Qt6Quick3DPhysicsHelpers
@@ -7174,6 +7197,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6RemoteObjects.pc
 %{_pkgconfigdir}/Qt6RemoteObjectsQml.pc
 %{_pkgconfigdir}/Qt6RepParser.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtRemoteObjectsTestsConfig.cmake
 %{_libdir}/cmake/Qt6RemoteObjects
 %{_libdir}/cmake/Qt6RemoteObjectsPrivate
 %{_libdir}/cmake/Qt6RemoteObjectsQml
@@ -7231,6 +7255,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtScxmlQml
 %{_pkgconfigdir}/Qt6Scxml.pc
 %{_pkgconfigdir}/Qt6ScxmlQml.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtScxmlTestsConfig.cmake
 %{_libdir}/cmake/Qt6Scxml
 %{_libdir}/cmake/Qt6ScxmlPrivate
 %{_libdir}/cmake/Qt6ScxmlGlobalPrivate
@@ -7283,6 +7308,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtSensorsQuick
 %{_pkgconfigdir}/Qt6Sensors.pc
 %{_pkgconfigdir}/Qt6SensorsQuick.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtSensorsTestsConfig.cmake
 %{_libdir}/cmake/Qt6Sensors
 %{_libdir}/cmake/Qt6SensorsPrivate
 %{_libdir}/cmake/Qt6SensorsQuick
@@ -7324,6 +7350,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6SerialBus.prl
 %{_includedir}/qt6/QtSerialBus
 %{_pkgconfigdir}/Qt6SerialBus.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtSerialBusTestsConfig.cmake
 %{_libdir}/cmake/Qt6SerialBus
 %{_libdir}/cmake/Qt6SerialBusPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_serialbus.pri
@@ -7352,6 +7379,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6SerialPort.prl
 %{_includedir}/qt6/QtSerialPort
 %{_pkgconfigdir}/Qt6SerialPort.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtSerialPortTestsConfig.cmake
 %{_libdir}/cmake/Qt6SerialPort
 %{_libdir}/cmake/Qt6SerialPortPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_serialport.pri
@@ -7415,6 +7443,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6ShaderTools.so
 %{_libdir}/libQt6ShaderTools.prl
 %{_includedir}/qt6/QtShaderTools
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtShaderToolsTestsConfig.cmake
 %{_libdir}/cmake/Qt6ShaderTools
 %{_libdir}/cmake/Qt6ShaderToolsPrivate
 %{_libdir}/cmake/Qt6ShaderToolsTools
@@ -7524,6 +7553,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtSvgWidgets
 %{_pkgconfigdir}/Qt6Svg.pc
 %{_pkgconfigdir}/Qt6SvgWidgets.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtSvgTestsConfig.cmake
 %{_libdir}/cmake/Qt6Svg
 %{_libdir}/cmake/Qt6SvgPrivate
 %{_libdir}/cmake/Qt6SvgWidgets
@@ -7561,7 +7591,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtTest
 %{_pkgconfigdir}/Qt6Test.pc
 %{_libdir}/cmake/Qt6BuildInternals/QtStandaloneTestTemplateProject
-%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtBaseTestsConfig.cmake
 %{_libdir}/cmake/Qt6Test
 %{_libdir}/cmake/Qt6TestPrivate
 %attr(755,root,root) %{qt6dir}/libexec/qt-internal-configure-tests
@@ -7617,6 +7647,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6TextToSpeech.prl
 %{_includedir}/qt6/QtTextToSpeech
 %{_pkgconfigdir}/Qt6TextToSpeech.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtSpeechTestsConfig.cmake
 %{_libdir}/cmake/Qt6TextToSpeech
 %{_libdir}/cmake/Qt6TextToSpeechPrivate
 %{qt6dir}/metatypes/qt6texttospeech_pld_metatypes.json
@@ -7757,6 +7788,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6VirtualKeyboard.pc
 %{_pkgconfigdir}/Qt6VirtualKeyboardQml.pc
 %{_pkgconfigdir}/Qt6VirtualKeyboardSettings.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtVirtualKeyboardTestsConfig.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QVirtualKeyboardPlugin*.cmake
 %{_libdir}/cmake/Qt6HunspellInputMethod
 %{_libdir}/cmake/Qt6HunspellInputMethodPrivate
@@ -7800,6 +7832,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6Wayland-devel
 %defattr(644,root,root,755)
 %{_includedir}/qt6/QtWaylandGlobal
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtWaylandTestsConfig.cmake
 %{_libdir}/cmake/Qt6WaylandGlobalPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_waylandglobal_private.pri
 %{qt6dir}/modules/WaylandGlobalPrivate.json
@@ -8029,6 +8062,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtWebChannelQuick
 %{_pkgconfigdir}/Qt6WebChannel.pc
 %{_pkgconfigdir}/Qt6WebChannelQuick.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtWebChannelTestsConfig.cmake
 %{_libdir}/cmake/Qt6WebChannel
 %{_libdir}/cmake/Qt6WebChannelPrivate
 %{_libdir}/cmake/Qt6WebChannelQuick
@@ -8146,6 +8180,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6WebEngineQuick.pc
 %{_pkgconfigdir}/Qt6WebEngineQuickDelegatesQml.pc
 %{_pkgconfigdir}/Qt6WebEngineWidgets.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtWebEngineTestsConfig.cmake
 %{_libdir}/cmake/Qt6WebEngineCore
 %{_libdir}/cmake/Qt6WebEngineCorePrivate
 %{_libdir}/cmake/Qt6WebEngineCoreTools
@@ -8203,6 +8238,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6WebSockets.prl
 %{_includedir}/qt6/QtWebSockets
 %{_pkgconfigdir}/Qt6WebSockets.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtWebSocketsTestsConfig.cmake
 %{_libdir}/cmake/Qt6WebSockets
 %{_libdir}/cmake/Qt6WebSocketsPrivate
 %{qt6dir}/metatypes/qt6websockets_pld_metatypes.json
@@ -8242,6 +8278,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtWebViewQuick
 %{_pkgconfigdir}/Qt6WebView.pc
 %{_pkgconfigdir}/Qt6WebViewQuick.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtWebViewTestsConfig.cmake
 %{_libdir}/cmake/Qt6WebView
 %{_libdir}/cmake/Qt6WebViewPrivate
 %{_libdir}/cmake/Qt6WebViewQuick

@@ -26,6 +26,7 @@
 #   %{_datadir}/qt6/translations/catalogs.json
 #
 # - -doc/-doc-qch mess: make packages per library (then split qt6-doc and qt6-doc-qch) or per submodule (like in qt5)?
+# - move files out of Qt6Qml/Qt6Qml-devel to packages they belong to
 #
 # Conditional build:
 # -- build targets

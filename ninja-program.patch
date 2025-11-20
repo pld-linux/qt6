@@ -1,11 +1,11 @@
---- qt-everywhere-src-6.3.1/qtwebengine/src/CMakeLists.txt.orig	2022-06-08 08:40:31.000000000 +0200
-+++ qt-everywhere-src-6.3.1/qtwebengine/src/CMakeLists.txt	2022-07-27 21:47:18.766238322 +0200
-@@ -137,6 +137,8 @@
-                    -DQT_FEATURE_qtwebengine_build=${QT_FEATURE_qtwebengine_build}
-                    -DQT_FEATURE_qtpdf_build=${QT_FEATURE_qtpdf_build}
-                    -DGCC_LEGACY_SUPPORT=${QT_FEATURE_webengine_gcc_legacy_support}
+--- qt-everywhere-src-6.10.0/qtwebengine/cmake/Functions.cmake.orig	2025-10-02 02:36:39.000000000 +0200
++++ qt-everywhere-src-6.10.0/qtwebengine/cmake/Functions.cmake	2025-11-20 20:28:09.478389120 +0100
+@@ -549,6 +552,8 @@
+                    -DWEBENGINE_ROOT_BUILD_DIR=${PROJECT_BINARY_DIR}
+                    -DQT_ALLOW_SYMLINK_IN_PATHS=${QT_ALLOW_SYMLINK_IN_PATHS}
+                    -DPython3_EXECUTABLE=${Python3_EXECUTABLE}
 +                   -DNinja_EXECUTABLE:FILEPATH=${Ninja_EXECUTABLE}
 +                   -DCMAKE_MAKE_PROGRAM:FILEPATH=${CMAKE_MAKE_PROGRAM}
+                    -DGCC_LEGACY_SUPPORT=${QT_FEATURE_webengine_gcc_legacy_support}
      )
-     if(QT_FEATURE_qtwebengine_build)
-         add_dependencies(run_core_GnReady hostBuild)
+     unset(OSX_ARCH_STR)

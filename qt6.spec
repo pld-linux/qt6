@@ -70,6 +70,8 @@
 # -- system libraries
 %bcond_with	qtwebengine_system_ffmpeg	# use system FFmpeg in qtwebengine
 %bcond_with	qtwebengine_system_libvpx	# use system libvpx in qtwebengine (build fails QTBUG-129955)
+# -- build system
+%bcond_without	samurai				# use ninja instead of samurai
 
 %ifnarch %{ix86} %{x8664} x32 sparc sparcv9 alpha ppc
 %undefine	with_ibase
@@ -218,6 +220,7 @@ BuildRequires:	libxml2-devel
 BuildRequires:	minizip-devel
 BuildRequires:	mtdev-devel
 %{?with_mysql:BuildRequires:	mysql-devel}
+%{!?with_samurai:BuildRequires:	ninja >= 1.7.2}
 %{?with_qtwebengine:BuildRequires:	nodejs >= 14.9}
 %{?with_qtwebengine:BuildRequires:	nss-devel >= 3.26}
 %{?with_qtwebengine:BuildRequires:	openjpeg2-devel}
@@ -241,7 +244,7 @@ BuildRequires:	python3-modules >= 1:3.8
 BuildRequires:	re2-devel >=  20230601
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 2.047
-BuildRequires:	samurai
+%{?with_samurai:BuildRequires:	samurai}
 BuildRequires:	sed >= 4.0
 BuildRequires:	snappy-devel
 BuildRequires:	speech-dispatcher-devel
@@ -3831,7 +3834,7 @@ narzędzia.
 	-DBUILD_qtquick3d=%{__ON_OFF qtquick3d} \
 	-DBUILD_qtquick3dphysics=%{__ON_OFF qtquick3dphysics} \
 	-DBUILD_qtwebengine=%{__ON_OFF qtwebengine} \
-	-DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/samu \
+	%{?with_samurai:-DCMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/samu} \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
 	-DINSTALL_ARCHDATADIR=%{qt6dir} \
 	-DINSTALL_BINDIR=%{qt6dir}/bin \
@@ -3846,7 +3849,7 @@ narzędzia.
 	-DINSTALL_QMLDIR=%{qt6dir}/qml \
 	-DINSTALL_SYSCONFDIR=%{_sysconfdir}/qt6 \
 	-DINSTALL_TRANSLATIONSDIR=%{_datadir}/qt6/translations \
-	-DNinja_EXECUTABLE:FILEPATH=/usr/bin/samu \
+	%{?with_samurai:-DNinja_EXECUTABLE:FILEPATH=/usr/bin/samu} \
 	%{?with_oci:-DOracle_INCLUDE_DIR=%{_includedir}/oracle/client} \
 	-DQT_BUILD_EXAMPLES=OFF \
 	-DQT_DISABLE_RPATH=TRUE \
@@ -3930,7 +3933,7 @@ narzędzia.
 
 # Make sure arg-less sub-invocations will follow our parallel build setting
 export CMAKE_BUILD_PARALLEL_LEVEL="%__jobs"
-export SAMUFLAGS="%{_smp_mflags}"
+%{?with_samurai:export SAMUFLAGS="%{_smp_mflags}"}
 export VERBOSE=1
 export CFLAGS="%{rpmcflags}"
 export CXXFLAGS="%{rpmcxxflags}"

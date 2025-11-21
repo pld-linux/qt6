@@ -8,7 +8,7 @@
 +#elif (defined(Q_PROCESSOR_X86_64) && !defined(__ILP32__)) && ((defined(Q_OS_LINUX) && defined(__GLIBC__)) || defined(Q_OS_FREEBSD))
      // x86_64 Linux, BSD uses FS
      __asm__("mov %%fs:%c1, %0" : "=r" (tid) : "i" (2 * sizeof(void*)) : );
- #elif defined(Q_PROCESSOR_X86_64) && defined(Q_OS_WIN)
+ #elif defined(Q_PROCESSOR_X86_64) && defined(Q_OS_WIN) && defined(Q_CC_MSVC)
 --- qt-everywhere-src-6.4.0/qtquick3d/src/3rdparty/embree/common/sys/platform.h.orig	2022-09-23 17:56:15.000000000 +0200
 +++ qt-everywhere-src-6.4.0/qtquick3d/src/3rdparty/embree/common/sys/platform.h	2022-11-04 18:30:31.728307534 +0100
 @@ -32,7 +32,7 @@

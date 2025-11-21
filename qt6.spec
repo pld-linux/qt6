@@ -128,12 +128,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.10.0
+Version:	6.10.1
 Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.10/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	1cbaf920517a11b345d0a33790b0b700
+# Source0-md5:	cb2c438c33e3f9e6a430d63c7ba0920a
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		arm-no-xnnpack.patch
@@ -3977,11 +3977,7 @@ DESTDIR=$RPM_BUILD_ROOT %{__cmake} --build build/ --target install_docs
 
 # bundled libs, not required by installed components - probably no need to package
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libQt6BundledResonanceAudio.a
-%{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6BundledOpenwnn
-%{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6BundledPinyin
 %{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6BundledResonanceAudio
-%{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6BundledTcime
-%{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6Bundled_Clip2Tri
 %ifarch %{x8664} aarch64
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libQt6BundledEmbree.a
 %{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6BundledEmbree
@@ -5898,7 +5894,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{qt6dir}/qml/Qt5Compat/GraphicalEffects
 %{qt6dir}/qml/Qt5Compat/GraphicalEffects/*.qml
 %attr(755,root,root) %{qt6dir}/qml/Qt5Compat/GraphicalEffects/libqtgraphicaleffectsplugin.so
-%{qt6dir}/qml/Qt5Compat/GraphicalEffects/plugins.qmltypes
+%{qt6dir}/qml/Qt5Compat/GraphicalEffects/qtgraphicaleffectsplugin.qmltypes
 %{qt6dir}/qml/Qt5Compat/GraphicalEffects/qmldir
 %dir %{qt6dir}/qml/Qt5Compat/GraphicalEffects/private
 %{qt6dir}/qml/Qt5Compat/GraphicalEffects/private/*.qml

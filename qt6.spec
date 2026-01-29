@@ -128,12 +128,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.10.1
-Release:	2
+Version:	6.10.2
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.10/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	cb2c438c33e3f9e6a430d63c7ba0920a
+# Source0-md5:	c888eeca204d8ee144d9c57c2df9f8f4
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		arm-no-xnnpack.patch
@@ -3815,7 +3815,11 @@ narzędzia.
 	qtwebchannel/examples/webchannel/qwclient/qwclient.js
 
 %{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+sh(\s|$),#!%{__sh}\1,' \
-	qtdoc/examples/demos/qtjennydemo/qtjenny_generator/gradlew
+	qtdoc/examples/demos/qtjennydemo/qtjenny_general/gradlew
+
+%{__sed} -E -i -e '1s,#!\s*/usr/bin/env\s+bash(\s|$),#!%{__bash}\1,' \
+	qtdoc/examples/demos/qtjennydemo/qtjenny_callback/gradlew \
+	qtdoc/examples/demos/qtjennydemo/qtjenny_baseclass/gradlew
 
 %if %(echo %{cxx_version} | cut -d. -f1) < 9
 # available since gcc 9

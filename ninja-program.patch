@@ -1,7 +1,7 @@
---- qt-everywhere-src-6.10.0/qtwebengine/cmake/Functions.cmake.orig	2025-10-02 02:36:39.000000000 +0200
-+++ qt-everywhere-src-6.10.0/qtwebengine/cmake/Functions.cmake	2025-11-20 20:28:09.478389120 +0100
-@@ -549,6 +552,8 @@
-                    -DWEBENGINE_ROOT_BUILD_DIR=${PROJECT_BINARY_DIR}
+--- qt-everywhere-src-6.10.3/qtwebengine/cmake/Functions.cmake.orig	2026-03-30 14:29:09.000000000 +0200
++++ qt-everywhere-src-6.10.3/qtwebengine/cmake/Functions.cmake	2026-04-02 12:03:21.328240391 +0200
+@@ -654,6 +654,8 @@
+                    -DCMAKE_VERBOSE_MAKEFILE=${CMAKE_VERBOSE_MAKEFILE}
                     -DQT_ALLOW_SYMLINK_IN_PATHS=${QT_ALLOW_SYMLINK_IN_PATHS}
                     -DPython3_EXECUTABLE=${Python3_EXECUTABLE}
 +                   -DNinja_EXECUTABLE:FILEPATH=${Ninja_EXECUTABLE}

@@ -128,12 +128,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.10.2
-Release:	2
+Version:	6.10.3
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.10/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	c888eeca204d8ee144d9c57c2df9f8f4
+# Source0-md5:	1299e6054496de364f56e8e6dcc0e5e9
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		arm-no-xnnpack.patch
@@ -141,7 +141,7 @@ Patch3:		no-implicit-sse2.patch
 Patch4:		x32.patch
 Patch5:		qtwebengine-cmake-build-type.patch
 Patch6:		qtquick3d-6.6.2-gcc14.patch
-Patch7:		glibc2.43.patch
+Patch7:		glib2.78-glibc2.43.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -7997,6 +7997,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6WaylandCompositorPresentationTime.pc
 %{_pkgconfigdir}/Qt6WaylandCompositorWLShell.pc
 %{_pkgconfigdir}/Qt6WaylandCompositorXdgShell.pc
+%{_libdir}/cmake/Qt6Gui/Qt6QWaylandIviShellIntegrationPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QWaylandQtShellIntegrationPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QWaylandWlShellIntegrationPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QWaylandXdgShellIntegrationPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6ShmServerBufferPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6VulkanServerBufferPlugin*.cmake
 %{_libdir}/cmake/Qt6WaylandCompositor
 %{_libdir}/cmake/Qt6WaylandCompositorPrivate
 %{_libdir}/cmake/Qt6WaylandCompositorIviapplication
@@ -8080,7 +8086,13 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6WaylandClient.prl
 %{_includedir}/qt6/QtWaylandClient
 %{_pkgconfigdir}/Qt6WaylandClient.pc
+%{_libdir}/cmake/Qt6Gui/Qt6DmaBufServerBufferPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6DrmEglServerBufferPlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QWaylandIntegrationPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QWaylandAdwaitaDecorationPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QWaylandBradientDecorationPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QWaylandEglClientBufferPlugin*.cmake
+%{_libdir}/cmake/Qt6Gui/Qt6QWaylandFullScreenShellV1IntegrationPlugin*.cmake
 %{_libdir}/cmake/Qt6WaylandClient
 %{_libdir}/cmake/Qt6WaylandClientPrivate
 %{_libdir}/cmake/Qt6WaylandClientFeaturesPrivate

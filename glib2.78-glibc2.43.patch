@@ -1,0 +1,11 @@
+--- qt-everywhere-src-6.10.3/qtpositioning/src/plugins/position/gypsy/qgeosatelliteinfosource_gypsy.cpp.orig	2026-03-30 13:38:37.000000000 +0200
++++ qt-everywhere-src-6.10.3/qtpositioning/src/plugins/position/gypsy/qgeosatelliteinfosource_gypsy.cpp	2026-04-02 12:48:44.437888803 +0200
+@@ -53,7 +53,7 @@
+ 
+ void SatelliteGypsyEngine::eng_g_free(gpointer mem)
+ {
+-    return ::g_free(mem);
++    return g_free(mem);
+ }
+ // Gypsy symbols
+ GypsyControl *SatelliteGypsyEngine::eng_gypsy_control_get_default (void)

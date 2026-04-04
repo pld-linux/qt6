@@ -128,12 +128,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.10.3
+Version:	6.11.0
 Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
-Source0:	https://download.qt.io/official_releases/qt/6.10/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	1299e6054496de364f56e8e6dcc0e5e9
+Source0:	https://download.qt.io/official_releases/qt/6.11/%{version}/single/qt-everywhere-src-%{version}.tar.xz
+# Source0-md5:	a93e9f424a9d11ee8d67bf8fb1af4772
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		arm-no-xnnpack.patch
@@ -210,8 +210,9 @@ BuildRequires:	libicu-devel >= %{icu_abi}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libmng-devel
 BuildRequires:	libpng-devel >= 2:1.6.0
-BuildRequires:	libstdc++-devel >= 6:8
+BuildRequires:	libstdc++-devel >= 6:10
 %{?with_qtwebengine:BuildRequires:	libtiff-devel >= 4.5.0}
+BuildRequires:	liburing-devel
 BuildRequires:	libva-devel
 %{?with_qtwebengine_system_libvpx:BuildRequires:	libvpx-devel >= 1.10.0}
 BuildRequires:	libwebp-devel
@@ -222,7 +223,7 @@ BuildRequires:	minizip-devel
 BuildRequires:	mtdev-devel
 %{?with_mysql:BuildRequires:	mysql-devel}
 %{!?with_samurai:BuildRequires:	ninja >= 1.7.2}
-%{?with_qtwebengine:BuildRequires:	nodejs >= 14.9}
+%{?with_qtwebengine:BuildRequires:	nodejs >= 20.0}
 %{?with_qtwebengine:BuildRequires:	nss-devel >= 3.26}
 %{?with_qtwebengine:BuildRequires:	openjpeg2-devel}
 BuildRequires:	openssl-devel >= 1.1.1
@@ -375,7 +376,7 @@ przy użyciu biblioteki Qt 6.
 Summary:	Translation helper for Qt 6
 Summary(pl.UTF-8):	Aplikacja ułatwiająca tłumaczenie aplikacji opartych na Qt 6
 Group:		X11/Development/Tools
-# lconvert,lprodump,lrelease*,lupdate-pro: Core
+# lconvert,lrelease*,lupdate-pro: Core
 # linguist: Core, Gui, PrintSupport, UiTools, Widgets
 # lupdate: Core, Qml, clang-libs, llvm-libs
 Requires:	Qt6Core = %{version}
@@ -579,6 +580,77 @@ Qt6 Bluetooth documentation in QCH format.
 
 %description -n Qt6Bluetooth-doc-qch -l pl.UTF-8
 Dokumentacja do biblioteki Qt6 Bluetooth w formacie QCH.
+
+%package -n qt6-canvaspainter
+Summary:	The Qt6 Canvas Painter library command line tools
+Summary(pl.UTF-8):	Narzędzia linii poleceń do biblioteki Qt6 Canvas Painter
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6CanvasPainter = %{version}
+
+%description -n qt6-canvaspainter
+The Qt6 Canvas Painter library command line tools.
+
+%description -n qt6-canvaspainter -l pl.UTF-8
+Narzędzia linii poleceń do biblioteki Qt6 Canvas Painter.
+
+%package -n Qt6CanvasPainter
+Summary:	The Qt6 CanvasPainter library
+Summary(pl.UTF-8):	Biblioteka Qt6 CanvasPainter
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Gui = %{version}
+Requires:	Qt6Widgets = %{version}
+Requires:	Qt6Quick = %{version}
+
+%description -n Qt6CanvasPainter
+Qt CanvasPainter module provides provides classes for
+hardware-accelerated imperative 2D painting.
+
+%description -n Qt6CanvasPainter -l pl.UTF-8
+Biblioteka Qt6 CanvasPainter udostępnia klasy do imperatywnego
+rysowania 2D wspieranego sprzętowo.
+
+%package -n Qt6CanvasPainter-devel
+Summary:	Qt6 CanvasPainter library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 CanvasPainter - pliki programistyczne
+Group:		Development/Libraries
+Requires:	Qt6CanvasPainter = %{version}
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6Widgets-devel = %{version}
+
+%description -n Qt6CanvasPainter-devel
+Qt6 CanvasPainter library - development files.
+
+%description -n Qt6CanvasPainter-devel -l pl.UTF-8
+Biblioteka Qt6 CanvasPainter - pliki programistyczne.
+
+%package -n Qt6CanvasPainter-doc
+Summary:	Qt6 CanvasPainter documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 CanvasPainter w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6CanvasPainter-doc
+Qt6 CanvasPainter documentation in HTML format.
+
+%description -n Qt6CanvasPainter-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 CanvasPainter w formacie HTML.
+
+%package -n Qt6CanvasPainter-doc-qch
+Summary:	Qt6 CanvasPainter documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 CanvasPainter w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6CanvasPainter-doc-qch
+Qt6 CanvasPainter documentation in QCH format.
+
+%description -n Qt6CanvasPainter-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 CanvasPainter w formacie QCH.
 
 %package -n Qt6Charts
 Summary:	The Qt6 Charts library
@@ -3084,6 +3156,65 @@ Qt6 Svg documentation in QCH format.
 %description -n Qt6Svg-doc-qch -l pl.UTF-8
 Dokumentacja do biblioteki Qt6 Svg w formacie QCH.
 
+%package -n Qt6TaskTree
+Summary:	The Qt6 TaskTree library
+Summary(pl.UTF-8):	Biblioteka Qt6 TaskTree
+Group:		Libraries
+Requires:	Qt6Core = %{version}
+Requires:	Qt6Network = %{version}
+
+%description -n Qt6TaskTree
+Qt6 TaskTree library provides a declarative way to compose and execute
+asynchronous task workflows with proper error handling and execution
+policies.
+
+%description -n Qt6TaskTree -l pl.UTF-8
+Biblioteka Qt6 TaskTree udostępnia deklaratywny sposób tworzenia i
+wykonywania asynchronicznych przepływów zadań z właściwą obsługą
+błędów oraz politykami wykonania.
+
+%package -n Qt6TaskTree-devel
+Summary:	Qt6 TaskTree library - development files
+Summary(pl.UTF-8):	Biblioteka Qt6 TaskTree - pliki programistyczne
+Group:		X11/Development/Libraries
+Requires:	Qt6Core-devel = %{version}
+Requires:	Qt6Gui-devel = %{version}
+Requires:	Qt6TaskTree = %{version}
+Requires:	Qt6Widgets-devel = %{version}
+Requires:	zlib-devel
+
+%description -n Qt6TaskTree-devel
+Qt6 TaskTree library - development files.
+
+%description -n Qt6TaskTree-devel -l pl.UTF-8
+Biblioteka Qt6 TaskTree - pliki programistyczne.
+
+%package -n Qt6TaskTree-doc
+Summary:	Qt6 TaskTree documentation in HTML format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 TaskTree w formacie HTML
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6TaskTree-doc
+Qt6 TaskTree documentation in HTML format.
+
+%description -n Qt6TaskTree-doc -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 TaskTree w formacie HTML.
+
+%package -n Qt6TaskTree-doc-qch
+Summary:	Qt6 TaskTree documentation in QCH format
+Summary(pl.UTF-8):	Dokumentacja do biblioteki Qt6 TaskTree w formacie QCH
+Group:		Documentation
+Requires:	qt6-doc-common = %{version}
+BuildArch:	noarch
+
+%description -n Qt6TaskTree-doc-qch
+Qt6 TaskTree documentation in QCH format.
+
+%description -n Qt6TaskTree-doc-qch -l pl.UTF-8
+Dokumentacja do biblioteki Qt6 TaskTree w formacie QCH.
+
 %package -n Qt6Test
 Summary:	Qt6 Test library
 Summary(pl.UTF-8):	Biblioteka Qt6 Test
@@ -3973,7 +4104,6 @@ DESTDIR=$RPM_BUILD_ROOT %{__cmake} --build build/ --target install_docs
 # junk
 %{__rm} -r $RPM_BUILD_ROOT%{_libdir}/objects-PLD
 %{__rm} -r $RPM_BUILD_ROOT%{qt6dir}/mkspecs/qtdoc_dummy_file.txt
-%{__rm} $RPM_BUILD_ROOT%{qt6dir}/libexec/sanitizer-testrunner.py
 %{__rm} -r $RPM_BUILD_ROOT%{qt6dir}/qml/Qt/labs/assetdownloader/objects-PLD
 %{__rm} -r $RPM_BUILD_ROOT%{qt6dir}/qml/Qt/test/controls/objects-PLD
 
@@ -4008,11 +4138,16 @@ cd $RPM_BUILD_ROOT%{_bindir}
 for prog in \
 assistant \
 designer \
+lcheck \
 lconvert \
 linguist \
 lrelease \
+lrelease-pro \
+ltext2id \
 lupdate \
+lupdate-pro \
 pixeltool \
+qcshadergen \
 qdbus \
 qdbuscpp2xml \
 qdbusviewer \
@@ -4021,6 +4156,7 @@ qdistancefieldgenerator \
 qdoc \
 qmake \
 qml \
+qmlcontextpropertydump \
 qmleasing \
 qmlformat \
 qmllint \
@@ -4039,9 +4175,6 @@ qtplugininfo ; do
 	ln -sf ../%{_lib}/qt6/bin/${prog} ${prog}-qt6
 done
 for prog in \
-lprodump \
-lrelease-pro \
-lupdate-pro \
 moc \
 qhelpgenerator \
 qlalr \
@@ -4112,6 +4245,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %post	-n Qt6Bluetooth -p /sbin/ldconfig
 %postun	-n Qt6Bluetooth -p /sbin/ldconfig
+
+%post	-n Qt6CanvasPainter -p /sbin/ldconfig
+%postun	-n Qt6CanvasPainter -p /sbin/ldconfig
 
 %post	-n Qt6Charts -p /sbin/ldconfig
 %postun	-n Qt6Charts -p /sbin/ldconfig
@@ -4245,6 +4381,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-n Qt6Svg -p /sbin/ldconfig
 %postun	-n Qt6Svg -p /sbin/ldconfig
 
+%post	-n Qt6TaskTree -p /sbin/ldconfig
+%postun	-n Qt6TaskTree -p /sbin/ldconfig
+
 %post	-n Qt6Test -p /sbin/ldconfig
 %postun	-n Qt6Test -p /sbin/ldconfig
 
@@ -4289,12 +4428,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/qtplugininfo-qt6
 %attr(755,root,root) %{qt6dir}/bin/androiddeployqt
 %attr(755,root,root) %{qt6dir}/bin/androidtestrunner
+%attr(755,root,root) %{qt6dir}/bin/kmap2qmap
 %attr(755,root,root) %{qt6dir}/bin/pixeltool
 %attr(755,root,root) %{qt6dir}/bin/qtdiag
 %attr(755,root,root) %{qt6dir}/bin/qtdiag6
 %attr(755,root,root) %{qt6dir}/bin/qtpaths
 %attr(755,root,root) %{qt6dir}/bin/qtpaths6
 %attr(755,root,root) %{qt6dir}/bin/qtplugininfo
+%attr(755,root,root) %{qt6dir}/bin/wasmdeployqt
+%attr(755,root,root) %{qt6dir}/bin/wasmdeployqt6
 # devel?
 %{_includedir}/qt6/QtTools
 %{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtToolsTestsConfig.cmake
@@ -4321,20 +4463,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n qt6-linguist -f linguist.lang
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/lcheck-qt6
 %attr(755,root,root) %{_bindir}/lconvert-qt6
 %attr(755,root,root) %{_bindir}/linguist-qt6
-%attr(755,root,root) %{_bindir}/lprodump-qt6
 %attr(755,root,root) %{_bindir}/lrelease-pro-qt6
 %attr(755,root,root) %{_bindir}/lrelease-qt6
+%attr(755,root,root) %{_bindir}/ltext2id-qt6
 %attr(755,root,root) %{_bindir}/lupdate-pro-qt6
 %attr(755,root,root) %{_bindir}/lupdate-qt6
+%attr(755,root,root) %{qt6dir}/bin/lcheck
 %attr(755,root,root) %{qt6dir}/bin/lconvert
 %attr(755,root,root) %{qt6dir}/bin/linguist
 %attr(755,root,root) %{qt6dir}/bin/lrelease
+%attr(755,root,root) %{qt6dir}/bin/lrelease-pro
+%attr(755,root,root) %{qt6dir}/bin/ltext2id
 %attr(755,root,root) %{qt6dir}/bin/lupdate
-%attr(755,root,root) %{qt6dir}/libexec/lprodump
-%attr(755,root,root) %{qt6dir}/libexec/lrelease-pro
-%attr(755,root,root) %{qt6dir}/libexec/lupdate-pro
+%attr(755,root,root) %{qt6dir}/bin/lupdate-pro
 # devel?
 %{_datadir}/qt6/phrasebooks
 %{_libdir}/cmake/Qt6Linguist
@@ -4376,6 +4520,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/qmlaotstats-qt6
 %attr(755,root,root) %{_bindir}/qmlcachegen-qt6
+%attr(755,root,root) %{_bindir}/qmlcontextpropertydump-qt6
 %attr(755,root,root) %{_bindir}/qmleasing-qt6
 %attr(755,root,root) %{_bindir}/qmlformat-qt6
 %attr(755,root,root) %{_bindir}/qmlimportscanner-qt6
@@ -4389,6 +4534,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/qmltime-qt6
 %attr(755,root,root) %{_bindir}/qmltyperegistrar-qt6
 %attr(755,root,root) %{qt6dir}/bin/qml
+%attr(755,root,root) %{qt6dir}/bin/qmlcontextpropertydump
 %attr(755,root,root) %{qt6dir}/bin/qmleasing
 %attr(755,root,root) %{qt6dir}/bin/qmlformat
 %attr(755,root,root) %{qt6dir}/bin/qmllint
@@ -4670,6 +4816,41 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_docdir}/qt6-doc/qtbluetooth.qch
 %{_docdir}/qt6-doc/qtnfc.qch
+%endif
+
+%files -n qt6-canvaspainter
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/qcshadergen-qt6
+%attr(755,root,root) %{qt6dir}/bin/qcshadergen
+
+%files -n Qt6CanvasPainter
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6CanvasPainter.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6CanvasPainter.so.6
+
+%files -n Qt6CanvasPainter-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6CanvasPainter.so
+%{_libdir}/libQt6CanvasPainter.prl
+%{_includedir}/qt6/QtCanvasPainter
+%{_pkgconfigdir}/Qt6CanvasPainter.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtCanvasPainterTestsConfig.cmake
+%{_libdir}/cmake/Qt6CanvasPainter
+%{_libdir}/cmake/Qt6CanvasPainterPrivate
+%{_libdir}/cmake/Qt6CanvasPainterTools
+%{qt6dir}/metatypes/qt6canvaspainter_metatypes.json
+%{qt6dir}/mkspecs/modules/qt_lib_canvaspainter.pri
+%{qt6dir}/mkspecs/modules/qt_lib_canvaspainter_private.pri
+%{qt6dir}/modules/CanvasPainter.json
+
+%if %{with doc}
+%files -n Qt6CanvasPainter-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtcanvaspainter
+
+%files -n Qt6CanvasPainter-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtcanvaspainter.qch
 %endif
 
 %files -n Qt6Charts
@@ -5525,6 +5706,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6Network.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Network.so.6
 %dir %{qt6dir}/plugins/networkinformation
+%attr(755,root,root) %{qt6dir}/plugins/networkinformation/libqconnman.so
 %attr(755,root,root) %{qt6dir}/plugins/networkinformation/libqglib.so
 %attr(755,root,root) %{qt6dir}/plugins/networkinformation/libqnetworkmanager.so
 %dir %{qt6dir}/plugins/tls
@@ -5982,6 +6164,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_native.so
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_nativedebugger.so
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_profiler.so
+%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_quickeventreplay.so
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_server.so
 %attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_tcp.so
 
@@ -6096,7 +6279,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6StateMachine.so
 %attr(755,root,root) %{_libdir}/libQt6StateMachineQml.so
 # static-only
-%{_libdir}/libQt6ExamplesAssetDownloader.a
 %{_libdir}/libQt6PacketProtocol.a
 %{_libdir}/libQt6QmlAssetDownloader.a
 %{_libdir}/libQt6QmlDebug.a
@@ -6105,7 +6287,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6QmlLS.a
 %{_libdir}/libQt6QmlToolingSettings.a
 %{_libdir}/libQt6QmlTypeRegistrar.a
-%{_libdir}/libQt6ExamplesAssetDownloader.prl
 %{_libdir}/libQt6LabsAnimation.prl
 %{_libdir}/libQt6LabsFolderListModel.prl
 %{_libdir}/libQt6LabsPlatform.prl
@@ -6131,7 +6312,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6QmlXmlListModel.prl
 %{_libdir}/libQt6StateMachine.prl
 %{_libdir}/libQt6StateMachineQml.prl
-%{_includedir}/qt6/QtExamplesAssetDownloader
 %{_includedir}/qt6/QtLabsAnimation
 %{_includedir}/qt6/QtLabsFolderListModel
 %{_includedir}/qt6/QtLabsPlatform
@@ -6165,7 +6345,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6LabsSettings.pc
 %{_pkgconfigdir}/Qt6LabsSynchronizer.pc
 %{_pkgconfigdir}/Qt6Qml.pc
-%{_pkgconfigdir}/Qt6QmlAssetDownloader.pc
 %{_pkgconfigdir}/Qt6QmlCompiler.pc
 %{_pkgconfigdir}/Qt6QmlCore.pc
 %{_pkgconfigdir}/Qt6QmlIntegration.pc
@@ -6178,7 +6357,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6StateMachine.pc
 %{_pkgconfigdir}/Qt6StateMachineQml.pc
 %{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtDeclarativeTestsConfig.cmake
-%{_libdir}/cmake/Qt6ExamplesAssetDownloaderPrivate
 %{_libdir}/cmake/Qt6LabsAnimation
 %{_libdir}/cmake/Qt6LabsAnimationPrivate
 %{_libdir}/cmake/Qt6LabsFolderListModel
@@ -6193,7 +6371,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6LabsSynchronizerPrivate
 %{_libdir}/cmake/Qt6PacketProtocolPrivate
 %{_libdir}/cmake/Qt6Qml
-%{_libdir}/cmake/Qt6QmlAssetDownloader
 %{_libdir}/cmake/Qt6QmlAssetDownloaderPrivate
 %{_libdir}/cmake/Qt6QmlPrivate
 %{_libdir}/cmake/Qt6QmlCompiler
@@ -6225,7 +6402,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6StateMachinePrivate
 %{_libdir}/cmake/Qt6StateMachineQml
 %{_libdir}/cmake/Qt6StateMachineQmlPrivate
-%{qt6dir}/metatypes/qt6examplesassetdownloaderprivate_metatypes.json
 %{qt6dir}/metatypes/qt6labsanimation_metatypes.json
 %{qt6dir}/metatypes/qt6labsfolderlistmodel_metatypes.json
 %{qt6dir}/metatypes/qt6labsplatform_metatypes.json
@@ -6234,7 +6410,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/metatypes/qt6labssynchronizer_metatypes.json
 %{qt6dir}/metatypes/qt6packetprotocolprivate_metatypes.json
 %{qt6dir}/metatypes/qt6qml_metatypes.json
-%{qt6dir}/metatypes/qt6qmlassetdownloader_metatypes.json
+%{qt6dir}/metatypes/qt6qmlassetdownloaderprivate_metatypes.json
 %{qt6dir}/metatypes/qt6qmlcompiler_metatypes.json
 %{qt6dir}/metatypes/qt6qmlcore_metatypes.json
 %{qt6dir}/metatypes/qt6qmldebugprivate_metatypes.json
@@ -6253,7 +6429,6 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/metatypes/qt6statemachineqml_metatypes.json
 %{qt6dir}/mkspecs/features/qmlcache.prf
 %{qt6dir}/mkspecs/features/qmltypes.prf
-%{qt6dir}/mkspecs/modules/qt_lib_examples_asset_downloader_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labsanimation.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labsanimation_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labsfolderlistmodel.pri
@@ -6267,7 +6442,6 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_labssynchronizer.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labssynchronizer_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_packetprotocol_private.pri
-%{qt6dir}/mkspecs/modules/qt_lib_qmlassetdownloader.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlassetdownloader_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlcompiler.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmlcompiler_private.pri
@@ -6300,7 +6474,6 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_statemachine_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_statemachineqml.pri
 %{qt6dir}/mkspecs/modules/qt_lib_statemachineqml_private.pri
-%{qt6dir}/modules/ExamplesAssetDownloaderPrivate.json
 %{qt6dir}/modules/LabsAnimation.json
 %{qt6dir}/modules/LabsFolderListModel.json
 %{qt6dir}/modules/LabsPlatform.json
@@ -6309,7 +6482,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/LabsSynchronizer.json
 %{qt6dir}/modules/PacketProtocolPrivate.json
 %{qt6dir}/modules/Qml.json
-%{qt6dir}/modules/QmlAssetDownloader.json
+%{qt6dir}/modules/QmlAssetDownloaderPrivate.json
 %{qt6dir}/modules/QmlCompiler.json
 %{qt6dir}/modules/QmlCore.json
 %{qt6dir}/modules/QmlDebugPrivate.json
@@ -6327,8 +6500,8 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/QmlXmlListModel.json
 %{qt6dir}/modules/StateMachine.json
 %{qt6dir}/modules/StateMachineQml.json
-%{qt6dir}/qml/Qt/labs/assetdownloader/libqmlassetdownloaderplugin.a
-%{qt6dir}/qml/Qt/labs/assetdownloader/libqmlassetdownloaderplugin.prl
+%{qt6dir}/qml/Qt/labs/assetdownloader/libqmlassetdownloaderprivateplugin.a
+%{qt6dir}/qml/Qt/labs/assetdownloader/libqmlassetdownloaderprivateplugin.prl
 
 %if %{with doc}
 %files -n Qt6Qml-doc
@@ -6360,6 +6533,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6LabsSharedImage.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6LabsSharedImage.so.6
+%attr(755,root,root) %{_libdir}/libQt6LabsStyleKit.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6LabsStyleKit.so.6
+%attr(755,root,root) %{_libdir}/libQt6LabsStyleKitImpl.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6LabsStyleKitImpl.so.6
 %attr(755,root,root) %{_libdir}/libQt6LabsWavefrontMesh.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6LabsWavefrontMesh.so.6
 %attr(755,root,root) %{_libdir}/libQt6Quick.so.*.*.*
@@ -6439,6 +6616,17 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/Qt/labs/sharedimage/plugins.qmltypes
 %{qt6dir}/qml/Qt/labs/sharedimage/qmldir
 
+%dir %{qt6dir}/qml/Qt/labs/StyleKit
+%attr(755,root,root) %{qt6dir}/qml/Qt/labs/StyleKit/liblabsstylekitplugin.so
+%{qt6dir}/qml/Qt/labs/StyleKit/*.qml
+%{qt6dir}/qml/Qt/labs/StyleKit/plugins.qmltypes
+%{qt6dir}/qml/Qt/labs/StyleKit/qmldir
+%dir %{qt6dir}/qml/Qt/labs/StyleKit/impl
+%attr(755,root,root) %{qt6dir}/qml/Qt/labs/StyleKit/impl/liblabsstylekitimplplugin.so
+%{qt6dir}/qml/Qt/labs/StyleKit/impl/*.qml
+%{qt6dir}/qml/Qt/labs/StyleKit/impl/plugins.qmltypes
+%{qt6dir}/qml/Qt/labs/StyleKit/impl/qmldir
+
 %dir %{qt6dir}/qml/Qt/labs/wavefrontmesh
 %attr(755,root,root) %{qt6dir}/qml/Qt/labs/wavefrontmesh/libqmlwavefrontmeshplugin.so
 %{qt6dir}/qml/Qt/labs/wavefrontmesh/plugins.qmltypes
@@ -6458,6 +6646,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Basic/libqtquickcontrols2basicstyleplugin.so
 %dir %{qt6dir}/qml/QtQuick/Controls/Basic/impl
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Basic/impl/libqtquickcontrols2basicstyleimplplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Basic/impl/*.qml
 %{qt6dir}/qml/QtQuick/Controls/Basic/impl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Basic/impl/qmldir
 
@@ -6524,6 +6713,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %dir %{qt6dir}/qml/QtQuick/Controls/impl
 %attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/impl/libqtquickcontrols2implplugin.so
+%{qt6dir}/qml/QtQuick/Controls/impl/*.qml
 %{qt6dir}/qml/QtQuick/Controls/impl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/impl/qmldir
 
@@ -6612,6 +6802,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6QuickControlsTestUtils.a
 %{_libdir}/libQt6QuickTestUtils.a
 %attr(755,root,root) %{_libdir}/libQt6LabsSharedImage.so
+%attr(755,root,root) %{_libdir}/libQt6LabsStyleKit.so
+%attr(755,root,root) %{_libdir}/libQt6LabsStyleKitImpl.so
 %attr(755,root,root) %{_libdir}/libQt6LabsWavefrontMesh.so
 %attr(755,root,root) %{_libdir}/libQt6Quick.so
 %attr(755,root,root) %{_libdir}/libQt6QuickEffects.so
@@ -6644,6 +6836,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6QuickVectorImageHelpers.so
 %attr(755,root,root) %{_libdir}/libQt6QuickWidgets.so
 %{_libdir}/libQt6LabsSharedImage.prl
+%{_libdir}/libQt6LabsStyleKit.prl
+%{_libdir}/libQt6LabsStyleKitImpl.prl
 %{_libdir}/libQt6LabsWavefrontMesh.prl
 %{_libdir}/libQt6Quick.prl
 %{_libdir}/libQt6QuickControls2.prl
@@ -6678,8 +6872,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6QuickVectorImageHelpers.prl
 %{_libdir}/libQt6QuickWidgets.prl
 %{qt6dir}/metatypes/qt6quick_metatypes.json
+%{qt6dir}/metatypes/qt6quickshapes_metatypes.json
 %{qt6dir}/metatypes/qt6quicktest_metatypes.json
 %{_includedir}/qt6/QtLabsSharedImage
+%{_includedir}/qt6/QtLabsStyleKit
+%{_includedir}/qt6/QtLabsStyleKitImpl
 %{_includedir}/qt6/QtLabsWavefrontMesh
 %{_includedir}/qt6/QtQuick
 %{_includedir}/qt6/QtQuickControls2
@@ -6714,6 +6911,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtQuickVectorImageHelpers
 %{_includedir}/qt6/QtQuickWidgets
 %{_pkgconfigdir}/Qt6LabsSharedImage.pc
+%{_pkgconfigdir}/Qt6LabsStyleKit.pc
+%{_pkgconfigdir}/Qt6LabsStyleKitImpl.pc
 %{_pkgconfigdir}/Qt6LabsWavefrontMesh.pc
 %{_pkgconfigdir}/Qt6Quick.pc
 %{_pkgconfigdir}/Qt6QuickTest.pc
@@ -6738,12 +6937,17 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6QuickDialogs2Utils.pc
 %{_pkgconfigdir}/Qt6QuickEffects.pc
 %{_pkgconfigdir}/Qt6QuickLayouts.pc
+%{_pkgconfigdir}/Qt6QuickShapes.pc
 %{_pkgconfigdir}/Qt6QuickTemplates2.pc
 %{_pkgconfigdir}/Qt6QuickVectorImage.pc
 %{_pkgconfigdir}/Qt6QuickVectorImageHelpers.pc
 %{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtQuickTimelineTestsConfig.cmake
 %{_libdir}/cmake/Qt6LabsSharedImage
 %{_libdir}/cmake/Qt6LabsSharedImagePrivate
+%{_libdir}/cmake/Qt6LabsStyleKit
+%{_libdir}/cmake/Qt6LabsStyleKitImpl
+%{_libdir}/cmake/Qt6LabsStyleKitImplPrivate
+%{_libdir}/cmake/Qt6LabsStyleKitPrivate
 %{_libdir}/cmake/Qt6LabsWavefrontMesh
 %{_libdir}/cmake/Qt6LabsWavefrontMeshPrivate
 %{_libdir}/cmake/Qt6Quick
@@ -6785,6 +6989,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6QuickLayouts
 %{_libdir}/cmake/Qt6QuickLayoutsPrivate
 %{_libdir}/cmake/Qt6QuickParticlesPrivate
+%{_libdir}/cmake/Qt6QuickShapes
 %{_libdir}/cmake/Qt6QuickShapesDesignHelpersPrivate
 %{_libdir}/cmake/Qt6QuickShapesPrivate
 %{_libdir}/cmake/Qt6QuickTemplates2
@@ -6807,6 +7012,10 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/features/qtquickcompiler.prf
 %{qt6dir}/mkspecs/modules/qt_lib_labssharedimage.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labssharedimage_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_labsstylekit.pri
+%{qt6dir}/mkspecs/modules/qt_lib_labsstylekit_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_labsstylekitimpl.pri
+%{qt6dir}/mkspecs/modules/qt_lib_labsstylekitimpl_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labswavefrontmesh.pri
 %{qt6dir}/mkspecs/modules/qt_lib_labswavefrontmesh_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickcontrols2.pri
@@ -6848,6 +7057,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_quickparticles_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quickshapes.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickshapes_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickshapesdesignhelpers_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quicktemplates2.pri
@@ -6865,6 +7075,8 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_quickvectorimagehelpers.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quickvectorimagehelpers_private.pri
 %{qt6dir}/modules/LabsSharedImage.json
+%{qt6dir}/modules/LabsStyleKit.json
+%{qt6dir}/modules/LabsStyleKitImpl.json
 %{qt6dir}/modules/LabsWavefrontMesh.json
 %{qt6dir}/modules/Quick.json
 %{qt6dir}/modules/QuickControls2.json
@@ -6887,8 +7099,8 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/QuickEffects.json
 %{qt6dir}/modules/QuickLayouts.json
 %{qt6dir}/modules/QuickParticlesPrivate.json
+%{qt6dir}/modules/QuickShapes.json
 %{qt6dir}/modules/QuickShapesDesignHelpersPrivate.json
-%{qt6dir}/modules/QuickShapesPrivate.json
 %{qt6dir}/modules/QuickTemplates2.json
 %{qt6dir}/modules/QuickTest.json
 %{qt6dir}/modules/QuickTestUtilsPrivate.json
@@ -6899,6 +7111,8 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/QuickVectorImageGeneratorPrivate.json
 %{qt6dir}/modules/QuickVectorImageHelpers.json
 %{qt6dir}/metatypes/qt6labssharedimage_metatypes.json
+%{qt6dir}/metatypes/qt6labsstylekit_metatypes.json
+%{qt6dir}/metatypes/qt6labsstylekitimpl_metatypes.json
 %{qt6dir}/metatypes/qt6labswavefrontmesh_metatypes.json
 %{qt6dir}/metatypes/qt6quickcontrols2_metatypes.json
 %{qt6dir}/metatypes/qt6quickcontrols2basic_metatypes.json
@@ -6921,7 +7135,6 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/metatypes/qt6quicklayouts_metatypes.json
 %{qt6dir}/metatypes/qt6quickparticlesprivate_metatypes.json
 %{qt6dir}/metatypes/qt6quickshapesdesignhelpersprivate_metatypes.json
-%{qt6dir}/metatypes/qt6quickshapesprivate_metatypes.json
 %{qt6dir}/metatypes/qt6quicktemplates2_metatypes.json
 %{qt6dir}/metatypes/qt6quicktestutilsprivate_metatypes.json
 %{qt6dir}/metatypes/qt6quicktimeline_metatypes.json
@@ -6976,6 +7189,7 @@ rm -rf $RPM_BUILD_ROOT
 %{?with_qtquick3dphysics:%attr(755,root,root) %{qt6dir}/bin/cooker}
 %attr(755,root,root) %{qt6dir}/bin/instancer
 %attr(755,root,root) %{qt6dir}/bin/materialeditor
+%attr(755,root,root) %{qt6dir}/bin/particleshadergen
 %attr(755,root,root) %{qt6dir}/bin/shadergen
 %attr(755,root,root) %{qt6dir}/bin/shapegen
 
@@ -7658,6 +7872,35 @@ rm -rf $RPM_BUILD_ROOT
 %{_docdir}/qt6-doc/qtsvg.qch
 %endif
 
+%files -n Qt6TaskTree
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6TaskTree.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libQt6TaskTree.so.6
+
+%files -n Qt6TaskTree-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libQt6TaskTree.so
+%{_libdir}/libQt6TaskTree.prl
+%{_includedir}/qt6/QtTaskTree
+%{_pkgconfigdir}/Qt6TaskTree.pc
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtTaskTreeTestsConfig.cmake
+%{_libdir}/cmake/Qt6TaskTree
+%{_libdir}/cmake/Qt6TaskTreePrivate
+%{qt6dir}/mkspecs/modules/qt_lib_tasktree.pri
+%{qt6dir}/mkspecs/modules/qt_lib_tasktree_private.pri
+%{qt6dir}/modules/TaskTree.json
+%{qt6dir}/metatypes/qt6tasktree_metatypes.json
+
+%if %{with doc}
+%files -n Qt6TaskTree-doc
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qttasktree
+
+%files -n Qt6TaskTree-doc-qch
+%defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qttasktree.qch
+%endif
+
 %files -n Qt6Test
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Test.so.*.*.*
@@ -7671,25 +7914,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6Test.pc
 %{_libdir}/cmake/Qt6BuildInternals/QtStandaloneTestTemplateProject
 %{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtBaseTestsConfig.cmake
+%{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtDocTestsConfig.cmake
 %{_libdir}/cmake/Qt6Test
 %{_libdir}/cmake/Qt6TestPrivate
 %attr(755,root,root) %{qt6dir}/libexec/qt-internal-configure-tests
-%attr(755,root,root) %{qt6dir}/libexec/qt-testrunner.py
 %{qt6dir}/metatypes/qt6test_metatypes.json
 %{qt6dir}/mkspecs/modules/qt_lib_testlib.pri
 %{qt6dir}/mkspecs/modules/qt_lib_testlib_private.pri
 %{qt6dir}/modules/Test.json
-
-# required by Qt6BuildInternals/StandaloneTests/QtBaseTestsConfig.cmake - separate package?
-#%files -n Qt6ExampleIcons-devel
-#%defattr(644,root,root,755)
-%{_libdir}/libQt6ExampleIcons.a
-%{_libdir}/libQt6ExampleIcons.prl
-%{_includedir}/qt6/QtExampleIcons
-%{_libdir}/cmake/Qt6ExampleIconsPrivate
-%{qt6dir}/metatypes/qt6exampleiconsprivate_metatypes.json
-%{qt6dir}/mkspecs/modules/qt_lib_example_icons_private.pri
-%{qt6dir}/modules/ExampleIconsPrivate.json
 
 # required by Qt6BuildInternals/StandaloneTests/QtToolsTestsConfig.cmake - separate package?
 #%files -n Qt6QDocCatch-devel
@@ -7947,6 +8179,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{qt6dir}/qml/QtWayland/Compositor/TextureSharingExtension
 %{qt6dir}/qml/QtWayland/Compositor/qmlfiles
 %attr(755,root,root) %{qt6dir}/qml/QtWayland/Compositor/TextureSharingExtension/libwaylandtexturesharingextensionplugin.so
+%{qt6dir}/qml/QtWayland/Compositor/TextureSharingExtension/plugins.qmltypes
 %{qt6dir}/qml/QtWayland/Compositor/TextureSharingExtension/qmldir
 %dir %{qt6dir}/qml/QtWayland/Compositor/IviApplication
 %attr(755,root,root) %{qt6dir}/qml/QtWayland/Compositor/IviApplication/libwaylandcompositoriviapplicationplugin.so
@@ -8078,6 +8311,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{qt6dir}/qml/QtWayland/Client
 %dir %{qt6dir}/qml/QtWayland/Client/TextureSharing
 %attr(755,root,root) %{qt6dir}/qml/QtWayland/Client/TextureSharing/libwaylandtexturesharingplugin.so
+%{qt6dir}/qml/QtWayland/Client/TextureSharing/plugins.qmltypes
 %{qt6dir}/qml/QtWayland/Client/TextureSharing/qmldir
 
 %files -n Qt6WaylandClient-devel
@@ -8134,6 +8368,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/qml/QtWebChannel/libwebchannelquickplugin.so
 %{qt6dir}/qml/QtWebChannel/plugins.qmltypes
 %{qt6dir}/qml/QtWebChannel/qmldir
+%dir %{_datadir}/qt6/webchannel
+%{_datadir}/qt6/webchannel/qwebchannel.js
 
 %files -n Qt6WebChannel-devel
 %defattr(644,root,root,755)
@@ -8510,7 +8746,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/libexec/rcc
 %attr(755,root,root) %{qt6dir}/libexec/uic
 %attr(755,root,root) %{qt6dir}/libexec/cmake_automoc_parser
-%{qt6dir}/libexec/ensure_pro_file.cmake
 %attr(755,root,root) %{qt6dir}/libexec/qt-cmake-private
 %{qt6dir}/libexec/qt-cmake-private-install.cmake
 %attr(755,root,root) %{qt6dir}/libexec/qt-cmake-standalone-test

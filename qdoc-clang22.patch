@@ -1,0 +1,11 @@
+--- qt-everywhere-src-6.11.0/qttools/src/qdoc/cmake/QDocConfiguration.cmake.orig	2026-03-20 00:00:00.000000000 +0000
++++ qt-everywhere-src-6.11.0/qttools/src/qdoc/cmake/QDocConfiguration.cmake	2026-04-16 00:00:00.000000000 +0000
+@@ -8,7 +8,7 @@
+
+ # List of explicitly supported Clang versions for QDoc
+ set(QDOC_SUPPORTED_CLANG_VERSIONS
+-    "21.1" "20.1" "19.1" "18.1" "17.0.6"
++    "22.1" "21.1" "20.1" "19.1" "18.1" "17.0.6"
+ )
+
+ # Check for QDoc coverage dependencies

@@ -9,3 +9,1721 @@
  )
 
  # Check for QDoc coverage dependencies
+diff --git a/qttools/src/qdoc/qdoc/src/qdoc/clang/AST/QualTypeNames.h b/qttools/src/qdoc/qdoc/src/qdoc/clang/AST/QualTypeNames.h
+index 9778599..f744044 100644
+--- a/qttools/src/qdoc/qdoc/src/qdoc/clang/AST/QualTypeNames.h
++++ b/qttools/src/qdoc/qdoc/src/qdoc/clang/AST/QualTypeNames.h
+@@ -36,6 +36,494 @@ namespace clang {
+ 
+ namespace TypeName {
+ 
++#if CLANG_VERSION_MAJOR >= 22
++
++// =========================================================================
++// LLVM 22+ implementation
++//
++// Adapted from upstream clang/lib/AST/QualTypeNames.cpp (release/22.x).
++// LLVM 22 changed NestedNameSpecifier from pointer to value type,
++// merged RecordType into TagType, and merged ElaboratedType into
++// TypedefType/TagType via TypeWithKeyword.
++//
++// QDoc divergences from upstream are marked with "QDoc divergence" comments.
++// =========================================================================
++
++inline QualType getFullyQualifiedType(QualType QT, const ASTContext &Ctx,
++                                      bool WithGlobalNsPrefix);
++
++static inline NestedNameSpecifier
++createNestedNameSpecifier(const ASTContext &Ctx, const NamespaceDecl *Namesp,
++                          bool WithGlobalNsPrefix);
++
++static inline NestedNameSpecifier
++createNestedNameSpecifier(const ASTContext &Ctx, const TypeDecl *TD,
++                          bool FullyQualify, bool WithGlobalNsPrefix);
++
++static inline NestedNameSpecifier
++createNestedNameSpecifierForScopeOf(const ASTContext &Ctx, const Decl *decl,
++                                    bool FullyQualified,
++                                    bool WithGlobalNsPrefix);
++
++static inline NestedNameSpecifier
++getFullyQualifiedNestedNameSpecifier(const ASTContext &Ctx,
++                                     NestedNameSpecifier NNS,
++                                     bool WithGlobalNsPrefix);
++
++static inline bool getFullyQualifiedTemplateName(const ASTContext &Ctx,
++                                          TemplateName &TName,
++                                          bool WithGlobalNsPrefix) {
++  bool Changed = false;
++  NestedNameSpecifier NNS = std::nullopt;
++
++  TemplateDecl *ArgTDecl = TName.getAsTemplateDecl();
++  if (!ArgTDecl) // ArgTDecl can be null in dependent contexts.
++    return false;
++
++  QualifiedTemplateName *QTName = TName.getAsQualifiedTemplateName();
++
++  if (QTName &&
++      !QTName->hasTemplateKeyword() &&
++      (NNS = QTName->getQualifier())) {
++    NestedNameSpecifier QNNS =
++        getFullyQualifiedNestedNameSpecifier(Ctx, NNS, WithGlobalNsPrefix);
++    if (QNNS != NNS) {
++      Changed = true;
++      NNS = QNNS;
++    } else {
++      NNS = std::nullopt;
++    }
++  } else {
++    NNS = createNestedNameSpecifierForScopeOf(
++        Ctx, ArgTDecl, true, WithGlobalNsPrefix);
++  }
++  if (NNS) {
++    TemplateName UnderlyingTN(ArgTDecl);
++    if (UsingShadowDecl *USD = TName.getAsUsingShadowDecl())
++      UnderlyingTN = TemplateName(USD);
++    TName =
++        Ctx.getQualifiedTemplateName(NNS,
++                                     /*TemplateKeyword=*/false, UnderlyingTN);
++    Changed = true;
++  }
++  return Changed;
++}
++
++static inline bool getFullyQualifiedTemplateArgument(const ASTContext &Ctx,
++                                              TemplateArgument &Arg,
++                                              bool WithGlobalNsPrefix) {
++  bool Changed = false;
++
++  // Note: we do not handle TemplateArgument::Expression, to replace it
++  // we need the information for the template instance decl.
++
++  if (Arg.getKind() == TemplateArgument::Template) {
++    TemplateName TName = Arg.getAsTemplate();
++    Changed = getFullyQualifiedTemplateName(Ctx, TName, WithGlobalNsPrefix);
++    if (Changed) {
++      Arg = TemplateArgument(TName);
++    }
++  } else if (Arg.getKind() == TemplateArgument::Type) {
++    QualType SubTy = Arg.getAsType();
++    // Check if the type needs more desugaring and recurse.
++    QualType QTFQ = getFullyQualifiedType(SubTy, Ctx, WithGlobalNsPrefix);
++    if (QTFQ != SubTy) {
++      Arg = TemplateArgument(QTFQ);
++      Changed = true;
++    }
++  }
++  return Changed;
++}
++
++static inline const Type *getFullyQualifiedTemplateType(
++    const ASTContext &Ctx,
++    const TagType *TSTRecord,
++    ElaboratedTypeKeyword Keyword,
++    NestedNameSpecifier Qualifier,
++    bool WithGlobalNsPrefix) {
++  // We are asked to fully qualify and we have a Record Type,
++  // which can point to a template instantiation with no sugar in any of
++  // its template argument, however we still need to fully qualify them.
++
++  const auto *TD = TSTRecord->getDecl();
++  const auto *TSTDecl = dyn_cast<ClassTemplateSpecializationDecl>(TD);
++  if (!TSTDecl)
++    return Ctx.getTagType(Keyword, Qualifier, TD, /*OwnsTag=*/false)
++        .getTypePtr();
++
++  const TemplateArgumentList &TemplateArgs = TSTDecl->getTemplateArgs();
++
++  bool MightHaveChanged = false;
++  SmallVector<TemplateArgument, 4> FQArgs;
++  for (unsigned int I = 0, E = TemplateArgs.size(); I != E; ++I) {
++    // cheap to copy and potentially modified by
++    // getFullyQualifedTemplateArgument
++    TemplateArgument Arg(TemplateArgs[I]);
++    MightHaveChanged |=
++        getFullyQualifiedTemplateArgument(Ctx, Arg, WithGlobalNsPrefix);
++    FQArgs.push_back(Arg);
++  }
++
++  if (!MightHaveChanged)
++    return Ctx.getTagType(Keyword, Qualifier, TD, /*OwnsTag=*/false)
++        .getTypePtr();
++  // If a fully qualified arg is different from the unqualified arg,
++  // allocate new type in the AST.
++  TemplateName TN = Ctx.getQualifiedTemplateName(
++      Qualifier, /*TemplateKeyword=*/false,
++      TemplateName(TSTDecl->getSpecializedTemplate()));
++  QualType QT = Ctx.getTemplateSpecializationType(
++      Keyword, TN, FQArgs,
++      /*CanonicalArgs=*/{}, TSTRecord->getCanonicalTypeInternal());
++  // getTemplateSpecializationType returns a fully qualified
++  // version of the specialization itself, so no need to qualify
++  // it.
++  return QT.getTypePtr();
++}
++
++static inline const Type *
++getFullyQualifiedTemplateType(const ASTContext &Ctx,
++                              const TemplateSpecializationType *TST,
++                              bool WithGlobalNsPrefix) {
++  TemplateName TName = TST->getTemplateName();
++  bool MightHaveChanged =
++      getFullyQualifiedTemplateName(Ctx, TName, WithGlobalNsPrefix);
++  SmallVector<TemplateArgument, 4> FQArgs;
++  // Cheap to copy and potentially modified by
++  // getFullyQualifedTemplateArgument.
++  for (TemplateArgument Arg : TST->template_arguments()) {
++    MightHaveChanged |=
++        getFullyQualifiedTemplateArgument(Ctx, Arg, WithGlobalNsPrefix);
++    FQArgs.push_back(Arg);
++  }
++
++  if (!MightHaveChanged)
++    return TST;
++
++  QualType NewQT =
++      Ctx.getTemplateSpecializationType(TST->getKeyword(), TName, FQArgs,
++                                        /*CanonicalArgs=*/{}, TST->desugar());
++  // getTemplateSpecializationType returns a fully qualified
++  // version of the specialization itself, so no need to qualify
++  // it.
++  return NewQT.getTypePtr();
++}
++
++static inline NestedNameSpecifier createOuterNNS(const ASTContext &Ctx,
++                                          const Decl *D,
++                                          bool FullyQualify,
++                                          bool WithGlobalNsPrefix) {
++  const DeclContext *DC = D->getDeclContext();
++  if (const auto *NS = dyn_cast<NamespaceDecl>(DC)) {
++    while (NS && NS->isInline()) {
++      // Ignore inline namespace;
++      NS = dyn_cast<NamespaceDecl>(NS->getDeclContext());
++    }
++    if (NS && NS->getDeclName()) {
++      return createNestedNameSpecifier(Ctx, NS, WithGlobalNsPrefix);
++    }
++    return std::nullopt; // no starting '::', no anonymous
++  }
++  if (const auto *TD = dyn_cast<TagDecl>(DC))
++    return createNestedNameSpecifier(Ctx, TD, FullyQualify, WithGlobalNsPrefix);
++  if (const auto *TDD = dyn_cast<TypedefNameDecl>(DC))
++    return createNestedNameSpecifier(Ctx, TDD, FullyQualify,
++                                     WithGlobalNsPrefix);
++  if (WithGlobalNsPrefix && DC->isTranslationUnit())
++    return NestedNameSpecifier::getGlobal();
++  return std::nullopt; // no starting '::' if |WithGlobalNsPrefix| is false
++}
++
++/// Return a fully qualified version of this name specifier.
++static inline NestedNameSpecifier getFullyQualifiedNestedNameSpecifier(
++    const ASTContext &Ctx, NestedNameSpecifier Scope,
++    bool WithGlobalNsPrefix) {
++  switch (Scope.getKind()) {
++  case NestedNameSpecifier::Kind::Null:
++    llvm_unreachable("can't fully qualify the empty nested name specifier");
++  case NestedNameSpecifier::Kind::Global:
++  case NestedNameSpecifier::Kind::MicrosoftSuper:
++    // Already fully qualified
++    return Scope;
++  case NestedNameSpecifier::Kind::Namespace:
++    return TypeName::createNestedNameSpecifier(
++        Ctx, Scope.getAsNamespaceAndPrefix().Namespace->getNamespace(),
++        WithGlobalNsPrefix);
++  case NestedNameSpecifier::Kind::Type: {
++    const Type *Type = Scope.getAsType();
++    // Find decl context.
++    const TypeDecl *TD;
++    if (const TagType *TagDeclType = Type->getAs<TagType>())
++      TD = TagDeclType->getDecl();
++    else if (const auto *D = dyn_cast<TypedefType>(Type))
++      TD = D->getDecl();
++    else
++      return Scope;
++    return TypeName::createNestedNameSpecifier(Ctx, TD, /*FullyQualify=*/true,
++                                               WithGlobalNsPrefix);
++  }
++  }
++  llvm_unreachable("bad NNS kind");
++}
++
++/// Create a nested name specifier for the declaring context of
++/// the type.
++static inline NestedNameSpecifier
++createNestedNameSpecifierForScopeOf(const ASTContext &Ctx, const Decl *Decl,
++                                    bool FullyQualified,
++                                    bool WithGlobalNsPrefix) {
++  assert(Decl);
++
++  // Some declaration cannot be qualified.
++  if (Decl->isTemplateParameter())
++    return std::nullopt;
++  const DeclContext *DC = Decl->getDeclContext()->getRedeclContext();
++  const auto *Outer = dyn_cast<NamedDecl>(DC);
++  const auto *OuterNS = dyn_cast<NamespaceDecl>(DC);
++  if (OuterNS && OuterNS->isAnonymousNamespace())
++    OuterNS = dyn_cast<NamespaceDecl>(OuterNS->getParent());
++  if (Outer) {
++#if 0
++    // QDoc divergence: upstream picks an arbitrary template specialization
++    // as the declaring context when a type is declared inside a class
++    // template but is not type-dependent. This produces unstable output
++    // (depends on specialization order) and is incorrect for QDoc's use
++    // case where we want the unspecialized template name.
++    // See QTBUG-144620.
++    if (const auto *CxxDecl = dyn_cast<CXXRecordDecl>(DC)) {
++      if (ClassTemplateDecl *ClassTempl =
++              CxxDecl->getDescribedClassTemplate()) {
++        if (!ClassTempl->specializations().empty()) {
++          Decl = *(ClassTempl->spec_begin());
++          Outer = dyn_cast<NamedDecl>(Decl);
++          OuterNS = dyn_cast<NamespaceDecl>(Decl);
++        }
++      }
++    }
++#endif
++
++    if (OuterNS) {
++      return createNestedNameSpecifier(Ctx, OuterNS, WithGlobalNsPrefix);
++    } else if (const auto *TD = dyn_cast<TagDecl>(Outer)) {
++      return createNestedNameSpecifier(
++          Ctx, TD, FullyQualified, WithGlobalNsPrefix);
++    } else if (isa<TranslationUnitDecl>(Outer)) {
++      // Context is the TU. Nothing needs to be done.
++      return std::nullopt;
++    } else {
++      // Decl's context was neither the TU, a namespace, nor a
++      // TagDecl, which means it is a type local to a scope, and not
++      // accessible at the end of the TU.
++      return std::nullopt;
++    }
++  } else if (WithGlobalNsPrefix && DC->isTranslationUnit()) {
++    return NestedNameSpecifier::getGlobal();
++  }
++  return std::nullopt;
++}
++
++/// Create a nested name specifier for the declaring context of
++/// the type.
++static inline NestedNameSpecifier
++createNestedNameSpecifierForScopeOf(const ASTContext &Ctx, const Type *TypePtr,
++                                    bool FullyQualified,
++                                    bool WithGlobalNsPrefix) {
++  if (!TypePtr)
++    return std::nullopt;
++
++  Decl *Decl = nullptr;
++  // There are probably other cases ...
++  if (const auto *TDT = dyn_cast<TypedefType>(TypePtr)) {
++    Decl = TDT->getDecl();
++  } else if (const auto *TagDeclType = dyn_cast<TagType>(TypePtr)) {
++    Decl = TagDeclType->getDecl();
++  } else if (const auto *TST = dyn_cast<TemplateSpecializationType>(TypePtr)) {
++    Decl = TST->getTemplateName().getAsTemplateDecl();
++  } else {
++    Decl = TypePtr->getAsCXXRecordDecl();
++  }
++
++  if (!Decl)
++    return std::nullopt;
++
++  return createNestedNameSpecifierForScopeOf(
++      Ctx, Decl, FullyQualified, WithGlobalNsPrefix);
++}
++
++inline NestedNameSpecifier
++createNestedNameSpecifier(const ASTContext &Ctx, const NamespaceDecl *Namespace,
++                          bool WithGlobalNsPrefix) {
++  while (Namespace && Namespace->isInline()) {
++    // Ignore inline namespace;
++    Namespace = dyn_cast<NamespaceDecl>(Namespace->getDeclContext());
++  }
++  if (!Namespace)
++    return std::nullopt;
++
++  bool FullyQualify = true; // doesn't matter, DeclContexts are namespaces
++  return NestedNameSpecifier(
++      Ctx, Namespace,
++      createOuterNNS(Ctx, Namespace, FullyQualify, WithGlobalNsPrefix));
++}
++
++inline NestedNameSpecifier
++createNestedNameSpecifier(const ASTContext &Ctx, const TypeDecl *TD,
++                          bool FullyQualify, bool WithGlobalNsPrefix) {
++  const Type *TypePtr = Ctx.getTypeDeclType(TD).getTypePtr();
++  if (auto *RD = dyn_cast<TagType>(TypePtr)) {
++    // We are asked to fully qualify and we have a Record Type (which
++    // may point to a template specialization) or Template
++    // Specialization Type. We need to fully qualify their arguments.
++    TypePtr = getFullyQualifiedTemplateType(
++        Ctx, RD, ElaboratedTypeKeyword::None,
++        createOuterNNS(Ctx, TD, FullyQualify, WithGlobalNsPrefix),
++        WithGlobalNsPrefix);
++  } else if (auto *TST = dyn_cast<TemplateSpecializationType>(TypePtr)) {
++    TypePtr = getFullyQualifiedTemplateType(Ctx, TST, WithGlobalNsPrefix);
++  }
++  return NestedNameSpecifier(TypePtr);
++}
++
++/// Return the fully qualified type, including fully-qualified
++/// versions of any template parameters.
++inline QualType getFullyQualifiedType(QualType QT, const ASTContext &Ctx,
++                               bool WithGlobalNsPrefix = false) {
++  // In case of myType* we need to strip the pointer first, fully
++  // qualify and attach the pointer once again.
++  if (isa<PointerType>(QT.getTypePtr())) {
++    // Get the qualifiers.
++    Qualifiers Quals = QT.getQualifiers();
++    QT = getFullyQualifiedType(QT->getPointeeType(), Ctx, WithGlobalNsPrefix);
++    QT = Ctx.getPointerType(QT);
++    // Add back the qualifiers.
++    QT = Ctx.getQualifiedType(QT, Quals);
++    return QT;
++  }
++
++  if (auto *MPT = dyn_cast<MemberPointerType>(QT.getTypePtr())) {
++    // Get the qualifiers.
++    Qualifiers Quals = QT.getQualifiers();
++    // Fully qualify the pointee and class types.
++    QT = getFullyQualifiedType(QT->getPointeeType(), Ctx, WithGlobalNsPrefix);
++    NestedNameSpecifier Qualifier = getFullyQualifiedNestedNameSpecifier(
++        Ctx, MPT->getQualifier(), WithGlobalNsPrefix);
++    QT = Ctx.getMemberPointerType(QT, Qualifier,
++                                  MPT->getMostRecentCXXRecordDecl());
++    // Add back the qualifiers.
++    QT = Ctx.getQualifiedType(QT, Quals);
++    return QT;
++  }
++
++  // In case of myType& we need to strip the reference first, fully
++  // qualify and attach the reference once again.
++  if (isa<ReferenceType>(QT.getTypePtr())) {
++    // Get the qualifiers.
++    bool IsLValueRefTy = isa<LValueReferenceType>(QT.getTypePtr());
++    Qualifiers Quals = QT.getQualifiers();
++    QT = getFullyQualifiedType(QT->getPointeeType(), Ctx, WithGlobalNsPrefix);
++    // Add the r- or l-value reference type back to the fully
++    // qualified one.
++    if (IsLValueRefTy)
++      QT = Ctx.getLValueReferenceType(QT);
++    else
++      QT = Ctx.getRValueReferenceType(QT);
++    // Add back the qualifiers.
++    QT = Ctx.getQualifiedType(QT, Quals);
++    return QT;
++  }
++
++  // Handle types with attributes such as `unique_ptr<int> _Nonnull`.
++  if (auto *AT = dyn_cast<AttributedType>(QT.getTypePtr())) {
++    QualType NewModified =
++        getFullyQualifiedType(AT->getModifiedType(), Ctx, WithGlobalNsPrefix);
++    QualType NewEquivalent =
++        getFullyQualifiedType(AT->getEquivalentType(), Ctx, WithGlobalNsPrefix);
++    Qualifiers Qualifiers = QT.getLocalQualifiers();
++    return Ctx.getQualifiedType(
++        Ctx.getAttributedType(AT->getAttrKind(), NewModified, NewEquivalent),
++        Qualifiers);
++  }
++
++  // Remove the part of the type related to the type being a template
++  // parameter (we won't report it as part of the 'type name' and it
++  // is actually make the code below to be more complex (to handle
++  // those)
++  while (isa<SubstTemplateTypeParmType>(QT.getTypePtr())) {
++    // Get the qualifiers.
++    Qualifiers Quals = QT.getQualifiers();
++
++    QT = cast<SubstTemplateTypeParmType>(QT.getTypePtr())->desugar();
++
++    // Add back the qualifiers.
++    QT = Ctx.getQualifiedType(QT, Quals);
++  }
++
++  if (const auto *TST =
++          dyn_cast<const TemplateSpecializationType>(QT.getTypePtr())) {
++
++    const Type *T = getFullyQualifiedTemplateType(Ctx, TST, WithGlobalNsPrefix);
++    if (T == TST)
++      return QT;
++    return Ctx.getQualifiedType(T, QT.getQualifiers());
++  }
++
++  // Local qualifiers are attached to the QualType outside of the
++  // elaborated type.  Retrieve them before descending into the
++  // elaborated type.
++  Qualifiers PrefixQualifiers = QT.getLocalQualifiers();
++  QT = QualType(QT.getTypePtr(), 0);
++
++  // We don't consider the alias introduced by `using a::X` as a new type.
++  // The qualified name is still a::X.
++  if (const auto *UT = QT->getAs<UsingType>()) {
++    QT = Ctx.getQualifiedType(UT->desugar(), PrefixQualifiers);
++    return getFullyQualifiedType(QT, Ctx, WithGlobalNsPrefix);
++  }
++
++  // Create a nested name specifier if needed.
++  NestedNameSpecifier Prefix = createNestedNameSpecifierForScopeOf(
++      Ctx, QT.getTypePtr(), true /*FullyQualified*/, WithGlobalNsPrefix);
++
++  // In case of template specializations iterate over the arguments and
++  // fully qualify them as well.
++  if (const auto *TT = dyn_cast<TagType>(QT.getTypePtr())) {
++    // We are asked to fully qualify and we have a Record Type (which
++    // may point to a template specialization) or Template
++    // Specialization Type. We need to fully qualify their arguments.
++
++    const Type *TypePtr = getFullyQualifiedTemplateType(
++        Ctx, TT, TT->getKeyword(), Prefix, WithGlobalNsPrefix);
++    QT = QualType(TypePtr, 0);
++  } else if (const auto *TT = dyn_cast<TypedefType>(QT.getTypePtr())) {
++    // QDoc divergence: prefer the existing qualifier from the TypedefType
++    // when available, falling back to the computed Prefix. This preserves
++    // member type alias qualifiers (e.g., QList<QVariant>::parameter_type)
++    // that would otherwise be lost when the Prefix is recomputed from the
++    // declaring context. See QTBUG-144620.
++    NestedNameSpecifier TypedefPrefix = TT->getQualifier();
++    QT = Ctx.getTypedefType(
++        TT->getKeyword(), TypedefPrefix ? TypedefPrefix : Prefix,
++        TT->getDecl(),
++        getFullyQualifiedType(TT->desugar(), Ctx, WithGlobalNsPrefix));
++  } else {
++    // QDoc divergence: upstream asserts here (!Prefix && "Unhandled type node").
++    // QDoc encounters types (such as AutoType and BuiltinType) that may have
++    // a non-null Prefix but are not TagType or TypedefType. Silently dropping
++    // the prefix is safe — it only affects qualification of the printed name.
++  }
++  QT = Ctx.getQualifiedType(QT, PrefixQualifiers);
++  return QT;
++}
++
++#else // CLANG_VERSION_MAJOR < 22
++
++// =========================================================================
++// Pre-LLVM 22 implementation
++//
++// This block is the existing fork, unchanged. It supports LLVM 17–21
++// with version-specific guards for API differences between those releases.
++// =========================================================================
++
+ inline QualType getFullyQualifiedType(QualType QT, const ASTContext &Ctx,
+                                       bool WithGlobalNsPrefix);
+ 
+@@ -503,6 +991,8 @@ inline QualType getFullyQualifiedType(QualType QT, const ASTContext &Ctx,
+   return QT;
+ }
+ 
++#endif // CLANG_VERSION_MAJOR >= 22
++
+ inline std::string getFullyQualifiedName(QualType QT,
+                                   const ASTContext &Ctx,
+                                   const PrintingPolicy &Policy,
+diff --git a/qttools/src/qdoc/qdoc/src/qdoc/clangcodeparser.cpp b/qttools/src/qdoc/qdoc/src/qdoc/clangcodeparser.cpp
+index bd9a5fe..e2b4fad 100644
+--- a/qttools/src/qdoc/qdoc/src/qdoc/clangcodeparser.cpp
++++ b/qttools/src/qdoc/qdoc/src/qdoc/clangcodeparser.cpp
+@@ -35,14 +35,21 @@
+ #include <clang/AST/Type.h>
+ #include <clang/AST/TypeLoc.h>
+ #include <clang/Basic/SourceLocation.h>
++QT_WARNING_PUSH
++#if LIBCLANG_VERSION_MAJOR >= 22
++QT_WARNING_DISABLE_GCC("-Wtemplate-body")
++#endif
+ #include <clang/Frontend/ASTUnit.h>
++QT_WARNING_POP
+ #include <clang/Lex/Lexer.h>
+ #include <llvm/Support/Casting.h>
+ 
+ #include "clang/AST/QualTypeNames.h"
+ #include "template_declaration.h"
+ 
++#include <algorithm>
+ #include <cstdio>
++#include <string_view>
+ 
+ QT_BEGIN_NAMESPACE
+ 
+@@ -166,12 +173,86 @@ static const clang::Decl* get_cursor_declaration(CXCursor cursor) {
+  * representation of a type is acquired as part of parsing with Clang,
+  * so as to ensure a consistent behavior and output.
+  */
++/*
++ * Ensures that bare "(unnamed)" or "(anonymous)" markers in \a typeName
++ * include the record keyword (struct, union, class). With
++ * AnonymousTagLocations disabled, some LLVM versions omit the keyword
++ * for some or all anonymous scopes. This function recovers the correct
++ * keyword for each scope from the RecordDecl hierarchy.
++ *
++ * Only anonymous record types produce scope components in fully qualified
++ * names — anonymous enums don't create "(unnamed enum)::" segments
++ * because their enumerators are injected into the enclosing scope.
++ *
++ * For nested anonymous records such as "(unnamed)::(unnamed)" where the
++ * outer scope is a union and the inner is a struct, each marker receives
++ * its own keyword. The parent walk follows only RecordDecl contexts,
++ * which is sufficient because only anonymous records produce these
++ * scope components in Clang's fully qualified name output.
++ *
++ * The function assumes Clang produces structurally well-formed anonymous
++ * markers: either bare "(unnamed)" or with a keyword "(unnamed struct)".
++ * Malformed spellings would silently consume a keyword entry.
++ */
++static std::string ensureAnonymousTagKeyword(std::string typeName, clang::QualType type)
++{
++    const clang::RecordType *rt = type->getAs<clang::RecordType>();
++    if (!rt)
++        return typeName;
++
++    // Collect keywords from innermost to outermost anonymous scope.
++    std::vector<std::string> keywords;
++    const clang::RecordDecl *decl = rt->getDecl();
++    while (decl) {
++        if (decl->getDeclName().isEmpty())
++            keywords.emplace_back(decl->getKindName());
++        const auto *parent = llvm::dyn_cast<clang::RecordDecl>(decl->getDeclContext());
++        decl = parent;
++    }
++    // Reverse so index 0 is the outermost anonymous scope,
++    // matching left-to-right marker order in the type string.
++    std::reverse(keywords.begin(), keywords.end());
++
++    // Scan left-to-right for "(unnamed" / "(anonymous" prefixes.
++    // Each prefix corresponds to one anonymous scope in the keyword list.
++    // Some LLVM versions already include the keyword (e.g., "(unnamed union)")
++    // while others produce bare "(unnamed)". Only inject when missing.
++    static constexpr std::string_view prefixes[] = { "(unnamed", "(anonymous" };
++    size_t keywordIndex = 0;
++    size_t pos = 0;
++    while (pos < typeName.size() && keywordIndex < keywords.size()) {
++        std::string_view foundPrefix;
++        size_t foundPos = std::string::npos;
++        for (auto prefix : prefixes) {
++            size_t p = typeName.find(prefix, pos);
++            if (p < foundPos) {
++                foundPos = p;
++                foundPrefix = prefix;
++            }
++        }
++        if (foundPos == std::string::npos)
++            break;
++
++        size_t afterPrefix = foundPos + foundPrefix.size();
++        if (afterPrefix < typeName.size() && typeName[afterPrefix] == ')') {
++            // Bare marker — inject the keyword before ')'.
++            typeName.insert(afterPrefix, " " + keywords[keywordIndex]);
++            pos = afterPrefix + 1 + keywords[keywordIndex].size() + 1;
++        } else {
++            // Already has a keyword — skip past the closing ')'.
++            size_t closePos = typeName.find(')', afterPrefix);
++            pos = (closePos != std::string::npos) ? closePos + 1 : afterPrefix;
++        }
++        ++keywordIndex;
++    }
++    return typeName;
++}
++
+ static std::string get_fully_qualified_type_name(clang::QualType type, const clang::ASTContext& declaration_context) {
+-     return clang::TypeName::getFullyQualifiedName(
+-        type,
+-        declaration_context,
+-        declaration_context.getPrintingPolicy()
+-    );
++    auto policy = declaration_context.getPrintingPolicy();
++    policy.AnonymousTagLocations = false;
++    std::string result = clang::TypeName::getFullyQualifiedName(type, declaration_context, policy);
++    return ensureAnonymousTagKeyword(std::move(result), type);
+ }
+ 
+ /*
+@@ -683,11 +764,12 @@ static Node *findNodeForCursor(QDocDatabase *qdb, CXCursor cur)
+ 
+             bool different = false;
+             for (int i = 0; i < numArg; ++i) {
+-                CXType argType = clang_getArgType(funcType, i);
++                auto *paramDecl = function_declaration->getParamDecl(i);
++                auto paramType = paramDecl->getOriginalType();
+ 
+                 if (args.size() <= i)
+                     args.append(QString::fromStdString(get_fully_qualified_type_name(
+-                        function_declaration->getParamDecl(i)->getOriginalType(),
++                        paramType,
+                         function_declaration->getASTContext()
+                     )));
+ 
+@@ -696,15 +778,26 @@ static Node *findNodeForCursor(QDocDatabase *qdb, CXCursor cur)
+ 
+                 different = recordedType != typeSpelling;
+ 
+-                // Retry with a canonical type spelling
+-                if (different && (argType.kind == CXType_Typedef || argType.kind == CXType_Elaborated)) {
+-                    QStringView canonicalType = parameters.at(i).canonicalType();
+-                    if (!canonicalType.isEmpty()) {
+-                        different = canonicalType !=
+-                            QString::fromStdString(get_fully_qualified_type_name(
+-                                function_declaration->getParamDecl(i)->getOriginalType().getCanonicalType(),
+-                                function_declaration->getASTContext()
+-                            ));
++                // Retry with a canonical type spelling unless the parameter is a bare
++                // template type parameter, such as T but not const T& or MyContainer<T>.
++                // Wrapped forms are safe because both sides of the comparison are
++                // canonicalized in the same way. Exclude bare TemplateTypeParmType
++                // because canonicalization removes the spelled Q_QDOC template
++                // parameter name and can make distinct Q_QDOC-declared signatures
++                // appear identical during matching.
++                if (different) {
++                    const bool isBareTemplateTypeParm =
++                        paramType.getTypePtrOrNull()
++                        && llvm::isa<clang::TemplateTypeParmType>(paramType.getTypePtr());
++                    if (!isBareTemplateTypeParm) {
++                        QStringView canonicalType = parameters.at(i).canonicalType();
++                        if (!canonicalType.isEmpty()) {
++                            different = canonicalType !=
++                                QString::fromStdString(get_fully_qualified_type_name(
++                                    paramType.getCanonicalType(),
++                                    function_declaration->getASTContext()
++                                ));
++                        }
+                     }
+                 }
+ 
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/aliasuser.xml b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/aliasuser.xml
+new file mode 100644
+index 0000000..aaef60b
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/aliasuser.xml
+@@ -0,0 +1,34 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
++<db:info>
++<db:title>AliasUser Class</db:title>
++<db:productname>Qt</db:productname>
++<db:titleabbrev>Tests that template container parameters appear with generic signatures</db:titleabbrev>
++<db:abstract>
++<db:para>A class that uses aliased template types as parameters.</db:para>
++</db:abstract>
++</db:info>
++<db:variablelist>
++<db:varlistentry>
++<db:term>Header</db:term>
++<db:listitem>
++<db:para>template_sugar.h</db:para>
++</db:listitem>
++</db:varlistentry>
++</db:variablelist>
++<db:section xml:id="details">
++<db:title>Detailed Description</db:title>
++<db:para><db:link xlink:href="aliasuser.xml">AliasUser</db:link> exercises canonical fallback for type aliases around template types. The alias introduces an extra layer of type sugar that the original fallback gating would have handled, verifying that broadening the fallback doesn't regress alias resolution.</db:para>
++</db:section>
++<db:section xml:id="member-function-documentation">
++<db:title>Member Function Documentation</db:title>
++<db:section xml:id="process">
++<db:title>void AliasUser::process(ContainerAlias&lt;int&gt; <db:emphasis>items</db:emphasis>)</db:title>
++<db:para>Processes the given <db:code role="parameter">items</db:code>.</db:para>
++</db:section>
++<db:section xml:id="transform">
++<db:title>void AliasUser::transform(const ContainerAlias&lt;double&gt; &amp;<db:emphasis>source</db:emphasis>, ContainerAlias&lt;double&gt; &amp;<db:emphasis>dest</db:emphasis>)</db:title>
++<db:para>Transforms elements from <db:code role="parameter">source</db:code> into <db:code role="parameter">dest</db:code>.</db:para>
++</db:section>
++</db:section>
++</db:article>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/connector.xml b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/connector.xml
+new file mode 100644
+index 0000000..9a79670
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/connector.xml
+@@ -0,0 +1,34 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
++<db:info>
++<db:title>Connector Class</db:title>
++<db:productname>Qt</db:productname>
++<db:titleabbrev>Tests that template container parameters appear with generic signatures</db:titleabbrev>
++<db:abstract>
++<db:para>A class for testing Q_QDOC-style template parameter overloads.</db:para>
++</db:abstract>
++</db:info>
++<db:variablelist>
++<db:varlistentry>
++<db:term>Header</db:term>
++<db:listitem>
++<db:para>template_sugar.h</db:para>
++</db:listitem>
++</db:varlistentry>
++</db:variablelist>
++<db:section xml:id="details">
++<db:title>Detailed Description</db:title>
++<db:para>Connector exercises the code path in findNodeForCursor where two overloads differ only in template parameter names, such as <db:code>Functor</db:code> vs <db:code>PointerToMemberFunction</db:code>. Without the TemplateTypeParmType guard, canonical comparison collapses both names to <db:code>type-parameter-0-0</db:code>, causing one overload to shadow the other.</db:para>
++</db:section>
++<db:section xml:id="member-function-documentation">
++<db:title>Member Function Documentation</db:title>
++<db:section xml:id="invoke">
++<db:title>template &lt;typename Functor&gt; void Connector::invoke(Functor <db:emphasis>callback</db:emphasis>)</db:title>
++<db:para>Invokes <db:code role="parameter">callback</db:code> asynchronously.</db:para>
++</db:section>
++<db:section xml:id="invoke-1">
++<db:title>template &lt;typename PointerToMemberFunction&gt; void Connector::invoke(PointerToMemberFunction <db:emphasis>callback</db:emphasis>, int <db:emphasis>priority</db:emphasis>)</db:title>
++<db:para>Invokes <db:code role="parameter">callback</db:code> with the given <db:code role="parameter">priority</db:code>.</db:para>
++</db:section>
++</db:section>
++</db:article>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/dispatcher.xml b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/dispatcher.xml
+new file mode 100644
+index 0000000..befd878
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/dispatcher.xml
+@@ -0,0 +1,40 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
++<db:info>
++<db:title>Dispatcher Class</db:title>
++<db:subtitle>template &lt;typename T&gt; class Dispatcher</db:subtitle>
++<db:productname>Qt</db:productname>
++<db:titleabbrev>Tests that template container parameters appear with generic signatures</db:titleabbrev>
++<db:abstract>
++<db:para>A class for testing wrapped template parameter types.</db:para>
++</db:abstract>
++</db:info>
++<db:variablelist>
++<db:varlistentry>
++<db:term>Header</db:term>
++<db:listitem>
++<db:para>template_sugar.h</db:para>
++</db:listitem>
++</db:varlistentry>
++</db:variablelist>
++<db:section xml:id="details">
++<db:title>Detailed Description</db:title>
++<db:para><db:code role="parameter">T</db:code> is the dispatched element type.</db:para>
++<db:para>Dispatcher exercises canonical fallback for wrapped template parameter types such as <db:code>T *</db:code>, <db:code>const T &amp;</db:code>, and <db:code>MyContainer&lt;T&gt;</db:code>. These verify that canonical comparison is symmetric: both sides canonicalize the same way, so the fallback produces correct matches even though the user-facing template parameter name is lost in the canonical form.</db:para>
++</db:section>
++<db:section xml:id="member-function-documentation">
++<db:title>Member Function Documentation</db:title>
++<db:section xml:id="byConstRef">
++<db:title>void Dispatcher::byConstRef(const T &amp;<db:emphasis>value</db:emphasis>)</db:title>
++<db:para>Dispatches via a const reference to <db:code role="parameter">value</db:code>.</db:para>
++</db:section>
++<db:section xml:id="byPointer">
++<db:title>void Dispatcher::byPointer(T *<db:emphasis>value</db:emphasis>)</db:title>
++<db:para>Dispatches via a pointer to <db:code role="parameter">value</db:code>.</db:para>
++</db:section>
++<db:section xml:id="nested">
++<db:title>void Dispatcher::nested(MyContainer&lt;T&gt; <db:emphasis>items</db:emphasis>)</db:title>
++<db:para>Dispatches all elements in <db:code role="parameter">items</db:code>.</db:para>
++</db:section>
++</db:section>
++</db:article>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/mycontainer.xml b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/mycontainer.xml
+new file mode 100644
+index 0000000..ab56190
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/mycontainer.xml
+@@ -0,0 +1,44 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
++<db:info>
++<db:title>MyContainer Class</db:title>
++<db:subtitle>template &lt;typename T&gt; class MyContainer</db:subtitle>
++<db:productname>Qt</db:productname>
++<db:titleabbrev>Tests that template container parameters appear with generic signatures</db:titleabbrev>
++<db:abstract>
++<db:para>A container class for testing template parameter type matching.</db:para>
++</db:abstract>
++</db:info>
++<db:variablelist>
++<db:varlistentry>
++<db:term>Header</db:term>
++<db:listitem>
++<db:para>template_sugar.h</db:para>
++</db:listitem>
++</db:varlistentry>
++</db:variablelist>
++<db:section xml:id="details">
++<db:title>Detailed Description</db:title>
++<db:para><db:code role="parameter">T</db:code> is the element type stored in the container.</db:para>
++<db:para><db:link xlink:href="mycontainer.xml">MyContainer</db:link> exercises the code path in findNodeForCursor where template parameter types must match between header parsing and <db:phrase>\fn</db:phrase> re-parsing.</db:para>
++</db:section>
++<db:section xml:id="member-function-documentation">
++<db:title>Member Function Documentation</db:title>
++<db:section xml:id="append">
++<db:title>void MyContainer::append(const T &amp;<db:emphasis>value</db:emphasis>)</db:title>
++<db:para>Appends <db:code role="parameter">value</db:code> to the container.</db:para>
++</db:section>
++<db:section xml:id="prepend">
++<db:title>void MyContainer::prepend(T <db:emphasis>value</db:emphasis>)</db:title>
++<db:para>Prepends <db:code role="parameter">value</db:code> to the container.</db:para>
++</db:section>
++<db:section xml:id="replace">
++<db:title>void MyContainer::replace(int <db:emphasis>index</db:emphasis>, const T &amp;<db:emphasis>value</db:emphasis>)</db:title>
++<db:para>Replaces the item at <db:code role="parameter">index</db:code> with <db:code role="parameter">value</db:code>.</db:para>
++</db:section>
++<db:section xml:id="operator-2b">
++<db:title>MyContainer&lt;T&gt; MyContainer::operator+(const MyContainer&lt;T&gt; &amp;<db:emphasis>other</db:emphasis>) const</db:title>
++<db:para>Returns a container that is the concatenation of this container and <db:code role="parameter">other</db:code>.</db:para>
++</db:section>
++</db:section>
++</db:article>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/templatesugarmodule-module.xml b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/templatesugarmodule-module.xml
+new file mode 100644
+index 0000000..b816381
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/docbook/templatesugarmodule-module.xml
+@@ -0,0 +1,44 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<db:article xmlns:db="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.2" xml:lang="en">
++<db:info>
++<db:title/>
++<db:productname>Qt</db:productname>
++<db:titleabbrev>Tests that template container parameters appear with generic signatures</db:titleabbrev>
++<db:abstract>
++<db:para>Module for template sugar tests.</db:para>
++</db:abstract>
++</db:info>
++<db:para>Module for template sugar tests.</db:para>
++<db:section xml:id="classes">
++<db:title>Classes</db:title>
++<db:variablelist role="classes">
++<db:varlistentry>
++<db:term><db:link xlink:href="aliasuser.xml" xlink:role="class">AliasUser</db:link></db:term>
++<db:listitem>
++<db:para>A class that uses aliased template types as parameters.</db:para>
++</db:listitem>
++</db:varlistentry>
++<db:varlistentry>
++<db:term><db:link xlink:href="connector.xml" xlink:role="class">Connector</db:link></db:term>
++<db:listitem>
++<db:para>A class for testing Q_QDOC-style template parameter overloads.</db:para>
++</db:listitem>
++</db:varlistentry>
++<db:varlistentry>
++<db:term><db:link xlink:href="dispatcher.xml" xlink:role="class">Dispatcher</db:link></db:term>
++<db:listitem>
++<db:para>A class for testing wrapped template parameter types.</db:para>
++</db:listitem>
++</db:varlistentry>
++<db:varlistentry>
++<db:term><db:link xlink:href="mycontainer.xml" xlink:role="class">MyContainer</db:link></db:term>
++<db:listitem>
++<db:para>A container class for testing template parameter type matching.</db:para>
++</db:listitem>
++</db:varlistentry>
++</db:variablelist>
++</db:section>
++<db:section xml:id="details">
++<db:title>Detailed Description</db:title>
++</db:section>
++</db:article>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/aliasuser-members.html b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/aliasuser-members.html
+new file mode 100644
+index 0000000..88aa4b0
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/aliasuser-members.html
+@@ -0,0 +1,21 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="utf-8">
++<!-- template_sugar.cpp -->
++  <meta name="description" content="A class that uses aliased template types as parameters.">
++  <title>List of All Members for AliasUser | Qt</title>
++</head>
++<body>
++<ul class="breadcrumb">
++<li>AliasUser</li>
++</ul>
++<div class="sidebar"><div class="sidebar-content" id="sidebar-content"></div></div>
++<h1 class="title" translate="no">List of All Members for AliasUser</h1>
++<p>This is the complete list of members for <a href="aliasuser.html">AliasUser</a>, including inherited members.</p>
++<ul>
++<li class="fn" translate="no"><span class="name"><b><a href="aliasuser.html#process" translate="no">process</a></b></span>(ContainerAlias&lt;int&gt;)</li>
++<li class="fn" translate="no"><span class="name"><b><a href="aliasuser.html#transform" translate="no">transform</a></b></span>(const ContainerAlias&lt;double&gt; &amp;, ContainerAlias&lt;double&gt; &amp;)</li>
++</ul>
++</body>
++</html>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/aliasuser.html b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/aliasuser.html
+new file mode 100644
+index 0000000..3f4d081
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/aliasuser.html
+@@ -0,0 +1,55 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="utf-8">
++<!-- template_sugar.cpp -->
++  <meta name="description" content="A class that uses aliased template types as parameters.">
++  <title>AliasUser Class | Qt</title>
++</head>
++<body>
++<ul class="breadcrumb">
++<li>AliasUser</li>
++</ul>
++<div class="sidebar">
++<div class="toc">
++<h3 id="toc">Contents</h3>
++<ul>
++<li class="level1"><a href="#public-functions">Public Functions</a></li>
++<li class="level1"><a href="#details">Detailed Description</a></li>
++</ul>
++</div>
++<div class="sidebar-content" id="sidebar-content"></div></div>
++<h1 class="title" translate="no">AliasUser Class</h1>
++<!-- $$$AliasUser-brief -->
++<p>A class that uses aliased template types as parameters. <a href="#details">More...</a></p>
++<!-- @@@AliasUser -->
++<div class="table"><table class="alignedsummary requisites" translate="no">
++<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign"> <code translate="no">#include &lt;template_sugar.h&gt;</code></td></tr>
++</table></div>
++<ul>
++<li><a href="aliasuser-members.html">List of all members, including inherited members</a></li>
++</ul>
++<h2 id="public-functions">Public Functions</h2>
++<div class="table"><table class="alignedsummary" translate="no">
++<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="aliasuser.html#process" translate="no">process</a></b>(ContainerAlias&lt;int&gt; <i>items</i>)</td></tr>
++<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="aliasuser.html#transform" translate="no">transform</a></b>(const ContainerAlias&lt;double&gt; &amp;<i>source</i>, ContainerAlias&lt;double&gt; &amp;<i>dest</i>)</td></tr>
++</table></div>
++<!-- $$$AliasUser-description -->
++<div class="descr">
++<h2 id="details">Detailed Description</h2>
++<p>AliasUser exercises canonical fallback for type aliases around template types. The alias introduces an extra layer of type sugar that the original fallback gating would have handled, verifying that broadening the fallback doesn't regress alias resolution.</p>
++</div>
++<!-- @@@AliasUser -->
++<div class="func">
++<h2>Member Function Documentation</h2>
++<!-- $$$process[overload1]$$$processContainerAlias<int> -->
++<h3 class="fn" translate="no" id="process"><span class="type">void</span> AliasUser::<span class="name">process</span>(<span class="type">ContainerAlias</span>&lt;<span class="type">int</span>&gt; <i>items</i>)</h3>
++<p>Processes the given <i translate="no">items</i>.</p>
++<!-- @@@process -->
++<!-- $$$transform[overload1]$$$transformconstContainerAlias<double>&ContainerAlias<double>& -->
++<h3 class="fn" translate="no" id="transform"><span class="type">void</span> AliasUser::<span class="name">transform</span>(const <span class="type">ContainerAlias</span>&lt;<span class="type">double</span>&gt; &amp;<i>source</i>, <span class="type">ContainerAlias</span>&lt;<span class="type">double</span>&gt; &amp;<i>dest</i>)</h3>
++<p>Transforms elements from <i translate="no">source</i> into <i translate="no">dest</i>.</p>
++<!-- @@@transform -->
++</div>
++</body>
++</html>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/connector-members.html b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/connector-members.html
+new file mode 100644
+index 0000000..b1890a2
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/connector-members.html
+@@ -0,0 +1,21 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="utf-8">
++<!-- template_sugar.cpp -->
++  <meta name="description" content="A class for testing Q_QDOC-style template parameter overloads.">
++  <title>List of All Members for Connector | Qt</title>
++</head>
++<body>
++<ul class="breadcrumb">
++<li>Connector</li>
++</ul>
++<div class="sidebar"><div class="sidebar-content" id="sidebar-content"></div></div>
++<h1 class="title" translate="no">List of All Members for Connector</h1>
++<p>This is the complete list of members for <a href="connector.html">Connector</a>, including inherited members.</p>
++<ul>
++<li class="fn" translate="no"><span class="name"><b><a href="connector.html#invoke" translate="no">invoke</a></b></span>(Functor)</li>
++<li class="fn" translate="no"><span class="name"><b><a href="connector.html#invoke-1" translate="no">invoke</a></b></span>(PointerToMemberFunction, int)</li>
++</ul>
++</body>
++</html>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/connector.html b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/connector.html
+new file mode 100644
+index 0000000..1907efa
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/connector.html
+@@ -0,0 +1,55 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="utf-8">
++<!-- template_sugar.cpp -->
++  <meta name="description" content="A class for testing Q_QDOC-style template parameter overloads.">
++  <title>Connector Class | Qt</title>
++</head>
++<body>
++<ul class="breadcrumb">
++<li>Connector</li>
++</ul>
++<div class="sidebar">
++<div class="toc">
++<h3 id="toc">Contents</h3>
++<ul>
++<li class="level1"><a href="#public-functions">Public Functions</a></li>
++<li class="level1"><a href="#details">Detailed Description</a></li>
++</ul>
++</div>
++<div class="sidebar-content" id="sidebar-content"></div></div>
++<h1 class="title" translate="no">Connector Class</h1>
++<!-- $$$Connector-brief -->
++<p>A class for testing Q_QDOC-style template parameter overloads. <a href="#details">More...</a></p>
++<!-- @@@Connector -->
++<div class="table"><table class="alignedsummary requisites" translate="no">
++<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign"> <code translate="no">#include &lt;template_sugar.h&gt;</code></td></tr>
++</table></div>
++<ul>
++<li><a href="connector-members.html">List of all members, including inherited members</a></li>
++</ul>
++<h2 id="public-functions">Public Functions</h2>
++<div class="table"><table class="alignedsummary" translate="no">
++<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="connector.html#invoke" translate="no">invoke</a></b>(Functor <i>callback</i>)</td></tr>
++<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="connector.html#invoke-1" translate="no">invoke</a></b>(PointerToMemberFunction <i>callback</i>, int <i>priority</i>)</td></tr>
++</table></div>
++<!-- $$$Connector-description -->
++<div class="descr">
++<h2 id="details">Detailed Description</h2>
++<p>Connector exercises the code path in findNodeForCursor where two overloads differ only in template parameter names, such as <code translate="no">Functor</code> vs <code translate="no">PointerToMemberFunction</code>. Without the TemplateTypeParmType guard, canonical comparison collapses both names to <code translate="no">type-parameter-0-0</code>, causing one overload to shadow the other.</p>
++</div>
++<!-- @@@Connector -->
++<div class="func">
++<h2>Member Function Documentation</h2>
++<!-- $$$invoke[overload1]$$$invokeFunctor -->
++<h3 class="fn" translate="no" id="invoke">template &lt;typename Functor&gt; <span class="type">void</span> Connector::<span class="name">invoke</span>(<span class="type">Functor</span> <i>callback</i>)</h3>
++<p>Invokes <i translate="no">callback</i> asynchronously.</p>
++<!-- @@@invoke -->
++<!-- $$$invoke$$$invokePointerToMemberFunctionint -->
++<h3 class="fn" translate="no" id="invoke-1">template &lt;typename PointerToMemberFunction&gt; <span class="type">void</span> Connector::<span class="name">invoke</span>(<span class="type">PointerToMemberFunction</span> <i>callback</i>, <span class="type">int</span> <i>priority</i>)</h3>
++<p>Invokes <i translate="no">callback</i> with the given <i translate="no">priority</i>.</p>
++<!-- @@@invoke -->
++</div>
++</body>
++</html>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/dispatcher-members.html b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/dispatcher-members.html
+new file mode 100644
+index 0000000..b3cc2f0
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/dispatcher-members.html
+@@ -0,0 +1,22 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="utf-8">
++<!-- template_sugar.cpp -->
++  <meta name="description" content="A class for testing wrapped template parameter types.">
++  <title>List of All Members for Dispatcher | Qt</title>
++</head>
++<body>
++<ul class="breadcrumb">
++<li>Dispatcher</li>
++</ul>
++<div class="sidebar"><div class="sidebar-content" id="sidebar-content"></div></div>
++<h1 class="title" translate="no">List of All Members for Dispatcher</h1>
++<p>This is the complete list of members for <a href="dispatcher.html">Dispatcher</a>, including inherited members.</p>
++<ul>
++<li class="fn" translate="no"><span class="name"><b><a href="dispatcher.html#byConstRef" translate="no">byConstRef</a></b></span>(const T &amp;)</li>
++<li class="fn" translate="no"><span class="name"><b><a href="dispatcher.html#byPointer" translate="no">byPointer</a></b></span>(T *)</li>
++<li class="fn" translate="no"><span class="name"><b><a href="dispatcher.html#nested" translate="no">nested</a></b></span>(MyContainer&lt;T&gt;)</li>
++</ul>
++</body>
++</html>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/dispatcher.html b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/dispatcher.html
+new file mode 100644
+index 0000000..c577a6f
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/dispatcher.html
+@@ -0,0 +1,62 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="utf-8">
++<!-- template_sugar.cpp -->
++  <meta name="description" content="A class for testing wrapped template parameter types.">
++  <title>Dispatcher Class | Qt</title>
++</head>
++<body>
++<ul class="breadcrumb">
++<li>Dispatcher</li>
++</ul>
++<div class="sidebar">
++<div class="toc">
++<h3 id="toc">Contents</h3>
++<ul>
++<li class="level1"><a href="#public-functions">Public Functions</a></li>
++<li class="level1"><a href="#details">Detailed Description</a></li>
++</ul>
++</div>
++<div class="sidebar-content" id="sidebar-content"></div></div>
++<h1 class="title" translate="no">Dispatcher Class</h1>
++<span class="small-subtitle" translate="no">template &lt;typename T&gt; class Dispatcher</span>
++<!-- $$$Dispatcher-brief -->
++<p>A class for testing wrapped template parameter types. <a href="#details">More...</a></p>
++<!-- @@@Dispatcher -->
++<div class="table"><table class="alignedsummary requisites" translate="no">
++<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign"> <code translate="no">#include &lt;template_sugar.h&gt;</code></td></tr>
++</table></div>
++<ul>
++<li><a href="dispatcher-members.html">List of all members, including inherited members</a></li>
++</ul>
++<h2 id="public-functions">Public Functions</h2>
++<div class="table"><table class="alignedsummary" translate="no">
++<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="dispatcher.html#byConstRef" translate="no">byConstRef</a></b>(const T &amp;<i>value</i>)</td></tr>
++<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="dispatcher.html#byPointer" translate="no">byPointer</a></b>(T *<i>value</i>)</td></tr>
++<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="dispatcher.html#nested" translate="no">nested</a></b>(MyContainer&lt;T&gt; <i>items</i>)</td></tr>
++</table></div>
++<!-- $$$Dispatcher-description -->
++<div class="descr">
++<h2 id="details">Detailed Description</h2>
++<p><i translate="no">T</i> is the dispatched element type.</p>
++<p>Dispatcher exercises canonical fallback for wrapped template parameter types such as <code translate="no">T *</code>, <code translate="no">const T &amp;</code>, and <code translate="no">MyContainer&lt;T&gt;</code>. These verify that canonical comparison is symmetric: both sides canonicalize the same way, so the fallback produces correct matches even though the user-facing template parameter name is lost in the canonical form.</p>
++</div>
++<!-- @@@Dispatcher -->
++<div class="func">
++<h2>Member Function Documentation</h2>
++<!-- $$$byConstRef[overload1]$$$byConstRefconstT& -->
++<h3 class="fn" translate="no" id="byConstRef"><span class="type">void</span> Dispatcher::<span class="name">byConstRef</span>(const <span class="type">T</span> &amp;<i>value</i>)</h3>
++<p>Dispatches via a const reference to <i translate="no">value</i>.</p>
++<!-- @@@byConstRef -->
++<!-- $$$byPointer[overload1]$$$byPointerT* -->
++<h3 class="fn" translate="no" id="byPointer"><span class="type">void</span> Dispatcher::<span class="name">byPointer</span>(<span class="type">T</span> *<i>value</i>)</h3>
++<p>Dispatches via a pointer to <i translate="no">value</i>.</p>
++<!-- @@@byPointer -->
++<!-- $$$nested[overload1]$$$nestedMyContainer<T> -->
++<h3 class="fn" translate="no" id="nested"><span class="type">void</span> Dispatcher::<span class="name">nested</span>(<span class="type"><a href="mycontainer.html" translate="no">MyContainer</a></span>&lt;<span class="type">T</span>&gt; <i>items</i>)</h3>
++<p>Dispatches all elements in <i translate="no">items</i>.</p>
++<!-- @@@nested -->
++</div>
++</body>
++</html>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/mycontainer-members.html b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/mycontainer-members.html
+new file mode 100644
+index 0000000..0e9e6bc
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/mycontainer-members.html
+@@ -0,0 +1,23 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="utf-8">
++<!-- template_sugar.cpp -->
++  <meta name="description" content="A container class for testing template parameter type matching.">
++  <title>List of All Members for MyContainer | Qt</title>
++</head>
++<body>
++<ul class="breadcrumb">
++<li>MyContainer</li>
++</ul>
++<div class="sidebar"><div class="sidebar-content" id="sidebar-content"></div></div>
++<h1 class="title" translate="no">List of All Members for MyContainer</h1>
++<p>This is the complete list of members for <a href="mycontainer.html">MyContainer</a>, including inherited members.</p>
++<ul>
++<li class="fn" translate="no"><span class="name"><b><a href="mycontainer.html#append" translate="no">append</a></b></span>(const T &amp;)</li>
++<li class="fn" translate="no"><span class="name"><b><a href="mycontainer.html#prepend" translate="no">prepend</a></b></span>(T)</li>
++<li class="fn" translate="no"><span class="name"><b><a href="mycontainer.html#replace" translate="no">replace</a></b></span>(int, const T &amp;)</li>
++<li class="fn" translate="no"><span class="name"><b><a href="mycontainer.html#operator-2b" translate="no">operator+</a></b></span>(const MyContainer&lt;T&gt; &amp;) const : MyContainer&lt;T&gt;</li>
++</ul>
++</body>
++</html>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/mycontainer.html b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/mycontainer.html
+new file mode 100644
+index 0000000..ef55580
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/mycontainer.html
+@@ -0,0 +1,67 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="utf-8">
++<!-- template_sugar.cpp -->
++  <meta name="description" content="A container class for testing template parameter type matching.">
++  <title>MyContainer Class | Qt</title>
++</head>
++<body>
++<ul class="breadcrumb">
++<li>MyContainer</li>
++</ul>
++<div class="sidebar">
++<div class="toc">
++<h3 id="toc">Contents</h3>
++<ul>
++<li class="level1"><a href="#public-functions">Public Functions</a></li>
++<li class="level1"><a href="#details">Detailed Description</a></li>
++</ul>
++</div>
++<div class="sidebar-content" id="sidebar-content"></div></div>
++<h1 class="title" translate="no">MyContainer Class</h1>
++<span class="small-subtitle" translate="no">template &lt;typename T&gt; class MyContainer</span>
++<!-- $$$MyContainer-brief -->
++<p>A container class for testing template parameter type matching. <a href="#details">More...</a></p>
++<!-- @@@MyContainer -->
++<div class="table"><table class="alignedsummary requisites" translate="no">
++<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign"> <code translate="no">#include &lt;template_sugar.h&gt;</code></td></tr>
++</table></div>
++<ul>
++<li><a href="mycontainer-members.html">List of all members, including inherited members</a></li>
++</ul>
++<h2 id="public-functions">Public Functions</h2>
++<div class="table"><table class="alignedsummary" translate="no">
++<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="mycontainer.html#append" translate="no">append</a></b>(const T &amp;<i>value</i>)</td></tr>
++<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="mycontainer.html#prepend" translate="no">prepend</a></b>(T <i>value</i>)</td></tr>
++<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="mycontainer.html#replace" translate="no">replace</a></b>(int <i>index</i>, const T &amp;<i>value</i>)</td></tr>
++<tr><td class="memItemLeft rightAlign topAlign"> MyContainer&lt;T&gt; </td><td class="memItemRight bottomAlign"><b><a href="mycontainer.html#operator-2b" translate="no">operator+</a></b>(const MyContainer&lt;T&gt; &amp;<i>other</i>) const</td></tr>
++</table></div>
++<!-- $$$MyContainer-description -->
++<div class="descr">
++<h2 id="details">Detailed Description</h2>
++<p><i translate="no">T</i> is the element type stored in the container.</p>
++<p>MyContainer exercises the code path in findNodeForCursor where template parameter types must match between header parsing and <span translate="no">\fn</span> re-parsing.</p>
++</div>
++<!-- @@@MyContainer -->
++<div class="func">
++<h2>Member Function Documentation</h2>
++<!-- $$$append[overload1]$$$appendconstT& -->
++<h3 class="fn" translate="no" id="append"><span class="type">void</span> MyContainer::<span class="name">append</span>(const <span class="type">T</span> &amp;<i>value</i>)</h3>
++<p>Appends <i translate="no">value</i> to the container.</p>
++<!-- @@@append -->
++<!-- $$$prepend[overload1]$$$prependT -->
++<h3 class="fn" translate="no" id="prepend"><span class="type">void</span> MyContainer::<span class="name">prepend</span>(<span class="type">T</span> <i>value</i>)</h3>
++<p>Prepends <i translate="no">value</i> to the container.</p>
++<!-- @@@prepend -->
++<!-- $$$replace[overload1]$$$replaceintconstT& -->
++<h3 class="fn" translate="no" id="replace"><span class="type">void</span> MyContainer::<span class="name">replace</span>(<span class="type">int</span> <i>index</i>, const <span class="type">T</span> &amp;<i>value</i>)</h3>
++<p>Replaces the item at <i translate="no">index</i> with <i translate="no">value</i>.</p>
++<!-- @@@replace -->
++<!-- $$$operator+[overload1]$$$operator+constMyContainer<T>& -->
++<h3 class="fn" translate="no" id="operator-2b"><span class="type"><a href="mycontainer.html" translate="no">MyContainer</a></span>&lt;<span class="type">T</span>&gt; MyContainer::<span class="name">operator+</span>(const <span class="type"><a href="mycontainer.html" translate="no">MyContainer</a></span>&lt;<span class="type">T</span>&gt; &amp;<i>other</i>) const</h3>
++<p>Returns a container that is the concatenation of this container and <i translate="no">other</i>.</p>
++<!-- @@@operator+ -->
++</div>
++</body>
++</html>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/template-sugar-test.index b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/template-sugar-test.index
+new file mode 100644
+index 0000000..146a8e5
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/template-sugar-test.index
+@@ -0,0 +1,51 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE QDOCINDEX>
++<INDEX url="" title="Tests that template container parameters appear with generic signatures" version="" project="Template sugar test">
++    <namespace name="" status="active" access="public" module="template sugar test">
++        <class name="AliasUser" href="aliasuser.html" status="active" access="public" location="template_sugar.h" documented="true" module="TemplateSugarModule" brief="A class that uses aliased template types as parameters">
++            <function name="process" fullname="AliasUser::process" href="aliasuser.html#process" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void process(ContainerAlias&lt;int&gt; items)">
++                <parameter type="ContainerAlias&lt;int&gt;" name="items" default=""/>
++            </function>
++            <function name="transform" fullname="AliasUser::transform" href="aliasuser.html#transform" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void transform(const ContainerAlias&lt;double&gt; &amp;source, ContainerAlias&lt;double&gt; &amp;dest)">
++                <parameter type="const ContainerAlias&lt;double&gt; &amp;" name="source" default=""/>
++                <parameter type="ContainerAlias&lt;double&gt; &amp;" name="dest" default=""/>
++            </function>
++        </class>
++        <class name="Connector" href="connector.html" status="active" access="public" location="template_sugar.h" documented="true" module="TemplateSugarModule" brief="A class for testing Q_QDOC-style template parameter overloads">
++            <function name="invoke" fullname="Connector::invoke" href="connector.html#invoke" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void invoke(Functor callback)">
++                <parameter type="Functor" name="callback" default=""/>
++            </function>
++            <function name="invoke" fullname="Connector::invoke" href="connector.html#invoke-1" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" overload="true" overload-number="1" type="void" signature="void invoke(PointerToMemberFunction callback, int priority)">
++                <parameter type="PointerToMemberFunction" name="callback" default=""/>
++                <parameter type="int" name="priority" default=""/>
++            </function>
++        </class>
++        <class name="Dispatcher" href="dispatcher.html" status="active" access="public" location="template_sugar.h" documented="true" module="TemplateSugarModule" brief="A class for testing wrapped template parameter types">
++            <function name="byConstRef" fullname="Dispatcher::byConstRef" href="dispatcher.html#byConstRef" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void byConstRef(const T &amp;value)">
++                <parameter type="const T &amp;" name="value" default=""/>
++            </function>
++            <function name="byPointer" fullname="Dispatcher::byPointer" href="dispatcher.html#byPointer" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void byPointer(T *value)">
++                <parameter type="T *" name="value" default=""/>
++            </function>
++            <function name="nested" fullname="Dispatcher::nested" href="dispatcher.html#nested" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void nested(MyContainer&lt;T&gt; items)">
++                <parameter type="MyContainer&lt;T&gt;" name="items" default=""/>
++            </function>
++        </class>
++        <class name="MyContainer" href="mycontainer.html" status="active" access="public" location="template_sugar.h" documented="true" module="TemplateSugarModule" brief="A container class for testing template parameter type matching">
++            <function name="append" fullname="MyContainer::append" href="mycontainer.html#append" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void append(const T &amp;value)">
++                <parameter type="const T &amp;" name="value" default=""/>
++            </function>
++            <function name="operator+" fullname="MyContainer::operator+" href="mycontainer.html#operator-2b" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" const="true" type="MyContainer&lt;T&gt;" signature="MyContainer&lt;T&gt; operator+(const MyContainer&lt;T&gt; &amp;other) const">
++                <parameter type="const MyContainer&lt;T&gt; &amp;" name="other" default=""/>
++            </function>
++            <function name="prepend" fullname="MyContainer::prepend" href="mycontainer.html#prepend" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void prepend(T value)">
++                <parameter type="T" name="value" default=""/>
++            </function>
++            <function name="replace" fullname="MyContainer::replace" href="mycontainer.html#replace" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void replace(int index, const T &amp;value)">
++                <parameter type="int" name="index" default=""/>
++                <parameter type="const T &amp;" name="value" default=""/>
++            </function>
++        </class>
++        <module name="TemplateSugarModule" href="templatesugarmodule-module.html" status="active" documented="true" seen="true" title="" brief="Module for template sugar tests"/>
++    </namespace>
++</INDEX>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/templatesugarmodule-module.html b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/templatesugarmodule-module.html
+new file mode 100644
+index 0000000..0d9b698
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/html/templatesugarmodule-module.html
+@@ -0,0 +1,38 @@
++<!DOCTYPE html>
++<html lang="en">
++<head>
++  <meta charset="utf-8">
++<!-- template_sugar.cpp -->
++  <meta name="description" content="Module for template sugar tests.">
++  <title></title>
++</head>
++<body>
++<ul class="breadcrumb">
++</ul>
++<div class="sidebar">
++<div class="toc">
++<h3 id="toc">Contents</h3>
++<ul>
++<li class="level1"><a href="#namespaces">Namespaces</a></li>
++<li class="level1"><a href="#classes">Classes</a></li>
++<li class="level1"><a href="#details">Detailed Description</a></li>
++</ul>
++</div>
++<div class="sidebar-content" id="sidebar-content"></div></div>
++<!-- $$$TemplateSugarModule-brief -->
++<p>Module for template sugar tests. <a href="#details">More...</a></p>
++<!-- @@@TemplateSugarModule -->
++<h2 id="classes">Classes</h2>
++<div class="table"><table class="annotated">
++<tr class="odd topAlign"><td class="tblName" translate="no"><p><a href="aliasuser.html">AliasUser</a></p></td><td class="tblDescr"><p>A class that uses aliased template types as parameters</p></td></tr>
++<tr class="even topAlign"><td class="tblName" translate="no"><p><a href="connector.html">Connector</a></p></td><td class="tblDescr"><p>A class for testing Q_QDOC-style template parameter overloads</p></td></tr>
++<tr class="odd topAlign"><td class="tblName" translate="no"><p><a href="dispatcher.html">Dispatcher</a></p></td><td class="tblDescr"><p>A class for testing wrapped template parameter types</p></td></tr>
++<tr class="even topAlign"><td class="tblName" translate="no"><p><a href="mycontainer.html">MyContainer</a></p></td><td class="tblDescr"><p>A container class for testing template parameter type matching</p></td></tr>
++</table></div>
++<!-- $$$TemplateSugarModule-description -->
++<div class="descr">
++<h2 id="details">Detailed Description</h2>
++</div>
++<!-- @@@TemplateSugarModule -->
++</body>
++</html>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/aliasuser.webxml b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/aliasuser.webxml
+new file mode 100644
+index 0000000..5a17d03
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/aliasuser.webxml
+@@ -0,0 +1,25 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<WebXML>
++    <document>
++        <class name="AliasUser" href="aliasuser.html" status="active" access="public" location="template_sugar.h" documented="true" module="TemplateSugarModule" brief="A class that uses aliased template types as parameters">
++            <description>
++                <brief>A class that uses aliased template types as parameters.</brief>
++                <para>
++                    <link raw="AliasUser" href="aliasuser.html" type="class">AliasUser</link> exercises canonical fallback for type aliases around template types. The alias introduces an extra layer of type sugar that the original fallback gating would have handled, verifying that broadening the fallback doesn't regress alias resolution.</para>
++            </description>
++            <function name="process" fullname="AliasUser::process" href="aliasuser.html#process" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void process(ContainerAlias&lt;int&gt; items)">
++                <parameter type="ContainerAlias&lt;int&gt;" name="items" default=""/>
++                <description>
++                    <para>Processes the given <argument>items</argument>.</para>
++                </description>
++            </function>
++            <function name="transform" fullname="AliasUser::transform" href="aliasuser.html#transform" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void transform(const ContainerAlias&lt;double&gt; &amp;source, ContainerAlias&lt;double&gt; &amp;dest)">
++                <parameter type="const ContainerAlias&lt;double&gt; &amp;" name="source" default=""/>
++                <parameter type="ContainerAlias&lt;double&gt; &amp;" name="dest" default=""/>
++                <description>
++                    <para>Transforms elements from <argument>source</argument> into <argument>dest</argument>.</para>
++                </description>
++            </function>
++        </class>
++    </document>
++</WebXML>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/connector.webxml b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/connector.webxml
+new file mode 100644
+index 0000000..f8035a9
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/connector.webxml
+@@ -0,0 +1,24 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<WebXML>
++    <document>
++        <class name="Connector" href="connector.html" status="active" access="public" location="template_sugar.h" documented="true" module="TemplateSugarModule" brief="A class for testing Q_QDOC-style template parameter overloads">
++            <description>
++                <brief>A class for testing Q_QDOC-style template parameter overloads.</brief>
++                <para>Connector exercises the code path in findNodeForCursor where two overloads differ only in template parameter names, such as <teletype type="highlighted">Functor</teletype> vs <teletype type="highlighted">PointerToMemberFunction</teletype>. Without the TemplateTypeParmType guard, canonical comparison collapses both names to <teletype type="highlighted">type-parameter-0-0</teletype>, causing one overload to shadow the other.</para>
++            </description>
++            <function name="invoke" fullname="Connector::invoke" href="connector.html#invoke" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void invoke(Functor callback)">
++                <parameter type="Functor" name="callback" default=""/>
++                <description>
++                    <para>Invokes <argument>callback</argument> asynchronously.</para>
++                </description>
++            </function>
++            <function name="invoke" fullname="Connector::invoke" href="connector.html#invoke-1" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" overload="true" overload-number="1" type="void" signature="void invoke(PointerToMemberFunction callback, int priority)">
++                <parameter type="PointerToMemberFunction" name="callback" default=""/>
++                <parameter type="int" name="priority" default=""/>
++                <description>
++                    <para>Invokes <argument>callback</argument> with the given <argument>priority</argument>.</para>
++                </description>
++            </function>
++        </class>
++    </document>
++</WebXML>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/dispatcher.webxml b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/dispatcher.webxml
+new file mode 100644
+index 0000000..a75ab46
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/dispatcher.webxml
+@@ -0,0 +1,31 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<WebXML>
++    <document>
++        <class name="Dispatcher" href="dispatcher.html" status="active" access="public" location="template_sugar.h" documented="true" module="TemplateSugarModule" brief="A class for testing wrapped template parameter types">
++            <description>
++                <brief>A class for testing wrapped template parameter types.</brief>
++                <para>
++                    <argument>T</argument> is the dispatched element type.</para>
++                <para>Dispatcher exercises canonical fallback for wrapped template parameter types such as <teletype type="highlighted">T *</teletype>, <teletype type="highlighted">const T &amp;</teletype>, and <teletype type="highlighted">MyContainer&lt;T&gt;</teletype>. These verify that canonical comparison is symmetric: both sides canonicalize the same way, so the fallback produces correct matches even though the user-facing template parameter name is lost in the canonical form.</para>
++            </description>
++            <function name="byConstRef" fullname="Dispatcher::byConstRef" href="dispatcher.html#byConstRef" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void byConstRef(const T &amp;value)">
++                <parameter type="const T &amp;" name="value" default=""/>
++                <description>
++                    <para>Dispatches via a const reference to <argument>value</argument>.</para>
++                </description>
++            </function>
++            <function name="byPointer" fullname="Dispatcher::byPointer" href="dispatcher.html#byPointer" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void byPointer(T *value)">
++                <parameter type="T *" name="value" default=""/>
++                <description>
++                    <para>Dispatches via a pointer to <argument>value</argument>.</para>
++                </description>
++            </function>
++            <function name="nested" fullname="Dispatcher::nested" href="dispatcher.html#nested" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void nested(MyContainer&lt;T&gt; items)">
++                <parameter type="MyContainer&lt;T&gt;" name="items" default=""/>
++                <description>
++                    <para>Dispatches all elements in <argument>items</argument>.</para>
++                </description>
++            </function>
++        </class>
++    </document>
++</WebXML>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/mycontainer.webxml b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/mycontainer.webxml
+new file mode 100644
+index 0000000..90ab726
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/mycontainer.webxml
+@@ -0,0 +1,39 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<WebXML>
++    <document>
++        <class name="MyContainer" href="mycontainer.html" status="active" access="public" location="template_sugar.h" documented="true" module="TemplateSugarModule" brief="A container class for testing template parameter type matching">
++            <description>
++                <brief>A container class for testing template parameter type matching.</brief>
++                <para>
++                    <argument>T</argument> is the element type stored in the container.</para>
++                <para>
++                    <link raw="MyContainer" href="mycontainer.html" type="class">MyContainer</link> exercises the code path in findNodeForCursor where template parameter types must match between header parsing and <teletype>\fn</teletype> re-parsing.</para>
++            </description>
++            <function name="append" fullname="MyContainer::append" href="mycontainer.html#append" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void append(const T &amp;value)">
++                <parameter type="const T &amp;" name="value" default=""/>
++                <description>
++                    <para>Appends <argument>value</argument> to the container.</para>
++                </description>
++            </function>
++            <function name="operator+" fullname="MyContainer::operator+" href="mycontainer.html#operator-2b" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" const="true" type="MyContainer&lt;T&gt;" signature="MyContainer&lt;T&gt; operator+(const MyContainer&lt;T&gt; &amp;other) const">
++                <parameter type="const MyContainer&lt;T&gt; &amp;" name="other" default=""/>
++                <description>
++                    <para>Returns a container that is the concatenation of this container and <argument>other</argument>.</para>
++                </description>
++            </function>
++            <function name="prepend" fullname="MyContainer::prepend" href="mycontainer.html#prepend" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void prepend(T value)">
++                <parameter type="T" name="value" default=""/>
++                <description>
++                    <para>Prepends <argument>value</argument> to the container.</para>
++                </description>
++            </function>
++            <function name="replace" fullname="MyContainer::replace" href="mycontainer.html#replace" status="active" access="public" location="template_sugar.h" documented="true" meta="plain" type="void" signature="void replace(int index, const T &amp;value)">
++                <parameter type="int" name="index" default=""/>
++                <parameter type="const T &amp;" name="value" default=""/>
++                <description>
++                    <para>Replaces the item at <argument>index</argument> with <argument>value</argument>.</para>
++                </description>
++            </function>
++        </class>
++    </document>
++</WebXML>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/templatesugarmodule-module.webxml b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/templatesugarmodule-module.webxml
+new file mode 100644
+index 0000000..5d24b30
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/expected/webxml/templatesugarmodule-module.webxml
+@@ -0,0 +1,4 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<WebXML>
++    <document/>
++</WebXML>
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/src/template_sugar.cpp b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/src/template_sugar.cpp
+new file mode 100644
+index 0000000..7b769b8
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/src/template_sugar.cpp
+@@ -0,0 +1,127 @@
++// Copyright (C) 2026 The Qt Company Ltd.
++// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR GPL-3.0-only
++
++#include "template_sugar.h"
++
++/*!
++    \module TemplateSugarModule
++    \brief Module for template sugar tests.
++*/
++
++/*!
++    \class MyContainer
++    \inmodule TemplateSugarModule
++    \brief A container class for testing template parameter type matching.
++
++    \a T is the element type stored in the container.
++
++    MyContainer exercises the code path in findNodeForCursor where
++    template parameter types must match between header parsing and
++    \\fn re-parsing.
++*/
++
++/*!
++    \fn template <typename T> void MyContainer<T>::append(const T &value)
++
++    Appends \a value to the container.
++*/
++
++/*!
++    \fn template <typename T> void MyContainer<T>::prepend(T value)
++
++    Prepends \a value to the container.
++*/
++
++/*!
++    \fn template <typename T> MyContainer<T> MyContainer<T>::operator+(const MyContainer<T> &other) const
++
++    Returns a container that is the concatenation of this container
++    and \a other.
++*/
++
++/*!
++    \fn template <typename T> void MyContainer<T>::replace(int index, const T &value)
++
++    Replaces the item at \a index with \a value.
++*/
++
++/*!
++    \class AliasUser
++    \inmodule TemplateSugarModule
++    \brief A class that uses aliased template types as parameters.
++
++    AliasUser exercises canonical fallback for type aliases around
++    template types. The alias introduces an extra layer of type sugar
++    that the original fallback gating would have handled, verifying
++    that broadening the fallback doesn't regress alias resolution.
++*/
++
++/*!
++    \fn void AliasUser::process(ContainerAlias<int> items)
++
++    Processes the given \a items.
++*/
++
++/*!
++    \fn void AliasUser::transform(const ContainerAlias<double> &source, ContainerAlias<double> &dest)
++
++    Transforms elements from \a source into \a dest.
++*/
++
++/*!
++    \class Connector
++    \inmodule TemplateSugarModule
++    \brief A class for testing Q_QDOC-style template parameter overloads.
++
++    Connector exercises the code path in findNodeForCursor where
++    two overloads differ only in template parameter names, such as
++    \c Functor vs \c PointerToMemberFunction. Without the
++    TemplateTypeParmType guard, canonical comparison collapses both
++    names to \c type-parameter-0-0, causing one overload to shadow
++    the other.
++*/
++
++/*!
++    \fn template <typename Functor> void Connector::invoke(Functor callback)
++
++    Invokes \a callback asynchronously.
++*/
++
++/*!
++    \fn template <typename PointerToMemberFunction> void Connector::invoke(PointerToMemberFunction callback, int priority)
++
++    Invokes \a callback with the given \a priority.
++*/
++
++/*!
++    \class Dispatcher
++    \inmodule TemplateSugarModule
++    \brief A class for testing wrapped template parameter types.
++
++    \a T is the dispatched element type.
++
++    Dispatcher exercises canonical fallback for wrapped template
++    parameter types such as \c {T *}, \c {const T &}, and
++    \c {MyContainer<T>}. These verify that canonical comparison
++    is symmetric: both sides canonicalize the same way, so the
++    fallback produces correct matches even though the user-facing
++    template parameter name is lost in the canonical form.
++*/
++
++/*!
++    \fn template <typename T> void Dispatcher<T>::byPointer(T *value)
++
++    Dispatches via a pointer to \a value.
++*/
++
++/*!
++    \fn template <typename T> void Dispatcher<T>::byConstRef(const T &value)
++
++    Dispatches via a const reference to \a value.
++*/
++
++/*!
++    \fn template <typename T> void Dispatcher<T>::nested(MyContainer<T> items)
++
++    Dispatches all elements in \a items.
++*/
+diff --git a/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/src/template_sugar.h b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/src/template_sugar.h
+new file mode 100644
+index 0000000..76956f3
+--- /dev/null
++++ b/qttools/src/qdoc/qdoc/tests/validateqdocoutputfiles/testdata/template_sugar/src/template_sugar.h
+@@ -0,0 +1,48 @@
++// Copyright (C) 2026 The Qt Company Ltd.
++// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR GPL-3.0-only
++
++#ifndef TEMPLATE_SUGAR_H
++#define TEMPLATE_SUGAR_H
++
++template <typename T>
++class MyContainer {
++public:
++    void append(const T &value);
++    void prepend(T value);
++    MyContainer<T> operator+(const MyContainer<T> &other) const;
++    void replace(int index, const T &value);
++};
++
++template <typename T>
++using ContainerAlias = MyContainer<T>;
++
++class AliasUser {
++public:
++    void process(ContainerAlias<int> items);
++    void transform(const ContainerAlias<double> &source, ContainerAlias<double> &dest);
++};
++
++class Connector {
++public:
++#ifdef Q_QDOC
++    template <typename Functor>
++    void invoke(Functor callback);
++    template <typename PointerToMemberFunction>
++    void invoke(PointerToMemberFunction callback, int priority);
++#else
++    template <typename F>
++    void invoke(F) {}
++    template <typename F>
++    void invoke(F, int) {}
++#endif
++};
++
++template <typename T>
++class Dispatcher {
++public:
++    void byPointer(T *value);
++    void byConstRef(const T &value);
++    void nested(MyContainer<T> items);
++};
++
++#endif // TEMPLATE_SUGAR_H

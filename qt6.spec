@@ -132,12 +132,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.11.0
-Release:	4
+Version:	6.11.1
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.11/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	a93e9f424a9d11ee8d67bf8fb1af4772
+# Source0-md5:	25d4d1dd74c92b978f164e8f20805985
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		arm-no-xnnpack.patch
@@ -147,6 +147,7 @@ Patch5:		qtwebengine-cmake-build-type.patch
 Patch6:		qtquick3d-6.6.2-gcc14.patch
 Patch7:		glib2.78-glibc2.43.patch
 Patch8:		qdoc-clang22.patch
+Patch9:		header-dep.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -3920,6 +3921,7 @@ narzędzia.
 %patch -P6 -p1 -d qtquick3d
 %patch -P7 -p1
 %patch -P8 -p1
+%patch -P9 -p1 -d qtwebengine
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 
@@ -7891,9 +7893,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6TaskTree.pc
 %{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtTaskTreeTestsConfig.cmake
 %{_libdir}/cmake/Qt6TaskTree
-%{_libdir}/cmake/Qt6TaskTreePrivate
 %{qt6dir}/mkspecs/modules/qt_lib_tasktree.pri
-%{qt6dir}/mkspecs/modules/qt_lib_tasktree_private.pri
 %{qt6dir}/modules/TaskTree.json
 %{qt6dir}/metatypes/qt6tasktree_metatypes.json
 

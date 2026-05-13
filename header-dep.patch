@@ -1,0 +1,10 @@
+--- qtwebengine/src/3rdparty/chromium/content/common/BUILD.gn.orig	2026-05-14 01:44:29.901386335 +0200
++++ qtwebengine/src/3rdparty/chromium/content/common/BUILD.gn	2026-05-14 01:44:38.844639180 +0200
+@@ -53,6 +53,7 @@
+       "//content/public/common:switches",
+       "//sandbox/policy",
+       "//third_party/icu",
++      "//content/common:buildflags",
+     ]
+ 
+     configs += [ "//content:content_implementation" ]

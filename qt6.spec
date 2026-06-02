@@ -5,28 +5,9 @@
 # together with module, and the rest of .cmake files in appropriate -devel subpackage.
 #
 # TODO:
-# - unpackaged files:
-#
-#   %attr(755,root,root) %{_libdir}/qt6/plugins/help/libhelpplugin.so
-#
-#   %{_libdir}/libQt6MultimediaTestLib.a
-#   %{_libdir}/libQt6MultimediaTestLib.prl
-#   %{_includedir}/qt6/QtMultimediaTestLib
-#   %{_libdir}/cmake/Qt6MultimediaTestLibPrivate
-#   %{_libdir}/qt6/metatypes/qt6multimediatestlibprivate_metatypes.json
-#   %{_libdir}/qt6/mkspecs/modules/qt_lib_multimediatestlibprivate_private.pri
-#   %{_libdir}/qt6/modules/MultimediaTestLibPrivate.json
-#
-#   %{_libdir}/cmake/Qt6TestInternalsPrivate
-#   %{_libdir}/qt6/mkspecs/modules/qt_lib_testinternals_private.pri
-#   %{_libdir}/qt6/modules/TestInternalsPrivate.json
-#
-#   %{_libdir}/qt6/mkspecs/REUSE.toml
-#   %{_libdir}/qt6/mkspecs/modules/README
-#   %{_datadir}/qt6/translations/catalogs.json
-#
 # - -doc/-doc-qch mess: make packages per library (then split qt6-doc and qt6-doc-qch) or per submodule (like in qt5)?
 # - move files out of Qt6Qml/Qt6Qml-devel to packages they belong to
+# - build qtopenapi component (BR: maven)
 #
 # Conditional build:
 # -- build targets
@@ -4107,6 +4088,10 @@ DESTDIR=$RPM_BUILD_ROOT %{__cmake} --build build/ --target install_docs
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/qt6-doc/activeqt*
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/qt6-doc/qtdoc/activeqt*
 %{__rm} -r $RPM_BUILD_ROOT%{_docdir}/qt6-doc/qtdoc/qt-activex*
+
+# qtopenapi component not built yet (TODO)
+%{__rm} -r $RPM_BUILD_ROOT%{_docdir}/qt6-doc/qtopenapi
+%{__rm} $RPM_BUILD_ROOT%{_docdir}/qt6-doc/qtopenapi.qch
 %endif
 
 # junk
@@ -4115,7 +4100,10 @@ DESTDIR=$RPM_BUILD_ROOT %{__cmake} --build build/ --target install_docs
 %{__rm} -r $RPM_BUILD_ROOT%{qt6dir}/qml/Qt/labs/assetdownloader/objects-PLD
 %{__rm} -r $RPM_BUILD_ROOT%{qt6dir}/qml/Qt/test/controls/objects-PLD
 
-%if %{without qtwebengine}
+%if %{with qtwebengine}
+# we have system gn package, available on all archs
+%{__rm} $RPM_BUILD_ROOT%{qt6dir}/libexec/gn
+%else
 %{__rm} $RPM_BUILD_ROOT%{_datadir}/qt6/translations/qtwebengine_*.qm
 %endif
 
@@ -4130,7 +4118,27 @@ DESTDIR=$RPM_BUILD_ROOT %{__cmake} --build build/ --target install_docs
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libQt6BundledPhysX.a
 %{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6BundledPhysX
 %endif
+# test libraries, not needed?
+# - Qt6MultimediaTestLib
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libQt6MultimediaTestLib.a
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libQt6MultimediaTestLib.prl
+%{__rm} -r $RPM_BUILD_ROOT%{_includedir}/qt6/QtMultimediaTestLib
+%{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6MultimediaTestLibPrivate
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/qt6/metatypes/qt6multimediatestlibprivate_metatypes.json
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/qt6/mkspecs/modules/qt_lib_multimediatestlibprivate_private.pri
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/qt6/modules/MultimediaTestLibPrivate.json
+# - Qt6TestInternalsPrivate
+%{__rm} -r $RPM_BUILD_ROOT%{_libdir}/cmake/Qt6TestInternalsPrivate
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/qt6/mkspecs/modules/qt_lib_testinternals_private.pri
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/qt6/modules/TestInternalsPrivate.json
 
+# internal files?
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/qt6/mkspecs/REUSE.toml
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/qt6/mkspecs/modules/README
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/qt6/json_schema/modules.json
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/qt6/translations/catalogs.json
+
+# non-linux
 %{__rm} $RPM_BUILD_ROOT%{qt6dir}/libexec/qt-android-runner.py
 
 # external plugins loaded from qtbase libs
@@ -5420,6 +5428,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libQt6Help.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libQt6Help.so.6
+%dir %{qt6dir}/plugins/help
+%attr(755,root,root) %{qt6dir}/plugins/help/libhelpplugin.so
 
 %files -n Qt6Help-devel
 %defattr(644,root,root,755)
@@ -7158,12 +7168,14 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with doc}
 %files -n Qt6Quick-doc
 %defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtlabsstylekit
 %{_docdir}/qt6-doc/qtquick
 %{_docdir}/qt6-doc/qtquickcontrols
 %{_docdir}/qt6-doc/qtquickdialogs
 
 %files -n Qt6Quick-doc-qch
 %defattr(644,root,root,755)
+%{_docdir}/qt6-doc/qtlabsstylekit.qch
 %{_docdir}/qt6-doc/qtquick.qch
 %{_docdir}/qt6-doc/qtquickcontrols.qch
 %{_docdir}/qt6-doc/qtquickdialogs.qch
@@ -8325,6 +8337,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libQt6WaylandClient.so
 %{_libdir}/libQt6WaylandClient.prl
 %{_includedir}/qt6/QtWaylandClient
+%dir %{_datadir}/qt6/wayland
+%{_datadir}/qt6/wayland/extensions
+%{_datadir}/qt6/wayland/protocols
 %{_pkgconfigdir}/Qt6WaylandClient.pc
 %{_libdir}/cmake/Qt6Gui/Qt6DmaBufServerBufferPlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6DrmEglServerBufferPlugin*.cmake
@@ -8756,6 +8771,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/libexec/qt-cmake-private-install.cmake
 %attr(755,root,root) %{qt6dir}/libexec/qt-cmake-standalone-test
 %attr(755,root,root) %{qt6dir}/libexec/qt-internal-configure-examples
+%attr(755,root,root) %{qt6dir}/libexec/qt_cyclonedx_generator.py
 %attr(755,root,root) %{qt6dir}/libexec/syncqt
 %attr(755,root,root) %{qt6dir}/libexec/tracepointgen
 %{qt6dir}/mkspecs/*.pri

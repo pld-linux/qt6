@@ -3949,6 +3949,7 @@ narzędzia.
 %endif
 
 %build
+export LD_LIBRARY_PATH=$(pwd)/build/qtbase/%{_lib}${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 # We're using samurai instead of ninja because the latter
 # cannot be told what command line flags to use globally
 %cmake -B build \

@@ -5,6 +5,7 @@
 # together with module, and the rest of .cmake files in appropriate -devel subpackage.
 #
 # TODO:
+# - lipi bcond/BRs?
 # - -doc/-doc-qch mess: make packages per library (then split qt6-doc and qt6-doc-qch) or per submodule (like in qt5)?
 # - move files out of Qt6Qml/Qt6Qml-devel to packages they belong to
 # - build qtopenapi component (BR: maven)
@@ -4439,10 +4440,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n qt6-qttools
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/pixeltool-qt6
-%attr(755,root,root) %{_bindir}/qtdiag-qt6
-%attr(755,root,root) %{_bindir}/qtpaths-qt6
-%attr(755,root,root) %{_bindir}/qtplugininfo-qt6
+# system bindir contains symlinks to qt6dir/bin
+%{_bindir}/pixeltool-qt6
+%{_bindir}/qtdiag-qt6
+%{_bindir}/qtpaths-qt6
+%{_bindir}/qtplugininfo-qt6
 %attr(755,root,root) %{qt6dir}/bin/androiddeployqt
 %attr(755,root,root) %{qt6dir}/bin/androidtestrunner
 %attr(755,root,root) %{qt6dir}/bin/kmap2qmap
@@ -4464,9 +4466,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n qt6-assistant -f assistant.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/assistant-qt6
-%attr(755,root,root) %{_bindir}/qdistancefieldgenerator-qt6
-%attr(755,root,root) %{_bindir}/qhelpgenerator-qt6
+%{_bindir}/assistant-qt6
+%{_bindir}/qdistancefieldgenerator-qt6
+%{_bindir}/qhelpgenerator-qt6
 %attr(755,root,root) %{qt6dir}/bin/assistant
 %attr(755,root,root) %{qt6dir}/bin/qdistancefieldgenerator
 %attr(755,root,root) %{qt6dir}/bin/qdoc
@@ -4475,19 +4477,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n qt6-designer -f designer.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/designer-qt6
+%{_bindir}/designer-qt6
 %attr(755,root,root) %{qt6dir}/bin/designer
 
 %files -n qt6-linguist -f linguist.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/lcheck-qt6
-%attr(755,root,root) %{_bindir}/lconvert-qt6
-%attr(755,root,root) %{_bindir}/linguist-qt6
-%attr(755,root,root) %{_bindir}/lrelease-pro-qt6
-%attr(755,root,root) %{_bindir}/lrelease-qt6
-%attr(755,root,root) %{_bindir}/ltext2id-qt6
-%attr(755,root,root) %{_bindir}/lupdate-pro-qt6
-%attr(755,root,root) %{_bindir}/lupdate-qt6
+%{_bindir}/lcheck-qt6
+%{_bindir}/lconvert-qt6
+%{_bindir}/linguist-qt6
+%{_bindir}/lrelease-pro-qt6
+%{_bindir}/lrelease-qt6
+%{_bindir}/ltext2id-qt6
+%{_bindir}/lupdate-pro-qt6
+%{_bindir}/lupdate-qt6
 %attr(755,root,root) %{qt6dir}/bin/lcheck
 %attr(755,root,root) %{qt6dir}/bin/lconvert
 %attr(755,root,root) %{qt6dir}/bin/linguist
@@ -4506,8 +4508,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n qt6-qdbus
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/qdbus-qt6
-%attr(755,root,root) %{_bindir}/qdbusviewer-qt6
+%{_bindir}/qdbus-qt6
+%{_bindir}/qdbusviewer-qt6
 %attr(755,root,root) %{qt6dir}/bin/qdbus
 %attr(755,root,root) %{qt6dir}/bin/qdbusviewer
 
@@ -4535,21 +4537,21 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n qt6-qtdeclarative
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/qmlaotstats-qt6
-%attr(755,root,root) %{_bindir}/qmlcachegen-qt6
-%attr(755,root,root) %{_bindir}/qmlcontextpropertydump-qt6
-%attr(755,root,root) %{_bindir}/qmleasing-qt6
-%attr(755,root,root) %{_bindir}/qmlformat-qt6
-%attr(755,root,root) %{_bindir}/qmlimportscanner-qt6
-%attr(755,root,root) %{_bindir}/qmllint-qt6
-%attr(755,root,root) %{_bindir}/qmlplugindump-qt6
-%attr(755,root,root) %{_bindir}/qmlpreview-qt6
-%attr(755,root,root) %{_bindir}/qmlprofiler-qt6
-%attr(755,root,root) %{_bindir}/qml-qt6
-%attr(755,root,root) %{_bindir}/qmlscene-qt6
-%attr(755,root,root) %{_bindir}/qmltestrunner-qt6
-%attr(755,root,root) %{_bindir}/qmltime-qt6
-%attr(755,root,root) %{_bindir}/qmltyperegistrar-qt6
+%{_bindir}/qmlaotstats-qt6
+%{_bindir}/qmlcachegen-qt6
+%{_bindir}/qmlcontextpropertydump-qt6
+%{_bindir}/qmleasing-qt6
+%{_bindir}/qmlformat-qt6
+%{_bindir}/qmlimportscanner-qt6
+%{_bindir}/qmllint-qt6
+%{_bindir}/qmlplugindump-qt6
+%{_bindir}/qmlpreview-qt6
+%{_bindir}/qmlprofiler-qt6
+%{_bindir}/qml-qt6
+%{_bindir}/qmlscene-qt6
+%{_bindir}/qmltestrunner-qt6
+%{_bindir}/qmltime-qt6
+%{_bindir}/qmltyperegistrar-qt6
 %attr(755,root,root) %{qt6dir}/bin/qml
 %attr(755,root,root) %{qt6dir}/bin/qmlcontextpropertydump
 %attr(755,root,root) %{qt6dir}/bin/qmleasing
@@ -4571,100 +4573,100 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with qt3d}
 %files -n Qt63D
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt63DAnimation.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt63DAnimation.so.6
-%attr(755,root,root) %{_libdir}/libQt63DCore.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt63DCore.so.6
-%attr(755,root,root) %{_libdir}/libQt63DExtras.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt63DExtras.so.6
-%attr(755,root,root) %{_libdir}/libQt63DInput.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt63DInput.so.6
-%attr(755,root,root) %{_libdir}/libQt63DLogic.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt63DLogic.so.6
-%attr(755,root,root) %{_libdir}/libQt63DQuick.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt63DQuick.so.6
-%attr(755,root,root) %{_libdir}/libQt63DQuickAnimation.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt63DQuickAnimation.so.6
-%attr(755,root,root) %{_libdir}/libQt63DQuickExtras.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt63DQuickExtras.so.6
-%attr(755,root,root) %{_libdir}/libQt63DQuickInput.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt63DQuickInput.so.6
-%attr(755,root,root) %{_libdir}/libQt63DQuickLogic.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt63DQuickLogic.so.6
-%attr(755,root,root) %{_libdir}/libQt63DQuickRender.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt63DQuickRender.so.6
-%attr(755,root,root) %{_libdir}/libQt63DQuickScene2D.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt63DQuickScene2D.so.6
-%attr(755,root,root) %{_libdir}/libQt63DQuickScene3D.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt63DQuickScene3D.so.6
-%attr(755,root,root) %{_libdir}/libQt63DRender.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt63DRender.so.6
+%{_libdir}/libQt63DAnimation.so.*.*.*
+%ghost %{_libdir}/libQt63DAnimation.so.6
+%{_libdir}/libQt63DCore.so.*.*.*
+%ghost %{_libdir}/libQt63DCore.so.6
+%{_libdir}/libQt63DExtras.so.*.*.*
+%ghost %{_libdir}/libQt63DExtras.so.6
+%{_libdir}/libQt63DInput.so.*.*.*
+%ghost %{_libdir}/libQt63DInput.so.6
+%{_libdir}/libQt63DLogic.so.*.*.*
+%ghost %{_libdir}/libQt63DLogic.so.6
+%{_libdir}/libQt63DQuick.so.*.*.*
+%ghost %{_libdir}/libQt63DQuick.so.6
+%{_libdir}/libQt63DQuickAnimation.so.*.*.*
+%ghost %{_libdir}/libQt63DQuickAnimation.so.6
+%{_libdir}/libQt63DQuickExtras.so.*.*.*
+%ghost %{_libdir}/libQt63DQuickExtras.so.6
+%{_libdir}/libQt63DQuickInput.so.*.*.*
+%ghost %{_libdir}/libQt63DQuickInput.so.6
+%{_libdir}/libQt63DQuickLogic.so.*.*.*
+%ghost %{_libdir}/libQt63DQuickLogic.so.6
+%{_libdir}/libQt63DQuickRender.so.*.*.*
+%ghost %{_libdir}/libQt63DQuickRender.so.6
+%{_libdir}/libQt63DQuickScene2D.so.*.*.*
+%ghost %{_libdir}/libQt63DQuickScene2D.so.6
+%{_libdir}/libQt63DQuickScene3D.so.*.*.*
+%ghost %{_libdir}/libQt63DQuickScene3D.so.6
+%{_libdir}/libQt63DRender.so.*.*.*
+%ghost %{_libdir}/libQt63DRender.so.6
 # - loaded from src/render/geometry/qmesh.cpp
 %dir %{qt6dir}/plugins/geometryloaders
-%attr(755,root,root) %{_libdir}/qt6/plugins/geometryloaders/libdefaultgeometryloader.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/geometryloaders/libgltfgeometryloader.so
+%{_libdir}/qt6/plugins/geometryloaders/libdefaultgeometryloader.so
+%{_libdir}/qt6/plugins/geometryloaders/libgltfgeometryloader.so
 # - loaded from src/render/qrendererpluginfactory.cpp
 %dir %{qt6dir}/plugins/renderers
-%attr(755,root,root) %{qt6dir}/plugins/renderers/libopenglrenderer.so
-%attr(755,root,root) %{qt6dir}/plugins/renderers/librhirenderer.so
+%{qt6dir}/plugins/renderers/libopenglrenderer.so
+%{qt6dir}/plugins/renderers/librhirenderer.so
 # - loaded from src/render/frontend/qrenderpluginfactory.cpp
 %dir %{qt6dir}/plugins/renderplugins
-%attr(755,root,root) %{_libdir}/qt6/plugins/renderplugins/libscene2d.so
+%{_libdir}/qt6/plugins/renderplugins/libscene2d.so
 # - loaded from src/render/io/qsceneimportfactory.cpp
 %dir %{qt6dir}/plugins/sceneparsers
-%attr(755,root,root) %{_libdir}/qt6/plugins/sceneparsers/libassimpsceneimport.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/sceneparsers/libgltfsceneexport.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/sceneparsers/libgltfsceneimport.so
+%{_libdir}/qt6/plugins/sceneparsers/libassimpsceneimport.so
+%{_libdir}/qt6/plugins/sceneparsers/libgltfsceneexport.so
+%{_libdir}/qt6/plugins/sceneparsers/libgltfsceneimport.so
 %dir %{qt6dir}/qml/Qt3D
 %dir %{qt6dir}/qml/Qt3D/Animation
-%attr(755,root,root) %{qt6dir}/qml/Qt3D/Animation/libquick3danimationplugin.so
+%{qt6dir}/qml/Qt3D/Animation/libquick3danimationplugin.so
 %{qt6dir}/qml/Qt3D/Animation/plugins.qmltypes
 %{qt6dir}/qml/Qt3D/Animation/qmldir
 %dir %{qt6dir}/qml/Qt3D/Core
-%attr(755,root,root) %{qt6dir}/qml/Qt3D/Core/libquick3dcoreplugin.so
+%{qt6dir}/qml/Qt3D/Core/libquick3dcoreplugin.so
 %{qt6dir}/qml/Qt3D/Core/plugins.qmltypes
 %{qt6dir}/qml/Qt3D/Core/qmldir
 %dir %{qt6dir}/qml/Qt3D/Extras
-%attr(755,root,root) %{qt6dir}/qml/Qt3D/Extras/libquick3dextrasplugin.so
+%{qt6dir}/qml/Qt3D/Extras/libquick3dextrasplugin.so
 %{qt6dir}/qml/Qt3D/Extras/plugins.qmltypes
 %{qt6dir}/qml/Qt3D/Extras/qmldir
 %dir %{qt6dir}/qml/Qt3D/Input
-%attr(755,root,root) %{qt6dir}/qml/Qt3D/Input/libquick3dinputplugin.so
+%{qt6dir}/qml/Qt3D/Input/libquick3dinputplugin.so
 %{qt6dir}/qml/Qt3D/Input/plugins.qmltypes
 %{qt6dir}/qml/Qt3D/Input/qmldir
 %dir %{qt6dir}/qml/Qt3D/Logic
-%attr(755,root,root) %{qt6dir}/qml/Qt3D/Logic/libquick3dlogicplugin.so
+%{qt6dir}/qml/Qt3D/Logic/libquick3dlogicplugin.so
 %{qt6dir}/qml/Qt3D/Logic/plugins.qmltypes
 %{qt6dir}/qml/Qt3D/Logic/qmldir
 %dir %{qt6dir}/qml/Qt3D/Render
-%attr(755,root,root) %{qt6dir}/qml/Qt3D/Render/libquick3drenderplugin.so
+%{qt6dir}/qml/Qt3D/Render/libquick3drenderplugin.so
 %{qt6dir}/qml/Qt3D/Render/plugins.qmltypes
 %{qt6dir}/qml/Qt3D/Render/qmldir
 %dir %{qt6dir}/qml/QtQuick/Scene2D
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Scene2D/libqtquickscene2dplugin.so
+%{qt6dir}/qml/QtQuick/Scene2D/libqtquickscene2dplugin.so
 %{qt6dir}/qml/QtQuick/Scene2D/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Scene2D/qmldir
 %dir %{qt6dir}/qml/QtQuick/Scene3D
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Scene3D/libqtquickscene3dplugin.so
+%{qt6dir}/qml/QtQuick/Scene3D/libqtquickscene3dplugin.so
 %{qt6dir}/qml/QtQuick/Scene3D/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Scene3D/qmldir
 
 %files -n Qt63D-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt63DAnimation.so
-%attr(755,root,root) %{_libdir}/libQt63DCore.so
-%attr(755,root,root) %{_libdir}/libQt63DExtras.so
-%attr(755,root,root) %{_libdir}/libQt63DInput.so
-%attr(755,root,root) %{_libdir}/libQt63DLogic.so
-%attr(755,root,root) %{_libdir}/libQt63DQuickAnimation.so
-%attr(755,root,root) %{_libdir}/libQt63DQuickExtras.so
-%attr(755,root,root) %{_libdir}/libQt63DQuickInput.so
-%attr(755,root,root) %{_libdir}/libQt63DQuickLogic.so
-%attr(755,root,root) %{_libdir}/libQt63DQuickRender.so
-%attr(755,root,root) %{_libdir}/libQt63DQuickScene2D.so
-%attr(755,root,root) %{_libdir}/libQt63DQuickScene3D.so
-%attr(755,root,root) %{_libdir}/libQt63DQuick.so
-%attr(755,root,root) %{_libdir}/libQt63DRender.so
+%{_libdir}/libQt63DAnimation.so
+%{_libdir}/libQt63DCore.so
+%{_libdir}/libQt63DExtras.so
+%{_libdir}/libQt63DInput.so
+%{_libdir}/libQt63DLogic.so
+%{_libdir}/libQt63DQuickAnimation.so
+%{_libdir}/libQt63DQuickExtras.so
+%{_libdir}/libQt63DQuickInput.so
+%{_libdir}/libQt63DQuickLogic.so
+%{_libdir}/libQt63DQuickRender.so
+%{_libdir}/libQt63DQuickScene2D.so
+%{_libdir}/libQt63DQuickScene3D.so
+%{_libdir}/libQt63DQuick.so
+%{_libdir}/libQt63DRender.so
 %{_libdir}/libQt63DAnimation.prl
 %{_libdir}/libQt63DCore.prl
 %{_libdir}/libQt63DExtras.prl
@@ -4806,13 +4808,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Bluetooth
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Bluetooth.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Bluetooth.so.6
+%{_libdir}/libQt6Bluetooth.so.*.*.*
+%ghost %{_libdir}/libQt6Bluetooth.so.6
 %attr(755,root,root) %{qt6dir}/libexec/sdpscanner
 
 %files -n Qt6Bluetooth-devel -f qtconnectivity.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Bluetooth.so
+%{_libdir}/libQt6Bluetooth.so
 %{_libdir}/libQt6Bluetooth.prl
 %{_includedir}/qt6/QtBluetooth
 %{_pkgconfigdir}/Qt6Bluetooth.pc
@@ -4837,17 +4839,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n qt6-canvaspainter
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/qcshadergen-qt6
+%{_bindir}/qcshadergen-qt6
 %attr(755,root,root) %{qt6dir}/bin/qcshadergen
 
 %files -n Qt6CanvasPainter
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6CanvasPainter.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6CanvasPainter.so.6
+%{_libdir}/libQt6CanvasPainter.so.*.*.*
+%ghost %{_libdir}/libQt6CanvasPainter.so.6
 
 %files -n Qt6CanvasPainter-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6CanvasPainter.so
+%{_libdir}/libQt6CanvasPainter.so
 %{_libdir}/libQt6CanvasPainter.prl
 %{_includedir}/qt6/QtCanvasPainter
 %{_pkgconfigdir}/Qt6CanvasPainter.pc
@@ -4872,20 +4874,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Charts
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Charts.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Charts.so.6
-%attr(755,root,root) %{_libdir}/libQt6ChartsQml.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6ChartsQml.so.6
+%{_libdir}/libQt6Charts.so.*.*.*
+%ghost %{_libdir}/libQt6Charts.so.6
+%{_libdir}/libQt6ChartsQml.so.*.*.*
+%ghost %{_libdir}/libQt6ChartsQml.so.6
 %dir %{qt6dir}/qml/QtCharts
 %{qt6dir}/qml/QtCharts/designer
-%attr(755,root,root) %{qt6dir}/qml/QtCharts/libqtchartsqml2plugin.so
+%{qt6dir}/qml/QtCharts/libqtchartsqml2plugin.so
 %{qt6dir}/qml/QtCharts/plugins.qmltypes
 %{qt6dir}/qml/QtCharts/qmldir
 
 %files -n Qt6Charts-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Charts.so
-%attr(755,root,root) %{_libdir}/libQt6ChartsQml.so
+%{_libdir}/libQt6Charts.so
+%{_libdir}/libQt6ChartsQml.so
 %{_libdir}/libQt6Charts.prl
 %{_libdir}/libQt6ChartsQml.prl
 %{_includedir}/qt6/QtCharts
@@ -4918,12 +4920,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Coap
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Coap.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Coap.so.6
+%{_libdir}/libQt6Coap.so.*.*.*
+%ghost %{_libdir}/libQt6Coap.so.6
 
 %files -n Qt6Coap-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Coap.so
+%{_libdir}/libQt6Coap.so
 %{_libdir}/libQt6Coap.prl
 %{_includedir}/qt6/QtCoap
 %{_pkgconfigdir}/Qt6Coap.pc
@@ -4947,12 +4949,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Concurrent
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Concurrent.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Concurrent.so.6
+%{_libdir}/libQt6Concurrent.so.*.*.*
+%ghost %{_libdir}/libQt6Concurrent.so.6
 
 %files -n Qt6Concurrent-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Concurrent.so
+%{_libdir}/libQt6Concurrent.so
 %{_libdir}/libQt6Concurrent.prl
 %{_includedir}/qt6/QtConcurrent
 %{_pkgconfigdir}/Qt6Concurrent.pc
@@ -4971,8 +4973,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Core -f qtbase.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Core.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Core.so.6
+%{_libdir}/libQt6Core.so.*.*.*
+%ghost %{_libdir}/libQt6Core.so.6
 %dir %{_sysconfdir}/qt6
 %dir %{qt6dir}
 %dir %{qt6dir}/bin
@@ -4986,7 +4988,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Core-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Core.so
+%{_libdir}/libQt6Core.so
 %{_libdir}/libQt6Core.prl
 %dir %{qt6dir}/metatypes
 %{qt6dir}/metatypes/qt6core_metatypes.json
@@ -5010,20 +5012,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6DataVisualization
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6DataVisualization.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6DataVisualization.so.6
-%attr(755,root,root) %{_libdir}/libQt6DataVisualizationQml.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6DataVisualizationQml.so.6
+%{_libdir}/libQt6DataVisualization.so.*.*.*
+%ghost %{_libdir}/libQt6DataVisualization.so.6
+%{_libdir}/libQt6DataVisualizationQml.so.*.*.*
+%ghost %{_libdir}/libQt6DataVisualizationQml.so.6
 %dir %{qt6dir}/qml/QtDataVisualization
-%attr(755,root,root) %{qt6dir}/qml/QtDataVisualization/libdatavisualizationqmlplugin.so
+%{qt6dir}/qml/QtDataVisualization/libdatavisualizationqmlplugin.so
 %{qt6dir}/qml/QtDataVisualization/plugins.qmltypes
 %{qt6dir}/qml/QtDataVisualization/qmldir
 %{qt6dir}/qml/QtDataVisualization/designer
 
 %files -n Qt6DataVisualization-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6DataVisualization.so
-%attr(755,root,root) %{_libdir}/libQt6DataVisualizationQml.so
+%{_libdir}/libQt6DataVisualization.so
+%{_libdir}/libQt6DataVisualizationQml.so
 %{_libdir}/libQt6DataVisualization.prl
 %{_libdir}/libQt6DataVisualizationQml.prl
 %{_includedir}/qt6/QtDataVisualization
@@ -5056,12 +5058,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6DBus
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6DBus.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6DBus.so.6
+%{_libdir}/libQt6DBus.so.*.*.*
+%ghost %{_libdir}/libQt6DBus.so.6
 
 %files -n Qt6DBus-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6DBus.so
+%{_libdir}/libQt6DBus.so
 %{_libdir}/libQt6DBus.prl
 %{_includedir}/qt6/QtDBus
 %{_pkgconfigdir}/Qt6DBus.pc
@@ -5075,16 +5077,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Designer
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Designer.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Designer.so.6
-%attr(755,root,root) %{_libdir}/libQt6DesignerComponents.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6DesignerComponents.so.6
+%{_libdir}/libQt6Designer.so.*.*.*
+%ghost %{_libdir}/libQt6Designer.so.6
+%{_libdir}/libQt6DesignerComponents.so.*.*.*
+%ghost %{_libdir}/libQt6DesignerComponents.so.6
 %dir %{qt6dir}/plugins/designer
 
 %files -n Qt6Designer-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Designer.so
-%attr(755,root,root) %{_libdir}/libQt6DesignerComponents.so
+%{_libdir}/libQt6Designer.so
+%{_libdir}/libQt6DesignerComponents.so
 %{_libdir}/libQt6Designer.prl
 %{_libdir}/libQt6DesignerComponents.prl
 %{_includedir}/qt6/QtDesigner
@@ -5104,7 +5106,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Designer-plugin-qquickwidget
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/designer/libqquickwidget.so
+%{qt6dir}/plugins/designer/libqquickwidget.so
 %{_libdir}/cmake/Qt6Designer/Qt6QQuickWidgetPlugin*.cmake
 
 %files -n Qt6DeviceDiscoverySupport-devel
@@ -5129,13 +5131,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Graphs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Graphs.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Graphs.so.6
-%attr(755,root,root) %{_libdir}/libQt6GraphsWidgets.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6GraphsWidgets.so.6
+%{_libdir}/libQt6Graphs.so.*.*.*
+%ghost %{_libdir}/libQt6Graphs.so.6
+%{_libdir}/libQt6GraphsWidgets.so.*.*.*
+%ghost %{_libdir}/libQt6GraphsWidgets.so.6
 %dir %{qt6dir}/qml/QtGraphs
 %{qt6dir}/qml/QtGraphs/Graphs.qmltypes
-%attr(755,root,root) %{qt6dir}/qml/QtGraphs/libgraphsplugin.so
+%{qt6dir}/qml/QtGraphs/libgraphsplugin.so
 %dir %{qt6dir}/qml/QtGraphs/designer
 %{qt6dir}/qml/QtGraphs/designer/*.qml
 %{qt6dir}/qml/QtGraphs/designer/qtgraphs.metainfo
@@ -5148,8 +5150,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Graphs-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Graphs.so
-%attr(755,root,root) %{_libdir}/libQt6GraphsWidgets.so
+%{_libdir}/libQt6Graphs.so
+%{_libdir}/libQt6GraphsWidgets.so
 %{_libdir}/libQt6Graphs.prl
 %{_libdir}/libQt6GraphsWidgets.prl
 %{_includedir}/qt6/QtGraphs
@@ -5172,19 +5174,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Grpc
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Grpc.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Grpc.so.6
-%attr(755,root,root) %{_libdir}/libQt6GrpcQuick.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6GrpcQuick.so.6
+%{_libdir}/libQt6Grpc.so.*.*.*
+%ghost %{_libdir}/libQt6Grpc.so.6
+%{_libdir}/libQt6GrpcQuick.so.*.*.*
+%ghost %{_libdir}/libQt6GrpcQuick.so.6
 %dir %{qt6dir}/qml/QtGrpc
-%attr(755,root,root) %{qt6dir}/qml/QtGrpc/libgrpcquickplugin.so
+%{qt6dir}/qml/QtGrpc/libgrpcquickplugin.so
 %{qt6dir}/qml/QtGrpc/plugins.qmltypes
 %{qt6dir}/qml/QtGrpc/qmldir
 
 %files -n Qt6Grpc-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Grpc.so
-%attr(755,root,root) %{_libdir}/libQt6GrpcQuick.so
+%{_libdir}/libQt6Grpc.so
+%{_libdir}/libQt6GrpcQuick.so
 %{_libdir}/libQt6Grpc.prl
 %{_libdir}/libQt6GrpcQuick.prl
 %{_includedir}/qt6/QtGrpc
@@ -5211,37 +5213,37 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Gui
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Gui.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Gui.so.6
+%{_libdir}/libQt6Gui.so.*.*.*
+%ghost %{_libdir}/libQt6Gui.so.6
 # loaded from src/gui/kernel/qgenericpluginfactory.cpp
 %dir %{qt6dir}/plugins/generic
-%attr(755,root,root) %{qt6dir}/plugins/generic/libqevdevkeyboardplugin.so
-%attr(755,root,root) %{qt6dir}/plugins/generic/libqevdevmouseplugin.so
-%attr(755,root,root) %{qt6dir}/plugins/generic/libqevdevtabletplugin.so
-%attr(755,root,root) %{qt6dir}/plugins/generic/libqevdevtouchplugin.so
+%{qt6dir}/plugins/generic/libqevdevkeyboardplugin.so
+%{qt6dir}/plugins/generic/libqevdevmouseplugin.so
+%{qt6dir}/plugins/generic/libqevdevtabletplugin.so
+%{qt6dir}/plugins/generic/libqevdevtouchplugin.so
 # loaded from src/gui/image/qicon.cpp
 %dir %{qt6dir}/plugins/iconengines
 # loaded from src/gui/image/qimage{reader,writer}.cpp
 %dir %{qt6dir}/plugins/imageformats
-%attr(755,root,root) %{qt6dir}/plugins/imageformats/libqgif.so
-%attr(755,root,root) %{qt6dir}/plugins/imageformats/libqico.so
-%attr(755,root,root) %{qt6dir}/plugins/imageformats/libqicns.so
-%attr(755,root,root) %{qt6dir}/plugins/imageformats/libqjp2.so
-%attr(755,root,root) %{qt6dir}/plugins/imageformats/libqjpeg.so
-%attr(755,root,root) %{qt6dir}/plugins/imageformats/libqmng.so
-%attr(755,root,root) %{qt6dir}/plugins/imageformats/libqtga.so
-%attr(755,root,root) %{qt6dir}/plugins/imageformats/libqtiff.so
-%attr(755,root,root) %{qt6dir}/plugins/imageformats/libqwbmp.so
-%attr(755,root,root) %{qt6dir}/plugins/imageformats/libqwebp.so
+%{qt6dir}/plugins/imageformats/libqgif.so
+%{qt6dir}/plugins/imageformats/libqico.so
+%{qt6dir}/plugins/imageformats/libqicns.so
+%{qt6dir}/plugins/imageformats/libqjp2.so
+%{qt6dir}/plugins/imageformats/libqjpeg.so
+%{qt6dir}/plugins/imageformats/libqmng.so
+%{qt6dir}/plugins/imageformats/libqtga.so
+%{qt6dir}/plugins/imageformats/libqtiff.so
+%{qt6dir}/plugins/imageformats/libqwbmp.so
+%{qt6dir}/plugins/imageformats/libqwebp.so
 # loaded from src/gui/kernel/qplatforminputcontextfactory.cpp
 %dir %{qt6dir}/plugins/platforminputcontexts
-%attr(755,root,root) %{qt6dir}/plugins/platforminputcontexts/libcomposeplatforminputcontextplugin.so
-%attr(755,root,root) %{qt6dir}/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+%{qt6dir}/plugins/platforminputcontexts/libcomposeplatforminputcontextplugin.so
+%{qt6dir}/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
 # loaded from src/gui/kernel/qplatformintegrationfactory.cpp
 %dir %{qt6dir}/plugins/platforms
-%attr(755,root,root) %{qt6dir}/plugins/platforms/libqminimal.so
-%attr(755,root,root) %{qt6dir}/plugins/platforms/libqoffscreen.so
-%attr(755,root,root) %{qt6dir}/plugins/platforms/libqvkkhrdisplay.so
+%{qt6dir}/plugins/platforms/libqminimal.so
+%{qt6dir}/plugins/platforms/libqoffscreen.so
+%{qt6dir}/plugins/platforms/libqvkkhrdisplay.so
 # loaded from src/gui/kernel/qplatformthemefactory.cpp
 %dir %{qt6dir}/plugins/platformthemes
 # common for base -devel and plugin-specific files
@@ -5250,51 +5252,51 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with libinput}
 %files -n Qt6Gui-generic-libinput
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/generic/libqlibinputplugin.so
+%{qt6dir}/plugins/generic/libqlibinputplugin.so
 %{_libdir}/cmake/Qt6Gui/Qt6QLibInputPlugin*.cmake
 %endif
 
 %if %{with tslib}
 %files -n Qt6Gui-generic-tslib
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/generic/libqtslibplugin.so
+%{qt6dir}/plugins/generic/libqtslibplugin.so
 %{_libdir}/cmake/Qt6Gui/Qt6QTsLibPlugin*.cmake
 %endif
 
 %files -n Qt6Gui-generic-tuiotouch
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/generic/libqtuiotouchplugin.so
+%{qt6dir}/plugins/generic/libqtuiotouchplugin.so
 %{_libdir}/cmake/Qt6Gui/Qt6QTuioTouchPlugin*.cmake
 
 %if %{with directfb}
 %files -n Qt6Gui-platform-directfb
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/platforms/libqdirectfb.so
+%{qt6dir}/plugins/platforms/libqdirectfb.so
 %{_libdir}/cmake/Qt6Gui/Qt6QDirectFbIntegrationPlugin*.cmake
 %endif
 
 %if %{with egl}
 %files -n Qt6Gui-platform-egl
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/platforms/libqminimalegl.so
+%{qt6dir}/plugins/platforms/libqminimalegl.so
 %{_libdir}/cmake/Qt6Gui/Qt6QMinimalEglIntegrationPlugin*.cmake
 %endif
 
 %files -n Qt6Gui-platform-eglfs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6EglFSDeviceIntegration.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6EglFSDeviceIntegration.so.6
-%attr(755,root,root) %{qt6dir}/plugins/platforms/libqeglfs.so
+%{_libdir}/libQt6EglFSDeviceIntegration.so.*.*.*
+%ghost %{_libdir}/libQt6EglFSDeviceIntegration.so.6
+%{qt6dir}/plugins/platforms/libqeglfs.so
 %{_libdir}/cmake/Qt6Gui/Qt6QEglFSIntegrationPlugin*.cmake
 %{_libdir}/cmake/Qt6Gui/Qt6QEglFSEmulatorIntegrationPlugin*.cmake
 # loaded from src/plugins/platforms/eglfs/qeglfsdeviceintegration.cpp
 %dir %{qt6dir}/plugins/egldeviceintegrations
-%attr(755,root,root) %{qt6dir}/plugins/egldeviceintegrations/libqeglfs-emu-integration.so
+%{qt6dir}/plugins/egldeviceintegrations/libqeglfs-emu-integration.so
 
 %files -n Qt6Gui-platform-eglfs-devel
 %defattr(644,root,root,755)
 %{_includedir}/qt6/QtEglFSDeviceIntegration
-%attr(755,root,root) %{_libdir}/libQt6EglFSDeviceIntegration.so
+%{_libdir}/libQt6EglFSDeviceIntegration.so
 %{_libdir}/cmake/Qt6EglFSDeviceIntegrationPrivate
 %{_libdir}/libQt6EglFSDeviceIntegration.prl
 %{qt6dir}/mkspecs/modules/qt_lib_eglfsdeviceintegration_private.pri
@@ -5304,17 +5306,17 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with kms}
 %files -n Qt6Gui-platform-eglfs-kms
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6EglFsKmsSupport.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6EglFsKmsSupport.so.6
-%attr(755,root,root) %{_libdir}/libQt6EglFsKmsGbmSupport.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6EglFsKmsGbmSupport.so.6
-%attr(755,root,root) %{qt6dir}/plugins/egldeviceintegrations/libqeglfs-kms-integration.so
-%attr(755,root,root) %{qt6dir}/plugins/egldeviceintegrations/libqeglfs-kms-egldevice-integration.so
+%{_libdir}/libQt6EglFsKmsSupport.so.*.*.*
+%ghost %{_libdir}/libQt6EglFsKmsSupport.so.6
+%{_libdir}/libQt6EglFsKmsGbmSupport.so.*.*.*
+%ghost %{_libdir}/libQt6EglFsKmsGbmSupport.so.6
+%{qt6dir}/plugins/egldeviceintegrations/libqeglfs-kms-integration.so
+%{qt6dir}/plugins/egldeviceintegrations/libqeglfs-kms-egldevice-integration.so
 
 %files -n Qt6Gui-platform-eglfs-kms-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6EglFsKmsSupport.so
-%attr(755,root,root) %{_libdir}/libQt6EglFsKmsGbmSupport.so
+%{_libdir}/libQt6EglFsKmsSupport.so
+%{_libdir}/libQt6EglFsKmsGbmSupport.so
 %{_includedir}/qt6/QtEglFsKmsGbmSupport
 %{_includedir}/qt6/QtEglFsKmsSupport
 %{_libdir}/libQt6EglFsKmsGbmSupport.prl
@@ -5333,17 +5335,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Gui-platform-eglfs-x11
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/egldeviceintegrations/libqeglfs-x11-integration.so
+%{qt6dir}/plugins/egldeviceintegrations/libqeglfs-x11-integration.so
 %{_libdir}/cmake/Qt6Gui/Qt6QEglFSX11IntegrationPlugin*.cmake
 
 %files -n Qt6Gui-platform-linuxfb
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/platforms/libqlinuxfb.so
+%{qt6dir}/plugins/platforms/libqlinuxfb.so
 %{_libdir}/cmake/Qt6Gui/Qt6QLinuxFbIntegrationPlugin*.cmake
 
 %files -n Qt6Gui-platform-vnc
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/platforms/libqvnc.so
+%{qt6dir}/plugins/platforms/libqvnc.so
 
 %files -n Qt6Gui-platform-vnc-devel
 %defattr(644,root,root,755)
@@ -5351,16 +5353,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Gui-platform-xcb
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6XcbQpa.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6XcbQpa.so.6
-%attr(755,root,root) %{qt6dir}/plugins/platforms/libqxcb.so
+%{_libdir}/libQt6XcbQpa.so.*.*.*
+%ghost %{_libdir}/libQt6XcbQpa.so.6
+%{qt6dir}/plugins/platforms/libqxcb.so
 # loaded from src/plugins/platforms/xcb/gl_integrations/qxcbglintegrationfactory.cpp
 %dir %{qt6dir}/plugins/xcbglintegrations
 %{_libdir}/cmake/Qt6Gui/Qt6QXcbIntegrationPlugin*.cmake
 
 %files -n Qt6Gui-platform-xcb-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6XcbQpa.so
+%{_libdir}/libQt6XcbQpa.so
 %{_libdir}/libQt6XcbQpa.prl
 %{_libdir}/cmake/Qt6XcbQpaPrivate
 %{qt6dir}/mkspecs/modules/qt_lib_xcb_qpa_lib_private.pri
@@ -5369,32 +5371,32 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Gui-platform-xcb-egl
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/xcbglintegrations/libqxcb-egl-integration.so
+%{qt6dir}/plugins/xcbglintegrations/libqxcb-egl-integration.so
 %{_libdir}/cmake/Qt6Gui/Qt6QXcbEglIntegrationPlugin*.cmake
 
 %if %{with opengl_desktop}
 %files -n Qt6Gui-platform-xcb-glx
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/xcbglintegrations/libqxcb-glx-integration.so
+%{qt6dir}/plugins/xcbglintegrations/libqxcb-glx-integration.so
 %{_libdir}/cmake/Qt6Gui/Qt6QXcbGlxIntegrationPlugin*.cmake
 %endif
 
 %if %{with gtk}
 %files -n Qt6Gui-platformtheme-gtk3
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/platformthemes/libqgtk3.so
+%{qt6dir}/plugins/platformthemes/libqgtk3.so
 %{_libdir}/cmake/Qt6Gui/Qt6QGtk3ThemePlugin*.cmake
 %endif
 
 %files -n Qt6Gui-platformtheme-xdgdesktopportal
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/platformthemes/libqxdgdesktopportal.so
+%{qt6dir}/plugins/platformthemes/libqxdgdesktopportal.so
 %{_libdir}/cmake/Qt6Gui/Qt6QXdgDesktopPortalThemePlugin*.cmake
 
 %files -n Qt6Gui-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{qt6dir}/libexec/qvkgen
-%attr(755,root,root) %{_libdir}/libQt6Gui.so
+%{_libdir}/libQt6Gui.so
 %{_libdir}/libQt6Gui.prl
 %{qt6dir}/metatypes/qt6gui_metatypes.json
 %{_includedir}/qt6/QtGui
@@ -5427,14 +5429,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Help -f qt_help.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Help.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Help.so.6
+%{_libdir}/libQt6Help.so.*.*.*
+%ghost %{_libdir}/libQt6Help.so.6
 %dir %{qt6dir}/plugins/help
-%attr(755,root,root) %{qt6dir}/plugins/help/libhelpplugin.so
+%{qt6dir}/plugins/help/libhelpplugin.so
 
 %files -n Qt6Help-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Help.so
+%{_libdir}/libQt6Help.so
 %{_libdir}/libQt6Help.prl
 %{_includedir}/qt6/QtHelp
 %{_pkgconfigdir}/Qt6Help.pc
@@ -5447,12 +5449,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6HttpServer
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6HttpServer.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6HttpServer.so.6
+%{_libdir}/libQt6HttpServer.so.*.*.*
+%ghost %{_libdir}/libQt6HttpServer.so.6
 
 %files -n Qt6HttpServer-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6HttpServer.so
+%{_libdir}/libQt6HttpServer.so
 %{_libdir}/libQt6HttpServer.prl
 %{_includedir}/qt6/QtHttpServer
 %{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtHttpServerTestsConfig.cmake
@@ -5507,20 +5509,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Location -f qtlocation.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Location.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Location.so.6
+%{_libdir}/libQt6Location.so.*.*.*
+%ghost %{_libdir}/libQt6Location.so.6
 %dir %{qt6dir}/plugins/geoservices
-%attr(755,root,root) %{qt6dir}/plugins/geoservices/libqtgeoservices_itemsoverlay.so
-%attr(755,root,root) %{qt6dir}/plugins/geoservices/libqtgeoservices_osm.so
+%{qt6dir}/plugins/geoservices/libqtgeoservices_itemsoverlay.so
+%{qt6dir}/plugins/geoservices/libqtgeoservices_osm.so
 %dir %{qt6dir}/qml/QtLocation
-%attr(755,root,root) %{qt6dir}/qml/QtLocation/libdeclarative_locationplugin.so
+%{qt6dir}/qml/QtLocation/libdeclarative_locationplugin.so
 %{qt6dir}/qml/QtLocation/*.qml
 %{qt6dir}/qml/QtLocation/plugins.qmltypes
 %{qt6dir}/qml/QtLocation/qmldir
 
 %files -n Qt6Location-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Location.so
+%{_libdir}/libQt6Location.so
 %{_libdir}/libQt6Location.prl
 %{_includedir}/qt6/QtLocation
 %{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtLocationTestsConfig.cmake
@@ -5534,28 +5536,28 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Lottie
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Lottie.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Lottie.so.6
-%attr(755,root,root) %{_libdir}/libQt6LottieVectorImageGenerator.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6LottieVectorImageGenerator.so.6
-%attr(755,root,root) %{_libdir}/libQt6LottieVectorImageHelpers.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6LottieVectorImageHelpers.so.6
+%{_libdir}/libQt6Lottie.so.*.*.*
+%ghost %{_libdir}/libQt6Lottie.so.6
+%{_libdir}/libQt6LottieVectorImageGenerator.so.*.*.*
+%ghost %{_libdir}/libQt6LottieVectorImageGenerator.so.6
+%{_libdir}/libQt6LottieVectorImageHelpers.so.*.*.*
+%ghost %{_libdir}/libQt6LottieVectorImageHelpers.so.6
 %attr(755,root,root) %{qt6dir}/bin/lottietoqml
-%attr(755,root,root) %{qt6dir}/plugins/vectorimageformats/libqlottievectorimage.so
+%{qt6dir}/plugins/vectorimageformats/libqlottievectorimage.so
 %dir %{qt6dir}/qml/Qt/labs/lottieqt
-%attr(755,root,root) %{qt6dir}/qml/Qt/labs/lottieqt/liblottieplugin.so
+%{qt6dir}/qml/Qt/labs/lottieqt/liblottieplugin.so
 %{qt6dir}/qml/Qt/labs/lottieqt/Lottie.qmltypes
 %{qt6dir}/qml/Qt/labs/lottieqt/qmldir
 %dir %{qt6dir}/qml/Qt/labs/lottieqt/VectorImageHelpers
-%attr(755,root,root) %{qt6dir}/qml/Qt/labs/lottieqt/VectorImageHelpers/liblottievectorimagehelpersplugin.so
+%{qt6dir}/qml/Qt/labs/lottieqt/VectorImageHelpers/liblottievectorimagehelpersplugin.so
 %{qt6dir}/qml/Qt/labs/lottieqt/VectorImageHelpers/plugins.qmltypes
 %{qt6dir}/qml/Qt/labs/lottieqt/VectorImageHelpers/qmldir
 
 %files -n Qt6Lottie-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Lottie.so
-%attr(755,root,root) %{_libdir}/libQt6LottieVectorImageGenerator.so
-%attr(755,root,root) %{_libdir}/libQt6LottieVectorImageHelpers.so
+%{_libdir}/libQt6Lottie.so
+%{_libdir}/libQt6LottieVectorImageGenerator.so
+%{_libdir}/libQt6LottieVectorImageHelpers.so
 %{_libdir}/libQt6Lottie.prl
 %{_libdir}/libQt6LottieVectorImageGenerator.prl
 %{_libdir}/libQt6LottieVectorImageHelpers.prl
@@ -5595,12 +5597,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Mqtt
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Mqtt.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Mqtt.so.6
+%{_libdir}/libQt6Mqtt.so.*.*.*
+%ghost %{_libdir}/libQt6Mqtt.so.6
 
 %files -n Qt6Mqtt-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Mqtt.so
+%{_libdir}/libQt6Mqtt.so
 %{_libdir}/libQt6Mqtt.prl
 %{_includedir}/qt6/QtMqtt
 %{_pkgconfigdir}/Qt6Mqtt.pc
@@ -5624,23 +5626,23 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Multimedia -f qtmultimedia.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Multimedia.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Multimedia.so.6
+%{_libdir}/libQt6Multimedia.so.*.*.*
+%ghost %{_libdir}/libQt6Multimedia.so.6
 # common for base -devel and plugin-specific files
 %dir %{_libdir}/cmake/Qt6Multimedia
 %dir %{qt6dir}/plugins/multimedia
 
 %files -n Qt6Multimedia-plugin-ffmpeg
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/multimedia/libffmpegmediaplugin.so
+%{qt6dir}/plugins/multimedia/libffmpegmediaplugin.so
 
 %files -n Qt6Multimedia-plugin-gstreamer
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/multimedia/libgstreamermediaplugin.so
+%{qt6dir}/plugins/multimedia/libgstreamermediaplugin.so
 
 %files -n Qt6Multimedia-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Multimedia.so
+%{_libdir}/libQt6Multimedia.so
 %{_libdir}/libQt6Multimedia.prl
 %{_includedir}/qt6/QtMultimedia
 %{_pkgconfigdir}/Qt6Multimedia.pc
@@ -5664,17 +5666,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6MultimediaQuick
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6MultimediaQuick.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6MultimediaQuick.so.6
+%{_libdir}/libQt6MultimediaQuick.so.*.*.*
+%ghost %{_libdir}/libQt6MultimediaQuick.so.6
 %dir %{qt6dir}/qml/QtMultimedia
-%attr(755,root,root) %{qt6dir}/qml/QtMultimedia/libquickmultimediaplugin.so
+%{qt6dir}/qml/QtMultimedia/libquickmultimediaplugin.so
 %{qt6dir}/qml/QtMultimedia/Video.qml
 %{qt6dir}/qml/QtMultimedia/plugins.qmltypes
 %{qt6dir}/qml/QtMultimedia/qmldir
 
 %files -n Qt6MultimediaQuick-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6MultimediaQuick.so
+%{_libdir}/libQt6MultimediaQuick.so
 %{_libdir}/libQt6MultimediaQuick.prl
 %{_libdir}/cmake/Qt6MultimediaQuickPrivate
 %{_includedir}/qt6/QtMultimediaQuick
@@ -5684,12 +5686,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6MultimediaWidgets
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6MultimediaWidgets.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6MultimediaWidgets.so.6
+%{_libdir}/libQt6MultimediaWidgets.so.*.*.*
+%ghost %{_libdir}/libQt6MultimediaWidgets.so.6
 
 %files -n Qt6MultimediaWidgets-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6MultimediaWidgets.so
+%{_libdir}/libQt6MultimediaWidgets.so
 %{_libdir}/libQt6MultimediaWidgets.prl
 %{_includedir}/qt6/QtMultimediaWidgets
 %{_pkgconfigdir}/Qt6MultimediaWidgets.pc
@@ -5722,19 +5724,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Network
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Network.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Network.so.6
+%{_libdir}/libQt6Network.so.*.*.*
+%ghost %{_libdir}/libQt6Network.so.6
 %dir %{qt6dir}/plugins/networkinformation
-%attr(755,root,root) %{qt6dir}/plugins/networkinformation/libqconnman.so
-%attr(755,root,root) %{qt6dir}/plugins/networkinformation/libqglib.so
-%attr(755,root,root) %{qt6dir}/plugins/networkinformation/libqnetworkmanager.so
+%{qt6dir}/plugins/networkinformation/libqconnman.so
+%{qt6dir}/plugins/networkinformation/libqglib.so
+%{qt6dir}/plugins/networkinformation/libqnetworkmanager.so
 %dir %{qt6dir}/plugins/tls
-%attr(755,root,root) %{qt6dir}/plugins/tls/libqcertonlybackend.so
-%attr(755,root,root) %{qt6dir}/plugins/tls/libqopensslbackend.so
+%{qt6dir}/plugins/tls/libqcertonlybackend.so
+%{qt6dir}/plugins/tls/libqopensslbackend.so
 
 %files -n Qt6Network-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Network.so
+%{_libdir}/libQt6Network.so
 %{_libdir}/libQt6Network.prl
 %{_includedir}/qt6/QtNetwork
 %{_pkgconfigdir}/Qt6Network.pc
@@ -5747,12 +5749,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6NetworkAuth
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6NetworkAuth.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6NetworkAuth.so.6
+%{_libdir}/libQt6NetworkAuth.so.*.*.*
+%ghost %{_libdir}/libQt6NetworkAuth.so.6
 
 %files -n Qt6NetworkAuth-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6NetworkAuth.so
+%{_libdir}/libQt6NetworkAuth.so
 %{_libdir}/libQt6NetworkAuth.prl
 %{_includedir}/qt6/QtNetworkAuth
 %{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtNetworkAuthTestsConfig.cmake
@@ -5776,12 +5778,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Nfc
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Nfc.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Nfc.so.6
+%{_libdir}/libQt6Nfc.so.*.*.*
+%ghost %{_libdir}/libQt6Nfc.so.6
 
 %files -n Qt6Nfc-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Nfc.so
+%{_libdir}/libQt6Nfc.so
 %{_libdir}/libQt6Nfc.prl
 %{_includedir}/qt6/QtNfc
 %{_pkgconfigdir}/Qt6Nfc.pc
@@ -5806,21 +5808,21 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6OpcUa
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6OpcUa.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6OpcUa.so.6
-%attr(755,root,root) %{_libdir}/libQt6DeclarativeOpcua.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6DeclarativeOpcua.so.6
+%{_libdir}/libQt6OpcUa.so.*.*.*
+%ghost %{_libdir}/libQt6OpcUa.so.6
+%{_libdir}/libQt6DeclarativeOpcua.so.*.*.*
+%ghost %{_libdir}/libQt6DeclarativeOpcua.so.6
 %dir %{qt6dir}/plugins/opcua
-%attr(755,root,root) %{qt6dir}/plugins/opcua/libopen62541_backend.so
+%{qt6dir}/plugins/opcua/libopen62541_backend.so
 %dir %{qt6dir}/qml/QtOpcUa
-%attr(755,root,root) %{qt6dir}/qml/QtOpcUa/libdeclarativeopcuaplugin.so
+%{qt6dir}/qml/QtOpcUa/libdeclarativeopcuaplugin.so
 %{qt6dir}/qml/QtOpcUa/plugins.qmltypes
 %{qt6dir}/qml/QtOpcUa/qmldir
 
 %files -n Qt6OpcUa-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6OpcUa.so
-%attr(755,root,root) %{_libdir}/libQt6DeclarativeOpcua.so
+%{_libdir}/libQt6OpcUa.so
+%{_libdir}/libQt6DeclarativeOpcua.so
 %{_libdir}/libQt6OpcUa.prl
 %{_libdir}/libQt6DeclarativeOpcua.prl
 %{_includedir}/qt6/QtDeclarativeOpcua
@@ -5855,15 +5857,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6OpenGL
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6OpenGL.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6OpenGL.so.6
-%attr(755,root,root) %{_libdir}/libQt6OpenGLWidgets.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6OpenGLWidgets.so.6
+%{_libdir}/libQt6OpenGL.so.*.*.*
+%ghost %{_libdir}/libQt6OpenGL.so.6
+%{_libdir}/libQt6OpenGLWidgets.so.*.*.*
+%ghost %{_libdir}/libQt6OpenGLWidgets.so.6
 
 %files -n Qt6OpenGL-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6OpenGL.so
-%attr(755,root,root) %{_libdir}/libQt6OpenGLWidgets.so
+%{_libdir}/libQt6OpenGL.so
+%{_libdir}/libQt6OpenGLWidgets.so
 %{_libdir}/libQt6OpenGL.prl
 %{_libdir}/libQt6OpenGLWidgets.prl
 %{_includedir}/qt6/QtOpenGL
@@ -5884,28 +5886,28 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with qtwebengine}
 %files -n Qt6Pdf
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Pdf.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Pdf.so.6
-%attr(755,root,root) %{_libdir}/libQt6PdfQuick.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6PdfQuick.so.6
-%attr(755,root,root) %{_libdir}/libQt6PdfWidgets.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6PdfWidgets.so.6
+%{_libdir}/libQt6Pdf.so.*.*.*
+%ghost %{_libdir}/libQt6Pdf.so.6
+%{_libdir}/libQt6PdfQuick.so.*.*.*
+%ghost %{_libdir}/libQt6PdfQuick.so.6
+%{_libdir}/libQt6PdfWidgets.so.*.*.*
+%ghost %{_libdir}/libQt6PdfWidgets.so.6
 %dir %{qt6dir}/qml/QtQuick/Pdf
 %{qt6dir}/qml/QtQuick/Pdf/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Pdf/qmldir
 %{qt6dir}/qml/QtQuick/Pdf/*.qml
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Pdf/libpdfquickplugin.so
+%{qt6dir}/qml/QtQuick/Pdf/libpdfquickplugin.so
 %dir %{qt6dir}/qml/QtQuick/Pdf/+Material
 %{qt6dir}/qml/QtQuick/Pdf/+Material/*.qml
 %dir %{qt6dir}/qml/QtQuick/Pdf/+Universal
 %{qt6dir}/qml/QtQuick/Pdf/+Universal/*.qml
-%attr(755,root,root) %{_libdir}/qt6/plugins/imageformats/libqpdf.so
+%{_libdir}/qt6/plugins/imageformats/libqpdf.so
 
 %files -n Qt6Pdf-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Pdf.so
-%attr(755,root,root) %{_libdir}/libQt6PdfQuick.so
-%attr(755,root,root) %{_libdir}/libQt6PdfWidgets.so
+%{_libdir}/libQt6Pdf.so
+%{_libdir}/libQt6PdfQuick.so
+%{_libdir}/libQt6PdfWidgets.so
 %{_libdir}/libQt6Pdf.prl
 %{_libdir}/libQt6PdfQuick.prl
 %{_libdir}/libQt6PdfWidgets.prl
@@ -5948,24 +5950,24 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Positioning
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Positioning.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Positioning.so.6
-%attr(755,root,root) %{_libdir}/libQt6PositioningQuick.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6PositioningQuick.so.6
+%{_libdir}/libQt6Positioning.so.*.*.*
+%ghost %{_libdir}/libQt6Positioning.so.6
+%{_libdir}/libQt6PositioningQuick.so.*.*.*
+%ghost %{_libdir}/libQt6PositioningQuick.so.6
 %dir %{qt6dir}/plugins/position
-%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_geoclue2.so
-%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_gypsy.so
-%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_nmea.so
-%attr(755,root,root) %{qt6dir}/plugins/position/libqtposition_positionpoll.so
+%{qt6dir}/plugins/position/libqtposition_geoclue2.so
+%{qt6dir}/plugins/position/libqtposition_gypsy.so
+%{qt6dir}/plugins/position/libqtposition_nmea.so
+%{qt6dir}/plugins/position/libqtposition_positionpoll.so
 %dir %{qt6dir}/qml/QtPositioning
-%attr(755,root,root) %{qt6dir}/qml/QtPositioning/libpositioningquickplugin.so
+%{qt6dir}/qml/QtPositioning/libpositioningquickplugin.so
 %{qt6dir}/qml/QtPositioning/plugins.qmltypes
 %{qt6dir}/qml/QtPositioning/qmldir
 
 %files -n Qt6Positioning-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Positioning.so
-%attr(755,root,root) %{_libdir}/libQt6PositioningQuick.so
+%{_libdir}/libQt6Positioning.so
+%{_libdir}/libQt6PositioningQuick.so
 %{_libdir}/libQt6Positioning.prl
 %{_libdir}/libQt6PositioningQuick.prl
 %{_includedir}/qt6/QtPositioning
@@ -5998,17 +6000,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6PrintSupport
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6PrintSupport.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6PrintSupport.so.6
+%{_libdir}/libQt6PrintSupport.so.*.*.*
+%ghost %{_libdir}/libQt6PrintSupport.so.6
 # loaded from src/printsupport/kernel/qplatformprintplugin.cpp
 %dir %{qt6dir}/plugins/printsupport
 %if %{with cups}
-%attr(755,root,root) %{qt6dir}/plugins/printsupport/libcupsprintersupport.so
+%{qt6dir}/plugins/printsupport/libcupsprintersupport.so
 %endif
 
 %files -n Qt6PrintSupport-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6PrintSupport.so
+%{_libdir}/libQt6PrintSupport.so
 %{_libdir}/libQt6PrintSupport.prl
 %{_includedir}/qt6/QtPrintSupport
 %{_pkgconfigdir}/Qt6PrintSupport.pc
@@ -6025,28 +6027,28 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Protobuf
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Protobuf.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Protobuf.so.6
-%attr(755,root,root) %{_libdir}/libQt6ProtobufQuick.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6ProtobufQuick.so.6
-%attr(755,root,root) %{_libdir}/libQt6ProtobufQtCoreTypes.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6ProtobufQtCoreTypes.so.6
-%attr(755,root,root) %{_libdir}/libQt6ProtobufQtGuiTypes.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6ProtobufQtGuiTypes.so.6
-%attr(755,root,root) %{_libdir}/libQt6ProtobufWellKnownTypes.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6ProtobufWellKnownTypes.so.6
+%{_libdir}/libQt6Protobuf.so.*.*.*
+%ghost %{_libdir}/libQt6Protobuf.so.6
+%{_libdir}/libQt6ProtobufQuick.so.*.*.*
+%ghost %{_libdir}/libQt6ProtobufQuick.so.6
+%{_libdir}/libQt6ProtobufQtCoreTypes.so.*.*.*
+%ghost %{_libdir}/libQt6ProtobufQtCoreTypes.so.6
+%{_libdir}/libQt6ProtobufQtGuiTypes.so.*.*.*
+%ghost %{_libdir}/libQt6ProtobufQtGuiTypes.so.6
+%{_libdir}/libQt6ProtobufWellKnownTypes.so.*.*.*
+%ghost %{_libdir}/libQt6ProtobufWellKnownTypes.so.6
 %dir %{qt6dir}/qml/QtProtobuf
-%attr(755,root,root) %{qt6dir}/qml/QtProtobuf/libprotobufquickplugin.so
+%{qt6dir}/qml/QtProtobuf/libprotobufquickplugin.so
 %{qt6dir}/qml/QtProtobuf/plugins.qmltypes
 %{qt6dir}/qml/QtProtobuf/qmldir
 
 %files -n Qt6Protobuf-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Protobuf.so
-%attr(755,root,root) %{_libdir}/libQt6ProtobufQuick.so
-%attr(755,root,root) %{_libdir}/libQt6ProtobufQtCoreTypes.so
-%attr(755,root,root) %{_libdir}/libQt6ProtobufQtGuiTypes.so
-%attr(755,root,root) %{_libdir}/libQt6ProtobufWellKnownTypes.so
+%{_libdir}/libQt6Protobuf.so
+%{_libdir}/libQt6ProtobufQuick.so
+%{_libdir}/libQt6ProtobufQtCoreTypes.so
+%{_libdir}/libQt6ProtobufQtGuiTypes.so
+%{_libdir}/libQt6ProtobufWellKnownTypes.so
 %{_libdir}/libQt6Protobuf.prl
 %{_libdir}/libQt6ProtobufQuick.prl
 %{_libdir}/libQt6ProtobufQtCoreTypes.prl
@@ -6095,23 +6097,23 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Qt5Compat
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Core5Compat.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Core5Compat.so.6
+%{_libdir}/libQt6Core5Compat.so.*.*.*
+%ghost %{_libdir}/libQt6Core5Compat.so.6
 %dir %{qt6dir}/qml/Qt5Compat
 %dir %{qt6dir}/qml/Qt5Compat/GraphicalEffects
 %{qt6dir}/qml/Qt5Compat/GraphicalEffects/*.qml
-%attr(755,root,root) %{qt6dir}/qml/Qt5Compat/GraphicalEffects/libqtgraphicaleffectsplugin.so
+%{qt6dir}/qml/Qt5Compat/GraphicalEffects/libqtgraphicaleffectsplugin.so
 %{qt6dir}/qml/Qt5Compat/GraphicalEffects/qtgraphicaleffectsplugin.qmltypes
 %{qt6dir}/qml/Qt5Compat/GraphicalEffects/qmldir
 %dir %{qt6dir}/qml/Qt5Compat/GraphicalEffects/private
 %{qt6dir}/qml/Qt5Compat/GraphicalEffects/private/*.qml
-%attr(755,root,root) %{qt6dir}/qml/Qt5Compat/GraphicalEffects/private/libqtgraphicaleffectsprivateplugin.so
+%{qt6dir}/qml/Qt5Compat/GraphicalEffects/private/libqtgraphicaleffectsprivateplugin.so
 %{qt6dir}/qml/Qt5Compat/GraphicalEffects/private/plugins.qmltypes
 %{qt6dir}/qml/Qt5Compat/GraphicalEffects/private/qmldir
 
 %files -n Qt6Qt5Compat-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Core5Compat.so
+%{_libdir}/libQt6Core5Compat.so
 %{_libdir}/libQt6Core5Compat.prl
 %{qt6dir}/metatypes/qt6core5compat_metatypes.json
 %{_includedir}/qt6/QtCore5Compat
@@ -6137,55 +6139,55 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Qml -f qtdeclarative.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6LabsAnimation.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6LabsAnimation.so.6
-%attr(755,root,root) %{_libdir}/libQt6LabsFolderListModel.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6LabsFolderListModel.so.6
-%attr(755,root,root) %{_libdir}/libQt6LabsPlatform.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6LabsPlatform.so.6
-%attr(755,root,root) %{_libdir}/libQt6LabsQmlModels.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6LabsQmlModels.so.6
-%attr(755,root,root) %{_libdir}/libQt6LabsSettings.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6LabsSettings.so.6
-%attr(755,root,root) %{_libdir}/libQt6LabsSynchronizer.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6LabsSynchronizer.so.6
-%attr(755,root,root) %{_libdir}/libQt6Qml.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Qml.so.6
-%attr(755,root,root) %{_libdir}/libQt6QmlCompiler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QmlCompiler.so.6
-%attr(755,root,root) %{_libdir}/libQt6QmlCore.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QmlCore.so.6
-%attr(755,root,root) %{_libdir}/libQt6QmlMeta.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QmlMeta.so.6
-%attr(755,root,root) %{_libdir}/libQt6QmlModels.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QmlModels.so.6
-%attr(755,root,root) %{_libdir}/libQt6QmlNetwork.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QmlNetwork.so.6
-%attr(755,root,root) %{_libdir}/libQt6QmlWorkerScript.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QmlWorkerScript.so.6
-%attr(755,root,root) %{_libdir}/libQt6QmlLocalStorage.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QmlLocalStorage.so.6
-%attr(755,root,root) %{_libdir}/libQt6QmlXmlListModel.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QmlXmlListModel.so.6
-%attr(755,root,root) %{_libdir}/libQt6StateMachine.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6StateMachine.so.6
-%attr(755,root,root) %{_libdir}/libQt6StateMachineQml.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6StateMachineQml.so.6
+%{_libdir}/libQt6LabsAnimation.so.*.*.*
+%ghost %{_libdir}/libQt6LabsAnimation.so.6
+%{_libdir}/libQt6LabsFolderListModel.so.*.*.*
+%ghost %{_libdir}/libQt6LabsFolderListModel.so.6
+%{_libdir}/libQt6LabsPlatform.so.*.*.*
+%ghost %{_libdir}/libQt6LabsPlatform.so.6
+%{_libdir}/libQt6LabsQmlModels.so.*.*.*
+%ghost %{_libdir}/libQt6LabsQmlModels.so.6
+%{_libdir}/libQt6LabsSettings.so.*.*.*
+%ghost %{_libdir}/libQt6LabsSettings.so.6
+%{_libdir}/libQt6LabsSynchronizer.so.*.*.*
+%ghost %{_libdir}/libQt6LabsSynchronizer.so.6
+%{_libdir}/libQt6Qml.so.*.*.*
+%ghost %{_libdir}/libQt6Qml.so.6
+%{_libdir}/libQt6QmlCompiler.so.*.*.*
+%ghost %{_libdir}/libQt6QmlCompiler.so.6
+%{_libdir}/libQt6QmlCore.so.*.*.*
+%ghost %{_libdir}/libQt6QmlCore.so.6
+%{_libdir}/libQt6QmlMeta.so.*.*.*
+%ghost %{_libdir}/libQt6QmlMeta.so.6
+%{_libdir}/libQt6QmlModels.so.*.*.*
+%ghost %{_libdir}/libQt6QmlModels.so.6
+%{_libdir}/libQt6QmlNetwork.so.*.*.*
+%ghost %{_libdir}/libQt6QmlNetwork.so.6
+%{_libdir}/libQt6QmlWorkerScript.so.*.*.*
+%ghost %{_libdir}/libQt6QmlWorkerScript.so.6
+%{_libdir}/libQt6QmlLocalStorage.so.*.*.*
+%ghost %{_libdir}/libQt6QmlLocalStorage.so.6
+%{_libdir}/libQt6QmlXmlListModel.so.*.*.*
+%ghost %{_libdir}/libQt6QmlXmlListModel.so.6
+%{_libdir}/libQt6StateMachine.so.*.*.*
+%ghost %{_libdir}/libQt6StateMachine.so.6
+%{_libdir}/libQt6StateMachineQml.so.*.*.*
+%ghost %{_libdir}/libQt6StateMachineQml.so.6
 
 %dir %{qt6dir}/plugins/qmllint
-%attr(755,root,root) %{qt6dir}/plugins/qmllint/libqdslintplugin.so
-%attr(755,root,root) %{qt6dir}/plugins/qmllint/libquicklintplugin.so
+%{qt6dir}/plugins/qmllint/libqdslintplugin.so
+%{qt6dir}/plugins/qmllint/libquicklintplugin.so
 # loaded from src/qml/debugger/{qqmldebugserver,qqmlinspectorservice}.cpp
 %dir %{qt6dir}/plugins/qmltooling
-%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_debugger.so
-%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_local.so
-%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_messages.so
-%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_native.so
-%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_nativedebugger.so
-%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_profiler.so
-%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_quickeventreplay.so
-%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_server.so
-%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_tcp.so
+%{qt6dir}/plugins/qmltooling/libqmldbg_debugger.so
+%{qt6dir}/plugins/qmltooling/libqmldbg_local.so
+%{qt6dir}/plugins/qmltooling/libqmldbg_messages.so
+%{qt6dir}/plugins/qmltooling/libqmldbg_native.so
+%{qt6dir}/plugins/qmltooling/libqmldbg_nativedebugger.so
+%{qt6dir}/plugins/qmltooling/libqmldbg_profiler.so
+%{qt6dir}/plugins/qmltooling/libqmldbg_quickeventreplay.so
+%{qt6dir}/plugins/qmltooling/libqmldbg_server.so
+%{qt6dir}/plugins/qmltooling/libqmldbg_tcp.so
 
 %dir %{qt6dir}/qml
 
@@ -6202,7 +6204,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{qt6dir}/qml/Qt/labs/animation
 %{qt6dir}/qml/jsroot.qmltypes
 
-%attr(755,root,root) %{qt6dir}/qml/Qt/labs/animation/liblabsanimationplugin.so
+%{qt6dir}/qml/Qt/labs/animation/liblabsanimationplugin.so
 %{qt6dir}/qml/Qt/labs/animation/plugins.qmltypes
 %{qt6dir}/qml/Qt/labs/animation/qmldir
 
@@ -6211,92 +6213,92 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt6/qml/Qt/labs/assetdownloader/qmldir
 
 %dir %{qt6dir}/qml/Qt/labs/folderlistmodel
-%attr(755,root,root) %{qt6dir}/qml/Qt/labs/folderlistmodel/libqmlfolderlistmodelplugin.so
+%{qt6dir}/qml/Qt/labs/folderlistmodel/libqmlfolderlistmodelplugin.so
 %{qt6dir}/qml/Qt/labs/folderlistmodel/plugins.qmltypes
 %{qt6dir}/qml/Qt/labs/folderlistmodel/qmldir
 
 %dir %{qt6dir}/qml/Qt/labs/platform
-%attr(755,root,root) %{qt6dir}/qml/Qt/labs/platform/liblabsplatformplugin.so
+%{qt6dir}/qml/Qt/labs/platform/liblabsplatformplugin.so
 %{qt6dir}/qml/Qt/labs/platform/plugins.qmltypes
 %{qt6dir}/qml/Qt/labs/platform/qmldir
 
 %dir %{qt6dir}/qml/Qt/labs/qmlmodels
 %{qt6dir}/qml/Qt/labs/qmlmodels/plugins.qmltypes
 %{qt6dir}/qml/Qt/labs/qmlmodels/qmldir
-%attr(755,root,root) %{qt6dir}/qml/Qt/labs/qmlmodels/liblabsmodelsplugin.so
+%{qt6dir}/qml/Qt/labs/qmlmodels/liblabsmodelsplugin.so
 
 %dir %{qt6dir}/qml/Qt/labs/settings
-%attr(755,root,root) %{qt6dir}/qml/Qt/labs/settings/libqmlsettingsplugin.so
+%{qt6dir}/qml/Qt/labs/settings/libqmlsettingsplugin.so
 %{qt6dir}/qml/Qt/labs/settings/plugins.qmltypes
 %{qt6dir}/qml/Qt/labs/settings/qmldir
 
 %dir %{qt6dir}/qml/Qt/labs/synchronizer
-%attr(755,root,root) %{qt6dir}/qml/Qt/labs/synchronizer/liblabssynchronizerplugin.so
+%{qt6dir}/qml/Qt/labs/synchronizer/liblabssynchronizerplugin.so
 %{qt6dir}/qml/Qt/labs/synchronizer/plugins.qmltypes
 %{qt6dir}/qml/Qt/labs/synchronizer/qmldir
 
 %dir %{qt6dir}/qml/Qt/test
 
 %dir %{qt6dir}/qml/Qt/test/controls
-%attr(755,root,root) %{qt6dir}/qml/Qt/test/controls/libquickcontrolstestutilsprivateplugin.so
+%{qt6dir}/qml/Qt/test/controls/libquickcontrolstestutilsprivateplugin.so
 %{qt6dir}/qml/Qt/test/controls/QuickControlsTestUtilsPrivate.qmltypes
 %{qt6dir}/qml/Qt/test/controls/qmldir
 
 %dir %{qt6dir}/qml/QtCore
-%attr(755,root,root) %{qt6dir}/qml/QtCore/libqtqmlcoreplugin.so
+%{qt6dir}/qml/QtCore/libqtqmlcoreplugin.so
 %{qt6dir}/qml/QtCore/plugins.qmltypes
 %{qt6dir}/qml/QtCore/qmldir
 
 %dir %{qt6dir}/qml/QtNetwork
-%attr(755,root,root) %{qt6dir}/qml/QtNetwork/libqmlnetworkplugin.so
+%{qt6dir}/qml/QtNetwork/libqmlnetworkplugin.so
 %{qt6dir}/qml/QtNetwork/plugins.qmltypes
 %{qt6dir}/qml/QtNetwork/qmldir
 
 %dir %{qt6dir}/qml/QtQml
-%attr(755,root,root) %{qt6dir}/qml/QtQml/libqmlplugin.so
+%{qt6dir}/qml/QtQml/libqmlplugin.so
 %{qt6dir}/qml/QtQml/plugins.qmltypes
 %{qt6dir}/qml/QtQml/qmldir
 
 %dir %{qt6dir}/qml/QtQml/Models
-%attr(755,root,root) %{qt6dir}/qml/QtQml/Models/libmodelsplugin.so
+%{qt6dir}/qml/QtQml/Models/libmodelsplugin.so
 %{qt6dir}/qml/QtQml/Models/plugins.qmltypes
 %{qt6dir}/qml/QtQml/Models/qmldir
 %{qt6dir}/qml/builtins.qmltypes
 
 %dir %{qt6dir}/qml/QtQml/StateMachine
-%attr(755,root,root) %{qt6dir}/qml/QtQml/StateMachine/libqtqmlstatemachineplugin.so
+%{qt6dir}/qml/QtQml/StateMachine/libqtqmlstatemachineplugin.so
 %{qt6dir}/qml/QtQml/StateMachine/plugins.qmltypes
 %{qt6dir}/qml/QtQml/StateMachine/qmldir
 
 %dir %{qt6dir}/qml/QtQml/WorkerScript
-%attr(755,root,root) %{qt6dir}/qml/QtQml/WorkerScript/libworkerscriptplugin.so
+%{qt6dir}/qml/QtQml/WorkerScript/libworkerscriptplugin.so
 %{qt6dir}/qml/QtQml/WorkerScript/plugins.qmltypes
 %{qt6dir}/qml/QtQml/WorkerScript/qmldir
 
 %dir %{qt6dir}/qml/QtQml/XmlListModel
-%attr(755,root,root) %{qt6dir}/qml/QtQml/XmlListModel/libqmlxmllistmodelplugin.so
+%{qt6dir}/qml/QtQml/XmlListModel/libqmlxmllistmodelplugin.so
 %{qt6dir}/qml/QtQml/XmlListModel/plugins.qmltypes
 %{qt6dir}/qml/QtQml/XmlListModel/qmldir
 
 %files -n Qt6Qml-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6LabsAnimation.so
-%attr(755,root,root) %{_libdir}/libQt6LabsFolderListModel.so
-%attr(755,root,root) %{_libdir}/libQt6LabsPlatform.so
-%attr(755,root,root) %{_libdir}/libQt6LabsQmlModels.so
-%attr(755,root,root) %{_libdir}/libQt6LabsSettings.so
-%attr(755,root,root) %{_libdir}/libQt6LabsSynchronizer.so
-%attr(755,root,root) %{_libdir}/libQt6Qml.so
-%attr(755,root,root) %{_libdir}/libQt6QmlCompiler.so
-%attr(755,root,root) %{_libdir}/libQt6QmlCore.so
-%attr(755,root,root) %{_libdir}/libQt6QmlMeta.so
-%attr(755,root,root) %{_libdir}/libQt6QmlModels.so
-%attr(755,root,root) %{_libdir}/libQt6QmlNetwork.so
-%attr(755,root,root) %{_libdir}/libQt6QmlWorkerScript.so
-%attr(755,root,root) %{_libdir}/libQt6QmlLocalStorage.so
-%attr(755,root,root) %{_libdir}/libQt6QmlXmlListModel.so
-%attr(755,root,root) %{_libdir}/libQt6StateMachine.so
-%attr(755,root,root) %{_libdir}/libQt6StateMachineQml.so
+%{_libdir}/libQt6LabsAnimation.so
+%{_libdir}/libQt6LabsFolderListModel.so
+%{_libdir}/libQt6LabsPlatform.so
+%{_libdir}/libQt6LabsQmlModels.so
+%{_libdir}/libQt6LabsSettings.so
+%{_libdir}/libQt6LabsSynchronizer.so
+%{_libdir}/libQt6Qml.so
+%{_libdir}/libQt6QmlCompiler.so
+%{_libdir}/libQt6QmlCore.so
+%{_libdir}/libQt6QmlMeta.so
+%{_libdir}/libQt6QmlModels.so
+%{_libdir}/libQt6QmlNetwork.so
+%{_libdir}/libQt6QmlWorkerScript.so
+%{_libdir}/libQt6QmlLocalStorage.so
+%{_libdir}/libQt6QmlXmlListModel.so
+%{_libdir}/libQt6StateMachine.so
+%{_libdir}/libQt6StateMachineQml.so
 # static-only
 %{_libdir}/libQt6PacketProtocol.a
 %{_libdir}/libQt6QmlAssetDownloader.a
@@ -6550,111 +6552,111 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Quick
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6LabsSharedImage.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6LabsSharedImage.so.6
-%attr(755,root,root) %{_libdir}/libQt6LabsStyleKit.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6LabsStyleKit.so.6
-%attr(755,root,root) %{_libdir}/libQt6LabsStyleKitImpl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6LabsStyleKitImpl.so.6
-%attr(755,root,root) %{_libdir}/libQt6LabsWavefrontMesh.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6LabsWavefrontMesh.so.6
-%attr(755,root,root) %{_libdir}/libQt6Quick.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickEffects.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickEffects.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickParticles.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickParticles.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickShapes.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickShapes.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickShapesDesignHelpers.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickShapesDesignHelpers.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickTest.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickTest.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickVectorImage.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickVectorImage.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickVectorImageGenerator.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickVectorImageGenerator.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickVectorImageHelpers.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickVectorImageHelpers.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickWidgets.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickWidgets.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2Basic.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2Basic.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2BasicStyleImpl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2BasicStyleImpl.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2FluentWinUI3StyleImpl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2FluentWinUI3StyleImpl.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2Fusion.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2Fusion.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2FusionStyleImpl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2FusionStyleImpl.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2Imagine.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2Imagine.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2ImagineStyleImpl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2ImagineStyleImpl.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2Impl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2Impl.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2Material.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2Material.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2MaterialStyleImpl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2MaterialStyleImpl.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2Universal.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2Universal.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2UniversalStyleImpl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickControls2UniversalStyleImpl.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickDialogs2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickDialogs2.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickDialogs2QuickImpl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickDialogs2QuickImpl.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickDialogs2Utils.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickDialogs2Utils.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickLayouts.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickLayouts.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickTemplates2.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickTemplates2.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickTimeline.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickTimeline.so.6
-%attr(755,root,root) %{_libdir}/libQt6QuickTimelineBlendTrees.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6QuickTimelineBlendTrees.so.6
+%{_libdir}/libQt6LabsSharedImage.so.*.*.*
+%ghost %{_libdir}/libQt6LabsSharedImage.so.6
+%{_libdir}/libQt6LabsStyleKit.so.*.*.*
+%ghost %{_libdir}/libQt6LabsStyleKit.so.6
+%{_libdir}/libQt6LabsStyleKitImpl.so.*.*.*
+%ghost %{_libdir}/libQt6LabsStyleKitImpl.so.6
+%{_libdir}/libQt6LabsWavefrontMesh.so.*.*.*
+%ghost %{_libdir}/libQt6LabsWavefrontMesh.so.6
+%{_libdir}/libQt6Quick.so.*.*.*
+%ghost %{_libdir}/libQt6Quick.so.6
+%{_libdir}/libQt6QuickEffects.so.*.*.*
+%ghost %{_libdir}/libQt6QuickEffects.so.6
+%{_libdir}/libQt6QuickParticles.so.*.*.*
+%ghost %{_libdir}/libQt6QuickParticles.so.6
+%{_libdir}/libQt6QuickShapes.so.*.*.*
+%ghost %{_libdir}/libQt6QuickShapes.so.6
+%{_libdir}/libQt6QuickShapesDesignHelpers.so.*.*.*
+%ghost %{_libdir}/libQt6QuickShapesDesignHelpers.so.6
+%{_libdir}/libQt6QuickTest.so.*.*.*
+%ghost %{_libdir}/libQt6QuickTest.so.6
+%{_libdir}/libQt6QuickVectorImage.so.*.*.*
+%ghost %{_libdir}/libQt6QuickVectorImage.so.6
+%{_libdir}/libQt6QuickVectorImageGenerator.so.*.*.*
+%ghost %{_libdir}/libQt6QuickVectorImageGenerator.so.6
+%{_libdir}/libQt6QuickVectorImageHelpers.so.*.*.*
+%ghost %{_libdir}/libQt6QuickVectorImageHelpers.so.6
+%{_libdir}/libQt6QuickWidgets.so.*.*.*
+%ghost %{_libdir}/libQt6QuickWidgets.so.6
+%{_libdir}/libQt6QuickControls2.so.*.*.*
+%ghost %{_libdir}/libQt6QuickControls2.so.6
+%{_libdir}/libQt6QuickControls2Basic.so.*.*.*
+%ghost %{_libdir}/libQt6QuickControls2Basic.so.6
+%{_libdir}/libQt6QuickControls2BasicStyleImpl.so.*.*.*
+%ghost %{_libdir}/libQt6QuickControls2BasicStyleImpl.so.6
+%{_libdir}/libQt6QuickControls2FluentWinUI3StyleImpl.so.*.*.*
+%ghost %{_libdir}/libQt6QuickControls2FluentWinUI3StyleImpl.so.6
+%{_libdir}/libQt6QuickControls2Fusion.so.*.*.*
+%ghost %{_libdir}/libQt6QuickControls2Fusion.so.6
+%{_libdir}/libQt6QuickControls2FusionStyleImpl.so.*.*.*
+%ghost %{_libdir}/libQt6QuickControls2FusionStyleImpl.so.6
+%{_libdir}/libQt6QuickControls2Imagine.so.*.*.*
+%ghost %{_libdir}/libQt6QuickControls2Imagine.so.6
+%{_libdir}/libQt6QuickControls2ImagineStyleImpl.so.*.*.*
+%ghost %{_libdir}/libQt6QuickControls2ImagineStyleImpl.so.6
+%{_libdir}/libQt6QuickControls2Impl.so.*.*.*
+%ghost %{_libdir}/libQt6QuickControls2Impl.so.6
+%{_libdir}/libQt6QuickControls2Material.so.*.*.*
+%ghost %{_libdir}/libQt6QuickControls2Material.so.6
+%{_libdir}/libQt6QuickControls2MaterialStyleImpl.so.*.*.*
+%ghost %{_libdir}/libQt6QuickControls2MaterialStyleImpl.so.6
+%{_libdir}/libQt6QuickControls2Universal.so.*.*.*
+%ghost %{_libdir}/libQt6QuickControls2Universal.so.6
+%{_libdir}/libQt6QuickControls2UniversalStyleImpl.so.*.*.*
+%ghost %{_libdir}/libQt6QuickControls2UniversalStyleImpl.so.6
+%{_libdir}/libQt6QuickDialogs2.so.*.*.*
+%ghost %{_libdir}/libQt6QuickDialogs2.so.6
+%{_libdir}/libQt6QuickDialogs2QuickImpl.so.*.*.*
+%ghost %{_libdir}/libQt6QuickDialogs2QuickImpl.so.6
+%{_libdir}/libQt6QuickDialogs2Utils.so.*.*.*
+%ghost %{_libdir}/libQt6QuickDialogs2Utils.so.6
+%{_libdir}/libQt6QuickLayouts.so.*.*.*
+%ghost %{_libdir}/libQt6QuickLayouts.so.6
+%{_libdir}/libQt6QuickTemplates2.so.*.*.*
+%ghost %{_libdir}/libQt6QuickTemplates2.so.6
+%{_libdir}/libQt6QuickTimeline.so.*.*.*
+%ghost %{_libdir}/libQt6QuickTimeline.so.6
+%{_libdir}/libQt6QuickTimelineBlendTrees.so.*.*.*
+%ghost %{_libdir}/libQt6QuickTimelineBlendTrees.so.6
 
-%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_inspector.so
-%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_preview.so
-%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_quickprofiler.so
+%{qt6dir}/plugins/qmltooling/libqmldbg_inspector.so
+%{qt6dir}/plugins/qmltooling/libqmldbg_preview.so
+%{qt6dir}/plugins/qmltooling/libqmldbg_quickprofiler.so
 
 %dir %{qt6dir}/plugins/vectorimageformats
 
 %if %{with openvg}
 %dir %{qt6dir}/plugins/scenegraph
-%attr(755,root,root) %{qt6dir}/plugins/scenegraph/libqsgopenvgbackend.so
+%{qt6dir}/plugins/scenegraph/libqsgopenvgbackend.so
 %endif
 
 %dir %{qt6dir}/qml/Qt/labs/sharedimage
-%attr(755,root,root) %{qt6dir}/qml/Qt/labs/sharedimage/libsharedimageplugin.so
+%{qt6dir}/qml/Qt/labs/sharedimage/libsharedimageplugin.so
 %{qt6dir}/qml/Qt/labs/sharedimage/plugins.qmltypes
 %{qt6dir}/qml/Qt/labs/sharedimage/qmldir
 
 %dir %{qt6dir}/qml/Qt/labs/StyleKit
-%attr(755,root,root) %{qt6dir}/qml/Qt/labs/StyleKit/liblabsstylekitplugin.so
+%{qt6dir}/qml/Qt/labs/StyleKit/liblabsstylekitplugin.so
 %{qt6dir}/qml/Qt/labs/StyleKit/*.qml
 %{qt6dir}/qml/Qt/labs/StyleKit/plugins.qmltypes
 %{qt6dir}/qml/Qt/labs/StyleKit/qmldir
 %dir %{qt6dir}/qml/Qt/labs/StyleKit/impl
-%attr(755,root,root) %{qt6dir}/qml/Qt/labs/StyleKit/impl/liblabsstylekitimplplugin.so
+%{qt6dir}/qml/Qt/labs/StyleKit/impl/liblabsstylekitimplplugin.so
 %{qt6dir}/qml/Qt/labs/StyleKit/impl/*.qml
 %{qt6dir}/qml/Qt/labs/StyleKit/impl/plugins.qmltypes
 %{qt6dir}/qml/Qt/labs/StyleKit/impl/qmldir
 
 %dir %{qt6dir}/qml/Qt/labs/wavefrontmesh
-%attr(755,root,root) %{qt6dir}/qml/Qt/labs/wavefrontmesh/libqmlwavefrontmeshplugin.so
+%{qt6dir}/qml/Qt/labs/wavefrontmesh/libqmlwavefrontmeshplugin.so
 %{qt6dir}/qml/Qt/labs/wavefrontmesh/plugins.qmltypes
 %{qt6dir}/qml/Qt/labs/wavefrontmesh/qmldir
 
 %dir %{qt6dir}/qml/QtQuick
 
 %dir %{qt6dir}/qml/QtQuick/Controls
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/libqtquickcontrols2plugin.so
+%{qt6dir}/qml/QtQuick/Controls/libqtquickcontrols2plugin.so
 %{qt6dir}/qml/QtQuick/Controls/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/qmldir
 
@@ -6662,9 +6664,9 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQuick/Controls/Basic/*.qml
 %{qt6dir}/qml/QtQuick/Controls/Basic/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Basic/qmldir
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Basic/libqtquickcontrols2basicstyleplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Basic/libqtquickcontrols2basicstyleplugin.so
 %dir %{qt6dir}/qml/QtQuick/Controls/Basic/impl
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Basic/impl/libqtquickcontrols2basicstyleimplplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Basic/impl/libqtquickcontrols2basicstyleimplplugin.so
 %{qt6dir}/qml/QtQuick/Controls/Basic/impl/*.qml
 %{qt6dir}/qml/QtQuick/Controls/Basic/impl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Basic/impl/qmldir
@@ -6673,7 +6675,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/*.qml
 %{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/qmldir
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/libqtquickcontrols2fluentwinui3styleplugin.so
+%{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/libqtquickcontrols2fluentwinui3styleplugin.so
 %dir %{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/dark
 %{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/dark/images
 %{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/icons
@@ -6681,7 +6683,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/impl/*.qml
 %{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/impl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/impl/qmldir
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/impl/libqtquickcontrols2fluentwinui3styleimplplugin.so
+%{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/impl/libqtquickcontrols2fluentwinui3styleimplplugin.so
 %dir %{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/light
 %{qt6dir}/qml/QtQuick/Controls/FluentWinUI3/light/images
 
@@ -6689,9 +6691,9 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQuick/Controls/Fusion/*.qml
 %{qt6dir}/qml/QtQuick/Controls/Fusion/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Fusion/qmldir
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Fusion/libqtquickcontrols2fusionstyleplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Fusion/libqtquickcontrols2fusionstyleplugin.so
 %dir %{qt6dir}/qml/QtQuick/Controls/Fusion/impl
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Fusion/impl/libqtquickcontrols2fusionstyleimplplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Fusion/impl/libqtquickcontrols2fusionstyleimplplugin.so
 %{qt6dir}/qml/QtQuick/Controls/Fusion/impl/*.qml
 %{qt6dir}/qml/QtQuick/Controls/Fusion/impl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Fusion/impl/qmldir
@@ -6699,9 +6701,9 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQuick/Controls/Imagine/*.qml
 %{qt6dir}/qml/QtQuick/Controls/Imagine/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Imagine/qmldir
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Imagine/libqtquickcontrols2imaginestyleplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Imagine/libqtquickcontrols2imaginestyleplugin.so
 %dir %{qt6dir}/qml/QtQuick/Controls/Imagine/impl
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Imagine/impl/libqtquickcontrols2imaginestyleimplplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Imagine/impl/libqtquickcontrols2imaginestyleimplplugin.so
 %{qt6dir}/qml/QtQuick/Controls/Imagine/impl/*.qml
 %{qt6dir}/qml/QtQuick/Controls/Imagine/impl/QuickControls2ImagineStyleImpl.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Imagine/impl/qmldir
@@ -6709,9 +6711,9 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQuick/Controls/Material/*.qml
 %{qt6dir}/qml/QtQuick/Controls/Material/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Material/qmldir
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Material/libqtquickcontrols2materialstyleplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Material/libqtquickcontrols2materialstyleplugin.so
 %dir %{qt6dir}/qml/QtQuick/Controls/Material/impl
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Material/impl/libqtquickcontrols2materialstyleimplplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Material/impl/libqtquickcontrols2materialstyleimplplugin.so
 %{qt6dir}/qml/QtQuick/Controls/Material/impl/*.qml
 %{qt6dir}/qml/QtQuick/Controls/Material/impl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Material/impl/qmldir
@@ -6719,9 +6721,9 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQuick/Controls/Universal/*.qml
 %{qt6dir}/qml/QtQuick/Controls/Universal/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Universal/qmldir
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Universal/libqtquickcontrols2universalstyleplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Universal/libqtquickcontrols2universalstyleplugin.so
 %dir %{qt6dir}/qml/QtQuick/Controls/Universal/impl
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/Universal/impl/libqtquickcontrols2universalstyleimplplugin.so
+%{qt6dir}/qml/QtQuick/Controls/Universal/impl/libqtquickcontrols2universalstyleimplplugin.so
 %{qt6dir}/qml/QtQuick/Controls/Universal/impl/*.qml
 %{qt6dir}/qml/QtQuick/Controls/Universal/impl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/Universal/impl/qmldir
@@ -6731,84 +6733,84 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/qml/QtQuick/Controls/designer/qtquickcontrols2.metainfo
 
 %dir %{qt6dir}/qml/QtQuick/Controls/impl
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Controls/impl/libqtquickcontrols2implplugin.so
+%{qt6dir}/qml/QtQuick/Controls/impl/libqtquickcontrols2implplugin.so
 %{qt6dir}/qml/QtQuick/Controls/impl/*.qml
 %{qt6dir}/qml/QtQuick/Controls/impl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Controls/impl/qmldir
 
 %dir %{qt6dir}/qml/QtQuick/Dialogs
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Dialogs/libqtquickdialogsplugin.so
+%{qt6dir}/qml/QtQuick/Dialogs/libqtquickdialogsplugin.so
 %{qt6dir}/qml/QtQuick/Dialogs/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Dialogs/qmldir
 %dir %{qt6dir}/qml/QtQuick/Dialogs/quickimpl
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Dialogs/quickimpl/libqtquickdialogs2quickimplplugin.so
+%{qt6dir}/qml/QtQuick/Dialogs/quickimpl/libqtquickdialogs2quickimplplugin.so
 %{qt6dir}/qml/QtQuick/Dialogs/quickimpl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Dialogs/quickimpl/qml
 %{qt6dir}/qml/QtQuick/Dialogs/quickimpl/qmldir
 
 %dir %{qt6dir}/qml/QtQuick/Effects
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Effects/libeffectsplugin.so
+%{qt6dir}/qml/QtQuick/Effects/libeffectsplugin.so
 %{qt6dir}/qml/QtQuick/Effects/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Effects/qmldir
 
 %dir %{qt6dir}/qml/QtQuick/Layouts
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Layouts/libqquicklayoutsplugin.so
+%{qt6dir}/qml/QtQuick/Layouts/libqquicklayoutsplugin.so
 %{qt6dir}/qml/QtQuick/Layouts/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Layouts/qmldir
 
 %dir %{qt6dir}/qml/QtQuick/LocalStorage
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/LocalStorage/libqmllocalstorageplugin.so
+%{qt6dir}/qml/QtQuick/LocalStorage/libqmllocalstorageplugin.so
 %{qt6dir}/qml/QtQuick/LocalStorage/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/LocalStorage/qmldir
 
 %dir %{qt6dir}/qml/QtQuick/Particles
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Particles/libparticlesplugin.so
+%{qt6dir}/qml/QtQuick/Particles/libparticlesplugin.so
 %{qt6dir}/qml/QtQuick/Particles/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Particles/qmldir
 
 %dir %{qt6dir}/qml/QtQuick/Shapes
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Shapes/libqmlshapesplugin.so
+%{qt6dir}/qml/QtQuick/Shapes/libqmlshapesplugin.so
 %{qt6dir}/qml/QtQuick/Shapes/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Shapes/qmldir
 
 %dir %{qt6dir}/qml/QtQuick/Shapes/DesignHelpers
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Shapes/DesignHelpers/libqtquickshapesdesignhelpersplugin.so
+%{qt6dir}/qml/QtQuick/Shapes/DesignHelpers/libqtquickshapesdesignhelpersplugin.so
 %{qt6dir}/qml/QtQuick/Shapes/DesignHelpers/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Shapes/DesignHelpers/qmldir
 
 %dir %{qt6dir}/qml/QtQuick/Templates
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Templates/libqtquicktemplates2plugin.so
+%{qt6dir}/qml/QtQuick/Templates/libqtquicktemplates2plugin.so
 %{qt6dir}/qml/QtQuick/Templates/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Templates/qmldir
 
 %dir %{qt6dir}/qml/QtQuick/VectorImage
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VectorImage/libqquickvectorimageplugin.so
+%{qt6dir}/qml/QtQuick/VectorImage/libqquickvectorimageplugin.so
 %{qt6dir}/qml/QtQuick/VectorImage/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VectorImage/qmldir
 
 %dir %{qt6dir}/qml/QtQuick/VectorImage/Helpers
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VectorImage/Helpers/libqquickvectorimagehelpersplugin.so
+%{qt6dir}/qml/QtQuick/VectorImage/Helpers/libqquickvectorimagehelpersplugin.so
 %{qt6dir}/qml/QtQuick/VectorImage/Helpers/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VectorImage/Helpers/qmldir
 
 %dir %{qt6dir}/qml/QtQuick/Window
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Window/libquickwindowplugin.so
+%{qt6dir}/qml/QtQuick/Window/libquickwindowplugin.so
 %{qt6dir}/qml/QtQuick/Window/quickwindow.qmltypes
 %{qt6dir}/qml/QtQuick/Window/qmldir
 
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/libqtquick2plugin.so
+%{qt6dir}/qml/QtQuick/libqtquick2plugin.so
 %{qt6dir}/qml/QtQuick/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/qmldir
 
 %dir %{qt6dir}/qml/QtTest
-%attr(755,root,root) %{qt6dir}/qml/QtTest/libquicktestplugin.so
+%{qt6dir}/qml/QtTest/libquicktestplugin.so
 %{qt6dir}/qml/QtTest/plugins.qmltypes
 %{qt6dir}/qml/QtTest/qmldir
 %{qt6dir}/qml/QtTest/testlogger.js
 %{qt6dir}/qml/QtTest/*.qml
 
 %dir %{qt6dir}/qml/QtQuick/tooling
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/tooling/libquicktoolingplugin.so
+%{qt6dir}/qml/QtQuick/tooling/libquicktoolingplugin.so
 %{qt6dir}/qml/QtQuick/tooling/quicktooling.qmltypes
 %{qt6dir}/qml/QtQuick/tooling/qmldir
 %{qt6dir}/qml/QtQuick/tooling/*.qml
@@ -6820,40 +6822,40 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{qt6dir}/bin/qmltc
 %{_libdir}/libQt6QuickControlsTestUtils.a
 %{_libdir}/libQt6QuickTestUtils.a
-%attr(755,root,root) %{_libdir}/libQt6LabsSharedImage.so
-%attr(755,root,root) %{_libdir}/libQt6LabsStyleKit.so
-%attr(755,root,root) %{_libdir}/libQt6LabsStyleKitImpl.so
-%attr(755,root,root) %{_libdir}/libQt6LabsWavefrontMesh.so
-%attr(755,root,root) %{_libdir}/libQt6Quick.so
-%attr(755,root,root) %{_libdir}/libQt6QuickEffects.so
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2.so
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2Basic.so
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2BasicStyleImpl.so
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2FluentWinUI3StyleImpl.so
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2Fusion.so
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2FusionStyleImpl.so
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2Imagine.so
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2ImagineStyleImpl.so
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2Impl.so
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2Material.so
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2MaterialStyleImpl.so
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2Universal.so
-%attr(755,root,root) %{_libdir}/libQt6QuickControls2UniversalStyleImpl.so
-%attr(755,root,root) %{_libdir}/libQt6QuickDialogs2QuickImpl.so
-%attr(755,root,root) %{_libdir}/libQt6QuickDialogs2.so
-%attr(755,root,root) %{_libdir}/libQt6QuickDialogs2Utils.so
-%attr(755,root,root) %{_libdir}/libQt6QuickLayouts.so
-%attr(755,root,root) %{_libdir}/libQt6QuickParticles.so
-%attr(755,root,root) %{_libdir}/libQt6QuickShapes.so
-%attr(755,root,root) %{_libdir}/libQt6QuickShapesDesignHelpers.so
-%attr(755,root,root) %{_libdir}/libQt6QuickTemplates2.so
-%attr(755,root,root) %{_libdir}/libQt6QuickTest.so
-%attr(755,root,root) %{_libdir}/libQt6QuickTimeline.so
-%attr(755,root,root) %{_libdir}/libQt6QuickTimelineBlendTrees.so
-%attr(755,root,root) %{_libdir}/libQt6QuickVectorImage.so
-%attr(755,root,root) %{_libdir}/libQt6QuickVectorImageGenerator.so
-%attr(755,root,root) %{_libdir}/libQt6QuickVectorImageHelpers.so
-%attr(755,root,root) %{_libdir}/libQt6QuickWidgets.so
+%{_libdir}/libQt6LabsSharedImage.so
+%{_libdir}/libQt6LabsStyleKit.so
+%{_libdir}/libQt6LabsStyleKitImpl.so
+%{_libdir}/libQt6LabsWavefrontMesh.so
+%{_libdir}/libQt6Quick.so
+%{_libdir}/libQt6QuickEffects.so
+%{_libdir}/libQt6QuickControls2.so
+%{_libdir}/libQt6QuickControls2Basic.so
+%{_libdir}/libQt6QuickControls2BasicStyleImpl.so
+%{_libdir}/libQt6QuickControls2FluentWinUI3StyleImpl.so
+%{_libdir}/libQt6QuickControls2Fusion.so
+%{_libdir}/libQt6QuickControls2FusionStyleImpl.so
+%{_libdir}/libQt6QuickControls2Imagine.so
+%{_libdir}/libQt6QuickControls2ImagineStyleImpl.so
+%{_libdir}/libQt6QuickControls2Impl.so
+%{_libdir}/libQt6QuickControls2Material.so
+%{_libdir}/libQt6QuickControls2MaterialStyleImpl.so
+%{_libdir}/libQt6QuickControls2Universal.so
+%{_libdir}/libQt6QuickControls2UniversalStyleImpl.so
+%{_libdir}/libQt6QuickDialogs2QuickImpl.so
+%{_libdir}/libQt6QuickDialogs2.so
+%{_libdir}/libQt6QuickDialogs2Utils.so
+%{_libdir}/libQt6QuickLayouts.so
+%{_libdir}/libQt6QuickParticles.so
+%{_libdir}/libQt6QuickShapes.so
+%{_libdir}/libQt6QuickShapesDesignHelpers.so
+%{_libdir}/libQt6QuickTemplates2.so
+%{_libdir}/libQt6QuickTest.so
+%{_libdir}/libQt6QuickTimeline.so
+%{_libdir}/libQt6QuickTimelineBlendTrees.so
+%{_libdir}/libQt6QuickVectorImage.so
+%{_libdir}/libQt6QuickVectorImageGenerator.so
+%{_libdir}/libQt6QuickVectorImageHelpers.so
+%{_libdir}/libQt6QuickWidgets.so
 %{_libdir}/libQt6LabsSharedImage.prl
 %{_libdir}/libQt6LabsStyleKit.prl
 %{_libdir}/libQt6LabsStyleKitImpl.prl
@@ -7164,7 +7166,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/metatypes/qt6quickwidgets_metatypes.json
 
 %dir %{qt6dir}/plugins/qmlls
-%attr(755,root,root) %{qt6dir}/plugins/qmlls/libqmllsquickplugin.so
+%{qt6dir}/plugins/qmlls/libqmllsquickplugin.so
 
 %if %{with doc}
 %files -n Qt6Quick-doc
@@ -7185,11 +7187,11 @@ rm -rf $RPM_BUILD_ROOT
 %files -n Qt6Quick-Timeline
 %defattr(644,root,root,755)
 %dir %{qt6dir}/qml/QtQuick/Timeline
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Timeline/libqtquicktimelineplugin.so
+%{qt6dir}/qml/QtQuick/Timeline/libqtquicktimelineplugin.so
 %{qt6dir}/qml/QtQuick/Timeline/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Timeline/qmldir
 %dir %{qt6dir}/qml/QtQuick/Timeline/BlendTrees
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/Timeline/BlendTrees/libqtquicktimelineblendtreesplugin.so
+%{qt6dir}/qml/QtQuick/Timeline/BlendTrees/libqtquicktimelineblendtreesplugin.so
 %{qt6dir}/qml/QtQuick/Timeline/BlendTrees/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/Timeline/BlendTrees/qmldir
 
@@ -7207,7 +7209,9 @@ rm -rf $RPM_BUILD_ROOT
 %files -n qt6-quick3d
 %defattr(644,root,root,755)
 %attr(755,root,root) %{qt6dir}/bin/balsamui
-%{?with_qtquick3dphysics:%attr(755,root,root) %{qt6dir}/bin/cooker}
+%if %{with qtquick3dphysics}
+%attr(755,root,root) %{qt6dir}/bin/cooker
+%endif
 %attr(755,root,root) %{qt6dir}/bin/instancer
 %attr(755,root,root) %{qt6dir}/bin/materialeditor
 %attr(755,root,root) %{qt6dir}/bin/particleshadergen
@@ -7216,84 +7220,84 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Quick3D
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Quick3D.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3D.so.6
-%attr(755,root,root) %{_libdir}/libQt6Quick3DAssetImport.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DAssetImport.so.6
-%attr(755,root,root) %{_libdir}/libQt6Quick3DAssetUtils.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DAssetUtils.so.6
-%attr(755,root,root) %{_libdir}/libQt6Quick3DEffects.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DEffects.so.6
-%attr(755,root,root) %{_libdir}/libQt6Quick3DGlslParser.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DGlslParser.so.6
-%attr(755,root,root) %{_libdir}/libQt6Quick3DHelpers.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DHelpers.so.6
-%attr(755,root,root) %{_libdir}/libQt6Quick3DHelpersImpl.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DHelpersImpl.so.6
-%attr(755,root,root) %{_libdir}/libQt6Quick3DIblBaker.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DIblBaker.so.6
-%attr(755,root,root) %{_libdir}/libQt6Quick3DParticleEffects.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DParticleEffects.so.6
-%attr(755,root,root) %{_libdir}/libQt6Quick3DParticles.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DParticles.so.6
-%attr(755,root,root) %{_libdir}/libQt6Quick3DRuntimeRender.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DRuntimeRender.so.6
-%attr(755,root,root) %{_libdir}/libQt6Quick3DUtils.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DUtils.so.6
+%{_libdir}/libQt6Quick3D.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3D.so.6
+%{_libdir}/libQt6Quick3DAssetImport.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DAssetImport.so.6
+%{_libdir}/libQt6Quick3DAssetUtils.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DAssetUtils.so.6
+%{_libdir}/libQt6Quick3DEffects.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DEffects.so.6
+%{_libdir}/libQt6Quick3DGlslParser.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DGlslParser.so.6
+%{_libdir}/libQt6Quick3DHelpers.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DHelpers.so.6
+%{_libdir}/libQt6Quick3DHelpersImpl.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DHelpersImpl.so.6
+%{_libdir}/libQt6Quick3DIblBaker.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DIblBaker.so.6
+%{_libdir}/libQt6Quick3DParticleEffects.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DParticleEffects.so.6
+%{_libdir}/libQt6Quick3DParticles.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DParticles.so.6
+%{_libdir}/libQt6Quick3DRuntimeRender.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DRuntimeRender.so.6
+%{_libdir}/libQt6Quick3DUtils.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DUtils.so.6
 %if %{with openxr}
-%attr(755,root,root) %{_libdir}/libQt6Quick3DXr.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DXr.so.6
+%{_libdir}/libQt6Quick3DXr.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DXr.so.6
 %endif
 %attr(755,root,root) %{qt6dir}/bin/balsam
 %attr(755,root,root) %{qt6dir}/bin/lightmapviewer
 %attr(755,root,root) %{qt6dir}/bin/meshdebug
 %dir %{qt6dir}/plugins/assetimporters
-%attr(755,root,root) %{qt6dir}/plugins/assetimporters/libassimp.so
+%{qt6dir}/plugins/assetimporters/libassimp.so
 %dir %{qt6dir}/plugins/qmltooling
-%attr(755,root,root) %{qt6dir}/plugins/qmltooling/libqmldbg_quick3dprofiler.so
+%{qt6dir}/plugins/qmltooling/libqmldbg_quick3dprofiler.so
 %dir %{qt6dir}/qml/QtQuick3D
-%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/libqquick3dplugin.so
+%{qt6dir}/qml/QtQuick3D/libqquick3dplugin.so
 %{qt6dir}/qml/QtQuick3D/Quick3D.qmltypes
 %{qt6dir}/qml/QtQuick3D/qmldir
 %{qt6dir}/qml/QtQuick3D/*.qml
 %{qt6dir}/qml/QtQuick3D/designer
 %dir %{qt6dir}/qml/QtQuick3D/AssetUtils
-%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/AssetUtils/libqtquick3dassetutilsplugin.so
+%{qt6dir}/qml/QtQuick3D/AssetUtils/libqtquick3dassetutilsplugin.so
 %{qt6dir}/qml/QtQuick3D/AssetUtils/designer
 %{qt6dir}/qml/QtQuick3D/AssetUtils/plugins.qmltypes
 %{qt6dir}/qml/QtQuick3D/AssetUtils/qmldir
 %dir %{qt6dir}/qml/QtQuick3D/Effects
-%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/Effects/libqtquick3deffectplugin.so
+%{qt6dir}/qml/QtQuick3D/Effects/libqtquick3deffectplugin.so
 %{qt6dir}/qml/QtQuick3D/Effects/qmldir
 %{qt6dir}/qml/QtQuick3D/Effects/*.qml
 %{qt6dir}/qml/QtQuick3D/Effects/designer
 %{qt6dir}/qml/QtQuick3D/Effects/Quick3DEffects.qmltypes
 %dir %{qt6dir}/qml/QtQuick3D/Helpers
-%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/Helpers/libqtquick3dhelpersplugin.so
+%{qt6dir}/qml/QtQuick3D/Helpers/libqtquick3dhelpersplugin.so
 %{qt6dir}/qml/QtQuick3D/Helpers/plugins.qmltypes
 %{qt6dir}/qml/QtQuick3D/Helpers/qmldir
 %{qt6dir}/qml/QtQuick3D/Helpers/*.qml
 %{qt6dir}/qml/QtQuick3D/Helpers/meshes
 %{qt6dir}/qml/QtQuick3D/Helpers/designer
 %dir %{qt6dir}/qml/QtQuick3D/Helpers/impl
-%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/Helpers/impl/libqtquick3dhelpersimplplugin.so
+%{qt6dir}/qml/QtQuick3D/Helpers/impl/libqtquick3dhelpersimplplugin.so
 %{qt6dir}/qml/QtQuick3D/Helpers/impl/plugins.qmltypes
 %{qt6dir}/qml/QtQuick3D/Helpers/impl/qmldir
 %{qt6dir}/qml/QtQuick3D/Helpers/impl/*.qml
 %{qt6dir}/qml/QtQuick3D/MaterialEditor
 %dir %{qt6dir}/qml/QtQuick3D/ParticleEffects
-%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/ParticleEffects/libqtquick3dparticleeffectsplugin.so
+%{qt6dir}/qml/QtQuick3D/ParticleEffects/libqtquick3dparticleeffectsplugin.so
 %{qt6dir}/qml/QtQuick3D/ParticleEffects/Quick3DParticleEffects.qmltypes
 %{qt6dir}/qml/QtQuick3D/ParticleEffects/designer
 %{qt6dir}/qml/QtQuick3D/ParticleEffects/qmldir
 %dir %{qt6dir}/qml/QtQuick3D/Particles3D
-%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/Particles3D/libqtquick3dparticles3dplugin.so
+%{qt6dir}/qml/QtQuick3D/Particles3D/libqtquick3dparticles3dplugin.so
 %{qt6dir}/qml/QtQuick3D/Particles3D/designer
 %{qt6dir}/qml/QtQuick3D/Particles3D/plugins.qmltypes
 %{qt6dir}/qml/QtQuick3D/Particles3D/qmldir
 %if %{with openxr}
 %dir %{qt6dir}/qml/QtQuick3D/Xr
-%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/Xr/libquick3dxrplugin.so
+%{qt6dir}/qml/QtQuick3D/Xr/libquick3dxrplugin.so
 %{qt6dir}/qml/QtQuick3D/Xr/plugins.qmltypes
 %{qt6dir}/qml/QtQuick3D/Xr/qmldir
 %{qt6dir}/qml/QtQuick3D/Xr/*.qml
@@ -7305,19 +7309,18 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Quick3D-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Quick3D.so
-%attr(755,root,root) %{_libdir}/libQt6Quick3DAssetImport.so
-%attr(755,root,root) %{_libdir}/libQt6Quick3DAssetUtils.so
-%attr(755,root,root) %{_libdir}/libQt6Quick3DEffects.so
-%attr(755,root,root) %{_libdir}/libQt6Quick3DGlslParser.so
-%attr(755,root,root) %{_libdir}/libQt6Quick3DHelpers.so
-%attr(755,root,root) %{_libdir}/libQt6Quick3DHelpersImpl.so
-%attr(755,root,root) %{_libdir}/libQt6Quick3DIblBaker.so
-%attr(755,root,root) %{_libdir}/libQt6Quick3DParticleEffects.so
-%attr(755,root,root) %{_libdir}/libQt6Quick3DParticles.so
-%attr(755,root,root) %{_libdir}/libQt6Quick3DRuntimeRender.so
-%attr(755,root,root) %{_libdir}/libQt6Quick3DUtils.so
-%{?with_openxr:%attr(755,root,root) %{_libdir}/libQt6Quick3DXr.so}
+%{_libdir}/libQt6Quick3D.so
+%{_libdir}/libQt6Quick3DAssetImport.so
+%{_libdir}/libQt6Quick3DAssetUtils.so
+%{_libdir}/libQt6Quick3DEffects.so
+%{_libdir}/libQt6Quick3DGlslParser.so
+%{_libdir}/libQt6Quick3DHelpers.so
+%{_libdir}/libQt6Quick3DHelpersImpl.so
+%{_libdir}/libQt6Quick3DIblBaker.so
+%{_libdir}/libQt6Quick3DParticleEffects.so
+%{_libdir}/libQt6Quick3DParticles.so
+%{_libdir}/libQt6Quick3DRuntimeRender.so
+%{_libdir}/libQt6Quick3DUtils.so
 %{_libdir}/libQt6Quick3D.prl
 %{_libdir}/libQt6Quick3DAssetImport.prl
 %{_libdir}/libQt6Quick3DAssetUtils.prl
@@ -7330,7 +7333,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6Quick3DParticles.prl
 %{_libdir}/libQt6Quick3DRuntimeRender.prl
 %{_libdir}/libQt6Quick3DUtils.prl
-%{?with_openxr:%{_libdir}/libQt6Quick3DXr.prl}
 %{_includedir}/qt6/QtQuick3D
 %{_includedir}/qt6/QtQuick3DAssetImport
 %{_includedir}/qt6/QtQuick3DAssetUtils
@@ -7341,7 +7343,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtQuick3DParticles
 %{_includedir}/qt6/QtQuick3DRuntimeRender
 %{_includedir}/qt6/QtQuick3DUtils
-%{?with_openxr:%{_includedir}/qt6/QtQuick3DXr}
 %{_pkgconfigdir}/Qt6Quick3D.pc
 %{_pkgconfigdir}/Qt6Quick3DAssetImport.pc
 %{_pkgconfigdir}/Qt6Quick3DAssetUtils.pc
@@ -7353,7 +7354,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/Qt6Quick3DParticles.pc
 %{_pkgconfigdir}/Qt6Quick3DRuntimeRender.pc
 %{_pkgconfigdir}/Qt6Quick3DUtils.pc
-%{?with_openxr:%{_pkgconfigdir}/Qt6Quick3DXr.pc}
 %{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtQuick3DTestsConfig.cmake
 %{_libdir}/cmake/Qt6Quick3D
 %{_libdir}/cmake/Qt6Quick3DPrivate
@@ -7377,8 +7377,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6Quick3DTools
 %{_libdir}/cmake/Qt6Quick3DUtils
 %{_libdir}/cmake/Qt6Quick3DUtilsPrivate
-%{?with_openxr:%{_libdir}/cmake/Qt6Quick3DXr}
-%{?with_openxr:%{_libdir}/cmake/Qt6Quick3DXrPrivate}
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dassetimport.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dassetimport_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dassetutils.pri
@@ -7400,8 +7398,6 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_quick3druntimerender_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dutils.pri
 %{qt6dir}/mkspecs/modules/qt_lib_quick3dutils_private.pri
-%{?with_openxr:%{qt6dir}/mkspecs/modules/qt_lib_quick3dxr.pri}
-%{?with_openxr:%{qt6dir}/mkspecs/modules/qt_lib_quick3dxr_private.pri}
 %{qt6dir}/modules/Quick3D.json
 %{qt6dir}/modules/Quick3DAssetImport.json
 %{qt6dir}/modules/Quick3DAssetUtils.json
@@ -7414,7 +7410,6 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/Quick3DParticles.json
 %{qt6dir}/modules/Quick3DRuntimeRender.json
 %{qt6dir}/modules/Quick3DUtils.json
-%{?with_openxr:%{qt6dir}/modules/Quick3DXr.json}
 %{qt6dir}/metatypes/qt6quick3d_metatypes.json
 %{qt6dir}/metatypes/qt6quick3dassetimport_metatypes.json
 %{qt6dir}/metatypes/qt6quick3dassetutils_metatypes.json
@@ -7427,7 +7422,18 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/metatypes/qt6quick3dparticles_metatypes.json
 %{qt6dir}/metatypes/qt6quick3druntimerender_metatypes.json
 %{qt6dir}/metatypes/qt6quick3dutils_metatypes.json
-%{?with_openxr:%{qt6dir}/metatypes/qt6quick3dxr_metatypes.json}
+%if %{with openxr}
+%{_libdir}/libQt6Quick3DXr.so
+%{_libdir}/libQt6Quick3DXr.prl
+%{_includedir}/qt6/QtQuick3DXr
+%{_pkgconfigdir}/Qt6Quick3DXr.pc
+%{_libdir}/cmake/Qt6Quick3DXr
+%{_libdir}/cmake/Qt6Quick3DXrPrivate
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dxr.pri
+%{qt6dir}/mkspecs/modules/qt_lib_quick3dxr_private.pri
+%{qt6dir}/modules/Quick3DXr.json
+%{qt6dir}/metatypes/qt6quick3dxr_metatypes.json
+%endif
 
 %if %{with doc}
 %files -n Qt6Quick3D-doc
@@ -7443,24 +7449,24 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with qtquick3dphysics}
 %files -n Qt6Quick3DPhysics
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Quick3DPhysics.so.*.*.*
-%attr(755,root,root) %{_libdir}/libQt6Quick3DPhysicsHelpers.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DPhysics.so.6
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DPhysicsHelpers.so.6
+%{_libdir}/libQt6Quick3DPhysics.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DPhysics.so.6
+%{_libdir}/libQt6Quick3DPhysicsHelpers.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DPhysicsHelpers.so.6
 %dir %{qt6dir}/qml/QtQuick3D/Physics
 %{qt6dir}/qml/QtQuick3D/Physics/qmldir
 %{qt6dir}/qml/QtQuick3D/Physics/plugins.qmltypes
-%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/Physics/libqquick3dphysicsplugin.so
+%{qt6dir}/qml/QtQuick3D/Physics/libqquick3dphysicsplugin.so
 %dir %{qt6dir}/qml/QtQuick3D/Physics/Helpers
 %{qt6dir}/qml/QtQuick3D/Physics/Helpers/qmldir
 %{qt6dir}/qml/QtQuick3D/Physics/Helpers/plugins.qmltypes
-%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/Physics/Helpers/libqtquick3dphysicshelpersplugin.so
+%{qt6dir}/qml/QtQuick3D/Physics/Helpers/libqtquick3dphysicshelpersplugin.so
 %{qt6dir}/qml/QtQuick3D/Physics/designer
 
 %files -n Qt6Quick3DPhysics-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Quick3DPhysics.so
-%attr(755,root,root) %{_libdir}/libQt6Quick3DPhysicsHelpers.so
+%{_libdir}/libQt6Quick3DPhysics.so
+%{_libdir}/libQt6Quick3DPhysicsHelpers.so
 %{_libdir}/libQt6Quick3DPhysics.prl
 %{_libdir}/libQt6Quick3DPhysicsHelpers.prl
 %{_includedir}/qt6/QtQuick3DPhysics
@@ -7484,7 +7490,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n qt6-quickeffectmaker
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/qqem-qt6
+%{_bindir}/qqem-qt6
 %attr(755,root,root) %{qt6dir}/bin/qqem
 
 %files -n Qt6QuickEffectMaker
@@ -7493,20 +7499,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6RemoteObjects
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6RemoteObjects.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6RemoteObjects.so.6
-%attr(755,root,root) %{_libdir}/libQt6RemoteObjectsQml.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6RemoteObjectsQml.so.6
+%{_libdir}/libQt6RemoteObjects.so.*.*.*
+%ghost %{_libdir}/libQt6RemoteObjects.so.6
+%{_libdir}/libQt6RemoteObjectsQml.so.*.*.*
+%ghost %{_libdir}/libQt6RemoteObjectsQml.so.6
 %attr(755,root,root) %{qt6dir}/libexec/repc
 %dir %{qt6dir}/qml/QtRemoteObjects
-%attr(755,root,root) %{qt6dir}/qml/QtRemoteObjects/libdeclarative_remoteobjectsplugin.so
+%{qt6dir}/qml/QtRemoteObjects/libdeclarative_remoteobjectsplugin.so
 %{qt6dir}/qml/QtRemoteObjects/plugins.qmltypes
 %{qt6dir}/qml/QtRemoteObjects/qmldir
 
 %files -n Qt6RemoteObjects-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6RemoteObjects.so
-%attr(755,root,root) %{_libdir}/libQt6RemoteObjectsQml.so
+%{_libdir}/libQt6RemoteObjects.so
+%{_libdir}/libQt6RemoteObjectsQml.so
 %{_libdir}/libQt6RemoteObjects.prl
 %{_libdir}/libQt6RemoteObjectsQml.prl
 %{_includedir}/qt6/QtRemoteObjects
@@ -7548,22 +7554,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Scxml
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Scxml.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Scxml.so.6
-%attr(755,root,root) %{_libdir}/libQt6ScxmlQml.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6ScxmlQml.so.6
+%{_libdir}/libQt6Scxml.so.*.*.*
+%ghost %{_libdir}/libQt6Scxml.so.6
+%{_libdir}/libQt6ScxmlQml.so.*.*.*
+%ghost %{_libdir}/libQt6ScxmlQml.so.6
 %attr(755,root,root) %{qt6dir}/libexec/qscxmlc
 %dir %{qt6dir}/qml/QtScxml
-%attr(755,root,root) %{qt6dir}/qml/QtScxml/libdeclarative_scxmlplugin.so
+%{qt6dir}/qml/QtScxml/libdeclarative_scxmlplugin.so
 %{qt6dir}/qml/QtScxml/plugins.qmltypes
 %{qt6dir}/qml/QtScxml/qmldir
 %dir %{qt6dir}/plugins/scxmldatamodel
-%attr(755,root,root) %{qt6dir}/plugins/scxmldatamodel/libqscxmlecmascriptdatamodel.so
+%{qt6dir}/plugins/scxmldatamodel/libqscxmlecmascriptdatamodel.so
 
 %files -n Qt6Scxml-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Scxml.so
-%attr(755,root,root) %{_libdir}/libQt6ScxmlQml.so
+%{_libdir}/libQt6Scxml.so
+%{_libdir}/libQt6ScxmlQml.so
 %{_libdir}/libQt6Scxml.prl
 %{_libdir}/libQt6ScxmlQml.prl
 %{_includedir}/qt6/QtScxml
@@ -7602,22 +7608,22 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Sensors
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Sensors.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Sensors.so.6
-%attr(755,root,root) %{_libdir}/libQt6SensorsQuick.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6SensorsQuick.so.6
+%{_libdir}/libQt6Sensors.so.*.*.*
+%ghost %{_libdir}/libQt6Sensors.so.6
+%{_libdir}/libQt6SensorsQuick.so.*.*.*
+%ghost %{_libdir}/libQt6SensorsQuick.so.6
 %dir %{qt6dir}/plugins/sensors
-%attr(755,root,root) %{qt6dir}/plugins/sensors/libqtsensors_generic.so
-%attr(755,root,root) %{qt6dir}/plugins/sensors/libqtsensors_iio-sensor-proxy.so
+%{qt6dir}/plugins/sensors/libqtsensors_generic.so
+%{qt6dir}/plugins/sensors/libqtsensors_iio-sensor-proxy.so
 %dir %{qt6dir}/qml/QtSensors
-%attr(755,root,root) %{qt6dir}/qml/QtSensors/libsensorsquickplugin.so
+%{qt6dir}/qml/QtSensors/libsensorsquickplugin.so
 %{qt6dir}/qml/QtSensors/plugins.qmltypes
 %{qt6dir}/qml/QtSensors/qmldir
 
 %files -n Qt6Sensors-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Sensors.so
-%attr(755,root,root) %{_libdir}/libQt6SensorsQuick.so
+%{_libdir}/libQt6Sensors.so
+%{_libdir}/libQt6SensorsQuick.so
 %{_libdir}/libQt6Sensors.prl
 %{_libdir}/libQt6SensorsQuick.prl
 %{_includedir}/qt6/QtSensors
@@ -7650,19 +7656,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6SerialBus
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6SerialBus.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6SerialBus.so.6
+%{_libdir}/libQt6SerialBus.so.*.*.*
+%ghost %{_libdir}/libQt6SerialBus.so.6
 %attr(755,root,root) %{qt6dir}/bin/canbusutil
 %dir %{qt6dir}/plugins/canbus
-%attr(755,root,root) %{qt6dir}/plugins/canbus/libqtpassthrucanbus.so
-%attr(755,root,root) %{qt6dir}/plugins/canbus/libqtpeakcanbus.so
-%attr(755,root,root) %{qt6dir}/plugins/canbus/libqtsocketcanbus.so
-%attr(755,root,root) %{qt6dir}/plugins/canbus/libqttinycanbus.so
-%attr(755,root,root) %{qt6dir}/plugins/canbus/libqtvirtualcanbus.so
+%{qt6dir}/plugins/canbus/libqtpassthrucanbus.so
+%{qt6dir}/plugins/canbus/libqtpeakcanbus.so
+%{qt6dir}/plugins/canbus/libqtsocketcanbus.so
+%{qt6dir}/plugins/canbus/libqttinycanbus.so
+%{qt6dir}/plugins/canbus/libqtvirtualcanbus.so
 
 %files -n Qt6SerialBus-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6SerialBus.so
+%{_libdir}/libQt6SerialBus.so
 %{_libdir}/libQt6SerialBus.prl
 %{_includedir}/qt6/QtSerialBus
 %{_pkgconfigdir}/Qt6SerialBus.pc
@@ -7686,12 +7692,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6SerialPort -f qtserialport.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6SerialPort.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6SerialPort.so.6
+%{_libdir}/libQt6SerialPort.so.*.*.*
+%ghost %{_libdir}/libQt6SerialPort.so.6
 
 %files -n Qt6SerialPort-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6SerialPort.so
+%{_libdir}/libQt6SerialPort.so
 %{_libdir}/libQt6SerialPort.prl
 %{_includedir}/qt6/QtSerialPort
 %{_pkgconfigdir}/Qt6SerialPort.pc
@@ -7715,19 +7721,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6SpatialAudio
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Quick3DSpatialAudio.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Quick3DSpatialAudio.so.6
-%attr(755,root,root) %{_libdir}/libQt6SpatialAudio.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6SpatialAudio.so.6
+%{_libdir}/libQt6Quick3DSpatialAudio.so.*.*.*
+%ghost %{_libdir}/libQt6Quick3DSpatialAudio.so.6
+%{_libdir}/libQt6SpatialAudio.so.*.*.*
+%ghost %{_libdir}/libQt6SpatialAudio.so.6
 %dir %{qt6dir}/qml/QtQuick3D/SpatialAudio
 %{qt6dir}/qml/QtQuick3D/SpatialAudio/qmldir
 %{qt6dir}/qml/QtQuick3D/SpatialAudio/plugins.qmltypes
-%attr(755,root,root) %{qt6dir}/qml/QtQuick3D/SpatialAudio/libquick3dspatialaudioplugin.so
+%{qt6dir}/qml/QtQuick3D/SpatialAudio/libquick3dspatialaudioplugin.so
 
 %files -n Qt6SpatialAudio-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Quick3DSpatialAudio.so
-%attr(755,root,root) %{_libdir}/libQt6SpatialAudio.so
+%{_libdir}/libQt6Quick3DSpatialAudio.so
+%{_libdir}/libQt6SpatialAudio.so
 %{_libdir}/libQt6Quick3DSpatialAudio.prl
 %{_libdir}/libQt6SpatialAudio.prl
 %{_includedir}/qt6/QtQuick3DSpatialAudio
@@ -7746,17 +7752,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n qt6-shadertools
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/qsb-qt6
+%{_bindir}/qsb-qt6
 %attr(755,root,root) %{qt6dir}/bin/qsb
 
 %files -n Qt6ShaderTools
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6ShaderTools.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6ShaderTools.so.6
+%{_libdir}/libQt6ShaderTools.so.*.*.*
+%ghost %{_libdir}/libQt6ShaderTools.so.6
 
 %files -n Qt6ShaderTools-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6ShaderTools.so
+%{_libdir}/libQt6ShaderTools.so
 %{_libdir}/libQt6ShaderTools.prl
 %{_includedir}/qt6/QtShaderTools
 %{_libdir}/cmake/Qt6BuildInternals/StandaloneTests/QtShaderToolsTestsConfig.cmake
@@ -7781,8 +7787,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Sql
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Sql.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Sql.so.6
+%{_libdir}/libQt6Sql.so.*.*.*
+%ghost %{_libdir}/libQt6Sql.so.6
 # loaded from src/sql/kernel/qsqldatabase.cpp
 %dir %{qt6dir}/plugins/sqldrivers
 # common for base -devel and plugin-specific files
@@ -7791,55 +7797,55 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with ibmdb2}
 %files -n Qt6Sql-sqldriver-db2
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqldb2.so
+%{qt6dir}/plugins/sqldrivers/libqsqldb2.so
 %{_libdir}/cmake/Qt6Sql/Qt6QDB2DriverPlugin*.cmake
 %endif
 
 %if %{with ibase}
 %files -n Qt6Sql-sqldriver-ibase
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqlibase.so
+%{qt6dir}/plugins/sqldrivers/libqsqlibase.so
 %{_libdir}/cmake/Qt6Sql/Qt6QIBaseDriverPlugin*.cmake
 %endif
 
 %if %{with sqlite3}
 %files -n Qt6Sql-sqldriver-sqlite3
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqlite.so
+%{qt6dir}/plugins/sqldrivers/libqsqlite.so
 %{_libdir}/cmake/Qt6Sql/Qt6QSQLiteDriverPlugin*.cmake
 %endif
 
 %if %{with mysql}
 %files -n Qt6Sql-sqldriver-mysql
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqlmysql.so
+%{qt6dir}/plugins/sqldrivers/libqsqlmysql.so
 %{_libdir}/cmake/Qt6Sql/Qt6QMYSQLDriverPlugin*.cmake
 %endif
 
 %if %{with oci}
 %files -n Qt6Sql-sqldriver-oci
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqloci.so
+%{qt6dir}/plugins/sqldrivers/libqsqloci.so
 %{_libdir}/cmake/Qt6Sql/Qt6QOCIDriverPlugin*.cmake
 %endif
 
 %if %{with odbc}
 %files -n Qt6Sql-sqldriver-odbc
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqlodbc.so
+%{qt6dir}/plugins/sqldrivers/libqsqlodbc.so
 %{_libdir}/cmake/Qt6Sql/Qt6QODBCDriverPlugin*.cmake
 %endif
 
 %if %{with pgsql}
 %files -n Qt6Sql-sqldriver-pgsql
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/sqldrivers/libqsqlpsql.so
+%{qt6dir}/plugins/sqldrivers/libqsqlpsql.so
 %{_libdir}/cmake/Qt6Sql/Qt6QPSQLDriverPlugin*.cmake
 %endif
 
 %files -n Qt6Sql-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Sql.so
+%{_libdir}/libQt6Sql.so
 %{_libdir}/libQt6Sql.prl
 %{_includedir}/qt6/QtSql
 %{_pkgconfigdir}/Qt6Sql.pc
@@ -7852,17 +7858,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Svg
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Svg.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Svg.so.6
-%attr(755,root,root) %{_libdir}/libQt6SvgWidgets.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6SvgWidgets.so.6
-%attr(755,root,root) %{qt6dir}/plugins/iconengines/libqsvgicon.so
-%attr(755,root,root) %{qt6dir}/plugins/imageformats/libqsvg.so
+%{_libdir}/libQt6Svg.so.*.*.*
+%ghost %{_libdir}/libQt6Svg.so.6
+%{_libdir}/libQt6SvgWidgets.so.*.*.*
+%ghost %{_libdir}/libQt6SvgWidgets.so.6
+%{qt6dir}/plugins/iconengines/libqsvgicon.so
+%{qt6dir}/plugins/imageformats/libqsvg.so
 
 %files -n Qt6Svg-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Svg.so
-%attr(755,root,root) %{_libdir}/libQt6SvgWidgets.so
+%{_libdir}/libQt6Svg.so
+%{_libdir}/libQt6SvgWidgets.so
 %{_libdir}/libQt6Svg.prl
 %{_libdir}/libQt6SvgWidgets.prl
 %{_includedir}/qt6/QtSvg
@@ -7895,12 +7901,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6TaskTree
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6TaskTree.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6TaskTree.so.6
+%{_libdir}/libQt6TaskTree.so.*.*.*
+%ghost %{_libdir}/libQt6TaskTree.so.6
 
 %files -n Qt6TaskTree-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6TaskTree.so
+%{_libdir}/libQt6TaskTree.so
 %{_libdir}/libQt6TaskTree.prl
 %{_includedir}/qt6/QtTaskTree
 %{_pkgconfigdir}/Qt6TaskTree.pc
@@ -7922,12 +7928,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Test
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Test.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Test.so.6
+%{_libdir}/libQt6Test.so.*.*.*
+%ghost %{_libdir}/libQt6Test.so.6
 
 %files -n Qt6Test-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Test.so
+%{_libdir}/libQt6Test.so
 %{_libdir}/libQt6Test.prl
 %{_includedir}/qt6/QtTest
 %{_pkgconfigdir}/Qt6Test.pc
@@ -7960,20 +7966,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6TextToSpeech
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6TextToSpeech.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6TextToSpeech.so.6
+%{_libdir}/libQt6TextToSpeech.so.*.*.*
+%ghost %{_libdir}/libQt6TextToSpeech.so.6
 %dir %{qt6dir}/plugins/texttospeech
-%attr(755,root,root) %{qt6dir}/plugins/texttospeech/libqtexttospeech_flite.so
-%attr(755,root,root) %{qt6dir}/plugins/texttospeech/libqtexttospeech_mock.so
-%attr(755,root,root) %{qt6dir}/plugins/texttospeech/libqtexttospeech_speechd.so
+%{qt6dir}/plugins/texttospeech/libqtexttospeech_flite.so
+%{qt6dir}/plugins/texttospeech/libqtexttospeech_mock.so
+%{qt6dir}/plugins/texttospeech/libqtexttospeech_speechd.so
 %dir %{qt6dir}/qml/QtTextToSpeech
 %{qt6dir}/qml/QtTextToSpeech/qmldir
 %{qt6dir}/qml/QtTextToSpeech/plugins.qmltypes
-%attr(755,root,root) %{qt6dir}/qml/QtTextToSpeech/libtexttospeechqmlplugin.so
+%{qt6dir}/qml/QtTextToSpeech/libtexttospeechqmlplugin.so
 
 %files -n Qt6TextToSpeech-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6TextToSpeech.so
+%{_libdir}/libQt6TextToSpeech.so
 %{_libdir}/libQt6TextToSpeech.prl
 %{_includedir}/qt6/QtTextToSpeech
 %{_pkgconfigdir}/Qt6TextToSpeech.pc
@@ -7987,8 +7993,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6UiTools
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6UiTools.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6UiTools.so.6
+%{_libdir}/libQt6UiTools.so.*.*.*
+%ghost %{_libdir}/libQt6UiTools.so.6
 
 %files -n Qt6UiTools-devel
 %defattr(644,root,root,755)
@@ -8010,102 +8016,102 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6VirtualKeyboard
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6HunspellInputMethod.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6HunspellInputMethod.so.6
-%attr(755,root,root) %{_libdir}/libQt6VirtualKeyboard.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6VirtualKeyboard.so.6
-%attr(755,root,root) %{_libdir}/libQt6VirtualKeyboardQml.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6VirtualKeyboardQml.so.6
-%attr(755,root,root) %{_libdir}/libQt6VirtualKeyboardSettings.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6VirtualKeyboardSettings.so.6
-%attr(755,root,root) %{qt6dir}/plugins/platforminputcontexts/libqtvirtualkeyboardplugin.so
+%{_libdir}/libQt6HunspellInputMethod.so.*.*.*
+%ghost %{_libdir}/libQt6HunspellInputMethod.so.6
+%{_libdir}/libQt6VirtualKeyboard.so.*.*.*
+%ghost %{_libdir}/libQt6VirtualKeyboard.so.6
+%{_libdir}/libQt6VirtualKeyboardQml.so.*.*.*
+%ghost %{_libdir}/libQt6VirtualKeyboardQml.so.6
+%{_libdir}/libQt6VirtualKeyboardSettings.so.*.*.*
+%ghost %{_libdir}/libQt6VirtualKeyboardSettings.so.6
+%{qt6dir}/plugins/platforminputcontexts/libqtvirtualkeyboardplugin.so
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/VirtualKeyboardQml.qmltypes
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/libqtvkbplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/libqtvkbplugin.so
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/qmldir
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/*.qml
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Components
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/*.qml
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/libqtvkbcomponentsplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/libqtvkbcomponentsplugin.so
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/qmldir
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Components/qtvkbcomponentsplugin.qmltypes
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Core
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Core/libvirtualkeyboardplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Core/libvirtualkeyboardplugin.so
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Core/qmldir
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Core/plugins.qmltypes
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Layouts
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Layouts/qmldir
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Layouts/qtvkblayoutsplugin.qmltypes
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Layouts/libqtvkblayoutsplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Layouts/libqtvkblayoutsplugin.so
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/qmldir
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/qtvkbpluginsplugin.qmltypes
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/libqtvkbpluginsplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/libqtvkbpluginsplugin.so
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hangul
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hangul/libqtvkbhangulplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hangul/libqtvkbhangulplugin.so
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hangul/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hangul/qmldir
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hunspell
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hunspell/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hunspell/qmldir
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hunspell/libqtvkbhunspellplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Hunspell/libqtvkbhunspellplugin.so
 %if %{with lipi}
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Lipi
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Lipi/libqtvkblipiplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Lipi/libqtvkblipiplugin.so
 %endif
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/OpenWNN
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/OpenWNN/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/OpenWNN/qmldir
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/OpenWNN/libqtvkbopenwnnplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/OpenWNN/libqtvkbopenwnnplugin.so
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Pinyin
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Pinyin/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Pinyin/qmldir
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Pinyin/libqtvkbpinyinplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Pinyin/libqtvkbpinyinplugin.so
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/TCIme
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/TCIme/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/TCIme/qmldir
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/TCIme/libqtvkbtcimeplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/TCIme/libqtvkbtcimeplugin.so
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Thai
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Thai/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Thai/qmldir
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Thai/libqtvkbthaiplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Plugins/Thai/libqtvkbthaiplugin.so
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Settings
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Settings/libqtvkbsettingsplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Settings/libqtvkbsettingsplugin.so
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Settings/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Settings/qmldir
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/*.qml
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/*.js
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/libqtvkbstylesplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/libqtvkbstylesplugin.so
 %dir %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/Builtin
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/Builtin/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/Builtin/qmldir
-%attr(755,root,root) %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/Builtin/libqtvkbbuiltinstylesplugin.so
+%{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/Builtin/libqtvkbbuiltinstylesplugin.so
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/plugins.qmltypes
 %{qt6dir}/qml/QtQuick/VirtualKeyboard/Styles/qmldir
 %if %{with lipi}
 %dir %{qt6dir}/plugins/lipi_toolkit
-%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libactivedtw.so
-%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libboxfld.so
-%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libl7.so
-%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/liblipiengine.so
-%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/liblogger.so
-%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libneuralnet.so
-%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libnn.so
-%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libnpen.so
-%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libpointfloat.so
-%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libpreproc.so
-%attr(755,root,root) %{qt6dir}/plugins/lipi_toolkit/libsubstroke.so
+%{qt6dir}/plugins/lipi_toolkit/libactivedtw.so
+%{qt6dir}/plugins/lipi_toolkit/libboxfld.so
+%{qt6dir}/plugins/lipi_toolkit/libl7.so
+%{qt6dir}/plugins/lipi_toolkit/liblipiengine.so
+%{qt6dir}/plugins/lipi_toolkit/liblogger.so
+%{qt6dir}/plugins/lipi_toolkit/libneuralnet.so
+%{qt6dir}/plugins/lipi_toolkit/libnn.so
+%{qt6dir}/plugins/lipi_toolkit/libnpen.so
+%{qt6dir}/plugins/lipi_toolkit/libpointfloat.so
+%{qt6dir}/plugins/lipi_toolkit/libpreproc.so
+%{qt6dir}/plugins/lipi_toolkit/libsubstroke.so
 %dir %{_datadir}/qt6/qtvirtualkeyboard
 %{_datadir}/qt6/qtvirtualkeyboard/lipi_toolkit
 %endif
 
 %files -n Qt6VirtualKeyboard-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6HunspellInputMethod.so
-%attr(755,root,root) %{_libdir}/libQt6VirtualKeyboard.so
-%attr(755,root,root) %{_libdir}/libQt6VirtualKeyboardQml.so
-%attr(755,root,root) %{_libdir}/libQt6VirtualKeyboardSettings.so
+%{_libdir}/libQt6HunspellInputMethod.so
+%{_libdir}/libQt6VirtualKeyboard.so
+%{_libdir}/libQt6VirtualKeyboardQml.so
+%{_libdir}/libQt6VirtualKeyboardSettings.so
 %{_libdir}/libQt6HunspellInputMethod.prl
 %{_libdir}/libQt6VirtualKeyboard.prl
 %{_libdir}/libQt6VirtualKeyboardQml.prl
@@ -8169,67 +8175,67 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6WaylandCompositor
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6WaylandCompositor.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WaylandCompositor.so.6
-%attr(755,root,root) %{_libdir}/libQt6WaylandCompositorIviapplication.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WaylandCompositorIviapplication.so.6
-%attr(755,root,root) %{_libdir}/libQt6WaylandCompositorPresentationTime.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WaylandCompositorPresentationTime.so.6
-%attr(755,root,root) %{_libdir}/libQt6WaylandCompositorWLShell.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WaylandCompositorWLShell.so.6
-%attr(755,root,root) %{_libdir}/libQt6WaylandCompositorXdgShell.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WaylandCompositorXdgShell.so.6
-%attr(755,root,root) %{_libdir}/libQt6WaylandEglCompositorHwIntegration.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WaylandEglCompositorHwIntegration.so.6
-%attr(755,root,root) %{_libdir}/libQt6WlShellIntegration.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WlShellIntegration.so.6
+%{_libdir}/libQt6WaylandCompositor.so.*.*.*
+%ghost %{_libdir}/libQt6WaylandCompositor.so.6
+%{_libdir}/libQt6WaylandCompositorIviapplication.so.*.*.*
+%ghost %{_libdir}/libQt6WaylandCompositorIviapplication.so.6
+%{_libdir}/libQt6WaylandCompositorPresentationTime.so.*.*.*
+%ghost %{_libdir}/libQt6WaylandCompositorPresentationTime.so.6
+%{_libdir}/libQt6WaylandCompositorWLShell.so.*.*.*
+%ghost %{_libdir}/libQt6WaylandCompositorWLShell.so.6
+%{_libdir}/libQt6WaylandCompositorXdgShell.so.*.*.*
+%ghost %{_libdir}/libQt6WaylandCompositorXdgShell.so.6
+%{_libdir}/libQt6WaylandEglCompositorHwIntegration.so.*.*.*
+%ghost %{_libdir}/libQt6WaylandEglCompositorHwIntegration.so.6
+%{_libdir}/libQt6WlShellIntegration.so.*.*.*
+%ghost %{_libdir}/libQt6WlShellIntegration.so.6
 %dir %{qt6dir}/plugins/wayland-graphics-integration-server
-%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-dmabuf-server-buffer.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-drm-egl-server-buffer.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-linux-dmabuf-unstable-v1.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-shm-emulation-server.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-vulkan-server.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-wayland-egl.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-wayland-eglstream-controller.so
+%{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-dmabuf-server-buffer.so
+%{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-drm-egl-server-buffer.so
+%{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-linux-dmabuf-unstable-v1.so
+%{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-shm-emulation-server.so
+%{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-vulkan-server.so
+%{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-wayland-egl.so
+%{qt6dir}/plugins/wayland-graphics-integration-server/libqt-wayland-compositor-wayland-eglstream-controller.so
 %dir %{qt6dir}/qml/QtWayland/Compositor
-%attr(755,root,root) %{qt6dir}/qml/QtWayland/Compositor/libqwaylandcompositorplugin.so
+%{qt6dir}/qml/QtWayland/Compositor/libqwaylandcompositorplugin.so
 %{qt6dir}/qml/QtWayland/Compositor/qmldir
 %{qt6dir}/qml/QtWayland/Compositor/WaylandCompositor.qmltypes
 %dir %{qt6dir}/qml/QtWayland/Compositor/TextureSharingExtension
 %{qt6dir}/qml/QtWayland/Compositor/qmlfiles
-%attr(755,root,root) %{qt6dir}/qml/QtWayland/Compositor/TextureSharingExtension/libwaylandtexturesharingextensionplugin.so
+%{qt6dir}/qml/QtWayland/Compositor/TextureSharingExtension/libwaylandtexturesharingextensionplugin.so
 %{qt6dir}/qml/QtWayland/Compositor/TextureSharingExtension/plugins.qmltypes
 %{qt6dir}/qml/QtWayland/Compositor/TextureSharingExtension/qmldir
 %dir %{qt6dir}/qml/QtWayland/Compositor/IviApplication
-%attr(755,root,root) %{qt6dir}/qml/QtWayland/Compositor/IviApplication/libwaylandcompositoriviapplicationplugin.so
+%{qt6dir}/qml/QtWayland/Compositor/IviApplication/libwaylandcompositoriviapplicationplugin.so
 %{qt6dir}/qml/QtWayland/Compositor/IviApplication/plugins.qmltypes
 %{qt6dir}/qml/QtWayland/Compositor/IviApplication/qmldir
 %dir %{qt6dir}/qml/QtWayland/Compositor/PresentationTime
-%attr(755,root,root) %{qt6dir}/qml/QtWayland/Compositor/PresentationTime/libwaylandcompositorpresentationtimeplugin.so
+%{qt6dir}/qml/QtWayland/Compositor/PresentationTime/libwaylandcompositorpresentationtimeplugin.so
 %{qt6dir}/qml/QtWayland/Compositor/PresentationTime/plugins.qmltypes
 %{qt6dir}/qml/QtWayland/Compositor/PresentationTime/qmldir
 %dir %{qt6dir}/qml/QtWayland/Compositor/QtShell
-%attr(755,root,root) %{qt6dir}/qml/QtWayland/Compositor/QtShell/libwaylandcompositorqtshellplugin.so
+%{qt6dir}/qml/QtWayland/Compositor/QtShell/libwaylandcompositorqtshellplugin.so
 %{qt6dir}/qml/QtWayland/Compositor/QtShell/plugins.qmltypes
 %{qt6dir}/qml/QtWayland/Compositor/QtShell/qmldir
 %dir %{qt6dir}/qml/QtWayland/Compositor/WlShell
-%attr(755,root,root) %{qt6dir}/qml/QtWayland/Compositor/WlShell/libwaylandcompositorwlshellplugin.so
+%{qt6dir}/qml/QtWayland/Compositor/WlShell/libwaylandcompositorwlshellplugin.so
 %{qt6dir}/qml/QtWayland/Compositor/WlShell/plugins.qmltypes
 %{qt6dir}/qml/QtWayland/Compositor/WlShell/qmldir
 %dir %{qt6dir}/qml/QtWayland/Compositor/XdgShell
-%attr(755,root,root) %{qt6dir}/qml/QtWayland/Compositor/XdgShell/libwaylandcompositorxdgshellplugin.so
+%{qt6dir}/qml/QtWayland/Compositor/XdgShell/libwaylandcompositorxdgshellplugin.so
 %{qt6dir}/qml/QtWayland/Compositor/XdgShell/plugins.qmltypes
 %{qt6dir}/qml/QtWayland/Compositor/XdgShell/qmldir
 
 %files -n Qt6WaylandCompositor-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6WaylandCompositor.so
-%attr(755,root,root) %{_libdir}/libQt6WaylandCompositorIviapplication.so
-%attr(755,root,root) %{_libdir}/libQt6WaylandCompositorPresentationTime.so
-%attr(755,root,root) %{_libdir}/libQt6WaylandCompositorWLShell.so
-%attr(755,root,root) %{_libdir}/libQt6WaylandCompositorXdgShell.so
-%attr(755,root,root) %{_libdir}/libQt6WaylandEglCompositorHwIntegration.so
-%attr(755,root,root) %{_libdir}/libQt6WlShellIntegration.so
+%{_libdir}/libQt6WaylandCompositor.so
+%{_libdir}/libQt6WaylandCompositorIviapplication.so
+%{_libdir}/libQt6WaylandCompositorPresentationTime.so
+%{_libdir}/libQt6WaylandCompositorWLShell.so
+%{_libdir}/libQt6WaylandCompositorXdgShell.so
+%{_libdir}/libQt6WaylandEglCompositorHwIntegration.so
+%{_libdir}/libQt6WlShellIntegration.so
 %{_libdir}/libQt6WaylandCompositor.prl
 %{_libdir}/libQt6WaylandCompositorIviapplication.prl
 %{_libdir}/libQt6WaylandCompositorPresentationTime.prl
@@ -8306,36 +8312,36 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6WaylandClient
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6WaylandClient.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WaylandClient.so.6
+%{_libdir}/libQt6WaylandClient.so.*.*.*
+%ghost %{_libdir}/libQt6WaylandClient.so.6
 %attr(755,root,root) %{qt6dir}/libexec/qtwaylandscanner
-%attr(755,root,root) %{qt6dir}/plugins/platforms/libqwayland.so
+%{qt6dir}/plugins/platforms/libqwayland.so
 %dir %{qt6dir}/plugins/wayland-decoration-client
-%attr(755,root,root) %{qt6dir}/plugins/wayland-decoration-client/libadwaita.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-decoration-client/libbradient.so
+%{qt6dir}/plugins/wayland-decoration-client/libadwaita.so
+%{qt6dir}/plugins/wayland-decoration-client/libbradient.so
 %dir %{qt6dir}/plugins/wayland-graphics-integration-client
-%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-client/libdmabuf-server.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-client/libdrm-egl-server.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-client/libqt-plugin-wayland-egl.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-client/libshm-emulation-server.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-graphics-integration-client/libvulkan-server.so
+%{qt6dir}/plugins/wayland-graphics-integration-client/libdmabuf-server.so
+%{qt6dir}/plugins/wayland-graphics-integration-client/libdrm-egl-server.so
+%{qt6dir}/plugins/wayland-graphics-integration-client/libqt-plugin-wayland-egl.so
+%{qt6dir}/plugins/wayland-graphics-integration-client/libshm-emulation-server.so
+%{qt6dir}/plugins/wayland-graphics-integration-client/libvulkan-server.so
 %dir %{qt6dir}/plugins/wayland-shell-integration
-%attr(755,root,root) %{qt6dir}/plugins/wayland-shell-integration/libfullscreen-shell-v1.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-shell-integration/libivi-shell.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-shell-integration/libqt-shell.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-shell-integration/libwl-shell-plugin.so
-%attr(755,root,root) %{qt6dir}/plugins/wayland-shell-integration/libxdg-shell.so
+%{qt6dir}/plugins/wayland-shell-integration/libfullscreen-shell-v1.so
+%{qt6dir}/plugins/wayland-shell-integration/libivi-shell.so
+%{qt6dir}/plugins/wayland-shell-integration/libqt-shell.so
+%{qt6dir}/plugins/wayland-shell-integration/libwl-shell-plugin.so
+%{qt6dir}/plugins/wayland-shell-integration/libxdg-shell.so
 # dir shared Qt6WaylandCompositor
 %dir %{qt6dir}/qml/QtWayland
 %dir %{qt6dir}/qml/QtWayland/Client
 %dir %{qt6dir}/qml/QtWayland/Client/TextureSharing
-%attr(755,root,root) %{qt6dir}/qml/QtWayland/Client/TextureSharing/libwaylandtexturesharingplugin.so
+%{qt6dir}/qml/QtWayland/Client/TextureSharing/libwaylandtexturesharingplugin.so
 %{qt6dir}/qml/QtWayland/Client/TextureSharing/plugins.qmltypes
 %{qt6dir}/qml/QtWayland/Client/TextureSharing/qmldir
 
 %files -n Qt6WaylandClient-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6WaylandClient.so
+%{_libdir}/libQt6WaylandClient.so
 %{_libdir}/libQt6WaylandClient.prl
 %{_includedir}/qt6/QtWaylandClient
 %dir %{_datadir}/qt6/wayland
@@ -8362,13 +8368,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Widgets
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Widgets.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Widgets.so.6
+%{_libdir}/libQt6Widgets.so.*.*.*
+%ghost %{_libdir}/libQt6Widgets.so.6
 %dir %{qt6dir}/plugins/styles
 
 %files -n Qt6Widgets-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Widgets.so
+%{_libdir}/libQt6Widgets.so
 %{_libdir}/libQt6Widgets.prl
 %{_includedir}/qt6/QtWidgets
 %{_pkgconfigdir}/Qt6Widgets.pc
@@ -8382,12 +8388,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6WebChannel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6WebChannel.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WebChannel.so.6
-%attr(755,root,root) %{_libdir}/libQt6WebChannelQuick.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WebChannelQuick.so.6
+%{_libdir}/libQt6WebChannel.so.*.*.*
+%ghost %{_libdir}/libQt6WebChannel.so.6
+%{_libdir}/libQt6WebChannelQuick.so.*.*.*
+%ghost %{_libdir}/libQt6WebChannelQuick.so.6
 %dir %{qt6dir}/qml/QtWebChannel
-%attr(755,root,root) %{qt6dir}/qml/QtWebChannel/libwebchannelquickplugin.so
+%{qt6dir}/qml/QtWebChannel/libwebchannelquickplugin.so
 %{qt6dir}/qml/QtWebChannel/plugins.qmltypes
 %{qt6dir}/qml/QtWebChannel/qmldir
 %dir %{_datadir}/qt6/webchannel
@@ -8395,8 +8401,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6WebChannel-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6WebChannel.so
-%attr(755,root,root) %{_libdir}/libQt6WebChannelQuick.so
+%{_libdir}/libQt6WebChannel.so
+%{_libdir}/libQt6WebChannelQuick.so
 %{_libdir}/libQt6WebChannel.prl
 %{_libdir}/libQt6WebChannelQuick.prl
 %{_includedir}/qt6/QtWebChannel
@@ -8430,19 +8436,19 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with qtwebengine}
 %files -n Qt6WebEngine -f qtwebengine.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6WebEngineCore.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WebEngineCore.so.6
-%attr(755,root,root) %{_libdir}/libQt6WebEngineQuick.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WebEngineQuick.so.6
-%attr(755,root,root) %{_libdir}/libQt6WebEngineQuickDelegatesQml.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WebEngineQuickDelegatesQml.so.6
-%attr(755,root,root) %{_libdir}/libQt6WebEngineWidgets.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WebEngineWidgets.so.6
+%{_libdir}/libQt6WebEngineCore.so.*.*.*
+%ghost %{_libdir}/libQt6WebEngineCore.so.6
+%{_libdir}/libQt6WebEngineQuick.so.*.*.*
+%ghost %{_libdir}/libQt6WebEngineQuick.so.6
+%{_libdir}/libQt6WebEngineQuickDelegatesQml.so.*.*.*
+%ghost %{_libdir}/libQt6WebEngineQuickDelegatesQml.so.6
+%{_libdir}/libQt6WebEngineWidgets.so.*.*.*
+%ghost %{_libdir}/libQt6WebEngineWidgets.so.6
 %dir %{qt6dir}/qml/QtWebEngine
 %{qt6dir}/qml/QtWebEngine/plugins.qmltypes
 %{qt6dir}/qml/QtWebEngine/qmldir
 %{qt6dir}/qml/QtWebEngine/ControlsDelegates
-%attr(755,root,root) %{qt6dir}/qml/QtWebEngine/libqtwebenginequickplugin.so
+%{qt6dir}/qml/QtWebEngine/libqtwebenginequickplugin.so
 %dir %{_datadir}/qt6/resources
 %{_datadir}/qt6/resources/qtwebengine*.pak
 %{_datadir}/qt6/resources/v8_context_snapshot.bin
@@ -8506,10 +8512,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6WebEngine-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6WebEngineCore.so
-%attr(755,root,root) %{_libdir}/libQt6WebEngineQuick.so
-%attr(755,root,root) %{_libdir}/libQt6WebEngineQuickDelegatesQml.so
-%attr(755,root,root) %{_libdir}/libQt6WebEngineWidgets.so
+%{_libdir}/libQt6WebEngineCore.so
+%{_libdir}/libQt6WebEngineQuick.so
+%{_libdir}/libQt6WebEngineQuickDelegatesQml.so
+%{_libdir}/libQt6WebEngineWidgets.so
 %{_libdir}/libQt6WebEngineCore.prl
 %{_libdir}/libQt6WebEngineQuick.prl
 %{_libdir}/libQt6WebEngineQuickDelegatesQml.prl
@@ -8548,7 +8554,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Designer-plugin-qwebengineview
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/qt6/plugins/designer/libqwebengineview.so
+%{_libdir}/qt6/plugins/designer/libqwebengineview.so
 %{_libdir}/cmake/Qt6Designer/Qt6QWebEngineViewPlugin*.cmake
 
 %if %{with doc}
@@ -8564,16 +8570,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6WebSockets -f qtwebsockets.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6WebSockets.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WebSockets.so.6
+%{_libdir}/libQt6WebSockets.so.*.*.*
+%ghost %{_libdir}/libQt6WebSockets.so.6
 %dir %{qt6dir}/qml/QtWebSockets
-%attr(755,root,root) %{qt6dir}/qml/QtWebSockets/libqmlwebsocketsplugin.so
+%{qt6dir}/qml/QtWebSockets/libqmlwebsocketsplugin.so
 %{qt6dir}/qml/QtWebSockets/plugins.qmltypes
 %{qt6dir}/qml/QtWebSockets/qmldir
 
 %files -n Qt6WebSockets-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6WebSockets.so
+%{_libdir}/libQt6WebSockets.so
 %{_libdir}/libQt6WebSockets.prl
 %{_includedir}/qt6/QtWebSockets
 %{_pkgconfigdir}/Qt6WebSockets.pc
@@ -8597,20 +8603,20 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6WebView
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6WebView.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WebView.so.6
-%attr(755,root,root) %{_libdir}/libQt6WebViewQuick.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6WebViewQuick.so.6
+%{_libdir}/libQt6WebView.so.*.*.*
+%ghost %{_libdir}/libQt6WebView.so.6
+%{_libdir}/libQt6WebViewQuick.so.*.*.*
+%ghost %{_libdir}/libQt6WebViewQuick.so.6
 %dir %{qt6dir}/plugins/webview
 %dir %{qt6dir}/qml/QtWebView
-%attr(755,root,root) %{qt6dir}/qml/QtWebView/libqtwebviewquickplugin.so
+%{qt6dir}/qml/QtWebView/libqtwebviewquickplugin.so
 %{qt6dir}/qml/QtWebView/plugins.qmltypes
 %{qt6dir}/qml/QtWebView/qmldir
 
 %files -n Qt6WebView-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6WebView.so
-%attr(755,root,root) %{_libdir}/libQt6WebViewQuick.so
+%{_libdir}/libQt6WebView.so
+%{_libdir}/libQt6WebViewQuick.so
 %{_libdir}/libQt6WebView.prl
 %{_libdir}/libQt6WebViewQuick.prl
 %{_includedir}/qt6/QtWebView
@@ -8634,7 +8640,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with qtwebengine}
 %files -n Qt6WebView-plugin-webengine
 %defattr(644,root,root,755)
-%attr(755,root,root) %{qt6dir}/plugins/webview/libqtwebview_webengine.so
+%{qt6dir}/plugins/webview/libqtwebview_webengine.so
 %{_libdir}/cmake/Qt6WebView/Qt6QWebEngineWebViewPlugin*.cmake
 %endif
 
@@ -8650,12 +8656,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Qt6Xml
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Xml.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libQt6Xml.so.6
+%{_libdir}/libQt6Xml.so.*.*.*
+%ghost %{_libdir}/libQt6Xml.so.6
 
 %files -n Qt6Xml-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libQt6Xml.so
+%{_libdir}/libQt6Xml.so
 %{_libdir}/libQt6Xml.prl
 %{_includedir}/qt6/QtXml
 %{_pkgconfigdir}/Qt6Xml.pc
@@ -8746,15 +8752,15 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n qt6-build
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/qt-cmake-qt6
-%attr(755,root,root) %{_bindir}/moc-qt6
-%attr(755,root,root) %{_bindir}/qdbuscpp2xml-qt6
-%attr(755,root,root) %{_bindir}/qdbusxml2cpp-qt6
-%attr(755,root,root) %{_bindir}/qdoc-qt6
-%attr(755,root,root) %{_bindir}/qlalr-qt6
-%attr(755,root,root) %{_bindir}/qmake-qt6
-%attr(755,root,root) %{_bindir}/rcc-qt6
-%attr(755,root,root) %{_bindir}/uic-qt6
+%{_bindir}/qt-cmake-qt6
+%{_bindir}/moc-qt6
+%{_bindir}/qdbuscpp2xml-qt6
+%{_bindir}/qdbusxml2cpp-qt6
+%{_bindir}/qdoc-qt6
+%{_bindir}/qlalr-qt6
+%{_bindir}/qmake-qt6
+%{_bindir}/rcc-qt6
+%{_bindir}/uic-qt6
 %attr(755,root,root) %{qt6dir}/bin/androiddeployqt6
 %attr(755,root,root) %{qt6dir}/bin/qdbuscpp2xml
 %attr(755,root,root) %{qt6dir}/bin/qdbusxml2cpp

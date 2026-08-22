@@ -114,12 +114,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.11.1
+Version:	6.11.2
 Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.11/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	25d4d1dd74c92b978f164e8f20805985
+# Source0-md5:	669c1f3a41c37fdda389094882044d7a
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		arm-no-xnnpack.patch
@@ -6308,6 +6308,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6QmlLS.a
 %{_libdir}/libQt6QmlToolingSettings.a
 %{_libdir}/libQt6QmlTypeRegistrar.a
+%{_libdir}/libQt6Qmltc.a
 %{_libdir}/libQt6LabsAnimation.prl
 %{_libdir}/libQt6LabsFolderListModel.prl
 %{_libdir}/libQt6LabsPlatform.prl
@@ -6331,6 +6332,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libQt6QmlTypeRegistrar.prl
 %{_libdir}/libQt6QmlWorkerScript.prl
 %{_libdir}/libQt6QmlXmlListModel.prl
+%{_libdir}/libQt6Qmltc.prl
 %{_libdir}/libQt6StateMachine.prl
 %{_libdir}/libQt6StateMachineQml.prl
 %{_includedir}/qt6/QtLabsAnimation
@@ -6357,6 +6359,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/qt6/QtQmlTypeRegistrar
 %{_includedir}/qt6/QtQmlWorkerScript
 %{_includedir}/qt6/QtQmlXmlListModel
+%{_includedir}/qt6/QtQmltc
 %{_includedir}/qt6/QtStateMachine
 %{_includedir}/qt6/QtStateMachineQml
 %{_pkgconfigdir}/Qt6LabsAnimation.pc
@@ -6419,6 +6422,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/cmake/Qt6QmlWorkerScriptPrivate
 %{_libdir}/cmake/Qt6QmlXmlListModel
 %{_libdir}/cmake/Qt6QmlXmlListModelPrivate
+%{_libdir}/cmake/Qt6QmltcPrivate
 %{_libdir}/cmake/Qt6StateMachine
 %{_libdir}/cmake/Qt6StateMachinePrivate
 %{_libdir}/cmake/Qt6StateMachineQml
@@ -6442,6 +6446,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/metatypes/qt6qmlmeta_metatypes.json
 %{qt6dir}/metatypes/qt6qmlmodels_metatypes.json
 %{qt6dir}/metatypes/qt6qmlnetwork_metatypes.json
+%{qt6dir}/metatypes/qt6qmltcprivate_metatypes.json
 %{qt6dir}/metatypes/qt6qmltoolingsettingsprivate_metatypes.json
 %{qt6dir}/metatypes/qt6qmltyperegistrarprivate_metatypes.json
 %{qt6dir}/metatypes/qt6qmlworkerscript_metatypes.json
@@ -6483,6 +6488,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/mkspecs/modules/qt_lib_qmlnetwork_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qml.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qml_private.pri
+%{qt6dir}/mkspecs/modules/qt_lib_qmltc_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmltest.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmltest_private.pri
 %{qt6dir}/mkspecs/modules/qt_lib_qmltoolingsettings_private.pri
@@ -6519,6 +6525,7 @@ rm -rf $RPM_BUILD_ROOT
 %{qt6dir}/modules/QmlTypeRegistrarPrivate.json
 %{qt6dir}/modules/QmlWorkerScript.json
 %{qt6dir}/modules/QmlXmlListModel.json
+%{qt6dir}/modules/QmltcPrivate.json
 %{qt6dir}/modules/StateMachine.json
 %{qt6dir}/modules/StateMachineQml.json
 %{qt6dir}/qml/Qt/labs/assetdownloader/libqmlassetdownloaderprivateplugin.a

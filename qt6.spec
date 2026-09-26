@@ -115,7 +115,7 @@ Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
 Version:	6.11.2
-Release:	2
+Release:	3
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.11/%{version}/single/qt-everywhere-src-%{version}.tar.xz
@@ -2135,6 +2135,8 @@ Requires:	Qt6Core-devel = %{version}
 Requires:	Qt6Gui-devel = %{version}
 Requires:	Qt6PrintSupport = %{version}
 Requires:	Qt6Widgets-devel = %{version}
+# Qt6PrintSupportDependencies.cmake does find_dependency(Cups) as required
+%{?with_cups:Requires:	cups-devel >= 1.4}
 
 %description -n Qt6PrintSupport-devel
 Header files for Qt6 PrintSupport library.

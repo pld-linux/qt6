@@ -114,12 +114,12 @@
 Summary:	Qt6 Library
 Summary(pl.UTF-8):	Biblioteka Qt6
 Name:		qt6
-Version:	6.11.2
-Release:	5
+Version:	6.11.3
+Release:	1
 License:	LGPL v3 or GPL v2 or GPL v3 or commercial
 Group:		X11/Libraries
 Source0:	https://download.qt.io/official_releases/qt/6.11/%{version}/single/qt-everywhere-src-%{version}.tar.xz
-# Source0-md5:	669c1f3a41c37fdda389094882044d7a
+# Source0-md5:	f5bc717bd4ec3e5058391a96f6418c98
 Patch0:		system-cacerts.patch
 Patch1:		ninja-program.patch
 Patch2:		arm-no-xnnpack.patch
@@ -130,7 +130,6 @@ Patch6:		qtquick3d-6.6.2-gcc14.patch
 Patch7:		glib2.78-glibc2.43.patch
 Patch8:		qdoc-clang22.patch
 Patch9:		header-dep.patch
-Patch10:	qtwebengine-v8-gc.patch
 URL:		https://www.qt.io/
 %{?with_directfb:BuildRequires:	DirectFB-devel}
 BuildRequires:	EGL-devel
@@ -3907,7 +3906,6 @@ narzędzia.
 %patch -P7 -p1
 %patch -P8 -p1
 %patch -P9 -p1 -d qtwebengine
-%patch -P10 -p1 -d qtwebengine/src/3rdparty
 
 %{__sed} -i -e 's,usr/X11R6/,usr/,g' qtbase/mkspecs/linux-g++-64/qmake.conf
 
